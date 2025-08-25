@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ TƯƠNG TÁC - PHỔ LOẠN THẦN</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A little custom style for better scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
+
+    <!-- Main container for the quiz app -->
+    <div id="app"></div>
+
+    <script>
+        // --- DATA ---
+        // All the case studies and questions are stored here.
+        const cases = [
+            {
+                id: 1,
+                title: "CA 1 — Phổ loạn thần: nghi TTPL",
+                patient: "N.T.H., nam 22 tuổi, sinh viên năm 3",
+                description: [
+                    "Được mẹ đưa đến khám vì 'con nghe thấy người ta nói xấu và ra lệnh trong đầu'. Khoảng 8 tháng gần đây H. thu mình, ít nói, bỏ các hoạt động trước đây yêu thích, điểm số giảm, tắm giặt thất thường. 2 tháng gần đây, H. nghe hai giọng nam đối thoại và bình luận về mình, đôi lúc ra lệnh phải đứng yên không nhúc nhích. H. tin rằng suy nghĩ của mình bị phát tán cho bạn học trong ký túc xá.",
+                    "Gia đình ghi nhận H. mất ngủ tăng dần, đi đi lại lại không mục đích, đôi lúc đứng bất động giữ tư thế kỳ lạ vài phút. Không sốt, không đau đầu dai dẳng, không co giật. Không dùng rượu/bia quá mức, phủ nhận ma túy. Bác ruột bên nội từng điều trị tâm thần phân liệt.",
+                    "Khám tâm thần: dáng vẻ luộm thuộm, giảm giao tiếp mắt, nét mặt cùn mòn, trả lời ngắn, đôi khi trật đường ray. Tư duy có hoang tưởng bị theo dõi/chi phối mức độ chắc chắn cao. H. mô tả ảo thanh bình luận và ra lệnh; không ghi nhận ảo thị.",
+                    "Khám nội thần kinh bình thường. Công thức máu, chức năng tuyến giáp, đường huyết, điện giải, men gan, test ma túy âm tính. MRI sọ não không bất thường. Trong 8 tháng qua, suy giảm rõ rệt học tập, quan hệ xã hội và tự chăm sóc so với trước đây."
+                ],
+                questions: [
+                    { question: "Dựa trên ca bệnh, nhóm triệu chứng dương tính nổi bật nhất là gì?", options: ["A. Giảm biểu lộ cảm xúc, giảm ý chí, nghèo lời", "B. Ảo thanh bình luận/ra lệnh và hoang tưởng bị theo dõi/chi phối", "C. Quá nói, tăng hoạt động có mục đích", "D. Ám ảnh – cưỡng chế về nhiễm bẩn"], correct: "B", explanation: "Triệu chứng dương tính nổi bật nhất là ảo thanh bình luận/ra lệnh và hoang tưởng bị theo dõi/chi phối, đây là các triệu chứng loạn thần điển hình." },
+                    { question: "Dấu hiệu nào sau đây thuộc triệu chứng âm tính trong ca?", options: ["A. Ý tưởng tự cao", "B. Múa vờn, tư thế kỳ quặc", "C. Cảm xúc cùn mòn, nghèo lời, giảm giao tiếp mắt", "D. Nói hổ lốn, trật đường ray"], correct: "C", explanation: "Cảm xúc cùn mòn, nghèo lời, giảm giao tiếp mắt là các triệu chứng âm tính điển hình của phổ loạn thần." },
+                    { question: "Phát biểu nào mô tả đúng ngôn ngữ/vận hành tư duy vô tổ chức quan sát ở H.?", options: ["A. Nói nhiều, nhanh, chuyển chủ đề do khí sắc tăng", "B. Trật đường ray, khó liên kết ý, nói hổ lốn", "C. Im lặng, không nói", "D. Nói thì thầm do sợ bị nghe trộm"], correct: "B", explanation: "Trật đường ray, khó liên kết ý, nói hổ lốn mô tả đúng tình trạng rối loạn tư duy và ngôn ngữ vô tổ chức trong ca này." },
+                    { question: "Với thời gian tiến triển tổng ≥ 6 tháng (tiền triệu + hoạt động) và ≥ 1 tháng triệu chứng hoạt động rõ, chẩn đoán nào phù hợp nhất?", options: ["A. Rối loạn loạn thần ngắn", "B. Rối loạn dạng phân liệt (schizophreniform)", "C. Tâm thần phân liệt", "D. Rối loạn hoang tưởng"], correct: "C", explanation: "Với thời gian tiến triển ≥ 6 tháng và triệu chứng hoạt động ≥ 1 tháng, chẩn đoán phù hợp nhất là Tâm thần phân liệt." },
+                    { question: "Đặc trưng phân biệt rối loạn dạng phân liệt so với TTPL là:", options: ["A. Chỉ có hoang tưởng, chức năng còn bảo tồn", "B. Thời gian đợt rối loạn ≥ 1 tháng nhưng < 6 tháng", "C. Có cơn hoảng loạn đi kèm", "D. Luôn có hưng cảm kịch phát"], correct: "B", explanation: "Rối loạn dạng phân liệt có thời gian đợt rối loạn ≥ 1 tháng nhưng < 6 tháng, trong khi TTPL ≥ 6 tháng." }
+                ]
+            },
+            {
+                id: 2,
+                title: "CA 2 — Rối loạn loạn thần ngắn",
+                patient: "N.T.M., nữ 24 tuổi, nhân viên kế toán",
+                description: [
+                    "Sau đợt cãi vã căng thẳng và mất việc 1 tuần. 5 ngày nay M. trở nên bứt rứt, nói cười một mình, nghe 'giọng phụ nữ ra lệnh' phải đập vỡ đồ đạc; tin rằng camera chung cư đang theo dõi.",
+                    "Khởi phát đột ngột sau sự kiện stress; trước đó chức năng học tập–xã hội bình thường. Không tiền sử rối loạn khí sắc/loạn thần. Gia đình không ai mắc TTPL.",
+                    "Khám: lời nói rời rạc, khó vào chủ đề; hoang tưởng bị theo dõi, ảo thanh ra lệnh. Cảm xúc thay đổi nhanh; không có giai đoạn khí sắc trầm/hưng đạt ngưỡng rối loạn khí sắc chính. Insight kém.",
+                    "Dấu hiệu sinh tồn ổn. CTM, TSH, đường huyết, điện giải, men gan bình thường; test ma túy âm tính. Sau nhập viện, được an thần ngắn hạn và antipsychotic liều thấp; đến tuần thứ 3, triệu chứng thuyên giảm hoàn toàn và chức năng trở lại mức trước đó."
+                ],
+                questions: [
+                    { question: "Chẩn đoán phù hợp nhất?", options: ["A. RLLT ngắn (brief psychotic) có yếu tố stress rõ", "B. RLLT dạng phân liệt", "C. TTPL", "D. Rối loạn hoang tưởng"], correct: "A", explanation: "Với khởi phát đột ngột sau stress, triệu chứng < 1 tháng và hồi phục hoàn toàn, chẩn đoán phù hợp nhất là RLLT ngắn có yếu tố stress rõ." },
+                    { question: "Tiêu chí thời gian cốt lõi của rối loạn ở ca này là:", options: ["A. ≥ 1 ngày và < 1 tháng, sau đó trở về mức trước bệnh", "B. ≥ 1 tháng và < 6 tháng", "C. ≥ 6 tháng", "D. Bất kỳ thời gian, miễn có ảo giác"], correct: "A", explanation: "RLLT ngắn có tiêu chí thời gian ≥ 1 ngày và < 1 tháng, sau đó bệnh nhân trở về mức chức năng trước bệnh." },
+                    { question: "Dấu hiệu nào không bắt buộc trong RLLT ngắn?", options: ["A. Khởi phát đột ngột", "B. Triệu chứng dương tính (hoang tưởng/ảo giác/lời nói vô tổ chức)", "C. Có yếu tố stress rõ", "D. Thuyên giảm hoàn toàn sau < 1 tháng"], correct: "C", explanation: "Yếu tố stress rõ không phải là tiêu chí bắt buộc trong RLLT ngắn, mặc dù thường có mặt." },
+                    { question: "Yếu tố nào giúp phân biệt với TTPL?", options: ["A. Có ảo thanh ra lệnh", "B. Có hoang tưởng bị theo dõi", "C. Tổng thời gian rối loạn < 1 tháng", "D. Insight kém"], correct: "C", explanation: "Tổng thời gian rối loạn < 1 tháng là điểm phân biệt chính với TTPL (≥ 6 tháng)." },
+                    { question: "Trong đánh giá ban đầu, mục tiêu loại trừ quan trọng nhất là:", options: ["A. Rối loạn nhân cách chống đối xã hội", "B. Rối loạn lo âu lan tỏa", "C. Loạn thần do chất/ bệnh nội khoa", "D. Rối loạn ám ảnh cưỡng chế"], correct: "C", explanation: "Loại trừ nguyên nhân thứ phát (do chất/bệnh nội khoa) luôn là ưu tiên đầu tiên trong đánh giá loạn thần." }
+                ]
+            },
+            {
+                id: 3,
+                title: "CA 3 — Rối loạn dạng phân liệt",
+                patient: "P.Q.K., nam 19 tuổi, sinh viên năm nhất",
+                description: [
+                    "6 tuần trước, gia đình ghi nhận K. thay đổi đột ngột: bối rối, phát biểu lộn xộn, nghe tiếng người cãi nhau trong đầu, tin bạn cùng phòng cài máy đọc suy nghĩ.",
+                    "Trước đây học giỏi, giao tiếp tốt. Từ khi phát bệnh tới nay 3,5 tháng, nghỉ học, thu mình. Không tiền sử khí sắc, không dùng chất.",
+                    "Khám: trật đường ray, nội dung hoang tưởng chi phối; ảo thanh bình luận. Không cùn mòn cảm xúc rõ. K. tỏ ra bối rối/hoang mang về thực tại (confusion/perplexity).",
+                    "Khám thần kinh bình thường; các xét nghiệm thường quy âm tính. Bắt đầu antipsychotic; sau 2 tuần, giảm rõ rệt ảo thanh; đang theo dõi sát diễn tiến chưa đủ 6 tháng."
+                ],
+                questions: [
+                    { question: "Chẩn đoán hiện tại phù hợp nhất:", options: ["A. TTPL", "B. RLLT ngắn", "C. RLLT dạng phân liệt", "D. Rối loạn hoang tưởng"], correct: "C", explanation: "Với thời gian 3,5 tháng (≥ 1 tháng nhưng < 6 tháng) và có triệu chứng loạn thần rõ, chẩn đoán phù hợp nhất là RLLT dạng phân liệt." },
+                    { question: "Tiêu chí thời gian cốt lõi để dạng phân liệt:", options: ["A. ≥ 1 ngày và < 1 tháng", "B. ≥ 1 tháng và < 6 tháng", "C. ≥ 6 tháng", "D. Không yêu cầu"], correct: "B", explanation: "Rối loạn dạng phân liệt có tiêu chí thời gian ≥ 1 tháng và < 6 tháng." },
+                    { question: "Dấu hiệu nào là yếu tố tiên lượng tốt của rối loạn dạng phân liệt?", options: ["A. Khởi phát từ từ", "B. Khởi phát trong vòng 4 tuần kể từ thay đổi hành vi đầu tiên", "C. Cảm xúc cùn mòn rõ", "D. Tiền sử chức năng xã hội kém"], correct: "B", explanation: "Khởi phát nhanh (trong vòng 4 tuần) là yếu tố tiên lượng tốt của rối loạn dạng phân liệt." },
+                    { question: "Dấu hiệu nào không phải yếu tố tiên lượng tốt cổ điển?", options: ["A. Bối rối/hoang mang", "B. Khởi phát nhanh", "C. Tiền bệnh tốt", "D. Cảm xúc cùn mòn/ phẳng rõ"], correct: "D", explanation: "Cảm xúc cùn mòn/phẳng rõ là yếu tố tiên lượng xấu, không phải tốt." },
+                    { question: "Khi triệu chứng kéo dài vượt quá 6 tháng, cần xem xét:", options: ["A. Chuyển chẩn đoán TTPL", "B. RLLT ngắn", "C. Rối loạn hoang tưởng", "D. RLLT cảm xúc"], correct: "A", explanation: "Khi triệu chứng kéo dài vượt quá 6 tháng, cần xem xét chuyển chẩn đoán thành TTPL." }
+                ]
+            },
+            {
+                id: 4,
+                title: "CA 4 — Rối loạn hoang tưởng",
+                patient: "T.T.H., nữ 52 tuổi, nhân viên văn phòng",
+                description: [
+                    "8 tháng nay tin rằng trưởng phòng 'chơi xấu', lập kế hoạch hại mình; H. thu thập email, ghi âm để 'làm bằng chứng'.",
+                    "Chức năng nghề nghiệp gần như bảo tồn (đi làm đều, hiệu suất ổn). Quan hệ gia đình căng thẳng do H. liên tục bàn về 'âm mưu'. Không có ảo thanh nổi bật; thỉnh thoảng 'nghe thấy' đồng nghiệp xì xào về mình ở gần (gắn với chủ đề hoang tưởng).",
+                    "Khám: không rối loạn lời nói, không hành vi vô tổ chức/catatonia. Không từng đáp ứng Tiêu chuẩn A của TTPL. Không ghi nhận giai đoạn khí sắc chính. Insight kém.",
+                    "Khám toàn thân, cận lâm sàng thường quy bình thường. Không dùng chất. Tâm lý xã hội: stress nghề nghiệp kéo dài."
+                ],
+                questions: [
+                    { question: "Chẩn đoán phù hợp nhất:", options: ["A. TTPL", "B. RLLT dạng phân liệt", "C. Rối loạn hoang tưởng (persecutory type)", "D. RLLT ngắn"], correct: "C", explanation: "Với hoang tưởng kéo dài, chức năng bảo tồn và không có triệu chứng TTPL khác, chẩn đoán phù hợp nhất là Rối loạn hoang tưởng." },
+                    { question: "Tiêu chuẩn không phù hợp với rối loạn hoang tưởng:", options: ["A. Hoang tưởng ≥ 1 tháng", "B. Đáp ứng đầy đủ Tiêu chuẩn A của TTPL", "C. Ảo giác (nếu có) không nổi bật và liên quan chủ đề hoang tưởng", "D. Chức năng không suy giảm đáng kể ngoài tác động trực tiếp của hoang tưởng"], correct: "B", explanation: "Rối loạn hoang tưởng không đáp ứng đầy đủ Tiêu chuẩn A của TTPL, đây là điểm phân biệt quan trọng." },
+                    { question: "Dấu hiệu giúp phân biệt với TTPL:", options: ["A. Có hoang tưởng", "B. Không có ảo giác nổi bật hoặc rối loạn ngôn ngữ/hành vi", "C. Có stress", "D. Có suy giảm một chút hiệu suất"], correct: "B", explanation: "Không có ảo giác nổi bật hoặc rối loạn ngôn ngữ/hành vi là dấu hiệu phân biệt chính với TTPL." },
+                    { question: "Biểu hiện nào trái với chẩn đoán rối loạn hoang tưởng:", options: ["A. Chức năng nghề nghiệp bảo tồn", "B. Tư duy có hệ thống quanh chủ đề bị hại", "C. Lời nói rời rạc, vô tổ chức", "D. Ít/không ảo giác nổi bật"], correct: "C", explanation: "Lời nói rời rạc, vô tổ chức trái với chẩn đoán rối loạn hoang tưởng, vì rối loạn này thường bảo tồn tư duy có tổ chức." },
+                    { question: "Can thiệp phù hợp ban đầu:", options: ["A. Chống trầm cảm đơn thuần", "B. Antipsychotic + trị liệu nhận thức–hành vi (CBT) nhắm hoang tưởng", "C. Thuốc ổn định khí sắc bắt buộc", "D. Chỉ theo dõi không điều trị"], correct: "B", explanation: "Antipsychotic kết hợp CBT nhắm vào hoang tưởng là can thiệp phù hợp cho rối loạn hoang tưởng." }
+                ]
+            },
+            {
+                id: 5,
+                title: "CA 5 — Loạn thần do chất",
+                patient: "L.V.H., nam 23 tuổi, làm tự do",
+                description: [
+                    "3 tuần gần đây sau các buổi 'đốt cỏ' liên tục và thi thoảng dùng viên 'đá' lúc đi bar, H. bắt đầu nghe tiếng đàn ông dọa giết, tin rằng hàng xóm gắn thiết bị ghi âm quanh nhà.",
+                    "Người nhà ghi nhận H. mất ngủ, tim đập nhanh, giảm ăn, cáu gắt; hôm nhập viện vẫn mùi cần sa.",
+                    "Khám: bồn chồn, nói nhanh, rời rạc nhẹ, hoang tưởng bị theo dõi; không có tiền sử trước đó. Insight kém.",
+                    "Dấu hiệu sinh tồn: mạch 112/phút. Test nước tiểu dương tính THC và amphetamine. CTM/điện giải bình thường. Sau 72 giờ ngưng chất, ảo thanh giảm đáng kể; sau 2 tuần hết ảo giác."
+                ],
+                questions: [
+                    { question: "Chẩn đoán phù hợp nhất:", options: ["A. TTPL", "B. RLLT dạng phân liệt", "C. Rối loạn hoang tưởng", "D. RLLT do chất"], correct: "D", explanation: "Với khởi phát trong bối cảnh sử dụng chất, test dương tính và cải thiện nhanh khi ngưng chất, chẩn đoán phù hợp nhất là RLLT do chất." },
+                    { question: "Tiêu chí bắt buộc của RLLT do chất:", options: ["A. Ảo giác/hoang tưởng xuất hiện trong hoặc ngay sau dùng/cai chất có khả năng gây loạn thần", "B. Phải có catatonia", "C. Phải kéo dài ≥ 6 tháng", "D. Phải có tiền sử tâm thần"], correct: "A", explanation: "Tiêu chí bắt buộc là ảo giác/hoang tưởng xuất hiện trong hoặc ngay sau dùng/cai chất có khả năng gây loạn thần." },
+                    { question: "Dấu hiệu ủng hộ nguyên nhân do chất hơn TTPL:", options: ["A. Có ảo thanh", "B. Bắt đầu ngay sau lạm dụng; dấu giao cảm; test dương tính; cải thiện nhanh khi ngưng", "C. Hoang tưởng bị theo dõi", "D. Từng có trầm cảm"], correct: "B", explanation: "Tổ hợp các yếu tố: bắt đầu ngay sau lạm dụng, dấu giao cảm, test dương tính và cải thiện nhanh khi ngưng chất đều ủng hộ nguyên nhân do chất." },
+                    { question: "Trường hợp nào không phù hợp RLLT do chất?", options: ["A. Ảo giác khởi phát trong bối cảnh dùng cần sa", "B. Loạn thần vẫn kéo dài nhiều tháng dù đã ngưng chất từ lâu", "C. Tim nhanh, mất ngủ đi kèm", "D. Test nước tiểu dương tính"], correct: "B", explanation: "Loạn thần vẫn kéo dài nhiều tháng dù đã ngưng chất từ lâu không phù hợp với RLLT do chất, gợi ý nguyên nhân nguyên phát." },
+                    { question: "Can thiệp ưu tiên ban đầu:", options: ["A. Cai chất, an thần và theo dõi sát", "B. Chỉ dùng antipsychotic dài hạn", "C. Bỏ qua không điều trị", "D. Chỉ điều trị tâm lý"], correct: "A", explanation: "Can thiệp ưu tiên ban đầu là cai chất, an thần và theo dõi sát để đánh giá tiến triển sau khi ngưng chất." }
+                ]
+            }
+        ];
+
+        // --- STATE MANAGEMENT ---
+        // These variables act like the 'state' in React.
+        let state = {
+            answers: {},
+            showResults: false,
+            currentCaseIndex: 0
+        };
+
+        // --- CONSTANTS ---
+        const totalQuestions = cases.reduce((total, caseItem) => total + caseItem.questions.length, 0);
+        const appContainer = document.getElementById('app');
+
+        // --- ACTION HANDLERS ---
+        // Functions that modify the state and trigger a re-render.
+
+        function handleAnswerChange(caseId, questionIndex, answer) {
+            if (state.showResults) return; // Don't allow changes after submitting
+            state.answers[`${caseId}-${questionIndex}`] = answer;
+            render();
+        }
+
+        function handleSubmit() {
+            state.showResults = true;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        function handleReset() {
+            state = {
+                answers: {},
+                showResults: false,
+                currentCaseIndex: 0
+            };
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        function setCurrentCase(index) {
+            state.currentCaseIndex = index;
+            render();
+        }
+
+        function navigateCase(direction) {
+            if (direction === 'prev') {
+                state.currentCaseIndex = Math.max(0, state.currentCaseIndex - 1);
+            } else if (direction === 'next') {
+                state.currentCaseIndex = Math.min(cases.length - 1, state.currentCaseIndex + 1);
+            }
+            render();
+        }
+        
+        function calculateScore() {
+            let correct = 0;
+            cases.forEach(caseItem => {
+                caseItem.questions.forEach((question, index) => {
+                    const answerKey = `${caseItem.id}-${index}`;
+                    if (state.answers[answerKey] === question.correct) {
+                        correct++;
+                    }
+                });
+            });
+            return correct;
+        }
+
+        // --- RENDER FUNCTION ---
+        // This function generates the HTML for the entire app based on the current state.
+        // It's called every time the state changes.
+
+        function render() {
+            const currentCase = cases[state.currentCaseIndex];
+            const score = calculateScore();
+            
+            let html = `
+                <div class="max-w-4xl mx-auto px-4 py-8 pb-32">
+                    <!-- Header -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h1 class="text-3xl font-bold text-center text-indigo-800 mb-4">
+                            QUIZ TƯƠNG TÁC - PHỔ LOẠN THẦN
+                        </h1>
+                        <div class="text-center text-gray-600">
+                            <p class="text-lg font-semibold">Môn: TÂM BỆNH HỌC</p>
+                            <p>Bộ đề kiểm tra 5 ca lâm sàng | Tổng số câu: ${totalQuestions}</p>
+                            <p class="text-sm mt-2">Trường ĐH KHXH&NV - Khoa Tâm lý học</p>
+                        </div>
+                    </div>
+            `;
+
+            // Results Summary (only shown if showResults is true)
+            if (state.showResults) {
+                const percentage = score / totalQuestions;
+                const resultText = percentage >= 0.8 ? 'Xuất sắc!' : percentage >= 0.6 ? 'Khá tốt' : 'Cần ôn lại';
+                const resultColor = percentage >= 0.8 ? 'bg-green-500' : percentage >= 0.6 ? 'bg-yellow-500' : 'bg-red-500';
+
+                html += `
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                        <h2 class="text-2xl font-bold text-center mb-4">
+                            <span class="text-indigo-600">KẾT QUẢ BÀI LÀM</span>
+                        </h2>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold mb-2">
+                                <span class="text-green-600">${score}</span>
+                                <span class="text-gray-400">/</span>
+                                <span class="text-blue-600">${totalQuestions}</span>
+                            </div>
+                            <div class="text-lg text-gray-600 mb-4">
+                                Điểm số: ${((score / totalQuestions) * 10).toFixed(1)}/10
+                            </div>
+                            <div class="inline-block px-4 py-2 rounded-full text-white font-semibold ${resultColor}">
+                                ${resultText}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Case Navigation
+            html += `
+                <div class="bg-white rounded-lg shadow-lg p-4 mb-8">
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        ${cases.map((caseItem, index) => `
+                            <button
+                                onclick="setCurrentCase(${index})"
+                                class="px-4 py-2 rounded-lg font-medium transition-colors ${
+                                    state.currentCaseIndex === index
+                                    ? 'bg-indigo-600 text-white'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }"
+                            >
+                                Ca ${caseItem.id}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Current Case Details
+            html += `
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-indigo-800 mb-2">${currentCase.title}</h2>
+                        <p class="text-lg text-gray-700 font-semibold">${currentCase.patient}</p>
+                    </div>
+                    <!-- Case Description -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">TRÌNH BÀY BỆNH:</h3>
+                        ${currentCase.description.map((paragraph, index) => `
+                            <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                                <p class="text-gray-700 leading-relaxed">
+                                    <span class="font-semibold">(${index + 1})</span> ${paragraph}
+                                </p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <!-- Questions -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">CÂU HỎI TRẮC NGHIỆM:</h3>
+                        ${currentCase.questions.map((q, qIndex) => {
+                            let questionHtml = `
+                                <div class="mb-6 p-6 border border-gray-200 rounded-lg">
+                                    <div class="mb-4">
+                                        <h4 class="font-semibold text-gray-800 text-base leading-relaxed">
+                                            Câu ${qIndex + 1}. ${q.question}
+                                        </h4>
+                                    </div>
+                                    <div class="space-y-3">
+                            `;
+                            
+                            q.options.forEach((option, oIndex) => {
+                                const optionLetter = ['A', 'B', 'C', 'D'][oIndex];
+                                const answerKey = `${currentCase.id}-${qIndex}`;
+                                const isSelected = state.answers[answerKey] === optionLetter;
+                                const isCorrect = q.correct === optionLetter;
+                                
+                                let buttonClass = 'w-full text-left p-3 border-2 rounded-lg transition-colors ';
+                                
+                                if (state.showResults) {
+                                    if (isCorrect) {
+                                        buttonClass += 'border-green-500 bg-green-50 text-green-800';
+                                    } else if (isSelected && !isCorrect) {
+                                        buttonClass += 'border-red-500 bg-red-50 text-red-800';
+                                    } else {
+                                        buttonClass += 'border-gray-200 bg-gray-50 text-gray-600';
+                                    }
+                                } else {
+                                    if (isSelected) {
+                                        buttonClass += 'border-indigo-500 bg-indigo-50 text-indigo-800';
+                                    } else {
+                                        buttonClass += 'border-gray-200 hover:border-gray-300 hover:bg-gray-50';
+                                    }
+                                }
+
+                                questionHtml += `
+                                    <button
+                                        onclick="handleAnswerChange(${currentCase.id}, ${qIndex}, '${optionLetter}')"
+                                        class="${buttonClass}"
+                                        ${state.showResults ? 'disabled' : ''}
+                                    >
+                                        ${option}
+                                        ${state.showResults && isCorrect ? '<span class="ml-2 text-green-600 font-semibold">✓</span>' : ''}
+                                        ${state.showResults && isSelected && !isCorrect ? '<span class="ml-2 text-red-600 font-semibold">✗</span>' : ''}
+                                    </button>
+                                `;
+                            });
+                            
+                            questionHtml += `</div>`;
+                            
+                            if (state.showResults) {
+                                questionHtml += `
+                                    <div class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+                                        <p class="text-sm text-blue-800">
+                                            <span class="font-semibold">Giải thích:</span> ${q.explanation}
+                                        </p>
+                                    </div>
+                                `;
+                            }
+                            
+                            questionHtml += `</div>`;
+                            return questionHtml;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Navigation between cases
+            html += `
+                <div class="flex justify-between mb-8">
+                    <button
+                        onclick="navigateCase('prev')"
+                        ${state.currentCaseIndex === 0 ? 'disabled' : ''}
+                        class="px-6 py-3 bg-gray-500 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-colors"
+                    >
+                        ← Ca trước
+                    </button>
+                    <button
+                        onclick="navigateCase('next')"
+                        ${state.currentCaseIndex === cases.length - 1 ? 'disabled' : ''}
+                        class="px-6 py-3 bg-gray-500 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-colors"
+                    >
+                        Ca tiếp theo →
+                    </button>
+                </div>
+            `;
+
+            // Sticky Bottom Bar
+            html += `
+                </div> <!-- Closes the main content container -->
+                <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4">
+                    <div class="max-w-4xl mx-auto flex gap-4 justify-center">
+                        <button
+                            onclick="handleSubmit()"
+                            class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
+                        >
+                            ${state.showResults ? 'XEM LẠI KẾT QUẢ' : 'NỘP BÀI'}
+                        </button>
+                        <button
+                            onclick="handleReset()"
+                            class="px-8 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors shadow-lg"
+                        >
+                            LÀM LẠI
+                        </button>
+                    </div>
+                    <div class="text-center mt-2 text-sm text-gray-600">
+                        Đã trả lời: ${Object.keys(state.answers).length}/${totalQuestions} câu
+                    </div>
+                </div>
+            `;
+
+            appContainer.innerHTML = html;
+        }
+
+        // --- INITIAL RENDER ---
+        // Render the app for the first time when the page loads.
+        document.addEventListener('DOMContentLoaded', render);
+    </script>
+
+</body>
+</html>

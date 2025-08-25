@@ -3,350 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trắc nghiệm 5 Ca Lâm Sàng - Phổ Loạn Thần</title>
-    
+    <title>Trắc Nghiệm Ca Lâm Sàng Tâm Bệnh Học</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f0f4f8; /* A light blue-gray background */
         }
-        /* Custom style for radio buttons */
-        input[type="radio"]:checked + label {
-            background-color: #e0f2fe; /* light-blue-100 */
-            border-color: #3b82f6; /* blue-500 */
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased">
+<body class="antialiased text-gray-800">
 
-    <div id="app-container" class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
-        
+    <div id="app-container" class="container mx-auto p-4 md:p-8 max-w-4xl">
+
         <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900">Bài kiểm tra 5 Ca Lâm Sàng</h1>
-            <p class="mt-2 text-lg text-slate-600">Môn: Tâm Bệnh Học - Phổ Loạn Thần</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-700">Trắc Nghiệm Ca Lâm Sàng Tâm Bệnh Học</h1>
+            <p class="text-slate-500 mt-2">Chọn chủ đề và số lượng ca để bắt đầu ôn tập.</p>
         </header>
 
-        <div id="setup-screen" class="bg-white p-8 rounded-2xl shadow-lg transition-all">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Chào mừng bạn!</h2>
-            <p class="text-slate-600 mb-6 text-center">Vui lòng chọn số lượng ca lâm sàng bạn muốn làm để bắt đầu bài kiểm tra.</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <select id="case-count" class="w-full sm:w-auto bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3">
-                    <option value="1">1 Ca lâm sàng</option>
-                    <option value="2">2 Ca lâm sàng</option>
-                    <option value="3">3 Ca lâm sàng</option>
-                    <option value="4">4 Ca lâm sàng</option>
-                    <option value="5" selected>5 Ca lâm sàng</option>
-                </select>
-                <button id="start-btn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 shadow-md">
-                    Bắt đầu
+        <div id="setup-screen" class="bg-white p-6 md:p-8 rounded-xl shadow-lg transition-all duration-300">
+            <div class="space-y-6">
+                <div>
+                    <label for="topic-select" class="block text-lg font-semibold text-gray-700 mb-2">1. Chọn chủ đề:</label>
+                    <select id="topic-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        <option value="tram-cam">Trầm Cảm Chủ Yếu</option>
+                        <option value="loan-than">Phổ Loạn Thần</option>
+                        <option value="lo-au">Các Rối Loạn Lo Âu</option>
+                        <option value="luong-cuc">Phổ Lưỡng Cực</option>
+                        <option value="ocd">OCD & Các Rối Loạn Liên Quan</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="case-count-select" class="block text-lg font-semibold text-gray-700 mb-2">2. Chọn số lượng ca lâm sàng:</label>
+                    <select id="case-count-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        <option value="1">1 Ca</option>
+                        <option value="2">2 Ca</option>
+                        <option value="3">3 Ca</option>
+                        <option value="4">4 Ca</option>
+                        <option value="5">5 Ca</option>
+                    </select>
+                </div>
+                <button id="start-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-3 px-4 rounded-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md">
+                    Bắt đầu làm bài
                 </button>
             </div>
         </div>
 
-        <div id="test-screen" class="hidden">
-            <form id="quiz-form">
-                <div id="quiz-content" class="space-y-10">
-                    </div>
-                
-                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                     <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md">
-                        Nộp bài
-                    </button>
-                    <button type="button" id="retake-btn" class="bg-slate-500 hover:bg-slate-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md">
-                        Làm lại
-                    </button>
+        <div id="test-screen" class="hidden transition-all duration-300">
+            <div id="cases-container" class="space-y-10">
                 </div>
-            </form>
-        </div>
-
-        <div id="results-screen" class="hidden bg-white p-8 rounded-2xl shadow-lg transition-all">
-             <h2 class="text-3xl font-bold text-center mb-4 text-slate-900">Kết quả bài làm</h2>
-             <div id="score-summary" class="text-center text-xl font-medium mb-8 p-4 rounded-lg">
+            <div class="mt-10 flex flex-col md:flex-row gap-4">
+                <button id="submit-btn" class="w-full md:w-auto flex-grow bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-md">Nộp bài</button>
+                <button id="retake-btn" class="w-full md:w-auto flex-grow bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition hidden shadow-md">Làm lại bài khác</button>
+            </div>
+             <div id="results-summary" class="hidden mt-8 text-center bg-white p-6 rounded-xl shadow-lg">
                 </div>
-             
-             <div id="detailed-results" class="space-y-6">
-                </div>
-             
-             <div class="mt-10 text-center">
-                 <button id="start-over-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md">
-                    Làm bài kiểm tra mới
-                </button>
-             </div>
         </div>
 
     </div>
 
+    <footer class="text-center p-4 mt-8 text-sm text-gray-500">
+        <p>&copy; 2025 - Gemini AI. Giao diện được thiết kế cho mục đích học tập.</p>
+    </footer>
+
     <script>
-        // === Dữ liệu Bài kiểm tra ===
-        const quizData = [
-            // CA 1
-            {
-                caseId: "case-1",
-                caseTitle: "CA 1: Phổ loạn thần: nghi TTPL (theo dõi diễn tiến)",
-                caseDescription: `
-                    <p class="mb-2"><strong>(1)</strong> N.T.H., nam 22 tuổi, sinh viên năm 3, được mẹ đưa đến khám vì “con nghe thấy người ta nói xấu và ra lệnh trong đầu". Khoảng 8 tháng gần đây H. thu mình, ít nói, bỏ các hoạt động trước đây yêu thích, điểm số giảm, tắm giặt thất thường. 2 tháng gần đây, H. nghe hai giọng nam đối thoại và bình luận về mình, đôi lúc ra lệnh phải đứng yên không nhúc nhích. H. tin rằng suy nghĩ của mình bị phát tán cho bạn học trong ký túc xá; cậu tránh đến lớp vì “ai cũng biết tôi nghĩ gì".</p>
-                    <p class="mb-2"><strong>(2)</strong> Gia đình ghi nhận H. mất ngủ tăng dần, đi đi lại lại không mục đích, đôi lúc đứng bất động giữ tư thế kỳ lạ vài phút. Không sốt, không đau đầu dai dẳng, không co giật. Không dùng rượu/bia quá mức, phủ nhận ma túy. Bố mẹ khỏe, bác ruột bên nội từng điều trị tâm thần phân liệt.</p>
-                    <p class="mb-2"><strong>(3)</strong> Khám tâm thần: dáng vẻ luộm thuộm, giảm giao tiếp mắt, nét mặt cùn mòn, trả lời ngắn, đôi khi trật đường ray. Tư duy có hoang tưởng bị theo dõi chi phối mức độ chắc chắn cao. H. mô tả ảo thanh bình luận và ra lệnh; không ghi nhận ảo thị. Khí sắc lo âu nhẹ, không có đợt khí sắc trầm/hưng đạt ngưỡng rối loạn khí sắc chính. Insight kém.</p>
-                    <p><strong>(4)</strong> Khám nội thần kinh bình thường. Các xét nghiệm và MRI sọ não không bất thường. Trong 8 tháng qua, suy giảm rõ rệt học tập, quan hệ xã hội và tự chăm sóc so với trước đây.</p>
-                `,
-                questions: [
-                    { q: "Câu 1. Dựa trên ca bệnh, nhóm triệu chứng dương tính nổi bật nhất là gì?", o: ["Giảm biểu lộ cảm xúc, giảm ý chí, nghèo lời", "Ảo thanh bình luận/ra lệnh và hoang tưởng bị theo dõi/chi phối", "Quá nói, tăng hoạt động có mục đích", "Ám ảnh – cưỡng chế về nhiễm bẩn"], a: "B", e: "Triệu chứng dương tính bao gồm ảo giác, hoang tưởng, và lời nói/hành vi vô tổ chức. Ca bệnh này có ảo thanh (nghe giọng nói) và hoang tưởng (tin suy nghĩ bị phát tán) rất nổi bật." },
-                    { q: "Câu 2. Dấu hiệu nào sau đây thuộc triệu chứng âm tính trong ca?", o: ["Ý tưởng tự cao", "Múa vờn, tư thế kỳ quặc", "Cảm xúc cùn mòn, nghèo lời, giảm giao tiếp mắt", "Nói hổ lốn, trật đường ray"], a: "C", e: "Triệu chứng âm tính là sự suy giảm hoặc mất đi các chức năng bình thường. 'Cảm xúc cùn mòn, nghèo lời, giảm giao tiếp mắt' là những biểu hiện kinh điển." },
-                    { q: "Câu 3. Phát biểu nào mô tả đúng ngôn ngữ/vận hành tư duy vô tổ chức quan sát ở H.?", o: ["Nói nhiều, nhanh, chuyển chủ đề do khí sắc tăng", "Trật đường ray, khó liên kết ý, nói hổ lốn", "Im lặng, không nói", "Nói thì thầm do sợ bị nghe trộm"], a: "B", e: "Mô tả 'trả lời đôi khi trật đường ray' trực tiếp chỉ ra sự vô tổ chức trong tư duy và ngôn ngữ, khi các ý tưởng không còn liên kết logic với nhau." },
-                    { q: "Câu 4. Với thời gian tiến triển tổng ≥6 tháng (tiền triệu + hoạt động) và ≥1 tháng triệu chứng hoạt động rõ, chẩn đoán nào phù hợp nhất?", o: ["Rối loạn loạn thần ngắn", "Rối loạn dạng phân liệt (schizophreniform)", "Tâm thần phân liệt", "Rối loạn hoang tưởng"], a: "C", e: "Tiêu chuẩn chẩn đoán Tâm thần phân liệt (TTPL) yêu cầu thời gian rối loạn kéo dài liên tục ít nhất 6 tháng, bao gồm ít nhất 1 tháng có các triệu chứng hoạt động." },
-                    { q: "Câu 5. Đặc trưng phân biệt rối loạn dạng phân liệt so với TTPL là:", o: ["Chỉ có hoang tưởng, chức năng còn bảo tồn", "Thời gian đợt rối loạn ≥1 tháng nhưng <6 tháng", "Có cơn hoảng loạn đi kèm", "Luôn có hưng cảm kịch phát"], a: "B", e: "Điểm khác biệt cốt lõi giữa Rối loạn dạng phân liệt và TTPL là thời gian. Rối loạn dạng phân liệt có triệu chứng tương tự nhưng kéo dài từ 1 đến dưới 6 tháng." },
-                    { q: "Câu 6. Yếu tố sau đây giúp loại trừ rối loạn cảm xúc phân liệt trong ca trên:", o: ["Có ảo giác kéo dài", "Từng có giai đoạn hưng cảm đầy đủ", "Không có đợt khí sắc chính đồng thời/chiếm phần lớn thời gian diễn tiến", "Khí sắc lo âu nhẹ"], a: "C", e: "Rối loạn cảm xúc phân liệt yêu cầu một giai đoạn rối loạn khí sắc chính (trầm cảm hoặc hưng cảm) phải diễn ra đồng thời với triệu chứng loạn thần và chiếm phần lớn thời gian của bệnh." },
-                    { q: "Câu 7. Vì sao rối loạn hoang tưởng ít phù hợp với ca này?", o: ["Vì H. không có hoang tưởng", "Vì chức năng học tập - xã hội suy giảm đáng kể và có ảo thanh nổi bật không chỉ gắn với chủ đề hoang tưởng", "Vì H. là nam và còn trẻ", "Vì không làm xét nghiệm hình ảnh não"], a: "B", e: "Rối loạn hoang tưởng thường không gây suy giảm chức năng nghiêm trọng và ảo giác (nếu có) thường không nổi bật. Ca này có cả hai yếu tố trên, nên ít phù hợp." },
-                    { q: "Câu 8. Theo tài liệu học phần, loại ảo giác phổ biến nhất trong phổ loạn thần là:", o: ["Ảo thị", "Ảo khứu", "Ảo thanh", "Ảo xúc"], a: "C", e: "Ảo thanh (nghe thấy âm thanh, giọng nói không có thật) là loại ảo giác thường gặp nhất trong các rối loạn phổ loạn thần, đặc biệt là TTPL." },
-                    { q: "Câu 9. Hành vi căng trương lực (catatonic) nào phù hợp với mô tả ở H.?", o: ["Giảm phản ứng môi trường, giữ tư thế kỳ quặc kéo dài", "Nói nhanh, nhảy chủ đề", "Tăng vận động mục đích do lo âu", "Bồn chồn gỗ chân nhẹ"], a: "A", e: "Mô tả 'đôi lúc đứng bất động giữ tư thế kỳ lạ vài phút' chính là một biểu hiện của hành vi căng trương lực, cụ thể là giữ một tư thế chống lại trọng lực." },
-                    { q: "Câu 10. Với tiến triển thu mình nhiều tháng rồi bộc lộ rầm rộ ảo giác/hoang tưởng và hiện còn âm tính dai dẳng, trình tự giai đoạn nào mô tả đúng nhất?", o: ["Hoạt động → Tồn dư → Tiền triệu", "Tiền triệu → Hoạt động → Tồn dư", "Hoạt động kéo dài đơn thuần", "Tồn dư → Tiền triệu → Hoạt động"], a: "B", e: "Tiến trình điển hình của TTPL bắt đầu bằng giai đoạn Tiền triệu (thu mình, suy giảm chức năng), sau đó đến giai đoạn Hoạt động (triệu chứng dương tính rầm rộ), và cuối cùng là giai đoạn Tồn dư (chủ yếu là triệu chứng âm tính)." },
+        // --- DATA STORE ---
+        // All clinical cases and questions are stored here
+        const testData = {
+            "tram-cam": {
+                topic: "Trầm Cảm Chủ Yếu",
+                cases: [
+                    { /* Ca 1 */
+                        title: "Ca 1 - Nữ công nhân 34 tuổi, ý tưởng tự sát và cảm giác tội lỗi nặng",
+                        vignette: `<b>(1) Trình bày bệnh:</b> Chị H., 34 tuổi, công nhân xưởng may, vào khám vì “không còn thấy điều gì đáng để sống". Khoảng 6 tuần nay chị buồn bã hầu như cả ngày, mất hứng thú với việc trông con và nấu ăn, sụt ~4 kg không do ăn kiêng, khó ngủ (thức giấc sớm 4-5h), mệt mỏi, và tập trung kém. Gần đây chị tin mình làm sai đơn hàng khiến công ty thiệt hại lớn, “đáng bị ở tù”, nên nghĩ uống thuốc ngủ quá liều để “kết thúc”.<br><b>(2) Tiền sử - bối cảnh:</b> Không tiền sử rối loạn tâm thần; mẹ từng "buồn rầu kéo dài" sau ly hôn. Không sử dụng chất. 3 tháng qua tăng ca liên tục, mâu thuẫn vợ chồng.<br><b>(3) Khám cận lâm sàng:</b> Khám nội tổng quát và xét nghiệm (CTM, TSH, đường huyết) trong giới hạn bình thường.<br><b>(4) Khám tâm thần:</b> Hợp tác, vẻ mặt trầm, tư duy chậm; nội dung tư duy xoay quanh tội lỗi và vô dụng; ý tưởng tự sát có kế hoạch (uống thuốc ngủ); không ảo giác; định hướng và trí nhớ bảo tồn.`,
+                        questions: [
+                            { q: "Chẩn đoán phù hợp nhất?", o: ["Rối loạn lưỡng cực hiện tại pha trầm cảm", "Trầm cảm chủ yếu, mức độ nặng, có nguy cơ tự sát", "Rối loạn lo âu lan tỏa", "Rối loạn thích nghi với khí sắc trầm"], a: "B", ex: "Có ≥5 triệu chứng trong ≥2 tuần (khí sắc trầm/mất hứng thú, rối loạn giấc ngủ, mệt mỏi, tập trung kém, tội lỗi), suy giảm chức năng và có ý tưởng tự sát có kế hoạch → MDD nặng." },
+                            { q: "Tiêu chuẩn nào bắt buộc phải có ≥1 để chẩn đoán giai đoạn trầm cảm chủ yếu?", o: ["Thay đổi cân nặng", "Khí sắc trầm hoặc mất hứng thú", "Mất ngủ/Ngủ nhiều", "Cảm giác vô dụng/tội lỗi"], a: "B", ex: "Theo DSM-5-TR: cần ≥5 triệu chứng/2 tuần và phải có ít nhất một trong hai triệu chứng cốt lõi là khí sắc trầm hoặc mất hứng thú." },
+                            { q: "Dấu hiệu nào làm tăng mức độ nặng trong ca này?", o: ["Sụt cân", "Thức giấc sớm", "Ý tưởng tự sát có kế hoạch", "Mệt mỏi"], a: "C", ex: "Ý tưởng hoặc hành vi tự sát là một trong những chỉ báo quan trọng nhất về mức độ nặng của trầm cảm, đòi hỏi sự can thiệp và ưu tiên an toàn ngay lập tức." },
+                            { q: "Yếu tố nào không ủng hộ chẩn đoán lưỡng cực?", o: ["Lịch sử hưng cảm nhẹ", "Dùng chất gây hưng cảm", "Gia đình có lưỡng cực", "Chưa từng có cơn hưng cảm/hưng cảm nhẹ"], a: "D", ex: "Chẩn đoán Trầm cảm chủ yếu yêu cầu bệnh nhân chưa từng có một giai đoạn hưng cảm hoặc hưng cảm nhẹ trong tiền sử. Nếu có, chẩn đoán sẽ chuyển sang phổ Rối loạn lưỡng cực." },
+                            { q: "Chỉ định nhập viện nào đúng lúc này?", o: ["Bệnh kéo dài > 2 tuần", "Ý tưởng/hành vi tự sát", "Sụt cân 4 kg", "Mất ngủ"], a: "B", ex: "Nguy cơ tự sát cao (có ý tưởng và kế hoạch cụ thể) là một chỉ định tuyệt đối cho việc nhập viện để đảm bảo an toàn cho bệnh nhân." },
+                            { q: "Can thiệp ưu tiên ban đầu với nguy cơ hiện tại:", o: ["Tăng cường vận động", "Kế hoạch an toàn và đảm bảo tính mạng; có thể gọi đường dây hỗ trợ", "Tự theo dõi tại nhà", "Chỉ dùng thảo dược"], a: "B", ex: "Khi có nguy cơ tự sát, ưu tiên hàng đầu là đảm bảo an toàn. Điều này bao gồm việc lập một kế hoạch an toàn, loại bỏ các phương tiện tự sát, và liên hệ các nguồn hỗ trợ khẩn cấp." },
+                            { q: "Phác đồ thuốc hàng đầu thường dùng:", o: ["Barbiturate", "SSRI/SNRI", "MAOI luôn ưu tiên đầu tay", "Chỉ benzodiazepine đơn độc"], a: "B", ex: "Các thuốc ức chế tái hấp thu serotonin có chọn lọc (SSRI) hoặc ức chế tái hấp thu serotonin-norepinephrine (SNRI) là lựa chọn đầu tay cho trầm cảm chủ yếu không kèm loạn thần do hiệu quả và tính an toàn." },
+                            { q: "Nếu kháng trị với 2 phác đồ đầy đủ, phương án sinh học nào hợp lý?", o: ["Liệu pháp ánh sáng", "rTMS", "Chỉ tâm lý trị liệu", "Không có lựa chọn nào"], a: "B", ex: "Kích thích từ xuyên sọ lặp lại (rTMS) là một phương pháp điều trị sinh học được chứng minh có hiệu quả cho các trường hợp trầm cảm kháng trị." },
+                            { q: "Nếu xuất hiện loạn thần khí sắc tương hợp, công cụ sinh học nên cân nhắc:", o: ["Thôi miên", "ECT", "Biofeedback", "Tăng liều benzodiazepine"], a: "B", ex: "Liệu pháp sốc điện (ECT) có hiệu quả rất cao và thường được chỉ định trong các trường hợp trầm cảm nặng, có triệu chứng loạn thần, nguy cơ tự sát cao hoặc kháng trị." },
+                            { q: "Yếu tố tiên lượng xấu nào sau đây đúng?", o: ["Khởi phát muộn", "Ít tác dụng phụ thuốc", "Có triệu chứng loạn thần", "Sống lành mạnh"], a: "C", ex: "Sự hiện diện của các triệu chứng loạn thần, khởi phát sớm, thời gian cơn kéo dài và có nhiều cơn tái phát là những yếu tố tiên lượng không thuận lợi trong Trầm cảm chủ yếu." }
+                        ]
+                    },
+                    { /* Ca 2 */
+                        title: "Ca 2 - Nam sinh viên 20 tuổi, buồn kéo dài sau thi rớt hay MDD?",
+                        vignette: `<b>(1) Trình bày bệnh:</b> K., 20 tuổi, buồn bã 3 tuần sau khi thi rớt học phần quan trọng. Ban đầu buồn, nuối tiếc; tuần gần đây chán nản dai dẳng, bỏ đá bóng, mất động lực, nghĩ “cuộc sống vô nghĩa", sợ không tốt nghiệp; ăn ngủ kém.<br><b>(2) Tiền sử - bối cảnh:</b> Không bệnh sử tâm thần; cha mẹ kỳ vọng cao; không chất.<br><b>(3) Khám cận lâm sàng:</b> Khám nội, xét nghiệm cơ bản bình thường.<br><b>(4) Khám tâm thần:</b> Ảnh hưởng chức năng học tập rõ; không ảo giác; không hưng cảm; có ý tưởng về cái chết mơ hồ nhưng không kế hoạch.`,
+                        questions: [
+                            { q: "Chẩn đoán khả dĩ nhất hiện tại:", o: ["Trầm cảm chủ yếu mức độ nhẹ vừa", "Phản ứng tang thương", "Rối loạn thích nghi (chỉ)", "Lưỡng cực II"], a: "A", ex: "Mặc dù có yếu tố khởi phát từ một biến cố, các triệu chứng (chán nản dai dẳng, mất hứng thú, ý nghĩ vô nghĩa, ăn ngủ kém) đã kéo dài ≥2 tuần, đủ 5 triệu chứng lõi và gây suy giảm chức năng, phù hợp với chẩn đoán MDD." },
+                            { q: "Điểm nào phân biệt tang thương/mất mát với MDD?", o: ["Cùng mức dao động cảm xúc", "MDD: buồn dai dẳng, tự hạ thấp, ý tưởng cái chết kéo dài; tang thương: đau buồn dao động, vẫn còn tính tích cực", "Tang thương luôn có loạn thần", "MDD luôn có ảo giác"], a: "B", ex: "Trong tang thương, cảm xúc buồn thường dao động và người bệnh vẫn có thể trải nghiệm những khoảnh khắc tích cực. Ngược lại, MDD đặc trưng bởi khí sắc trầm dai dẳng, mất hứng thú lan tỏa và tự hạ thấp giá trị bản thân." },
+                            { q: "Điều kiện thời gian cho tiêu chuẩn A của MDD:", o: ["≥1 tuần", "≥2 tuần", "≥1 tháng", "Không yêu cầu"], a: "B", ex: "Tiêu chuẩn chẩn đoán của DSM-5-TR yêu cầu các triệu chứng phải hiện diện trong khoảng thời gian tối thiểu là 2 tuần." },
+                            { q: "Triệu chứng nào không thuộc nhóm 9 triệu chứng tiêu chuẩn?", o: ["Mất hứng thú", "Mất ngủ", "Cơn hoảng loạn", "Mệt mỏi"], a: "C", ex: "9 triệu chứng tiêu chuẩn của MDD bao gồm: khí sắc trầm, mất hứng thú, thay đổi cân nặng/ăn uống, rối loạn giấc ngủ, kích động/chậm chạp, mệt mỏi, cảm giác vô dụng/tội lỗi, giảm tập trung, và ý nghĩ tự sát. Cơn hoảng loạn không nằm trong số này." },
+                            { q: "Câu nào đúng về chức năng:", o: ["Không cần suy giảm chức năng", "Cần gây khổ sở đáng kể hoặc suy giảm hoạt động xã hội nghề nghiệp", "Chỉ cần 5/9 triệu chứng là đủ", "Chỉ cần ý tưởng chết là đủ"], a: "B", ex: "Một tiêu chí quan trọng để chẩn đoán MDD (và nhiều rối loạn tâm thần khác) là các triệu chứng phải gây ra sự khổ sở có ý nghĩa lâm sàng hoặc suy giảm chức năng trong các lĩnh vực xã hội, nghề nghiệp hoặc các lĩnh vực quan trọng khác." },
+                            { q: "Khi đánh giá, cần loại trừ điều gì theo tiêu chuẩn C?", o: ["Stress học tập", "Tác động sinh lý của chất/bệnh nội khoa", "Xung đột bạn bè", "Rối loạn giấc ngủ mạn"], a: "B", ex: "Tiêu chuẩn C yêu cầu các triệu chứng không phải là do tác động sinh lý trực tiếp của một chất (ví dụ: ma túy, thuốc) hoặc một bệnh lý nội khoa khác (ví dụ: suy giáp)." },
+                            { q: "Yếu tố nhận thức nào góp phần duy trì trầm cảm?", o: ["Tư duy lạc quan hóa", "Quy gán nội tại ổn định-toàn thể; nhai lại/rumination", "Phản ứng hướng ngoại", "Định kiến xác nhận tích cực"], a: "B", ex: "Theo mô hình nhận thức, các kiểu tư duy tiêu cực như quy gán nguyên nhân thất bại cho bản thân (nội tại), tin rằng nó sẽ không thay đổi (ổn định) và ảnh hưởng mọi mặt (toàn thể), cùng với việc suy nghĩ luẩn quẩn (nhai lại - rumination) sẽ duy trì và làm nặng thêm trầm cảm." },
+                            { q: "Tâm lý trị liệu phù hợp:", o: ["Chỉ phân tâm cổ điển", "CBT hoặc MBCT, ACT", "Chỉ nhóm hỗ trợ", "Chỉ gia đình trị liệu"], a: "B", ex: "Liệu pháp Nhận thức Hành vi (CBT), Liệu pháp Nhận thức dựa trên Chánh niệm (MBCT), và Liệu pháp Chấp nhận và Cam kết (ACT) là các phương pháp trị liệu tâm lý có bằng chứng khoa học mạnh mẽ về hiệu quả cho trầm cảm." },
+                            { q: "Với nguy cơ thấp (không kế hoạch), bước can thiệp ban đầu không cần làm ngay:", o: ["Giáo dục tâm lý", "Lập kế hoạch an toàn cơ bản", "Nhập viện bắt buộc", "Theo dõi sát"], a: "C", ex: "Nhập viện bắt buộc chỉ được chỉ định khi có nguy cơ tự sát cao, có triệu chứng loạn thần, hoặc bệnh nhân không thể tự chăm sóc an toàn. Với nguy cơ thấp, các biện pháp ngoại trú như giáo dục, lập kế hoạch an toàn và theo dõi sát là phù hợp." },
+                            { q: "Nếu điều trị ổn định, để giảm tái phát, cần lưu ý:", o: ["Ngưng thuốc sớm ngay khi hết triệu chứng", "Duy trì điều trị thêm ~6 tháng sau khi ổn định", "Chỉ cần trị liệu tâm lý", "Không cần theo dõi"], a: "B", ex: "Để ngăn ngừa tái phát, các hướng dẫn điều trị khuyến nghị nên duy trì phác đồ (thuốc và/hoặc trị liệu tâm lý) trong khoảng 6 tháng sau khi các triệu chứng đã thuyên giảm hoàn toàn." }
+                        ]
+                    },
+                    { /* Ca 3 */
+                        title: "Ca 3 - Nữ 41 tuổi, sau mất cha 2 tháng: tang thương hay MDD?",
+                        vignette: `<b>(1) Trình bày bệnh:</b> Chị M., 41 tuổi, mất cha cách đây 2 tháng. 3 tuần gần đây chị buồn dai dẳng, không muốn gặp ai, mất hứng thú công việc, đêm khó ngủ, tự trách vô giá trị, nghĩ “sống vô nghĩa”.<br><b>(2) Tiền sử - bối cảnh:</b> Không tiền sử rối loạn tâm thần; có tiền sử mất ngủ mạn; không chất.<br><b>(3) Khám cận lâm sàng:</b> Khám nội khoa bình thường.<br><b>(4) Khám tâm thần:</b> Nói năng nhỏ, ít tự phát; không ảo giác; không ý tưởng “đoàn tụ với người đã mất”, thay vào đó nghĩ về cái chết kéo dài vì “hết ý nghĩa”.`,
+                        questions: [
+                            { q: "Đặc điểm nào nghiêng về MDD hơn là tang thương bình thường?", o: ["Buồn dao động, vẫn làm được việc ý nghĩa", "Tư duy vô giá trị, ý tưởng cái chết kéo dài, buồn dai dẳng", "Nhớ người đã mất kèm ấm áp", "Khóc rồi dịu đi"], a: "B", ex: "Các triệu chứng như cảm giác vô giá trị, ý nghĩ về cái chết kéo dài không liên quan đến việc đoàn tụ, và khí sắc buồn dai dẳng, lan tỏa là những dấu hiệu đặc trưng của MDD, phân biệt với phản ứng tang thương thông thường." },
+                            { q: "Trường hợp này có đủ thời lượng cho MDD chưa?", o: ["Chưa đủ 2 tuần", "Đã ≥2 tuần với ≥5 triệu chứng cốt lõi", "Phải ≥2 tháng", "Phải có ảo giác"], a: "B", ex: "Bệnh nhân có triệu chứng kéo dài 3 tuần, đã vượt qua ngưỡng tối thiểu 2 tuần theo tiêu chuẩn chẩn đoán của DSM-5-TR, và có đủ số lượng triệu chứng cần thiết." },
+                            { q: "Tài liệu khuyến nghị gì khi có biến cố mất mát?", o: ["Không bao giờ chẩn đoán MDD", "Xem xét kỹ bệnh sử và cách ứng phó trước khi kết luận", "Phải chờ 6 tháng", "Luôn nhập viện"], a: "B", ex: "Một biến cố mất mát lớn có thể là yếu tố khởi phát cho một giai đoạn trầm cảm chủ yếu. Cần đánh giá cẩn thận các triệu chứng để phân biệt giữa phản ứng tang thương bình thường và một rối loạn trầm cảm thực sự." },
+                            { q: "Thuốc đầu tay hợp lý:", o: ["SSRI/SNRI", "Thuốc ngủ dài hạn đơn độc", "MAOI ngay", "Không cần điều trị"], a: "A", ex: "Khi cần điều trị bằng thuốc, SSRI/SNRI là lựa chọn hàng đầu cho MDD do hiệu quả và khả năng dung nạp tốt." },
+                            { q: "Liệu pháp tâm lý có bằng chứng:", o: ["CBT/MBCT/ACT", "Điện châm", "Thôi miên", "Tắm rừng"], a: "A", ex: "Các liệu pháp như CBT, MBCT, ACT đã được chứng minh qua nhiều nghiên cứu là có hiệu quả trong việc điều trị và phòng ngừa tái phát trầm cảm." },
+                            { q: "Dấu hiệu nào không bắt buộc cho MDD?", o: ["Mất hứng thú", "Ảo giác", "Khí sắc trầm", "Rối loạn giấc ngủ"], a: "B", ex: "Ảo giác là một triệu chứng loạn thần, có thể xuất hiện trong trầm cảm nặng (MDD có đặc điểm loạn thần) nhưng không phải là một tiêu chí bắt buộc để chẩn đoán MDD." },
+                            { q: "Nếu có loạn thần khí sắc tương hợp, can thiệp sinh học ưu tiên:", o: ["ECT", "Liệu pháp ánh sáng", "Thảo dược", "Biofeedback"], a: "A", ex: "ECT (Liệu pháp sốc điện) là một can thiệp rất hiệu quả, đặc biệt được chỉ định cho các trường hợp trầm cảm nặng có loạn thần, kháng trị, hoặc cần đáp ứng nhanh." },
+                            { q: "Tiêu chí nào giúp loại trừ lưỡng cực trong MDD?", o: ["Không có cơn hưng cảm/hưng cảm nhẹ", "Không có ảo giác", "Không tiền sử gia đình", "Không dùng rượu"], a: "A", ex: "Định nghĩa của Trầm cảm chủ yếu là chưa từng có giai đoạn hưng cảm hoặc hưng cảm nhẹ. Đây là tiêu chí loại trừ cốt lõi để phân biệt với Rối loạn lưỡng cực." },
+                            { q: "Lời khuyên về tái phát sau khi hồi phục:", o: ["Tái phát hiếm gặp", "Tỷ lệ tái phát đáng kể; cần duy trì điều trị và phòng ngừa", "Không cần theo dõi", "Chỉ cần vận động"], a: "B", ex: "MDD là một rối loạn có tính tái phát cao. Việc duy trì điều trị sau khi hồi phục và có kế hoạch phòng ngừa là rất quan trọng để giảm nguy cơ tái phát." },
+                            { q: "Yếu tố tâm lý nào góp phần duy trì MDD?", o: ["Cảm giác bất lực, quy gán nội tại ổn định-toàn thể", "Tư duy tăng giá trị bản thân", "Khuynh hướng lạc quan hóa", "Phóng chiếu tích cực"], a: "A", ex: "Cảm giác bất lực học được và các kiểu quy gán tiêu cực (cho rằng nguyên nhân là do bản thân, không thay đổi và ảnh hưởng mọi thứ) là những yếu tố nhận thức-tâm lý quan trọng duy trì vòng luẩn quẩn của trầm cảm." }
+                        ]
+                    },
+                    { /* Ca 4 */
+                        title: "Ca 4 - Nữ nhân viên 27 tuổi, “tính tôi vốn buồn bã từ lâu”: PDD hay MDD?",
+                        vignette: `<b>(1) Trình bày bệnh:</b> T., 27 tuổi, kể từ 2 năm trước gần như ngày nào cũng buồn, mệt mỏi, năng lượng thấp, tự đánh giá thấp, khó quyết định; đợt 1 tháng gần đây nặng lên, mất hứng thú, ngủ không ngon, giảm tập trung, đi làm sợ sai, muốn nghỉ việc.<br><b>(2) Tiền sử - bối cảnh:</b> Không chất; áp lực KPI kéo dài.<br><b>(3) Khám cận lâm sàng:</b> Khám nội và xét nghiệm cơ bản bình thường.<br><b>(4) Khám tâm thần:</b> Ảnh hưởng rõ đến hiệu suất; không ảo giác; không ý tưởng tự sát; phủ nhận từng có giai đoạn khí sắc tăng.`,
+                        questions: [
+                            { q: "Chẩn đoán phù hợp nhất hiện tại:", o: ["Trầm cảm dai dẳng (PDD) có thể kèm giai đoạn MDD (\"double depression\")", "Rối loạn lưỡng cực II", "MDD đơn thuần", "Rối loạn lo âu xã hội"], a: "A", ex: "Bệnh nhân có một nền khí sắc trầm kéo dài ≥2 năm (đáp ứng tiêu chí PDD), và gần đây có một đợt các triệu chứng nặng lên đủ tiêu chuẩn của một giai đoạn Trầm cảm chủ yếu (MDD). Tình trạng này được gọi là \"trầm cảm kép\" (double depression)." },
+                            { q: "Tiêu chuẩn thời lượng của PDD:", o: ["≥6 tháng", "≥2 năm (≥1 năm ở trẻ em/TTN)", "≥1 tháng", "Không yêu cầu thời gian"], a: "B", ex: "Để chẩn đoán Rối loạn trầm cảm dai dẳng (PDD) ở người lớn, khí sắc trầm phải xuất hiện hầu hết các ngày, trong thời gian tối thiểu là 2 năm. Ở trẻ em và vị thành niên, thời gian yêu cầu là ≥1 năm." },
+                            { q: "Trong PDD, cần ít nhất 2 triệu chứng sau, ngoại trừ:", o: ["Ăn kém/ăn nhiều", "Ngủ ít/ngủ nhiều", "Hoảng loạn tái diễn", "Mệt mỏi"], a: "C", ex: "Các triệu chứng của PDD bao gồm thay đổi ăn uống, rối loạn giấc ngủ, mệt mỏi, tự đánh giá thấp, khó tập trung, và cảm giác tuyệt vọng. Cơn hoảng loạn tái diễn không phải là triệu chứng của PDD." },
+                            { q: "Tiêu chí không quá 2 tháng trống triệu chứng thuộc phần nào?", o: ["MDD", "PDD - Tiêu chí C", "Rối loạn thích nghi", "Rối loạn hoảng loạn"], a: "B", ex: "Tiêu chí C của Rối loạn trầm cảm dai dẳng (PDD) quy định rằng trong suốt khoảng thời gian 2 năm của rối loạn, bệnh nhân chưa bao giờ không có triệu chứng trong hơn 2 tháng liên tục." },
+                            { q: "Khi PDD có đợt tăng nặng đủ tiêu chuẩn MDD, gọi là:", o: ["Double depression", "Rapid cycling", "Mixed features", "Cyclothymia"], a: "A", ex: "\"Double depression\" (trầm cảm kép) là thuật ngữ lâm sàng dùng để mô tả tình trạng một giai đoạn Trầm cảm chủ yếu xảy ra trên nền một Rối loạn trầm cảm dai dẳng có từ trước." },
+                            { q: "Điều trị hợp lý:", o: ["SSRI/SNRI + CBT/MBCT", "Chỉ benzodiazepine", "Chỉ tham vấn chung chung", "Không cần điều trị"], a: "A", ex: "Sự kết hợp giữa thuốc chống trầm cảm (như SSRI/SNRI) và trị liệu tâm lý có cấu trúc (như CBT/MBCT) thường mang lại hiệu quả tốt nhất cho PDD, đặc biệt là khi có trầm cảm kép." },
+                            { q: "Tiêu chí loại trừ lưỡng cực trong MDD/PDD:", o: ["Chưa từng có cơn hưng cảm/hưng cảm nhẹ", "Không có lo âu", "Không có tiền sử gia đình", "Không có stress"], a: "A", ex: "Cũng như MDD, chẩn đoán PDD yêu cầu bệnh nhân chưa từng trải qua một giai đoạn hưng cảm hoặc hưng cảm nhẹ." },
+                            { q: "Dự hậu MDD/PDD nói chung:", o: ["Hiếm tái phát", "Tái phát thường gặp; số cơn quá khứ dự báo tái phát", "Không bị ảnh hưởng chức năng", "Chỉ tái phát ở nam"], a: "B", ex: "Các rối loạn trầm cảm có xu hướng tái phát. Số lượng các cơn trầm cảm trong quá khứ là một yếu tố dự báo mạnh mẽ về nguy cơ tái phát trong tương lai." },
+                            { q: "Khi nào cân nhắc rTMS/ECT?", o: ["Kháng trị, mức độ nặng hoặc có loạn thần (ECT)", "Mức độ rất nhẹ", "Trầm cảm do stress nhẹ", "Bệnh mới khởi phát 1 tuần"], a: "A", ex: "rTMS thường được cân nhắc cho các trường hợp kháng trị. ECT được chỉ định cho các trường hợp nặng hơn, kháng trị, có loạn thần, hoặc cần đáp ứng điều trị nhanh chóng." },
+                            { q: "Yếu tố tiên lượng tốt:", o: ["Điều trị sớm, đáp ứng tốt, lối sống cân bằng", "Khởi phát tuổi nhỏ", "Cơn kéo dài, phải nhập viện", "Đồng mắc nghiện chất"], a: "A", ex: "Việc được chẩn đoán và điều trị sớm, đáp ứng tốt với can thiệp ban đầu, và duy trì một lối sống lành mạnh là những yếu tố giúp cải thiện tiên lượng và giảm nguy cơ tái phát." }
+                        ]
+                    },
+                    { /* Ca 5 */
+                        title: "Ca 5 - Nữ 60 tuổi, tái phát nhiều lần, kháng trị",
+                        vignette: `<b>(1) Trình bày bệnh:</b> Bà L., 60 tuổi, có 4 cơn trầm cảm trước đây. 4 tháng qua buồn bã dai dẳng, mất hứng thú, sụt 6% cân, thức giấc sớm, chậm chạp tâm thần vận động, tội lỗi, ý nghĩ chết tái diễn (không kế hoạch cụ thể). Đã dùng 2 phác đồ SSRI → SNRI đủ liều/đủ thời gian, chỉ đáp ứng 1 phần.<br><b>(2) Tiền sử - bối cảnh:</b> Tăng huyết áp kiểm soát tốt; không chất; con cái sống xa, ít hỗ trợ.<br><b>(3) Khám cận lâm sàng:</b> Khám nội, xét nghiệm trong giới hạn; loại trừ suy giáp.<br><b>(4) Khám tâm thần:</b> Dáng vẻ u sầu; nói chậm; không loạn thần; định hướng tốt; chức năng xã hội suy giảm (nghỉ hưu nhưng không còn sinh hoạt cộng đồng).`,
+                        questions: [
+                            { q: "Đánh giá mức độ hiện tại:", o: ["Nhẹ", "Vừa nặng, kháng trị một phần", "Chỉ rối loạn thích nghi", "Hưng cảm nhẹ"], a: "B", ex: "Bệnh nhân có nhiều triệu chứng, kéo dài và suy giảm chức năng đáng kể, phù hợp với mức độ vừa-nặng. Việc chỉ đáp ứng một phần sau khi đã thử hai phác đồ thuốc đầy đủ cho thấy tình trạng kháng trị một phần." },
+                            { q: "Yếu tố nào tăng nguy cơ tái phát ở bà L.?", o: ["Nữ giới", "Nhiều cơn trong quá khứ", "Sống gần con", "Không tăng huyết áp"], a: "B", ex: "Số lượng các cơn trầm cảm trước đây là một trong những yếu tố dự báo mạnh nhất cho nguy cơ tái phát. Càng nhiều cơn, nguy cơ tái phát càng cao." },
+                            { q: "Phương án sinh học tiếp theo có bằng chứng:", o: ["rTMS", "Chỉ vitamin", "Chỉ vận động", "Không có lựa chọn"], a: "A", ex: "Sau khi thất bại với hai loại thuốc chống trầm cảm, rTMS (Kích thích từ xuyên sọ lặp lại) là một lựa chọn điều trị sinh học hợp lý và có bằng chứng hiệu quả cho trầm cảm kháng trị." },
+                            { q: "Trường hợp nào cân nhắc ECT mạnh mẽ hơn?", o: ["Khởi phát mới 1 tuần", "Nặng/kháng trị hoặc kèm loạn thần/nguy cơ cao", "Triệu chứng thoáng qua", "Chỉ mất ngủ"], a: "B", ex: "ECT (Liệu pháp sốc điện) được ưu tiên cân nhắc trong các tình huống trầm cảm rất nặng, kháng trị với nhiều phương pháp khác, có kèm triệu chứng loạn thần, hoặc có nguy cơ tự sát cao cần can thiệp nhanh." },
+                            { q: "Về hiệu quả ECT theo tài liệu:", o: ["Không có hiệu quả lâu dài", "Tỷ lệ thuyên giảm tăng từ ~27% (6 tuần) lên ~63% (2 năm)", "100% thuyên giảm", "Chỉ hiệu quả ở người trẻ"], a: "B", ex: "Dữ liệu cho thấy hiệu quả của ECT có thể được duy trì và cải thiện theo thời gian khi kết hợp với điều trị duy trì phù hợp, giúp giảm đáng kể tỷ lệ tái phát." },
+                            { q: "Theo dõi duy trì để giảm tái phát sau ổn định:", o: ["Ngưng thuốc ngay", "Duy trì điều trị thêm ~6 tháng", "Không cần tái khám", "Chỉ tập thể dục"], a: "B", ex: "Giai đoạn điều trị duy trì, thường kéo dài ít nhất 6 tháng sau khi các triệu chứng đã ổn định, là rất quan trọng để củng cố kết quả và giảm thiểu nguy cơ tái phát." },
+                            { q: "Phát biểu đúng về diễn tiến tự nhiên:", o: ["MDD thường tự hết sau 2 tuần và hiếm tái phát", "Có thể kéo dài đến 12 tháng, rồi ẩn tàn và dễ tái phát khi có yếu tố kích hoạt", "Luôn tiến tới loạn thần", "Không ảnh hưởng chức năng"], a: "B", ex: "Nếu không được điều trị, một giai đoạn trầm cảm chủ yếu có thể kéo dài nhiều tháng. Ngay cả sau khi hồi phục, rối loạn vẫn có xu hướng tái phát, đặc biệt khi có các yếu tố căng thẳng." },
+                            { q: "Nếu xuất hiện hành vi xung động/nguy hiểm, khuyến nghị:", o: ["Theo dõi tại nhà", "Nhập viện", "Chỉ tư vấn qua điện thoại", "Tự ký cam kết"], a: "B", ex: "Bất kỳ hành vi nào có nguy cơ gây hại cho bản thân hoặc người khác đều là một chỉ định rõ ràng cho việc nhập viện để đảm bảo an toàn và can thiệp kịp thời." },
+                            { q: "Khi lập kế hoạch an toàn, có thể hướng dẫn thêm:", o: ["Chỉ dựa vào người nhà", "Gọi các đầu mối hỗ trợ khẩn (ví dụ 1900 1267/115; \"Ngày Mai\" 094 482 46 10)", "Đăng lên mạng xã hội", "Tự cách ly hoàn toàn"], a: "B", ex: "Một kế hoạch an toàn hiệu quả cần bao gồm thông tin liên lạc của các dịch vụ hỗ trợ khẩn cấp, giúp bệnh nhân có thể tiếp cận sự giúp đỡ chuyên nghiệp ngay khi cần." },
+                            { q: "Phát biểu đúng về tiên lượng xấu:", o: ["Ít cơn trong quá khứ", "Thời gian cơn kéo dài, môi trường gia đình xấu, có bệnh nội khoa kèm", "Ít tác dụng phụ thuốc", "Điều trị sớm"], a: "B", ex: "Các yếu tố như cơn bệnh kéo dài, thiếu hỗ trợ xã hội, và sự hiện diện của các bệnh lý nội khoa đồng mắc thường liên quan đến một tiên lượng kém thuận lợi hơn." }
+                        ]
+                    }
                 ]
             },
-            // CA 2
-            {
-                caseId: "case-2",
-                caseTitle: "CA 2: Rối loạn loạn thần ngắn (có yếu tố stress rõ)",
-                caseDescription: `
-                    <p class="mb-2"><strong>(1)</strong> N.T.M., nữ 24 tuổi, nhân viên kế toán, sau đợt cãi vã căng thẳng và mất việc 1 tuần. 5 ngày nay M. trở nên bứt rứt, nói cười một mình, nghe “giọng phụ nữ ra lệnh" phải đập vỡ đồ đạc; tin rằng camera chung cư đang theo dõi.</p>
-                    <p class="mb-2"><strong>(2)</strong> Khởi phát đột ngột sau sự kiện stress; trước đó chức năng học tập-xã hội bình thường. Không tiền sử rối loạn khí sắc/loạn thần. Gia đình không ai mắc TTPL.</p>
-                    <p class="mb-2"><strong>(3)</strong> Khám: lời nói rời rạc, khó vào chủ đề; hoang tưởng bị theo dõi, ảo thanh ra lệnh. Cảm xúc thay đổi nhanh; không có giai đoạn khí sắc trầm/hưng đạt ngưỡng.</p>
-                    <p><strong>(4)</strong> Các xét nghiệm bình thường. Sau nhập viện, được an thần ngắn hạn và antipsychotic liều thấp; đến tuần thứ 3, triệu chứng thuyên giảm hoàn toàn và chức năng trở lại mức trước đó.</p>
-                `,
-                questions: [
-                    { q: "Câu 1. Chẩn đoán phù hợp nhất?", o: ["RLLT ngắn (brief psychotic) có yếu tố stress rõ", "RLLT dạng phân liệt", "TTPL", "Rối loạn hoang tưởng"], a: "A", e: "Ca bệnh có khởi phát đột ngột sau một yếu tố stress rõ ràng, các triệu chứng kéo dài dưới 1 tháng và bệnh nhân hồi phục hoàn toàn. Đây là đặc điểm kinh điển của Rối loạn loạn thần ngắn." },
-                    { q: "Câu 2. Tiêu chí thời gian cốt lõi của rối loạn ở ca này là:", o: ["≥1 ngày và <1 tháng, sau đó trở về mức trước bệnh", "≥1 tháng và <6 tháng", "≥6 tháng", "Bất kỳ thời gian, miễn có ảo giác"], a: "A", e: "Rối loạn loạn thần ngắn được định nghĩa bởi thời gian của đợt bệnh: kéo dài ít nhất 1 ngày nhưng ít hơn 1 tháng, sau đó bệnh nhân hoàn toàn trở lại chức năng như trước." },
-                    { q: "Câu 3. Dấu hiệu nào không bắt buộc trong RLLT ngắn?", o: ["Khởi phát đột ngột", "Triệu chứng dương tính (hoang tưởng/ảo giác/lời nói vô tổ chức)", "Có yếu tố stress rõ", "Thuyên giảm hoàn toàn sau <1 tháng"], a: "C", e: "Yếu tố stress (with marked stressor) là một đặc điểm kỹ thuật (specifier) chứ không phải là một tiêu chí bắt buộc để chẩn đoán. Có những trường hợp RLLT ngắn không có yếu tố stress rõ ràng." },
-                    { q: "Câu 4. Yếu tố nào giúp phân biệt với TTPL?", o: ["Có ảo thanh ra lệnh", "Có hoang tưởng bị theo dõi", "Tổng thời gian rối loạn <1 tháng", "Insight kém"], a: "C", e: "Sự khác biệt chính về chẩn đoán giữa RLLT ngắn và TTPL là thời gian. TTPL yêu cầu thời gian kéo dài ít nhất 6 tháng." },
-                    { q: "Câu 5. Trong đánh giá ban đầu, mục tiêu loại trừ quan trọng nhất là:", o: ["Rối loạn nhân cách chống đối xã hội", "Rối loạn lo âu lan tỏa", "Loạn thần do chất/ bệnh nội khoa", "Rối loạn ám ảnh cưỡng chế"], a: "C", e: "Trước khi chẩn đoán một rối loạn loạn thần nguyên phát, luôn phải loại trừ các nguyên nhân thực thể như do sử dụng chất (ma túy, thuốc) hoặc do một bệnh lý y khoa khác gây ra." },
-                    { q: "Câu 6. Lựa chọn mô tả đúng về tiến triển điển hình:", o: ["Luôn chuyển thành TTPL", "Thuyên giảm hoàn toàn và trở về mức trước bệnh", "Luôn tồn lưu triệu chứng âm tính", "Luôn tái phát trong 3 tháng"], a: "B", e: "Theo định nghĩa, tiên lượng của Rối loạn loạn thần ngắn là rất tốt, với sự thuyên giảm hoàn toàn các triệu chứng và quay trở lại mức chức năng ban đầu." },
-                    { q: "Câu 7. Tình huống nào dùng specifier hợp lý cho RLLT ngắn?", o: ["Không có stress", "Có stress rõ (with marked stressor)", "Có tiền sử hưng cảm", "Có bệnh nội khoa mạn tính"], a: "B", e: "Các specifier (đặc điểm kỹ thuật) cho RLLT ngắn bao gồm: 'có yếu tố stress rõ', 'không có yếu tố stress rõ', và 'khởi phát sau sinh'." },
-                    { q: "Câu 8. Biểu hiện nào không thuộc nhóm dương tính?", o: ["Ảo thanh ra lệnh", "Hoang tưởng chi phối", "Cảm xúc cùn mòn", "Lời nói rời rạc"], a: "C", e: "'Cảm xúc cùn mòn' là một triệu chứng âm tính, thể hiện sự suy giảm biểu lộ cảm xúc. Các lựa chọn còn lại đều là triệu chứng dương tính." },
-                    { q: "Câu 9. Can thiệp cấp tính hay dùng:", o: ["Chỉ tâm lý, tránh thuốc", "An thần ngắn hạn + antipsychotic liều phù hợp", "Chống trầm cảm SSRI đơn thuần", "Thuốc ổn định khí sắc đơn thuần"], a: "B", e: "Trong giai đoạn cấp tính của loạn thần, việc đảm bảo an toàn cho bệnh nhân và kiểm soát triệu chứng là ưu tiên. Thường sử dụng thuốc an thần và/hoặc thuốc chống loạn thần (antipsychotic) liều thấp, ngắn hạn." },
-                    { q: "Câu 10. Khi nào cần xem xét lại chẩn đoán sang dạng phân liệt?", o: ["Khi có ảo giác", "Khi triệu chứng kéo dài ≥1 tháng nhưng <6 tháng", "Khi có stress", "Khi test ma túy âm tính"], a: "B", e: "Nếu các triệu chứng loạn thần vẫn tiếp diễn và vượt qua mốc 1 tháng nhưng chưa đến 6 tháng, chẩn đoán sẽ được thay đổi từ RLLT ngắn sang Rối loạn dạng phân liệt." },
+            "loan-than": {
+                topic: "Phổ Loạn Thần",
+                cases: [
+                    { /* Ca 1 */
+                        title: "Ca 1 - Nghi Tâm thần phân liệt (theo dõi diễn tiến)",
+                        vignette: `<b>(1) Trình bày bệnh:</b> N.T.H., nam 22 tuổi, sinh viên năm 3, được mẹ đưa đến khám vì “con nghe thấy người ta nói xấu và ra lệnh trong đầu". Khoảng 8 tháng gần đây H. thu mình, ít nói, bỏ các hoạt động trước đây yêu thích, điểm số giảm, tắm giặt thất thường. 2 tháng gần đây, H. nghe hai giọng nam đối thoại và bình luận về mình, đôi lúc ra lệnh phải đứng yên không nhúc nhích. H. tin rằng suy nghĩ của mình bị phát tán cho bạn học; cậu tránh đến lớp vì “ai cũng biết tôi nghĩ gì”.<br><b>(2) Tiền sử - bối cảnh:</b> Gia đình ghi nhận H. mất ngủ tăng dần, đi đi lại lại không mục đích, đôi lúc đứng bất động giữ tư thế kỳ lạ vài phút. Không dùng rượu/bia, phủ nhận ma túy. Bác ruột bên nội từng điều trị tâm thần phân liệt.<br><b>(3) Khám tâm thần:</b> Dáng vẻ luộm thuộm, giảm giao tiếp mắt, nét mặt cùn mòn, trả lời ngắn, đôi khi trật đường ray. Tư duy có hoang tưởng bị theo dõi chi phối. Mô tả ảo thanh bình luận và ra lệnh. Khí sắc lo âu nhẹ, không có đợt khí sắc trầm/hưng đạt ngưỡng. Insight kém.<br><b>(4) Cận lâm sàng:</b> Khám nội thần kinh bình thường. Các xét nghiệm máu, test ma túy âm tính. MRI sọ não không bất thường. Trong 8 tháng qua, suy giảm rõ rệt học tập, quan hệ xã hội và tự chăm sóc.`,
+                        questions: [
+                            { q: "Dựa trên ca bệnh, nhóm triệu chứng dương tính nổi bật nhất là gì?", o: ["Giảm biểu lộ cảm xúc, giảm ý chí, nghèo lời", "Ảo thanh bình luận/ra lệnh và hoang tưởng bị theo dõi/chi phối", "Quá nói, tăng hoạt động có mục đích", "Ám ảnh – cưỡng chế về nhiễm bẩn"], a: "B", ex: "Triệu chứng dương tính là sự xuất hiện của những trải nghiệm bất thường. Trong ca này, ảo thanh (nghe giọng nói) và hoang tưởng (niềm tin sai lầm) là những biểu hiện dương tính rõ rệt nhất." },
+                            { q: "Dấu hiệu nào sau đây thuộc triệu chứng âm tính trong ca?", o: ["Ý tưởng tự cao", "Múa vờn, tư thế kỳ quặc", "Cảm xúc cùn mòn, nghèo lời, giảm giao tiếp mắt", "Nói hổ lốn, trật đường ray"], a: "C", ex: "Triệu chứng âm tính là sự suy giảm hoặc mất đi các chức năng bình thường. Cảm xúc cùn mòn, nghèo lời, và giảm giao tiếp mắt là những ví dụ điển hình của triệu chứng âm tính." },
+                            { q: "Phát biểu nào mô tả đúng ngôn ngữ/vận hành tư duy vô tổ chức quan sát ở H.?", o: ["Nói nhiều, nhanh, chuyển chủ đề do khí sắc tăng", "Trật đường ray, khó liên kết ý, nói hổ lốn", "Im lặng, không nói", "Nói thì thầm do sợ bị nghe trộm"], a: "B", ex: "Tư duy vô tổ chức biểu hiện qua lời nói khó hiểu, các ý tưởng không liên kết logic với nhau, hay còn gọi là 'trật đường ray' (derailment) hoặc 'nói hổ lốn'." },
+                            { q: "Với thời gian tiến triển tổng ≥6 tháng (tiền triệu + hoạt động) và ≥1 tháng triệu chứng hoạt động rõ, chẩn đoán nào phù hợp nhất?", o: ["Rối loạn loạn thần ngắn", "Rối loạn dạng phân liệt (schizophreniform)", "Tâm thần phân liệt", "Rối loạn hoang tưởng"], a: "C", ex: "Tiêu chuẩn chẩn đoán Tâm thần phân liệt yêu cầu tổng thời gian của các dấu hiệu rối loạn (bao gồm giai đoạn tiền triệu, hoạt động và tồn dư) phải kéo dài ít nhất 6 tháng, trong đó có ít nhất 1 tháng của các triệu chứng giai đoạn hoạt động." },
+                            { q: "Đặc trưng phân biệt rối loạn dạng phân liệt so với TTPL là:", o: ["Chỉ có hoang tưởng, chức năng còn bảo tồn", "Thời gian đợt rối loạn ≥1 tháng nhưng <6 tháng", "Có cơn hoảng loạn đi kèm", "Luôn có hưng cảm kịch phát"], a: "B", ex: "Điểm khác biệt cốt lõi giữa Rối loạn dạng phân liệt và Tâm thần phân liệt là thời gian. Rối loạn dạng phân liệt có các triệu chứng tương tự nhưng kéo dài từ 1 đến dưới 6 tháng." },
+                            { q: "Yếu tố sau đây giúp loại trừ rối loạn cảm xúc phân liệt trong ca trên:", o: ["Có ảo giác kéo dài", "Từng có giai đoạn hưng cảm đầy đủ", "Không có đợt khí sắc chính đồng thời/chiếm phần lớn thời gian diễn tiến", "Khí sắc lo âu nhẹ"], a: "C", ex: "Rối loạn cảm xúc phân liệt yêu cầu có sự hiện diện của một giai đoạn khí sắc chính (trầm cảm hoặc hưng cảm) xảy ra đồng thời với các triệu chứng loạn thần, và giai đoạn khí sắc này chiếm phần lớn tổng thời gian của bệnh. Ca này không có đặc điểm đó." },
+                            { q: "Vì sao rối loạn hoang tưởng ít phù hợp với ca này?", o: ["Vì H. không có hoang tưởng", "Vì chức năng học tập - xã hội suy giảm đáng kể và có ảo thanh nổi bật không chỉ gắn với chủ đề hoang tưởng", "Vì H. là nam và còn trẻ", "Vì không làm xét nghiệm hình ảnh não"], a: "B", ex: "Rối loạn hoang tưởng thường không có sự suy giảm chức năng nghiêm trọng như ca này, và ảo giác (nếu có) thường không nổi bật và liên quan trực tiếp đến chủ đề của hoang tưởng. Ca này có cả ảo thanh nổi bật và suy giảm chức năng rõ rệt." },
+                            { q: "Theo tài liệu học phần, loại ảo giác phổ biến nhất trong phổ loạn thần là:", o: ["Ảo thị", "Ảo khứu", "Ảo thanh", "Ảo xúc"], a: "C", ex: "Ảo thanh, đặc biệt là nghe thấy các giọng nói, là loại ảo giác thường gặp và đặc trưng nhất trong Tâm thần phân liệt và các rối loạn phổ loạn thần khác." },
+                            { q: "Hành vi căng trương lực (catatonic) nào phù hợp với mô tả ở H.?", o: ["Giảm phản ứng môi trường, giữ tư thế kỳ quặc kéo dài", "Nói nhanh, nhảy chủ đề", "Tăng vận động mục đích do lo âu", "Bồn chồn gỗ chân nhẹ"], a: "A", ex: "Hành vi 'đứng bất động giữ tư thế kỳ lạ vài phút' được mô tả là một biểu hiện của căng trương lực (catatonia), cụ thể là giữ nguyên tư thế (catalepsy)." },
+                            { q: "Với tiến triển thu mình nhiều tháng rồi bộc lộ rầm rộ ảo giác/hoang tưởng và hiện còn âm tính dai dẳng, trình tự giai đoạn nào mô tả đúng nhất?", o: ["Hoạt động → Tồn dư → Tiền triệu", "Tiền triệu → Hoạt động → Tồn dư", "Hoạt động kéo dài đơn thuần", "Tồn dư → Tiền triệu → Hoạt động"], a: "B", ex: "Diễn tiến điển hình của Tâm thần phân liệt thường bắt đầu bằng giai đoạn Tiền triệu (thu mình, suy giảm chức năng), tiếp theo là giai đoạn Hoạt động (triệu chứng dương tính rầm rộ), và sau đó là giai đoạn Tồn dư (chủ yếu là triệu chứng âm tính)." }
+                        ]
+                    },
+                    // ... More cases for Loạn Thần
                 ]
             },
-            // CA 3
-            {
-                caseId: "case-3",
-                caseTitle: "CA 3: Rối loạn dạng phân liệt (yếu tố tiên lượng tốt)",
-                caseDescription: `
-                    <p class="mb-2"><strong>(1)</strong> P.Q.K., nam 19 tuổi, sinh viên năm nhất. 6 tuần trước, gia đình ghi nhận K. thay đổi đột ngột: bối rối, phát biểu lộn xộn, nghe tiếng người cãi nhau trong đầu, tin bạn cùng phòng cài máy đọc suy nghĩ.</p>
-                    <p class="mb-2"><strong>(2)</strong> Trước đây học giỏi, giao tiếp tốt. Từ khi phát bệnh tới nay 3,5 tháng, nghỉ học, thu mình.</p>
-                    <p class="mb-2"><strong>(3)</strong> Khám: trật đường ray, nội dung hoang tưởng chi phối; ảo thanh bình luận. Không cùn mòn cảm xúc rõ. K. tỏ ra bối rối/hoang mang về thực tại (confusion/perplexity).</p>
-                    <p><strong>(4)</strong> Khám thần kinh bình thường; các xét nghiệm thường quy âm tính. Bắt đầu antipsychotic; sau 2 tuần, giảm rõ rệt ảo thanh; đang theo dõi sát diễn tiến chưa đủ 6 tháng.</p>
-                `,
-                questions: [
-                    { q: "Câu 1. Chẩn đoán hiện tại phù hợp nhất:", o: ["TTPL", "RLLT ngắn", "RLLT dạng phân liệt", "Rối loạn hoang tưởng"], a: "C", e: "Ca bệnh có các triệu chứng loạn thần rõ rệt kéo dài 3,5 tháng. Khoảng thời gian này (≥1 tháng và <6 tháng) là tiêu chí cốt lõi cho chẩn đoán Rối loạn dạng phân liệt." },
-                    { q: "Câu 2. Tiêu chí thời gian cốt lõi để dạng phân liệt:", o: ["≥1 ngày và <1 tháng", "≥1 tháng và <6 tháng", "≥6 tháng", "Không yêu cầu"], a: "B", e: "Rối loạn dạng phân liệt có triệu chứng giống TTPL nhưng được chẩn đoán khi tổng thời gian của đợt bệnh là từ 1 tháng đến dưới 6 tháng." },
-                    { q: "Câu 3. Dấu hiệu nào là yếu tố tiên lượng tốt của rối loạn dạng phân liệt?", o: ["Khởi phát từ từ", "Khởi phát trong vòng 4 tuần kể từ thay đổi hành vi đầu tiên", "Cảm xúc cùn mòn rõ", "Tiền sử chức năng xã hội kém"], a: "B", e: "Khởi phát nhanh (trong vòng 4 tuần) được xem là một yếu tố tiên lượng tốt, cho thấy khả năng hồi phục cao hơn." },
-                    { q: "Câu 4. Dấu hiệu nào không phải yếu tố tiên lượng tốt cổ điển?", o: ["Bối rối/hoang mang", "Khởi phát nhanh", "Tiền bệnh tốt", "Cảm xúc cùn mòn/ phẳng rõ"], a: "D", e: "Cảm xúc cùn mòn hoặc phẳng lặng là một triệu chứng âm tính. Sự hiện diện rõ rệt của triệu chứng này thường liên quan đến tiên lượng xấu hơn." },
-                    { q: "Câu 5. Khi triệu chứng kéo dài vượt quá 6 tháng, cần xem xét:", o: ["Chuyển chẩn đoán TTPL", "RLLT ngắn", "Rối loạn hoang tưởng", "RLLT cảm xúc"], a: "A", e: "Nếu một đợt Rối loạn dạng phân liệt kéo dài hơn 6 tháng, chẩn đoán sẽ được đổi thành Tâm thần phân liệt (TTPL)." },
-                    { q: "Câu 6. Tập hợp triệu chứng bắt buộc đáp ứng Tiêu chuẩn A:", o: ["Chỉ âm tính", "≥2 triệu chứng, trong đó ≥1 là ảo giác/hoang tưởng/lời nói rời rạc", "Chỉ hành vi vô tổ chức", "Chỉ catatonia"], a: "B", e: "Tiêu chuẩn A của TTPL (và dạng phân liệt) yêu cầu có ít nhất 2 triệu chứng, và ít nhất 1 trong số đó phải là một trong ba triệu chứng cốt lõi: hoang tưởng, ảo giác, hoặc ngôn ngữ vô tổ chức." },
-                    { q: "Câu 7. So với TTPL, RLLT dạng phân liệt khác ở:", o: ["Có ảo thanh", "Có hoang tưởng", "Thời gian < 6 tháng", "Chức năng không suy giảm"], a: "C", e: "Điểm khác biệt chính duy nhất giữa hai rối loạn này là thời gian. Triệu chứng có thể giống hệt nhau, nhưng dạng phân liệt có thời gian dưới 6 tháng." },
-                    { q: "Câu 8. Dấu hiệu nào gợi ý không phải rối loạn hoang tưởng?", o: ["Chức năng còn tương đối", "Ảo giác nhẹ liên quan chủ đề hoang tưởng", "Đáp ứng Tiêu chuẩn A của TTPL", "Hoang tưởng hệ thống"], a: "C", e: "Một trong các tiêu chí loại trừ của Rối loạn hoang tưởng là bệnh nhân không bao giờ đáp ứng Tiêu chuẩn A của TTPL. Ca này có đủ triệu chứng (ảo thanh, hoang tưởng, lời nói vô tổ chức) để đáp ứng tiêu chuẩn A." },
-                    { q: "Câu 9. Mục tiêu theo dõi quan trọng trong 2-4 tuần đầu:", o: ["Có/hết catatonia", "Đáp ứng với antipsychotic và tính an toàn", "Nồng độ TSH", "Điện não đồ"], a: "B", e: "Khi bắt đầu điều trị bằng thuốc chống loạn thần (antipsychotic), mục tiêu chính ban đầu là theo dõi hiệu quả của thuốc trong việc giảm triệu chứng và theo dõi các tác dụng phụ để đảm bảo an toàn cho bệnh nhân." },
-                    { q: "Câu 10. Nếu xuất hiện đợt khí sắc trầm/hưng chiếm phần lớn thời gian diễn tiến và vẫn có ≥2 tuần loạn thần đơn thuần, nghĩ đến:", o: ["TTPL", "RLLT cảm xúc phân liệt", "RLLT hoang tưởng", "RLLT do chất"], a: "B", e: "Đây chính là định nghĩa của Rối loạn cảm xúc phân liệt: sự kết hợp của các triệu chứng loạn thần và một đợt rối loạn khí sắc chính, với một giai đoạn có loạn thần mà không có triệu chứng khí sắc." },
+            "lo-au": {
+                topic: "Các Rối Loạn Lo Âu",
+                cases: [
+                    { /* Ca 1 */
+                        title: "Ca 1 - Ám sợ đặc hiệu (máu-chích-chấn thương)",
+                        vignette: `<b>(1) Diễn tiến:</b> N.T.L, nữ 20 tuổi, sinh viên điều dưỡng, mô tả "choáng váng, buồn nôn, tay lạnh mỗi khi nhìn thấy kim tiêm hoặc máu trong giờ thực tập. Tránh vào phòng thủ thuật, xin đổi môn vì “không chịu nổi cảnh lấy máu". Tình trạng kéo dài khoảng 8-9 tháng, ngày càng né tránh tiếp xúc.<br><b>(2) Tiền sử:</b> Không bệnh nội khoa, không dùng chất. Từ nhỏ sợ nhìn cảnh đứt tay, từng ngất khi xem video chấn thương. Gia đình kể gần đây em xem tin tức tai nạn nhiều (gợi ý học qua quan sát/gián tiếp).<br><b>(3) Thăm khám:</b> Khám nội khoa bình thường. Huyết áp, đường huyết trong giới hạn.<br><b>(4) Trạng thái tâm thần:</b> Trong buổi tham vấn, bệnh nhân căng thẳng khi nói tới “xét nghiệm máu", muốn rời phòng khi thấy hình kim tiêm. Không có ý tưởng kỳ quái.`,
+                        questions: [
+                            { q: "Tiêu chí nào KHÔNG thuộc “Ám sợ đặc hiệu”?", o: ["Sợ hãi/lo âu tức thì trước kích thích đặc hiệu", "Né tránh/nhịn chịu với lo âu dữ dội", "Thời gian ≥6 tháng", "Bắt buộc có cơn hoảng loạn toàn phát mỗi lần tiếp xúc"], a: "D", ex: "DSM-5-TR không yêu cầu bắt buộc phải có cơn hoảng loạn toàn phát mỗi lần tiếp xúc. Phản ứng sợ hãi có thể ở nhiều mức độ, miễn là nó xảy ra tức thì và quá mức so với nguy cơ thực tế." },
+                            { q: "Dấu hiệu “xem clip tai nạn rồi sợ kim tiêm” minh họa cơ chế:", o: ["Điều kiện hóa cổ điển", "Học qua quan sát/gián tiếp", "Củng cố tích cực", "Nhạy cảm hóa"], a: "B", ex: "Nỗi sợ có thể được hình thành không chỉ qua trải nghiệm trực tiếp mà còn qua việc quan sát người khác trải qua sự kiện đáng sợ hoặc nhận thông tin tiêu cực về nó. Đây được gọi là học tập gián tiếp (vicarious learning)." },
+                            { q: "Với phân nhóm 'máu-chích-bị thương', yếu tố cảm xúc thường đi kèm là:", o: ["Cảm xúc ghê sợ (disgust)", "Giận dữ", "Hưng phấn", "Buồn bã"], a: "A", ex: "Loại ám sợ này có một đặc trưng riêng là ngoài sự sợ hãi, nó còn liên quan mạnh mẽ đến cảm giác ghê tởm (disgust). Phản ứng sinh lý cũng khác biệt, thường là phản ứng ngất do hạ huyết áp (vasovagal response)." },
+                            { q: "Tiêu chí “không tương xứng nguy cơ thực tế” thuộc mục (ký hiệu DSM):", o: ["A", "C", "D", "F"], a: "C", ex: "Trong DSM-5-TR, Tiêu chí D của Ám sợ đặc hiệu nêu rõ rằng 'Nỗi sợ hãi hoặc lo âu không tương xứng với nguy cơ thực tế mà đối tượng hoặc tình huống gây ra và với bối cảnh văn hóa xã hội'." },
+                            { q: "Điều trị nền tảng nhất (first-line về kỹ thuật hành vi) cho ca này là:", o: ["Thôi miên", "Phơi nhiễm có hệ thống/tiếp xúc dần", "Phân tích giấc mơ", "Chỉ dùng benzodiazepine dài hạn"], a: "B", ex: "Liệu pháp phơi nhiễm (exposure therapy) là phương pháp điều trị tâm lý có bằng chứng hiệu quả cao nhất cho Ám sợ đặc hiệu. Bệnh nhân sẽ được tiếp xúc một cách có hệ thống và an toàn với các kích thích gây sợ để 'dập tắt' phản ứng lo âu." },
+                            { q: "Hành vi “tránh vào phòng thủ thuật” là ví dụ của:", o: ["Hành vi an toàn/né tránh duy trì sợ", "Tiếp xúc nội cảm", "Củng cố tích cực", "Phản điều kiện hóa"], a: "A", ex: "Hành vi né tránh mang lại sự giảm lo âu tạm thời, nhưng về lâu dài, nó củng cố niềm tin rằng đối tượng/tình huống đó thực sự nguy hiểm và ngăn cản quá trình học lại, do đó duy trì nỗi sợ." },
+                            { q: "Chẩn đoán phân biệt KHÔNG trực tiếp nằm trong nhóm loại trừ của tiêu chí G là:", o: ["Rối loạn ám ảnh cưỡng bức (OCD)", "Rối loạn hoảng loạn", "Rối loạn stress sau sang chấn (PTSD)", "Rối loạn ăn uống"], a: "B", ex: "Tiêu chí G liệt kê các rối loạn cần phân biệt như OCD, PTSD, lo âu xã hội, lo âu chia ly, agoraphobia. Rối loạn hoảng loạn không phải là một ví dụ điển hình trong danh sách này vì nỗi sợ trong ám sợ đặc hiệu luôn có một tác nhân cụ thể, trong khi cơn hoảng loạn trong RL hoảng loạn có thể xảy ra bất ngờ." },
+                            { q: "Tiêu chí “dai dẳng ≥6 tháng” giúp phân biệt với:", o: ["Rối loạn điều chỉnh", "Phản ứng sợ thoáng qua", "Rối loạn khí sắc", "Rối loạn nhân cách"], a: "B", ex: "Yêu cầu về thời gian giúp phân biệt một rối loạn ám sợ thực sự với những nỗi sợ hãi tạm thời, thoáng qua mà nhiều người có thể trải qua sau một sự kiện hoặc trong một giai đoạn ngắn." },
+                            { q: "Nếu theo tiếp cận phân tâm học về ám sợ, trọng tâm can thiệp là:", o: ["Ý thức hóa xung đột vô thức, làm việc với chuyển di", "Tăng benzodiazepine", "Tập thể dục cường độ cao", "Biofeedback duy nhất"], a: "A", ex: "Theo lý thuyết phân tâm, ám sợ được xem là biểu hiện của một xung đột vô thức bị dồn nén và chuyển dịch sang một đối tượng bên ngoài. Trị liệu sẽ tập trung vào việc khám phá và giải quyết xung đột gốc rễ đó." },
+                            { q: "Phát biểu đúng về dịch tễ ám sợ đặc hiệu:", o: ["Nữ ≈ nam", "Nữ thường cao hơn nam (≈2:1)", "Chỉ gặp ở trẻ em", "Chỉ gặp ở người già"], a: "B", ex: "Các nghiên cứu dịch tễ học cho thấy tỷ lệ mắc Ám sợ đặc hiệu ở nữ giới cao hơn đáng kể so với nam giới, với tỷ lệ xấp xỉ 2:1." }
+                        ]
+                    },
+                    // ... More cases for Lo Âu
                 ]
             },
-            // CA 4
-            {
-                caseId: "case-4",
-                caseTitle: "CA 4: Rối loạn hoang tưởng (kiểu bị hại)",
-                caseDescription: `
-                    <p class="mb-2"><strong>(1)</strong> T.T.H., nữ 52 tuổi, nhân viên văn phòng. 8 tháng nay tin rằng trưởng phòng “chơi xấu", lập kế hoạch hại mình; H. thu thập email, ghi âm để “làm bằng chứng".</p>
-                    <p class="mb-2"><strong>(2)</strong> Chức năng nghề nghiệp gần như bảo tồn (đi làm đều, hiệu suất ổn). Quan hệ gia đình căng thẳng do H. liên tục bàn về “âm mưu". Không có ảo thanh nổi bật; thỉnh thoảng "nghe thấy" đồng nghiệp xì xào về mình ở gần (gắn với chủ đề hoang tưởng).</p>
-                    <p class="mb-2"><strong>(3)</strong> Khám: không rối loạn lời nói, không hành vi vô tổ chức/catatonia. Không từng đáp ứng Tiêu chuẩn A của TTPL. Không ghi nhận giai đoạn khí sắc chính.</p>
-                    <p><strong>(4)</strong> Khám toàn thân, cận lâm sàng thường quy bình thường. Không dùng chất.</p>
-                `,
-                questions: [
-                    { q: "Câu 1. Chẩn đoán phù hợp nhất:", o: ["TTPL", "RLLT dạng phân liệt", "Rối loạn hoang tưởng (persecutory type)", "RLLT ngắn"], a: "C", e: "Bệnh nhân có một hoang tưởng (bị hại) kéo dài ≥1 tháng, chức năng không bị suy giảm nghiêm trọng, và không đáp ứng tiêu chuẩn của TTPL. Đây là những đặc điểm của Rối loạn hoang tưởng." },
-                    { q: "Câu 2. Tiêu chuẩn không phù hợp với rối loạn hoang tưởng:", o: ["Hoang tưởng ≥1 tháng", "Đáp ứng đầy đủ Tiêu chuẩn A của TTPL", "Ảo giác (nếu có) không nổi bật và liên quan chủ đề hoang tưởng", "Chức năng không suy giảm đáng kể ngoài tác động trực tiếp của hoang tưởng"], a: "B", e: "Tiêu chí B của Rối loạn hoang tưởng nêu rõ: 'Tiêu chuẩn A cho Tâm thần phân liệt chưa bao giờ được đáp ứng'. Đây là điểm loại trừ quan trọng." },
-                    { q: "Câu 3. Dấu hiệu giúp phân biệt với TTPL:", o: ["Có hoang tưởng", "Không có ảo giác nổi bật hoặc rối loạn ngôn ngữ hành vi", "Có stress", "Có suy giảm một chút hiệu suất"], a: "B", e: "Trong khi TTPL thường có đầy đủ các triệu chứng dương tính (ảo giác, rối loạn ngôn ngữ, hành vi vô tổ chức), Rối loạn hoang tưởng chủ yếu chỉ có hoang tưởng mà không có các triệu chứng kia một cách nổi bật." },
-                    { q: "Câu 4. Biểu hiện nào trái với chẩn đoán rối loạn hoang tưởng:", o: ["Chức năng nghề nghiệp bảo tồn", "Tư duy có hệ thống quanh chủ đề bị hại", "Lời nói rời rạc, vô tổ chức", "Ít/không ảo giác nổi bật"], a: "C", e: "Lời nói rời rạc, vô tổ chức là một triệu chứng cốt lõi của Tiêu chuẩn A TTPL. Sự hiện diện của nó sẽ loại trừ chẩn đoán Rối loạn hoang tưởng." },
-                    { q: "Câu 5. Trường hợp ảo giác nào vẫn chấp nhận trong rối loạn hoang tưởng?", o: ["Ảo thị phức tạp kéo dài", "Ảo thanh bình luận liên tục, không gắn chủ đề", "Nghe xì xào về mình khi đi ngang qua (gắn với chủ đề bị hại)", "Ảo khứu lan tỏa suốt ngày"], a: "C", e: "Trong Rối loạn hoang tưởng, ảo giác có thể xuất hiện nhưng chúng không được nổi bật và phải liên quan trực tiếp đến chủ đề của hoang tưởng. Việc 'nghe xì xào' củng cố cho hoang tưởng bị hại là một ví dụ phù hợp." },
-                    { q: "Câu 6. Can thiệp phù hợp ban đầu:", o: ["Chống trầm cảm đơn thuần", "Antipsychotic + trị liệu nhận thức hành vi (CBT) nhắm hoang tưởng", "Thuốc ổn định khí sắc bắt buộc", "Chỉ psychoeducation gia đình"], a: "B", e: "Điều trị cho Rối loạn hoang tưởng thường kết hợp thuốc chống loạn thần (antipsychotic) để giảm cường độ của hoang tưởng và liệu pháp tâm lý như CBT để giúp bệnh nhân kiểm tra và điều chỉnh niềm tin sai lệch." },
-                    { q: "Câu 7. Tuyên bố sai về tiên lượng:", o: ["Có thể mạn tính, dao động theo stress", "Chức năng thường tương đối bảo tồn", "Luôn chuyển thành TTPL", "Một số đáp ứng với antipsychotics"], a: "C", e: "Rối loạn hoang tưởng là một rối loạn riêng biệt và không phải lúc nào cũng là tiền đề của TTPL. Nhiều trường hợp vẫn duy trì chẩn đoán này suốt đời mà không chuyển thành TTPL." },
-                    { q: "Câu 8. Điểm khác biệt cốt lõi với RLLT dạng phân liệt:", o: ["Xuất hiện hoang tưởng", "Không đáp ứng Tiêu chuẩn A TTPL và thời gian kéo dài", "Có stress", "Tuổi trung niên"], a: "B", e: "RLLT dạng phân liệt bắt buộc phải đáp ứng Tiêu chuẩn A của TTPL, trong khi Rối loạn hoang tưởng thì không. Ngoài ra, thời gian của Rối loạn hoang tưởng thường kéo dài hơn nhiều." },
-                    { q: "Câu 9. Nếu xuất hiện ảo thanh bình luận nổi bật và lời nói vô tổ chức, xem xét:", o: ["TTPL", "RLLT do chất", "Rối loạn nhân cách", "PTSD"], a: "A", e: "Sự xuất hiện của ảo thanh bình luận và lời nói vô tổ chức là các triệu chứng cốt lõi, khi kết hợp với hoang tưởng sẽ đủ để đáp ứng Tiêu chuẩn A của TTPL, do đó cần xem xét chẩn đoán này." },
-                    { q: "Câu 10. Khi bệnh nhân khăng khăng kiện tụng, ưu tiên kỹ năng:", o: ["Tranh luận trực diện hoang tưởng", "Thiết lập liên minh trị liệu, quản lý nguy cơ, tiếp cận dần dần", "Cắt liên hệ gia đình", "Tăng liều chống trầm cảm"], a: "B", e: "Đối đầu trực tiếp với hoang tưởng thường phản tác dụng. Cách tiếp cận tốt nhất là xây dựng một mối quan hệ tin cậy (liên minh trị liệu), thấu cảm với cảm xúc của bệnh nhân, và từ đó dần dần giúp họ xem xét lại các bằng chứng." },
+            "luong-cuc": {
+                topic: "Phổ Lưỡng Cực",
+                cases: [
+                     { /* Ca 1 */
+                        title: "Ca 1 - Cơn hưng cảm có loạn thần (Bipolar I)",
+                        vignette: `<b>(1) Diễn tiến:</b> Nam, 27 tuổi, được đưa vào khoa cấp cứu vì 3 ngày liền không ngủ mà “vẫn rất khoẻ", nói liên tục về kế hoạch khởi nghiệp tầm cỡ, tự nhận mình “thiên tài marketing". Gia đình ghi nhận 1 tuần gần đây anh tăng hoạt động bất thường, tiêu tiền ào ạt, lái xe quá tốc độ.<br><b>(2) Khám tâm thần:</b> Tại phòng khám, bệnh nhân nói nhanh, khó ngắt lời, tư duy phi tán. Khi hỏi về rủi ro tài chính, anh cáu gắt cho rằng “ngân hàng sẽ xin anh đầu tư ngược lại”.<br><b>(3) Tiền sử - bối cảnh:</b> Người nhà phủ nhận dùng chất kích thích; không bệnh nội khoa đặc biệt. Đêm qua anh leo vào công trường xây dựng để “check mặt bằng cho tập đoàn".<br><b>(4) Đánh giá nguy cơ:</b> Có hành vi xung động, ý nghĩ hoang tưởng tự cao thoáng qua, suy giảm chức năng nghiêm trọng; bác sĩ đề nghị nhập viện điều trị cấp.`,
+                        questions: [
+                            { q: "Tiêu chuẩn thời gian để chẩn đoán pha hưng cảm theo DSM-5-TR là:", o: ["≥4 ngày", "≥1 tuần hoặc bất kỳ thời gian nào nếu cần nhập viện", "≥2 tuần", "≥1 tháng"], a: "B", ex: "Một giai đoạn hưng cảm được xác định khi có một giai đoạn khí sắc tăng/cáu kỉnh bất thường và dai dẳng, kéo dài ít nhất 1 tuần. Tuy nhiên, nếu các triệu chứng đủ nghiêm trọng để phải nhập viện, thì yêu cầu về thời gian này không còn bắt buộc." },
+                            { q: "Dấu hiệu nào không phải là triệu chứng điển hình của hưng cảm?", o: ["Nói nhiều/áp lực nói", "Giảm nhu cầu ngủ", "Tư duy phi tán", "Hoảng loạn kịch phát lặp lại"], a: "D", ex: "Các triệu chứng điển hình của hưng cảm bao gồm khí sắc tăng, tự cao, giảm nhu cầu ngủ, nói nhiều, tư duy phi tán, tăng hoạt động và tham gia vào các hành vi nguy cơ cao. Cơn hoảng loạn không phải là một triệu chứng cốt lõi của hưng cảm." },
+                            { q: "Trường hợp này phù hợp nhất với:", o: ["RLLC I có loạn thần", "RLLC II", "Rối loạn nhân cách", "Mất ngủ tiên phát"], a: "A", ex: "Bệnh nhân có một giai đoạn hưng cảm rõ rệt, gây suy giảm chức năng nghiêm trọng và phải nhập viện, có kèm ý nghĩ hoang tưởng tự cao. Điều này đáp ứng đầy đủ tiêu chuẩn chẩn đoán Rối loạn Lưỡng cực I, cơn hưng cảm hiện tại." },
+                            { q: "Yếu tố nào ủng hộ quyết định nhập viện?", o: ["Mất ngủ nhẹ", "Không suy giảm chức năng", "Hành vi nguy cơ cao/xung động", "Tự xử trí được tại nhà"], a: "C", ex: "Sự hiện diện của các hành vi nguy cơ cao (lái xe quá tốc độ, leo vào công trường) và suy giảm khả năng phán xét là những lý do chính đáng để nhập viện, nhằm đảm bảo an toàn cho bệnh nhân và những người xung quanh." },
+                            { q: "Xét nghiệm sàng lọc nào hữu ích ban đầu để rà tiền sử khí sắc?", o: ["MDQ", "PCL-5", "Y-BOCS", "AUDIT"], a: "A", ex: "MDQ (Mood Disorder Questionnaire - Bảng câu hỏi Rối loạn Khí sắc) là một công cụ sàng lọc ngắn gọn và được sử dụng rộng rãi để phát hiện các giai đoạn hưng cảm hoặc hưng cảm nhẹ trong tiền sử của bệnh nhân." },
+                            { q: "Trong cơn hưng cảm có hoang tưởng tự cao, dùng duy nhất thuốc chống trầm cảm sẽ dẫn tới nguy cơ gì?", o: ["Ổn định khí sắc nhanh", "Làm nặng cơn hưng cảm", "Không ảnh hưởng", "Chỉ gây an thần"], a: "B", ex: "Sử dụng thuốc chống trầm cảm đơn trị liệu trong một cơn hưng cảm có thể làm cho các triệu chứng trở nên tồi tệ hơn, gây ra kích động, hoặc thậm chí gây chuyển cực nhanh (rapid cycling)." },
+                            { q: "Biện pháp nào có bằng chứng giảm nguy cơ tự sát lâu dài ở RLLC?", o: ["Benzodiazepine", "Lithium", "Thuốc ngủ Z-drug", "Stimulant"], a: "B", ex: "Lithium là thuốc ổn định khí sắc có bằng chứng mạnh mẽ nhất về việc giảm nguy cơ tự sát và hành vi tự tử ở những bệnh nhân mắc Rối loạn lưỡng cực." },
+                            { q: "Khi phân biệt với rối loạn loạn thần nguyên phát, tiêu chí cốt lõi nghiêng về hưng cảm là:", o: ["Ảo thanh kéo dài từ tuổi thiếu niên", "Khí sắc tăng/cáu bẳn + tăng năng lượng kèm cụm triệu chứng hưng cảm", "Amotivational", "Tụt cảm kéo dài 2 năm"], a: "B", ex: "Sự hiện diện của một giai đoạn khí sắc tăng/cáu kỉnh rõ rệt, kết hợp với tăng năng lượng và các triệu chứng hưng cảm khác là dấu hiệu đặc trưng của một cơn khí sắc trong RLLC, phân biệt với các rối loạn loạn thần nguyên phát nơi mà rối loạn khí sắc thường không nổi bật bằng." },
+                            { q: "Triệu chứng nào trong ca là hành vi nguy cơ thường gặp ở hưng cảm?", o: ["Rửa tay lặp đi lặp lại", "Leo vào công trường ban đêm", "Né giao tiếp xã hội", "Ám ảnh sạch bẩn"], a: "B", ex: "Tham gia vào các hoạt động có khả năng gây hậu quả đau đớn, chẳng hạn như tiêu tiền hoang phí, hành vi tình dục không an toàn, hoặc các quyết định kinh doanh dại dột (như leo vào công trường), là một đặc điểm của hưng cảm." },
+                            { q: "Trong bước lượng giá ban đầu, ngoài MDQ nên bổ sung thang nào để khảo sát trầm cảm đi kèm?", o: ["PHQ-9", "HCL-32", "PSS-10", "YMRS"], a: "A", ex: "PHQ-9 (Patient Health Questionnaire-9) là một thang đo tự báo cáo ngắn gọn và hiệu quả để sàng lọc và đánh giá mức độ nặng của các triệu chứng trầm cảm. YMRS dùng để đánh giá hưng cảm, còn HCL-32 dùng sàng lọc hưng cảm nhẹ." }
+                        ]
+                    },
+                    // ... More cases for Lưỡng Cực
                 ]
             },
-            // CA 5
-            {
-                caseId: "case-5",
-                caseTitle: "CA 5: Loạn thần do chất (Cannabis/Amphetamine)",
-                caseDescription: `
-                    <p class="mb-2"><strong>(1)</strong> L.V.H., nam 23 tuổi, làm tự do. 3 tuần gần đây sau các buổi “đốt cỏ” liên tục và thi thoảng dùng viên “đá” lúc đi bar, H. bắt đầu nghe tiếng đàn ông dọa giết, tin rằng hàng xóm gắn thiết bị ghi âm quanh nhà.</p>
-                    <p class="mb-2"><strong>(2)</strong> Người nhà ghi nhận H. mất ngủ, tim đập nhanh, giảm ăn, cáu gắt; hôm nhập viện vẫn mùi cần sa.</p>
-                    <p class="mb-2"><strong>(3)</strong> Khám: bồn chồn, nói nhanh, rời rạc nhẹ, hoang tưởng bị theo dõi; không có tiền sử trước đó.</p>
-                    <p><strong>(4)</strong> Dấu hiệu sinh tồn: mạch 112/phút. Test nước tiểu dương tính THC và amphetamine. Sau 72 giờ ngưng chất, ảo thanh giảm đáng kể; sau 2 tuần hết ảo giác.</p>
-                `,
-                questions: [
-                    { q: "Câu 1. Chẩn đoán phù hợp nhất:", o: ["TTPL", "RLLT dạng phân liệt", "Rối loạn hoang tưởng", "RLLT do chất"], a: "D", e: "Bằng chứng rất rõ ràng: triệu chứng loạn thần xuất hiện ngay sau khi sử dụng chất (cần sa, amphetamine), có xét nghiệm dương tính, và triệu chứng thuyên giảm nhanh chóng sau khi ngưng chất." },
-                    { q: "Câu 2. Tiêu chí bắt buộc của RLLT do chất:", o: ["Ảo giác/hoang tưởng xuất hiện trong hoặc ngay sau dùng/cai chất có khả năng gây loạn thần", "Phải có catatonia", "Phải kéo dài ≥6 tháng", "Phải có tiền sử tâm thần"], a: "A", e: "Tiêu chí cốt lõi là phải có bằng chứng từ bệnh sử, khám thực thể hoặc xét nghiệm cho thấy các triệu chứng loạn thần phát triển trong hoặc ngay sau khi nhiễm độc hoặc cai một chất." },
-                    { q: "Câu 3. Dấu hiệu ủng hộ nguyên nhân do chất hơn TTPL:", o: ["Có ảo thanh", "Bắt đầu ngay sau lạm dụng; dấu giao cảm; test dương tính; cải thiện nhanh khi ngưng", "Hoang tưởng bị theo dõi", "Từng có trầm cảm"], a: "B", e: "Tập hợp các bằng chứng: mối liên hệ về thời gian với việc sử dụng chất, các dấu hiệu sinh lý (tim nhanh), xét nghiệm dương tính, và sự cải thiện khi cai chất là những bằng chứng mạnh mẽ nhất cho Rối loạn loạn thần do chất." },
-                    { q: "Câu 4. Trường hợp nào không phù hợp RLLT do chất?", o: ["Ảo giác khởi phát trong bối cảnh dùng cần sa", "Loạn thần vẫn kéo dài nhiều tháng dù đã ngưng chất từ lâu", "Tim nhanh, mất ngủ đi kèm", "Test nước tiểu dương tính"], a: "B", e: "Nếu các triệu chứng loạn thần vẫn tồn tại dai dẳng một thời gian dài (ví dụ >1 tháng) sau khi đã ngừng hoàn toàn việc sử dụng chất, cần phải xem xét một chẩn đoán loạn thần nguyên phát (như TTPL)." },
-                    { q: "Câu 5. Chẩn đoán phân biệt ưu tiên loại trừ:", o: ["Rối loạn thích nghi", "TTPL khởi phát sớm (nếu triệu chứng kéo dài sau cai)", "Rối loạn somatoform", "Rối loạn lo âu"], a: "B", e: "Thách thức lớn nhất trong chẩn đoán là phân biệt giữa một đợt loạn thần do chất và đợt loạn thần đầu tiên của TTPL bị kích hoạt bởi việc sử dụng chất. Nếu triệu chứng không thuyên giảm sau khi cai, TTPL là chẩn đoán cần nghĩ đến." },
-                    { q: "Câu 6. Can thiệp ưu tiên ban đầu:", o: ["Ngừng chất; hỗ trợ cai; theo dõi an toàn; antipsychotic nếu cần", "SSRI bắt buộc", "Tâm kịch nhóm", "Chỉ ngủ nghỉ"], a: "A", e: "Ưu tiên hàng đầu là đảm bảo an toàn, giúp bệnh nhân ngưng sử dụng chất, và quản lý các triệu chứng cai. Thuốc chống loạn thần có thể được sử dụng ngắn hạn nếu bệnh nhân bị kích động hoặc các triệu chứng loạn thần nghiêm trọng." },
-                    { q: "Câu 7. Khi nào có thể xem xét nguyên phát (TTPL) thay vì do chất?", o: ["Có ảo thanh", "Có stress", "Triệu chứng loạn thần tồn tại đáng kể sau giai đoạn dự kiến hết tác dụng/ cai", "Test nước tiểu dương tính"], a: "C", e: "Điểm mấu chốt là khi các triệu chứng kéo dài một cách không tương xứng. Nếu tác dụng của chất đã hết từ lâu mà bệnh nhân vẫn loạn thần, khả năng cao đây là một rối loạn nguyên phát." },
-                    { q: "Câu 8. Dấu hiệu nào không bắt buộc ở RLLT do chất:", o: ["Ảo giác", "Hoang tưởng", "Suy giảm chức năng kéo dài", "Khởi phát liên quan thời điểm dùng"], a: "C", e: "Loạn thần do chất có thể chỉ là một giai đoạn ngắn và không nhất thiết gây ra suy giảm chức năng kéo dài sau khi bệnh nhân đã hồi phục." },
-                    { q: "Câu 9. Yếu tố nguy cơ tái phát loạn thần ở H.:", o: ["Tuổi trung niên", "Tiếp tục sử dụng THC/amphetamine", "Nữ giới", "Lao động văn phòng"], a: "B", e: "Nguy cơ lớn nhất và trực tiếp nhất cho việc tái phát một đợt loạn thần do chất chính là việc tiếp tục sử dụng các chất đó." },
-                    { q: "Câu 10. Thông điệp giáo dục sức khỏe quan trọng:", o: ["'Dùng ít lại sẽ an toàn'", "'Ngưng hoàn toàn, theo dõi nguy cơ và tuân thủ kế hoạch cai'", "'Chỉ cần uống thuốc là đủ'", "'Có thể tự cai không cần hỗ trợ'"], a: "B", e: "Thông điệp quan trọng nhất là cần ngưng hoàn toàn việc sử dụng chất, vì ngay cả liều lượng nhỏ cũng có thể kích hoạt lại các triệu chứng. Việc cai nghiện cần có kế hoạch và sự hỗ trợ chuyên nghiệp." },
+            "ocd": {
+                topic: "OCD & Các Rối Loạn Liên Quan",
+                cases: [
+                     { /* Ca 1 */
+                        title: "Ca 1 - Ám ảnh nhiễm bẩn, rửa tay/né tránh",
+                        vignette: `<b>(1) Triệu chứng hiện tại:</b> N.T.H., nữ, 28 tuổi, nhân viên QA thực phẩm, đến khám vì “cứ thấy người mình bẩn và phải rửa cho sạch". 6 tháng nay, H. tắm rửa 3-4 lần/ngày (mỗi lần 40-60 phút), giặt riêng toàn bộ quần áo, tránh chạm tay vào tay nắm cửa; dùng khăn giấy để bấm thang máy. Mỗi khi nhớ lại chuyện bị một đồng nghiệp nam nói lời xúc phạm, H. "cảm thấy dơ bẩn từ bên trong" và phải tắm ngay mới dễ chịu hơn. Thời gian dành cho tắm/rửa $>2 giờ/ngày, đi làm muộn, hiệu suất giảm. H. nhận ra điều này "phi lý” nhưng không kìm được.<br><b>(2) Tiền sử - bối cảnh:</b> Không bệnh nội khoa đáng kể. Từng trải qua một lần bị người yêu cũ lăng mạ, xem là "sự phản bội và từ đó nhạy cảm với cảm giác dơ bẩn”.<br><b>(3) Khám lâm sàng - cận lâm sàng:</b> Các xét nghiệm bình thường.<br><b>(4) Khám tâm thần:</b> Tỉnh táo, định hướng tốt. Khí sắc lo âu. Tư duy: xuất hiện ý nghĩ xâm nhập “mình bẩn", đi kèm cưỡng chế rửa/lau để trung hòa khó chịu; có né tránh. Mức độ insight khá: thừa nhận hành vi quá mức, không hợp lý.`,
+                        questions: [
+                            { q: "Tổ hợp triệu chứng nào dưới đây phù hợp nhất với định nghĩa ám ảnh và cưỡng chế?", o: ["Ý nghĩ xâm nhập gây lo âu + hành vi lặp lại để trung hòa/giảm lo.", "Sợ hãi rõ rệt có tác nhân đặc hiệu, né tránh nhất quán.", "Trạng thái buồn chán kéo dài ≥2 tuần, giảm hứng thú, ý nghĩ tội lỗi.", "Ý tưởng bị theo dõi, bị hại, kết hợp ảo thính."], a: "A", ex: "Đặc trưng cốt lõi của OCD là sự hiện diện của ám ảnh (ý nghĩ, hình ảnh, hoặc thôi thúc lặp đi lặp lại, không mong muốn gây lo âu) và/hoặc cưỡng chế (hành vi lặp lại hoặc hành vi tinh thần mà người đó cảm thấy bị thúc đẩy thực hiện để đáp lại ám ảnh)." },
+                            { q: "Đặc điểm 'cảm giác dơ bẩn từ bên trong' gợi ý cơ chế nào?", o: ["Dung nạp không chắc chắn.", "Nhiễm bẩn trong tâm trí.", "Thổi phồng trách nhiệm.", "Liên hợp suy nghĩ – hành động."], a: "B", ex: "'Nhiễm bẩn trong tâm trí' (mental contamination) là một khái niệm trong đó cảm giác bẩn không đến từ tiếp xúc vật lý mà từ những ký ức, hình ảnh hoặc suy nghĩ gây khó chịu (ví dụ như ký ức bị xúc phạm), dẫn đến thôi thúc phải 'thanh tẩy'." },
+                            { q: "Điều kiện B trong tiêu chuẩn OCD nhấn mạnh:", o: ["Triệu chứng kéo dài ≥6 tháng.", "Triệu chứng chiếm nhiều thời gian (thường >1h/ngày) hoặc suy giảm chức năng đáng kể.", "Có tối thiểu 3 cụm triệu chứng.", "Có tiền sử gia đình OCD."], a: "B", ex: "Tiêu chí B của DSM-5-TR yêu cầu các ám ảnh hoặc cưỡng chế phải tốn nhiều thời gian (ví dụ, chiếm hơn 1 giờ mỗi ngày) hoặc gây ra sự khổ sở có ý nghĩa lâm sàng hoặc suy giảm trong các lĩnh vực xã hội, nghề nghiệp, hoặc các lĩnh vực chức năng quan trọng khác." },
+                            { q: "Hành vi tắm/rửa trong ca này có tính chất:", o: ["Thực tế liên quan trực tiếp đến nguy cơ bị bệnh.", "Rõ ràng quá mức và không liên quan thực tế đến sự kiện đáng sợ.", "Luôn làm giảm lo âu ngay lập tức.", "Chỉ là thói quen vệ sinh tốt."], a: "B", ex: "Hành vi cưỡng chế trong OCD được thực hiện để giảm lo âu nhưng chúng hoặc là không kết nối một cách thực tế với những gì chúng được thiết kế để trung hòa hoặc ngăn chặn, hoặc là rõ ràng quá mức. Việc tắm rửa do 'cảm giác bẩn từ bên trong' là một ví dụ." },
+                            { q: "Chẩn biệt KHÔNG phù hợp nhất với ca này:", o: ["Ám sợ đặc hiệu (bẩn).", "Rối loạn lo âu lan tỏa.", "Rối loạn hoảng loạn.", "Rối loạn mặc cảm cơ thể."], a: "D", ex: "Rối loạn mặc cảm cơ thể tập trung vào mối bận tâm về một hoặc nhiều khiếm khuyết nhận thấy trong ngoại hình, điều này không phải là vấn đề chính trong ca này. Các rối loạn lo âu khác cần được phân biệt nhưng Rối loạn mặc cảm cơ thể là ít liên quan nhất." },
+                            { q: "Liệu pháp hàng đầu có bằng chứng mạnh:", o: ["Liệu pháp phân tâm cổ điển đơn trị.", "ERP (tiếp xúc - ngăn hành vi đáp ứng), kết hợp tái cấu trúc nhận thức.", "Chỉ thư giãn - hít thở, tránh phơi nhiễm.", "Thôi miên."], a: "B", ex: "Liệu pháp Tiếp xúc và Ngăn chặn Đáp ứng (ERP) là 'tiêu chuẩn vàng' trong trị liệu tâm lý cho OCD. Nó bao gồm việc tiếp xúc có chủ đích với các tác nhân gây ám ảnh và sau đó ngăn không cho thực hiện hành vi cưỡng chế, giúp bệnh nhân học cách chịu đựng sự khó chịu và nhận ra rằng thảm họa sẽ không xảy ra." },
+                            { q: "Khi lập thang phơi nhiễm cho ERP, bước KHÔNG đúng:", o: ["Đánh giá các tình huống gợi lo, sắp theo thứ bậc.", "Tiếp xúc lặp lại tới khi lo giảm.", "Cho phép thực hiện cưỡng chế ở lần tiếp xúc đầu để “xả lo”.", "Ngăn tránh/rituals trong khi tiếp xúc."], a: "C", ex: "Nguyên tắc cốt lõi của ERP là 'Ngăn chặn Đáp ứng'. Việc cho phép thực hiện hành vi cưỡng chế sẽ củng cố vòng lặp ám ảnh-cưỡng chế và làm mất đi hiệu quả của bài tập phơi nhiễm." },
+                            { q: "Thuốc hỗ trợ có bằng chứng:", o: ["Chỉ benzodiazepine dài hạn.", "SSRI hoặc clomipramine (theo chỉ định).", "Thuốc chống loạn thần đơn trị cho mọi trường hợp.", "Chỉ thảo dược."], a: "B", ex: "Các thuốc ức chế tái hấp thu Serotonin có chọn lọc (SSRI), thường ở liều cao hơn so với điều trị trầm cảm, và Clomipramine (một thuốc chống trầm cảm ba vòng) là các loại thuốc có bằng chứng hiệu quả mạnh mẽ nhất trong điều trị OCD." },
+                            { q: "Yếu tố nhận thức phù hợp nhất với né tránh/rửa trong ca này:", o: ["Liên tưởng “bẩn bên trong” kích hoạt bởi ký ức bị xúc phạm → rửa để “trung hòa”.", "Tự ti về cơ thể.", "Lệch lạc tri giác thị giác.", "Sợ hãi tình huống cụ thể."], a: "A", ex: "Cơ chế nhận thức ở đây là một sự kiện (bị xúc phạm) được liên kết với cảm giác 'bẩn', tạo ra một ám ảnh. Hành vi rửa tay/tắm sau đó được thực hiện như một nỗ lực để trung hòa hoặc 'làm sạch' cảm giác khó chịu đó." },
+                            { q: "Chỉ dấu cảnh báo cần sàng lọc thêm ở bệnh nhân OCD:", o: ["Ý tưởng tham vọng.", "Ý nghĩ/hành vi tự sát (tỉ lệ có ý định cao).", "Tăng hoạt động thể lực.", "Sút cân nhanh."], a: "B", ex: "Bệnh nhân mắc OCD có nguy cơ cao về ý định tự tử và hành vi tự tử, đặc biệt khi có các rối loạn đồng mắc như trầm cảm. Do đó, việc sàng lọc nguy cơ tự sát là cực kỳ quan trọng." }
+                        ]
+                    },
+                    // ... More cases for OCD
                 ]
             }
-        ];
+        };
 
-        // === DOM Elements ===
+        // Fill in missing cases with placeholders to avoid errors
+        for (const topicKey in testData) {
+            const topic = testData[topicKey];
+            while (topic.cases.length < 5) {
+                const caseNum = topic.cases.length + 1;
+                topic.cases.push({
+                    title: `Ca ${caseNum} - Nội dung đang được cập nhật`,
+                    vignette: `Ca lâm sàng này hiện chưa có. Vui lòng chọn số lượng ca ít hơn hoặc thử chủ đề khác.`,
+                    questions: []
+                });
+            }
+        }
+
+
+        // --- APPLICATION LOGIC ---
         const setupScreen = document.getElementById('setup-screen');
         const testScreen = document.getElementById('test-screen');
-        const resultsScreen = document.getElementById('results-screen');
-        const quizContent = document.getElementById('quiz-content');
-        const quizForm = document.getElementById('quiz-form');
-        
+        const topicSelect = document.getElementById('topic-select');
+        const caseCountSelect = document.getElementById('case-count-select');
         const startBtn = document.getElementById('start-btn');
+        const submitBtn = document.getElementById('submit-btn');
         const retakeBtn = document.getElementById('retake-btn');
-        const startOverBtn = document.getElementById('start-over-btn');
-        const caseCountSelect = document.getElementById('case-count');
+        const casesContainer = document.getElementById('cases-container');
+        const resultsSummary = document.getElementById('results-summary');
 
-        let activeCasesData = [];
+        let currentTopicData = null;
+        let currentNumCases = 0;
 
-        // === Functions ===
-        function generateQuiz(numCases) {
-            quizContent.innerHTML = '';
-            activeCasesData = quizData.slice(0, numCases);
+        function startTest() {
+            const selectedTopicKey = topicSelect.value;
+            const selectedCaseCount = parseInt(caseCountSelect.value);
 
-            activeCasesData.forEach((caseItem, caseIndex) => {
+            currentTopicData = testData[selectedTopicKey];
+            currentNumCases = selectedCaseCount;
+
+            if (!currentTopicData) {
+                console.error("Topic data not found!");
+                return;
+            }
+
+            generateTestUI(currentTopicData, currentNumCases);
+
+            setupScreen.classList.add('hidden');
+            testScreen.classList.remove('hidden');
+            resultsSummary.classList.add('hidden');
+            resultsSummary.innerHTML = '';
+            window.scrollTo(0, 0);
+        }
+
+        function generateTestUI(topicData, numCases) {
+            casesContainer.innerHTML = ''; // Clear previous test
+            for (let i = 0; i < numCases; i++) {
+                const caseData = topicData.cases[i];
+                if (!caseData) continue;
+
                 const caseElement = document.createElement('div');
-                caseElement.className = 'bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200';
-                
+                caseElement.className = 'case-block bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200';
+                caseElement.setAttribute('data-case-index', i);
+
                 let questionsHTML = '';
-                caseItem.questions.forEach((q, qIndex) => {
-                    const optionsHTML = q.o.map((option, optionIndex) => {
-                        const optionValue = String.fromCharCode(65 + optionIndex); // A, B, C, D
+                if (caseData.questions.length > 0) {
+                    questionsHTML = caseData.questions.map((q, qIndex) => {
+                        const optionsHTML = q.o.map((option, oIndex) => {
+                            const optionValue = String.fromCharCode(65 + oIndex); // A, B, C, D
+                            return `
+                                <div class="option-container">
+                                    <label class="flex items-center p-3 my-2 border rounded-lg cursor-pointer transition-colors duration-200 hover:bg-gray-50">
+                                        <input type="radio" name="case-${i}-q-${qIndex}" value="${optionValue}" class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                        <span class="flex-1">${optionValue}. ${option}</span>
+                                    </label>
+                                </div>
+                            `;
+                        }).join('');
+
                         return `
-                            <div class="relative">
-                                <input type="radio" name="q-${caseIndex}-${qIndex}" id="q-${caseIndex}-${qIndex}-${optionIndex}" value="${optionValue}" class="absolute top-4 left-4 opacity-0">
-                                <label for="q-${caseIndex}-${qIndex}-${optionIndex}" class="block w-full text-left p-3 pl-12 border-2 border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
-                                    <span class="font-bold text-blue-600 mr-2">${optionValue}.</span> ${option}
-                                </label>
+                            <div class="question-block mt-6" data-question-index="${qIndex}">
+                                <p class="font-semibold text-gray-800">${qIndex + 1}. ${q.q}</p>
+                                <div class="options-group mt-2">${optionsHTML}</div>
+                                <div class="explanation-container"></div>
                             </div>
                         `;
                     }).join('');
-
-                    questionsHTML += `
-                        <div class="mb-6">
-                            <p class="font-semibold text-lg mb-3">${q.q}</p>
-                            <div class="space-y-3">${optionsHTML}</div>
-                        </div>
-                    `;
-                });
+                } else {
+                    questionsHTML = `<p class="text-gray-500 mt-4">Không có câu hỏi cho ca lâm sàng này.</p>`;
+                }
+                
 
                 caseElement.innerHTML = `
-                    <h2 class="text-2xl font-bold mb-2 text-slate-800">${caseItem.caseTitle}</h2>
-                    <div class="prose prose-slate max-w-none mb-6 text-slate-600 bg-slate-50 p-4 rounded-lg border-l-4 border-blue-300">
-                        ${caseItem.caseDescription}
+                    <h2 class="text-2xl font-bold text-slate-700 border-b-2 border-blue-200 pb-2 mb-4">${caseData.title}</h2>
+                    <div class="vignette text-gray-700 leading-relaxed bg-slate-50 p-4 rounded-lg">
+                        <p>${caseData.vignette}</p>
                     </div>
-                    <div class="mt-6">${questionsHTML}</div>
+                    ${questionsHTML}
                 `;
-                quizContent.appendChild(caseElement);
-            });
-        }
-        
-        function showResults() {
-            let correctAnswers = 0;
-            let totalQuestions = 0;
-            let detailedResultsHTML = '';
 
-            activeCasesData.forEach((caseItem, caseIndex) => {
-                caseItem.questions.forEach((q, qIndex) => {
-                    totalQuestions++;
-                    const selectedOption = quizForm.querySelector(`input[name="q-${caseIndex}-${qIndex}"]:checked`);
+                casesContainer.appendChild(caseElement);
+            }
+        }
+
+        function submitTest() {
+            let correctCount = 0;
+            let totalQuestions = 0;
+
+            for (let i = 0; i < currentNumCases; i++) {
+                const caseData = currentTopicData.cases[i];
+                if (!caseData || caseData.questions.length === 0) continue;
+
+                totalQuestions += caseData.questions.length;
+                
+                caseData.questions.forEach((q, qIndex) => {
+                    const questionBlock = document.querySelector(`.case-block[data-case-index="${i}"] .question-block[data-question-index="${qIndex}"]`);
+                    const radioButtons = questionBlock.querySelectorAll(`input[name="case-${i}-q-${qIndex}"]`);
+                    const selectedRadio = questionBlock.querySelector(`input[name="case-${i}-q-${qIndex}"]:checked`);
                     
-                    if (selectedOption) {
-                        if (selectedOption.value === q.a) {
-                            correctAnswers++;
+                    // Disable all options
+                    radioButtons.forEach(radio => radio.disabled = true);
+
+                    if (selectedRadio) {
+                        const userAnswer = selectedRadio.value;
+                        const correctAnswer = q.a;
+                        const userLabel = selectedRadio.parentElement;
+
+                        if (userAnswer === correctAnswer) {
+                            correctCount++;
+                            userLabel.classList.add('bg-green-100', 'border-green-400', 'ring-2', 'ring-green-300');
                         } else {
-                            detailedResultsHTML += generateResultDetail(q, selectedOption.value, caseItem.caseTitle);
+                            userLabel.classList.add('bg-red-100', 'border-red-400', 'ring-2', 'ring-red-300');
+                            
+                            const correctRadio = questionBlock.querySelector(`input[value="${correctAnswer}"]`);
+                            if (correctRadio) {
+                                correctRadio.parentElement.classList.add('bg-green-100', 'border-green-400');
+                            }
                         }
                     } else {
-                         detailedResultsHTML += generateResultDetail(q, 'N/A', caseItem.caseTitle);
+                        // Mark the correct answer if none was selected
+                        const correctRadio = questionBlock.querySelector(`input[value="${q.a}"]`);
+                        if (correctRadio) {
+                           correctRadio.parentElement.classList.add('bg-yellow-100', 'border-yellow-400');
+                           correctRadio.parentElement.insertAdjacentHTML('beforeend', '<span class="text-sm font-semibold text-yellow-800 ml-auto">Đáp án đúng</span>');
+                        }
+                    }
+
+                    // Show explanation for incorrect answers
+                    if (!selectedRadio || selectedRadio.value !== q.a) {
+                        const explanationContainer = questionBlock.querySelector('.explanation-container');
+                        explanationContainer.innerHTML = `
+                            <div class="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                <h4 class="font-bold text-blue-800">Giải thích:</h4>
+                                <p class="text-blue-700">${q.ex}</p>
+                            </div>
+                        `;
                     }
                 });
-            });
-
-            const scoreSummary = document.getElementById('score-summary');
-            const incorrectAnswers = totalQuestions - correctAnswers;
-            
-            if(incorrectAnswers === 0){
-                 scoreSummary.className = 'text-center text-xl font-medium mb-8 p-4 rounded-lg bg-green-100 text-green-800';
-                 scoreSummary.innerHTML = `🎉 <strong class="font-semibold">Xuất sắc!</strong> Bạn đã trả lời đúng tất cả <strong>${correctAnswers}/${totalQuestions}</strong> câu!`;
-                 detailedResultsHTML = '<p class="text-center text-slate-600">Bạn đã nắm vững kiến thức. Hãy tiếp tục phát huy!</p>';
-            } else {
-                scoreSummary.className = 'text-center text-xl font-medium mb-8 p-4 rounded-lg bg-red-100 text-red-800';
-                scoreSummary.innerHTML = `
-                Bạn đã trả lời đúng <strong class="font-semibold">${correctAnswers}/${totalQuestions}</strong> câu.
-                <br>Số câu sai: <strong class="font-semibold">${incorrectAnswers}</strong>.
-            `;
             }
             
-            document.getElementById('detailed-results').innerHTML = detailedResultsHTML;
-            setupScreen.classList.add('hidden');
-            testScreen.classList.add('hidden');
-            resultsScreen.classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-        
-        function generateResultDetail(questionData, userAnswer, caseTitle) {
-            const correctOptionText = questionData.o[questionData.a.charCodeAt(0) - 65];
-            const userAnswerText = userAnswer !== 'N/A' ? questionData.o[userAnswer.charCodeAt(0) - 65] : "<em>Bạn chưa trả lời</em>";
-
-            return `
-                <div class="border border-slate-200 rounded-lg p-4">
-                    <p class="text-sm font-medium text-slate-500 mb-2">${caseTitle}</p>
-                    <p class="font-semibold mb-3">${questionData.q}</p>
-                    <div class="space-y-2 text-sm">
-                        <p class="bg-red-100 text-red-800 p-2 rounded"><strong>Câu trả lời của bạn:</strong> ${userAnswerText}</p>
-                        <p class="bg-green-100 text-green-800 p-2 rounded"><strong>Đáp án đúng:</strong> ${questionData.a}. ${correctOptionText}</p>
-                        <div class="mt-2 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 rounded-r-lg">
-                            <strong class="font-semibold">Giải thích:</strong> ${questionData.e}
-                        </div>
-                    </div>
-                </div>
+            // Display summary
+            resultsSummary.innerHTML = `
+                <h3 class="text-2xl font-bold text-slate-700">Kết quả bài làm</h3>
+                <p class="mt-4 text-lg">
+                    Số câu đúng: <span class="font-bold text-green-600">${correctCount} / ${totalQuestions}</span>
+                </p>
+                <p class="text-lg">
+                    Số câu sai hoặc bỏ qua: <span class="font-bold text-red-600">${totalQuestions - correctCount} / ${totalQuestions}</span>
+                </p>
             `;
+            resultsSummary.classList.remove('hidden');
+            resultsSummary.scrollIntoView({ behavior: 'smooth' });
+
+            submitBtn.classList.add('hidden');
+            retakeBtn.classList.remove('hidden');
         }
 
-        // === Event Listeners ===
-        startBtn.addEventListener('click', () => {
-            const numCases = parseInt(caseCountSelect.value, 10);
-            generateQuiz(numCases);
-            setupScreen.classList.add('hidden');
-            resultsScreen.classList.add('hidden');
-            testScreen.classList.remove('hidden');
-            window.scrollTo(0, 0);
-        });
-
-        quizForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            showResults();
-        });
-
-        retakeBtn.addEventListener('click', () => {
-            quizForm.reset();
-            window.scrollTo(0, 0);
-        });
-        
-        startOverBtn.addEventListener('click', () => {
-            quizForm.reset();
-            resultsScreen.classList.add('hidden');
+        function retakeTest() {
             testScreen.classList.add('hidden');
             setupScreen.classList.remove('hidden');
+            submitBtn.classList.remove('hidden');
+            retakeBtn.classList.add('hidden');
             window.scrollTo(0, 0);
-        });
+        }
+
+        startBtn.addEventListener('click', startTest);
+        submitBtn.addEventListener('click', submitTest);
+        retakeBtn.addEventListener('click', retakeTest);
 
     </script>
 </body>

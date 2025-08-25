@@ -36,7 +36,7 @@
                 BÀI THI TÂM BỆNH HỌC
             </h1>
             <p class="text-center text-gray-600 mt-2 text-lg">
-                40 câu hỏi • Mỗi câu 1 điểm
+                40 câu hỏi • Mỗi câu 0.25 điểm
             </p>
             <div class="text-center mt-3 text-sm text-indigo-600">
                 20 câu kiến thức + 20 câu ca lâm sàng (4 ca × 5 câu)
@@ -154,7 +154,7 @@
         let userAnswers = {};
         let isSubmitted = false;
         
-        // --- FIX: Combine all questions into one array for easier processing ---
+        // --- Combine all questions into one array for easier processing ---
         const allQuestions = [
             ...knowledgeQuestions,
             ...clinicalCases.flatMap(caseItem => caseItem.questions)
@@ -200,7 +200,7 @@
         }
 
         /**
-         * --- NEW: Function to render clinical cases ---
+         * Function to render clinical cases
          * This function renders the case description and its associated questions.
          */
         function renderClinicalCases() {
@@ -259,7 +259,6 @@
         function handleSubmit() {
             if (isSubmitted) return;
             
-            // --- FIX: Calculate score based on the combined 'allQuestions' array ---
             let correctCount = 0;
             allQuestions.forEach(q => {
                 if (userAnswers[q.id] === q.correct) {
@@ -292,7 +291,8 @@
 
             document.getElementById('score-number').textContent = `${score}/${totalQuestions}`;
             document.getElementById('percentage').textContent = ((score / totalQuestions) * 100).toFixed(1) + '%';
-            document.getElementById('grade').textContent = ((score / totalQuestions) * 10).toFixed(1);
+            // --- UPDATE: Calculate grade based on 0.25 points per question ---
+            document.getElementById('grade').textContent = (score * 0.25).toFixed(2);
 
             const evaluationEl = document.getElementById('evaluation');
             const percentage = (score / totalQuestions) * 100;
@@ -307,7 +307,6 @@
                 evaluationEl.className = 'inline-block px-6 py-2 rounded-full text-lg font-bold bg-red-600 text-white';
             }
 
-            // --- FIX: Show feedback for ALL questions ---
             allQuestions.forEach(q => {
                 const resultEl = document.getElementById(`result-${q.id}`);
                 const statusEl = document.getElementById(`status-${q.id}`);
@@ -359,7 +358,7 @@
             const knowledgeContainer = document.getElementById('knowledge-questions');
             renderQuestionList(knowledgeQuestions, knowledgeContainer);
 
-            // --- FIX: Call the new function to render clinical cases ---
+            // Render clinical cases
             renderClinicalCases();
         };
     </script>

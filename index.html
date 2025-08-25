@@ -6,24 +6,21 @@
     <title>Trang Học Tập Y Khoa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Thêm một hiệu ứng chuyển động mượt mà cho sidebar */
+        /* Hiệu ứng chuyển động mượt mà cho sidebar */
         #sidebar {
             transition: transform 0.3s ease-in-out;
+        }
+        /* Lớp CSS cho trạng thái active của link menu */
+        .active-link {
+            background-color: #4A5568; /* tương đương bg-gray-600 */
+            color: #ffffff;
+            font-weight: bold;
         }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
-    <div class="relative min-h-screen md:flex">
-        <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
-            <a href="#" class="block p-4 text-white font-bold">Học Tập</a>
-            <button id="hamburger-button" class="p-4 focus:outline-none focus:bg-gray-700">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
-
-        <aside id="sidebar" class="bg-gray-800 text-gray-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 z-20">
+    <div class="flex h-screen overflow-hidden">
+        <aside id="sidebar" class="bg-gray-800 text-gray-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 z-30">
             <a href="#" class="text-white flex items-center space-x-2 px-4">
                 <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
@@ -31,15 +28,15 @@
                 <span class="text-2xl font-extrabold">Học Tập</span>
             </a>
 
-            <nav>
-                <a href="#" class="menu-link block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white" data-target="welcome.html">
+            <nav id="nav-menu">
+                <a href="#" class="menu-link block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" data-target="welcome.html">
                     Kiến thức
                 </a>
                 <div>
-                    <a href="#" id="quiz-menu-toggle" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                    <a href="#" id="quiz-menu-toggle" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                         Bài kiểm tra
                     </a>
-                    <div id="quiz-submenu" class="hidden text-sm ml-4">
+                    <div id="quiz-submenu" class="hidden text-sm ml-4 mt-1">
                         <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="quiz.html">
                             Ca lâm sàng
                         </a>
@@ -51,17 +48,29 @@
             </nav>
         </aside>
 
-        <main class="flex-1 p-4 md:p-10 h-screen">
-            <iframe id="content-frame" src="welcome.html" class="w-full h-full border-0 rounded-lg shadow-lg" name="content-frame"></iframe>
-        </main>
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-gray-800 text-gray-100 flex justify-between md:hidden shadow-lg z-20">
+                <a href="#" class="block p-4 text-white font-bold">Học Tập</a>
+                <button id="hamburger-button" class="p-4 focus:outline-none focus:bg-gray-700">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+                <iframe id="content-frame" src="welcome.html" class="w-full h-full border-0" name="content-frame"></iframe>
+            </main>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const hamburgerButton = document.getElementById('hamburger-button');
             const sidebar = document.getElementById('sidebar');
-            const menuLinks = document.querySelectorAll('.menu-link');
             const contentFrame = document.getElementById('content-frame');
+            const navMenu = document.getElementById('nav-menu');
+            const menuLinks = navMenu.querySelectorAll('a[data-target]');
             
             const quizMenuToggle = document.getElementById('quiz-menu-toggle');
             const quizSubmenu = document.getElementById('quiz-submenu');
@@ -77,12 +86,20 @@
                 quizSubmenu.classList.toggle('hidden');
             });
 
-            // Xử lý khi click vào link menu
+            // Xử lý khi click vào link menu để tải nội dung và cập nhật trạng thái active
             menuLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
                     e.preventDefault();
+                    
+                    // Xóa trạng thái active khỏi tất cả các link
+                    menuLinks.forEach(l => l.classList.remove('active-link'));
+                    
+                    // Thêm trạng thái active cho link vừa được click
+                    this.classList.add('active-link');
+                    
+                    // Tải nội dung vào iframe
                     const targetPage = this.getAttribute('data-target');
-                    if (targetPage) {
+                    if (targetPage && contentFrame.src !== window.location.origin + '/' + targetPage) {
                         contentFrame.src = targetPage;
                     }
                     
@@ -92,6 +109,11 @@
                     }
                 });
             });
+
+            // Tự động active link đầu tiên khi tải trang
+            if(menuLinks.length > 0) {
+                menuLinks[0].classList.add('active-link');
+            }
         });
     </script>
 </body>

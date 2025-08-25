@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,24 +12,30 @@
     <style>
         body {
             font-family: 'Be Vietnam Pro', sans-serif;
-            background-color: #f0f4f8; /* A light blue-gray background */
+            background-color: #f0f4f8;
+            /* A light blue-gray background */
         }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
     </style>
 </head>
+
 <body class="antialiased text-gray-800">
 
     <div id="app-container" class="container mx-auto p-4 md:p-8 max-w-4xl">
@@ -41,8 +48,10 @@
         <div id="setup-screen" class="bg-white p-6 md:p-8 rounded-xl shadow-lg transition-all duration-300">
             <div class="space-y-6">
                 <div>
-                    <label for="topic-select" class="block text-lg font-semibold text-gray-700 mb-2">1. Chọn chủ đề:</label>
-                    <select id="topic-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    <label for="topic-select" class="block text-lg font-semibold text-gray-700 mb-2">1. Chọn chủ
+                        đề:</label>
+                    <select id="topic-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                         <option value="tram-cam">Trầm Cảm Chủ Yếu</option>
                         <option value="loan-than">Phổ Loạn Thần</option>
                         <option value="lo-au">Các Rối Loạn Lo Âu</option>
@@ -51,8 +60,10 @@
                     </select>
                 </div>
                 <div>
-                    <label for="case-count-select" class="block text-lg font-semibold text-gray-700 mb-2">2. Chọn số lượng ca lâm sàng:</label>
-                    <select id="case-count-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    <label for="case-count-select" class="block text-lg font-semibold text-gray-700 mb-2">2. Chọn số
+                        lượng ca lâm sàng:</label>
+                    <select id="case-count-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                         <option value="1">1 Ca</option>
                         <option value="2">2 Ca</option>
                         <option value="3">3 Ca</option>
@@ -60,7 +71,8 @@
                         <option value="5">5 Ca</option>
                     </select>
                 </div>
-                <button id="start-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-3 px-4 rounded-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md">
+                <button id="start-btn"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-3 px-4 rounded-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md">
                     Bắt đầu làm bài
                 </button>
             </div>
@@ -68,13 +80,17 @@
 
         <div id="test-screen" class="hidden transition-all duration-300">
             <div id="cases-container" class="space-y-10">
-                </div>
-            <div class="mt-10 flex flex-col md:flex-row gap-4">
-                <button id="submit-btn" class="w-full md:w-auto flex-grow bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-md">Nộp bài</button>
-                <button id="retake-btn" class="w-full md:w-auto flex-grow bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition hidden shadow-md">Làm lại bài khác</button>
             </div>
-             <div id="results-summary" class="hidden mt-8 text-center bg-white p-6 rounded-xl shadow-lg">
-                </div>
+            <div class="mt-10 flex flex-col md:flex-row gap-4">
+                <button id="submit-btn"
+                    class="w-full md:w-auto flex-grow bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-md">Nộp
+                    bài</button>
+                <button id="retake-btn"
+                    class="w-full md:w-auto flex-grow bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition hidden shadow-md">Làm
+                    lại bài khác</button>
+            </div>
+            <div id="results-summary" class="hidden mt-8 text-center bg-white p-6 rounded-xl shadow-lg">
+            </div>
         </div>
 
     </div>
@@ -171,15 +187,22 @@
                         ]
                     }
                 ]
-            },
-            "loan-than": {
+                "loan-than": {
+                },
                 topic: "Phổ Loạn Thần",
                 cases: [
                     { /* Ca 1 */
                         title: "Ca 1 - Nghi Tâm thần phân liệt (theo dõi diễn tiến)",
-                        vignette: `<b>(1) Trình bày bệnh:</b> N.T.H., nam 22 tuổi, sinh viên năm 3, được mẹ đưa đến khám vì “con nghe thấy người ta nói xấu và ra lệnh trong đầu". Khoảng 8 tháng gần đây H. thu mình, ít nói, bỏ các hoạt động trước đây yêu thích, điểm số giảm, tắm giặt thất thường. 2 tháng gần đây, H. nghe hai giọng nam đối thoại và bình luận về mình, đôi lúc ra lệnh phải đứng yên không nhúc nhích. H. tin rằng suy nghĩ của mình bị phát tán cho bạn học; cậu tránh đến lớp vì “ai cũng biết tôi nghĩ gì”.<br><b>(2) Tiền sử - bối cảnh:</b> Gia đình ghi nhận H. mất ngủ tăng dần, đi đi lại lại không mục đích, đôi lúc đứng bất động giữ tư thế kỳ lạ vài phút. Không dùng rượu/bia, phủ nhận ma túy. Bác ruột bên nội từng điều trị tâm thần phân liệt.<br><b>(3) Khám tâm thần:</b> Dáng vẻ luộm thuộm, giảm giao tiếp mắt, nét mặt cùn mòn, trả lời ngắn, đôi khi trật đường ray. Tư duy có hoang tưởng bị theo dõi chi phối. Mô tả ảo thanh bình luận và ra lệnh. Khí sắc lo âu nhẹ, không có đợt khí sắc trầm/hưng đạt ngưỡng. Insight kém.<br><b>(4) Cận lâm sàng:</b> Khám nội thần kinh bình thường. Các xét nghiệm máu, test ma túy âm tính. MRI sọ não không bất thường. Trong 8 tháng qua, suy giảm rõ rệt học tập, quan hệ xã hội và tự chăm sóc.`,
+                        vignette: `<b>N.T.M., nữ 24 tuổi, nhân viên kế toán, sau đợt cãi vã căng thẳng và mất việc 1 tuần.
+5 ngày nay M. trở nên bứt rứt, nói cười một mình, nghe “giọng phụ nữ ra lệnh” phải đập
+vỡ đồ đạc; tin rằng camera chung cư đang theo dõi.<br><b>(2) Khởi phát đột ngột sau sự kiện stress; trước đó chức năng học tập–xã hội bình
+thường. Không tiền sử rối loạn khí sắc/loạn thần. Gia đình không ai mắc TTPL.<br><b>(3) Khám tâm thần:</b> Khám: lời nói rời rạc, khó vào chủ đề; hoang tưởng bị theo dõi, ảo thanh ra lệnh.
+Cảm xúc thay đổi nhanh; không có giai đoạn khí sắc trầm/hưng đạt ngưỡng rối loạn khí
+sắc chính. Insight kém.<br><b>(4)Dấu hiệu sinh tồn ổn. CTM, TSH, đường huyết, điện giải, men gan bình thường; test
+ma túy âm tính. Sau nhập viện, được an thần ngắn hạn và antipsychotic liều thấp; đến
+tuần thứ 3, triệu chứng thuyên giảm hoàn toàn và chức năng trở lại mức trước đó.`,
                         questions: [
-                            { q: "Dựa trên ca bệnh, nhóm triệu chứng dương tính nổi bật nhất là gì?", o: ["Giảm biểu lộ cảm xúc, giảm ý chí, nghèo lời", "Ảo thanh bình luận/ra lệnh và hoang tưởng bị theo dõi/chi phối", "Quá nói, tăng hoạt động có mục đích", "Ám ảnh – cưỡng chế về nhiễm bẩn"], a: "B", ex: "Triệu chứng dương tính là sự xuất hiện của những trải nghiệm bất thường. Trong ca này, ảo thanh (nghe giọng nói) và hoang tưởng (niềm tin sai lầm) là những biểu hiện dương tính rõ rệt nhất." },
+                            { q: "Chẩn đoán phù hợp nhất?", o: ["RLLT ngắn (brief psychotic) có yếu tố stress rõ", "RLLT dạng phân liệt", "TTPL", "Rối loạn hoang tưởng"], a: "A", ex: "Khởi phát đột ngột sau stress, thời gian < 1 tháng và hồi phục hoàn toàn." },
                             { q: "Dấu hiệu nào sau đây thuộc triệu chứng âm tính trong ca?", o: ["Ý tưởng tự cao", "Múa vờn, tư thế kỳ quặc", "Cảm xúc cùn mòn, nghèo lời, giảm giao tiếp mắt", "Nói hổ lốn, trật đường ray"], a: "C", ex: "Triệu chứng âm tính là sự suy giảm hoặc mất đi các chức năng bình thường. Cảm xúc cùn mòn, nghèo lời, và giảm giao tiếp mắt là những ví dụ điển hình của triệu chứng âm tính." },
                             { q: "Phát biểu nào mô tả đúng ngôn ngữ/vận hành tư duy vô tổ chức quan sát ở H.?", o: ["Nói nhiều, nhanh, chuyển chủ đề do khí sắc tăng", "Trật đường ray, khó liên kết ý, nói hổ lốn", "Im lặng, không nói", "Nói thì thầm do sợ bị nghe trộm"], a: "B", ex: "Tư duy vô tổ chức biểu hiện qua lời nói khó hiểu, các ý tưởng không liên kết logic với nhau, hay còn gọi là 'trật đường ray' (derailment) hoặc 'nói hổ lốn'." },
                             { q: "Với thời gian tiến triển tổng ≥6 tháng (tiền triệu + hoạt động) và ≥1 tháng triệu chứng hoạt động rõ, chẩn đoán nào phù hợp nhất?", o: ["Rối loạn loạn thần ngắn", "Rối loạn dạng phân liệt (schizophreniform)", "Tâm thần phân liệt", "Rối loạn hoang tưởng"], a: "C", ex: "Tiêu chuẩn chẩn đoán Tâm thần phân liệt yêu cầu tổng thời gian của các dấu hiệu rối loạn (bao gồm giai đoạn tiền triệu, hoạt động và tồn dư) phải kéo dài ít nhất 6 tháng, trong đó có ít nhất 1 tháng của các triệu chứng giai đoạn hoạt động." },
@@ -192,6 +215,7 @@
                         ]
                     },
                     // ... More cases for Loạn Thần
+                   
                 ]
             },
             "lo-au": {
@@ -219,7 +243,7 @@
             "luong-cuc": {
                 topic: "Phổ Lưỡng Cực",
                 cases: [
-                     { /* Ca 1 */
+                    { /* Ca 1 */
                         title: "Ca 1 - Cơn hưng cảm có loạn thần (Bipolar I)",
                         vignette: `<b>(1) Diễn tiến:</b> Nam, 27 tuổi, được đưa vào khoa cấp cứu vì 3 ngày liền không ngủ mà “vẫn rất khoẻ", nói liên tục về kế hoạch khởi nghiệp tầm cỡ, tự nhận mình “thiên tài marketing". Gia đình ghi nhận 1 tuần gần đây anh tăng hoạt động bất thường, tiêu tiền ào ạt, lái xe quá tốc độ.<br><b>(2) Khám tâm thần:</b> Tại phòng khám, bệnh nhân nói nhanh, khó ngắt lời, tư duy phi tán. Khi hỏi về rủi ro tài chính, anh cáu gắt cho rằng “ngân hàng sẽ xin anh đầu tư ngược lại”.<br><b>(3) Tiền sử - bối cảnh:</b> Người nhà phủ nhận dùng chất kích thích; không bệnh nội khoa đặc biệt. Đêm qua anh leo vào công trường xây dựng để “check mặt bằng cho tập đoàn".<br><b>(4) Đánh giá nguy cơ:</b> Có hành vi xung động, ý nghĩ hoang tưởng tự cao thoáng qua, suy giảm chức năng nghiêm trọng; bác sĩ đề nghị nhập viện điều trị cấp.`,
                         questions: [
@@ -241,7 +265,7 @@
             "ocd": {
                 topic: "OCD & Các Rối Loạn Liên Quan",
                 cases: [
-                     { /* Ca 1 */
+                    { /* Ca 1 */
                         title: "Ca 1 - Ám ảnh nhiễm bẩn, rửa tay/né tránh",
                         vignette: `<b>(1) Triệu chứng hiện tại:</b> N.T.H., nữ, 28 tuổi, nhân viên QA thực phẩm, đến khám vì “cứ thấy người mình bẩn và phải rửa cho sạch". 6 tháng nay, H. tắm rửa 3-4 lần/ngày (mỗi lần 40-60 phút), giặt riêng toàn bộ quần áo, tránh chạm tay vào tay nắm cửa; dùng khăn giấy để bấm thang máy. Mỗi khi nhớ lại chuyện bị một đồng nghiệp nam nói lời xúc phạm, H. "cảm thấy dơ bẩn từ bên trong" và phải tắm ngay mới dễ chịu hơn. Thời gian dành cho tắm/rửa $>2 giờ/ngày, đi làm muộn, hiệu suất giảm. H. nhận ra điều này "phi lý” nhưng không kìm được.<br><b>(2) Tiền sử - bối cảnh:</b> Không bệnh nội khoa đáng kể. Từng trải qua một lần bị người yêu cũ lăng mạ, xem là "sự phản bội và từ đó nhạy cảm với cảm giác dơ bẩn”.<br><b>(3) Khám lâm sàng - cận lâm sàng:</b> Các xét nghiệm bình thường.<br><b>(4) Khám tâm thần:</b> Tỉnh táo, định hướng tốt. Khí sắc lo âu. Tư duy: xuất hiện ý nghĩ xâm nhập “mình bẩn", đi kèm cưỡng chế rửa/lau để trung hòa khó chịu; có né tránh. Mức độ insight khá: thừa nhận hành vi quá mức, không hợp lý.`,
                         questions: [
@@ -347,7 +371,7 @@
                 } else {
                     questionsHTML = `<p class="text-gray-500 mt-4">Không có câu hỏi cho ca lâm sàng này.</p>`;
                 }
-                
+
 
                 caseElement.innerHTML = `
                     <h2 class="text-2xl font-bold text-slate-700 border-b-2 border-blue-200 pb-2 mb-4">${caseData.title}</h2>
@@ -370,12 +394,12 @@
                 if (!caseData || caseData.questions.length === 0) continue;
 
                 totalQuestions += caseData.questions.length;
-                
+
                 caseData.questions.forEach((q, qIndex) => {
                     const questionBlock = document.querySelector(`.case-block[data-case-index="${i}"] .question-block[data-question-index="${qIndex}"]`);
                     const radioButtons = questionBlock.querySelectorAll(`input[name="case-${i}-q-${qIndex}"]`);
                     const selectedRadio = questionBlock.querySelector(`input[name="case-${i}-q-${qIndex}"]:checked`);
-                    
+
                     // Disable all options
                     radioButtons.forEach(radio => radio.disabled = true);
 
@@ -389,7 +413,7 @@
                             userLabel.classList.add('bg-green-100', 'border-green-400', 'ring-2', 'ring-green-300');
                         } else {
                             userLabel.classList.add('bg-red-100', 'border-red-400', 'ring-2', 'ring-red-300');
-                            
+
                             const correctRadio = questionBlock.querySelector(`input[value="${correctAnswer}"]`);
                             if (correctRadio) {
                                 correctRadio.parentElement.classList.add('bg-green-100', 'border-green-400');
@@ -399,8 +423,8 @@
                         // Mark the correct answer if none was selected
                         const correctRadio = questionBlock.querySelector(`input[value="${q.a}"]`);
                         if (correctRadio) {
-                           correctRadio.parentElement.classList.add('bg-green-100', 'border-green-400');
-                           correctRadio.parentElement.insertAdjacentHTML('beforeend', '<span class="text-sm font-semibold text-green-800 ml-auto">Đáp án đúng</span>');
+                            correctRadio.parentElement.classList.add('bg-green-100', 'border-green-400');
+                            correctRadio.parentElement.insertAdjacentHTML('beforeend', '<span class="text-sm font-semibold text-green-800 ml-auto">Đáp án đúng</span>');
                         }
                     }
 
@@ -416,7 +440,7 @@
                     }
                 });
             }
-            
+
             // Display summary
             resultsSummary.innerHTML = `
                 <h3 class="text-2xl font-bold text-slate-700">Kết quả bài làm</h3>
@@ -448,4 +472,5 @@
 
     </script>
 </body>
+
 </html>

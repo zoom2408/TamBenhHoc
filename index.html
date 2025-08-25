@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Học Tập Y Khoa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Thêm một hiệu ứng chuyển động mượt mà cho sidebar */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="relative min-h-screen md:flex">
+        <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
+            <a href="#" class="block p-4 text-white font-bold">Học Tập</a>
+            <button id="hamburger-button" class="p-4 focus:outline-none focus:bg-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <aside id="sidebar" class="bg-gray-800 text-gray-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 z-20">
+            <a href="#" class="text-white flex items-center space-x-2 px-4">
+                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+                <span class="text-2xl font-extrabold">Học Tập</span>
+            </a>
+
+            <nav>
+                <a href="#" class="menu-link block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white" data-target="welcome.html">
+                    Kiến thức
+                </a>
+                <div>
+                    <a href="#" id="quiz-menu-toggle" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                        Bài kiểm tra
+                    </a>
+                    <div id="quiz-submenu" class="hidden text-sm ml-4">
+                        <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="quiz.html">
+                            Ca lâm sàng
+                        </a>
+                        <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="general.html">
+                            Kiến thức chung
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-10 h-screen">
+            <iframe id="content-frame" src="welcome.html" class="w-full h-full border-0 rounded-lg shadow-lg" name="content-frame"></iframe>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburgerButton = document.getElementById('hamburger-button');
+            const sidebar = document.getElementById('sidebar');
+            const menuLinks = document.querySelectorAll('.menu-link');
+            const contentFrame = document.getElementById('content-frame');
+            
+            const quizMenuToggle = document.getElementById('quiz-menu-toggle');
+            const quizSubmenu = document.getElementById('quiz-submenu');
+
+            // Toggle sidebar trên di động
+            hamburgerButton.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+            });
+            
+            // Toggle menu con "Bài kiểm tra"
+            quizMenuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                quizSubmenu.classList.toggle('hidden');
+            });
+
+            // Xử lý khi click vào link menu
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-target');
+                    if (targetPage) {
+                        contentFrame.src = targetPage;
+                    }
+                    
+                    // Tự động đóng sidebar trên di động sau khi chọn
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.add('-translate-x-full');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

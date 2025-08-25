@@ -35,10 +35,10 @@
                     Kiến thức
                 </a>
                 <div>
-                    <a href="#" id="quiz-menu-toggle" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
-                        Kiểm tra 
-                    </a>
-                    <div id="quiz-submenu" class="hidden text-sm ml-4 mt-1">
+                    <div class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                        Kiểm tra
+                    </div>
+                    <div id="quiz-submenu" class="text-sm ml-4 mt-1">
                         <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="quiz.html">
                             Tổng hợp
                         </a>
@@ -73,19 +73,10 @@
             const contentFrame = document.getElementById('content-frame');
             const navMenu = document.getElementById('nav-menu');
             const menuLinks = navMenu.querySelectorAll('a[data-target]');
-            
-            const quizMenuToggle = document.getElementById('quiz-menu-toggle');
-            const quizSubmenu = document.getElementById('quiz-submenu');
 
             // Toggle sidebar trên di động
             hamburgerButton.addEventListener('click', () => {
                 sidebar.classList.toggle('-translate-x-full');
-            });
-            
-            // Toggle menu con "Bài kiểm tra"
-            quizMenuToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                quizSubmenu.classList.toggle('hidden');
             });
 
             // Xử lý khi click vào link menu để tải nội dung và cập nhật trạng thái active

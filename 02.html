@@ -1,0 +1,428 @@
+Chắc chắn rồi\! Dưới đây là phiên bản code đã được tinh chỉnh để giao diện trông gọn gàng, đẹp mắt và xử lý nội dung tốt hơn trên nhiều kích thước màn hình.
+
+Các thay đổi chính bao gồm:
+
+1.  **Tinh chỉnh khoảng cách tổng thể**: Giảm `space-y-10` thành `space-y-8` trong `main` để các section gần nhau hơn một chút, tạo cảm giác kết nối hơn.
+2.  **Header đẹp hơn**: Thêm một chút padding trục `y` (`py-12`) và làm cho văn bản mô tả (`text-blue-200`) nhẹ nhàng hơn để tạo sự phân cấp thị giác.
+3.  **Thẻ lật (Flip Card) cân đối**: Điều chỉnh padding bên trong các thẻ lật để nội dung không bị sát viền, đồng thời đảm bảo chiều cao đồng đều khi chưa lật bằng cách thêm `flex flex-col`.
+4.  **Accordion mượt mà hơn**: Thêm `transition-colors` và `hover:bg-blue-50` vào nút accordion để tạo phản hồi tương tác tốt hơn cho người dùng.
+5.  **Canh chỉnh bố cục Grid**: Đảm bảo các grid items có chiều cao nhất quán (sử dụng `h-full` ở một vài nơi) để bố cục không bị so le, đặc biệt là ở phần triệu chứng.
+6.  **Quiz trực quan hơn**: Cải thiện giao diện của phần quiz. Khi chấm điểm, câu trả lời đúng sẽ có icon ✓ và câu sai có icon ✗ để dễ nhận biết hơn, thay vì chỉ đổi màu nền.
+7.  **Responsive**: Tinh chỉnh lại các điểm ngắt (breakpoints) và khoảng cách để đảm bảo giao diện hiển thị tốt trên cả thiết bị di động và máy tính để bàn.
+
+Dưới đây là code hoàn chỉnh đã được tinh chỉnh. Bạn có thể sao chép và sử dụng trực tiếp.
+
+```html
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phổ Loạn Thần — Học Tương Tác (Tailwind • Blue)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Flip card fix: đảm bảo nội dung không bị ngược khi lật */
+    .flip { perspective: 1000px; }
+    .flip-inner { transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    .flip.is-flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .flip-back { transform: rotateY(180deg); }
+    /* Smooth accordion */
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-in-out; }
+    .accordion.open .accordion-content { max-height: 2000px; /* Large enough for content */ }
+    /* Pill anchor nav */
+    .pill { @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full bg-blue-500/80 text-white hover:bg-blue-500 transition-colors duration-200; }
+    /* Code-ish tag for key facts */
+    .chip { @apply inline-block text-xs font-medium px-2 py-1 rounded bg-blue-100 text-blue-800 border border-blue-200; }
+  </style>
+</head>
+<body class="bg-blue-50 text-slate-800 antialiased">
+  <header class="bg-gradient-to-br from-blue-600 to-blue-800 text-white shadow-lg">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Phổ Loạn Thần — Bản Đồ Học Nhanh</h1>
+      <p class="mt-3 text-lg text-blue-200 max-w-3xl mx-auto">Định nghĩa • Triệu chứng (+/–) • Chẩn đoán • Rối loạn trong phổ • Nguyên nhân • Điều trị • Dịch tễ & Tiên lượng • Mini Quiz</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-2">
+        <a href="#tong-quan" class="pill">Tổng quan</a>
+        <a href="#trieu-chung" class="pill">Triệu chứng</a>
+        <a href="#chan-doan" class="pill">Chẩn đoán</a>
+        <a href="#roi-loan-trong-pho" class="pill">Các rối loạn</a>
+        <a href="#nguyen-nhan" class="pill">Nguyên nhân</a>
+        <a href="#dieu-tri" class="pill">Điều trị</a>
+        <a href="#quiz" class="pill">Quiz 10 câu</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 space-y-8">
+    <section id="tong-quan" class="bg-white rounded-xl shadow-md p-6 border border-gray-200/80">
+      <h2 class="text-2xl font-bold text-blue-800">1. Tổng quan & Ý cốt lõi</h2>
+      <div class="mt-4 grid md:grid-cols-5 gap-6">
+        <div class="md:col-span-3 space-y-3">
+          <p><span class="chip">Định nghĩa cốt lõi</span> Loạn thần = có ≥1 trong 5 triệu chứng chính: ảo giác, hoang tưởng, tư duy/lời nói vô tổ chức, hành vi vô tổ chức/căng trương lực, và triệu chứng âm tính.</p>
+          <p class="leading-relaxed">
+            Phổ loạn thần là một continuum các rối loạn, bao gồm: <span class="font-semibold">Rối loạn hoang tưởng, Loạn thần ngắn, Rối loạn dạng phân liệt, Tâm thần phân liệt (TTPL), và Rối loạn cảm xúc phân liệt.</span>
+          </p>
+          <ul class="list-disc list-outside ml-5 space-y-1 text-sm">
+            <li><span class="font-semibold">Dịch tễ TTPL:</span> Tỷ lệ mắc suốt đời ~0.7%; nam:nữ ≈1.4:1; khoảng 20% bệnh nhân từng toan tự sát.</li>
+            <li><span class="font-semibold">Tiên lượng TTPL (sau 15–25 năm):</span> ~38% hồi phục, ~25% cải thiện nhiều, trong khi ~10% tử vong (chủ yếu do tự sát).</li>
+            <li><span class="font-semibold">Điều trị trụ cột:</span> Thuốc chống loạn thần là nền tảng, kết hợp với các liệu pháp tâm lý như CBT, liệu pháp gia đình, và huấn luyện kỹ năng xã hội.</li>
+          </ul>
+        </div>
+        <div class="md:col-span-2 bg-blue-50/80 rounded-lg p-4 border border-blue-200">
+          <h3 class="font-semibold text-blue-900">Bản đồ “phổ” theo mức độ nghiêm trọng</h3>
+          <ol class="mt-2 space-y-2 text-sm">
+            <li class="flex items-center gap-2"><span class="chip">Ít nghiêm trọng</span> Rối loạn hoang tưởng</li>
+            <li class="pl-4">Rối loạn loạn thần ngắn</li>
+            <li class="pl-4">Rối loạn dạng phân liệt</li>
+            <li class="pl-4 font-semibold">Tâm thần phân liệt</li>
+            <li class="flex items-center gap-2"><span class="chip">Nghiêm trọng hơn</span> Rối loạn cảm xúc phân liệt</li>
+          </ol>
+          <p class="text-xs text-slate-600 mt-3">Mục tiêu học: Định vị ca lâm sàng trong continuum này để định hướng thăm khám và xử trí hiệu quả.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="trieu-chung" class="bg-white rounded-xl shadow-md p-6 border border-gray-200/80">
+      <h2 class="text-2xl font-bold text-blue-800">2. Triệu chứng: Dương tính & Âm tính</h2>
+      <p class="mt-2 text-slate-700">Học theo thẻ lật (click hoặc dùng phím Enter/Space để lật).</p>
+
+      <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flip h-full" tabindex="0" role="button" aria-pressed="false">
+          <div class="flip-inner h-full">
+            <div class="flip-face flex flex-col justify-between p-4 rounded-xl bg-white shadow border border-blue-200">
+              <div>
+                <h3 class="font-semibold text-blue-900">Ảo giác (Hallucinations)</h3>
+                <p class="text-sm mt-1">Tri giác về sự vật/hiện tượng không có thật trong thực tế (phổ biến nhất là ảo thanh).</p>
+              </div>
+              <p class="text-xs mt-2 text-slate-500 self-start">→ Bấm để xem đặc điểm lâm sàng</p>
+            </div>
+            <div class="flip-back flex flex-col justify-center p-4 rounded-xl bg-blue-700 text-white shadow-lg">
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li>Xuất hiện/mất đi không phụ thuộc ý chí.</li>
+                <li>Đương sự tin chắc là thật, rất khó phê phán.</li>
+                <li>Có thể kèm theo sảng hoặc hoang tưởng.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flip h-full" tabindex="0" role="button" aria-pressed="false">
+          <div class="flip-inner h-full">
+            <div class="flip-face flex flex-col justify-between p-4 rounded-xl bg-white shadow border border-blue-200">
+              <div>
+                <h3 class="font-semibold text-blue-900">Hoang tưởng (Delusions)</h3>
+                <p class="text-sm mt-1">Niềm tin sai lệch, cứng nhắc, không thể lay chuyển dù có bằng chứng trái ngược.</p>
+              </div>
+              <p class="text-xs mt-2 text-slate-500 self-start">→ Bấm để xem phân loại & hệ quả</p>
+            </div>
+            <div class="flip-back flex flex-col justify-center p-4 rounded-xl bg-blue-700 text-white shadow-lg">
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li>Nguyên phát vs. thứ phát (hình thành sau rối loạn tri giác).</li>
+                <li>Ảnh hưởng mạnh đến cảm xúc và hành vi.</li>
+                <li>Có nguy cơ dẫn đến hành vi nguy hiểm cho bản thân/người khác.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flip h-full" tabindex="0" role="button" aria-pressed="false">
+          <div class="flip-inner h-full">
+            <div class="flip-face flex flex-col justify-between p-4 rounded-xl bg-white shadow border border-blue-200">
+              <div>
+                <h3 class="font-semibold text-blue-900">Tư duy/Lời nói vô tổ chức</h3>
+                <p class="text-sm mt-1">Biểu hiện qua ngôn ngữ trật đường ray, rời rạc, khó theo dõi mạch logic.</p>
+              </div>
+              <p class="text-xs mt-2 text-slate-500 self-start">→ Bấm để xem dấu hiệu cảnh báo</p>
+            </div>
+            <div class="flip-back flex flex-col justify-center p-4 rounded-xl bg-blue-700 text-white shadow-lg">
+              <p class="text-sm">Khi sự rối loạn này nghiêm trọng đến mức suy giảm khả năng giao tiếp hiệu quả, nó là một dấu hiệu gợi ý bệnh lý nặng (thường gặp trong TTPL).</p>
+            </div>
+          </div>
+        </div>
+         <div class="flip h-full" tabindex="0" role="button" aria-pressed="false">
+          <div class="flip-inner h-full">
+            <div class="flip-face flex flex-col justify-between p-4 rounded-xl bg-white shadow border border-blue-200">
+              <div>
+                <h3 class="font-semibold text-blue-900">Hành vi vô tổ chức / Căng trương lực</h3>
+                <p class="text-sm mt-1">Hành vi không phù hợp bối cảnh, kích động vô cớ, hoặc giảm đáp ứng với môi trường.</p>
+              </div>
+              <p class="text-xs mt-2 text-slate-500 self-start">→ Bấm để xem ví dụ</p>
+            </div>
+            <div class="flip-back flex flex-col justify-center p-4 rounded-xl bg-blue-700 text-white shadow-lg">
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li><span class="font-semibold">Vô tổ chức:</span> Ngốc nghếch như trẻ con, hành động không mục đích.</li>
+                <li><span class="font-semibold">Căng trương lực:</span> Giữ nguyên tư thế lạ, uốn sáp, nhại lời/hành vi, bất động...</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flip h-full" tabindex="0" role="button" aria-pressed="false">
+          <div class="flip-inner h-full">
+            <div class="flip-face flex flex-col justify-between p-4 rounded-xl bg-white shadow border border-blue-200">
+              <div>
+                <h3 class="font-semibold text-blue-900">Triệu chứng âm tính</h3>
+                <p class="text-sm mt-1">Sự suy giảm hoặc mất đi các chức năng tâm thần bình thường.</p>
+              </div>
+              <p class="text-xs mt-2 text-slate-500 self-start">→ Bấm để xem 5 dấu hiệu "A"</p>
+            </div>
+            <div class="flip-back flex flex-col justify-center p-4 rounded-xl bg-blue-700 text-white shadow-lg">
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li><span class="font-semibold">Affective flattening:</span> Cảm xúc cùn mòn.</li>
+                <li><span class="font-semibold">Alogia:</span> Ngôn ngữ nghèo nàn.</li>
+                <li><span class="font-semibold">Avolition:</span> Mất ý chí, động lực.</li>
+                <li><span class="font-semibold">Anhedonia:</span> Mất hứng thú.</li>
+                <li><span class="font-semibold">Asociality:</span> Mất tương tác xã hội.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="chan-doan" class="bg-white rounded-xl shadow-md p-6 border border-gray-200/80">
+      <h2 class="text-2xl font-bold text-blue-800">3. Chẩn đoán cốt lõi (Trích yếu DSM-5)</h2>
+      <div class="mt-4 space-y-3">
+        <div class="accordion rounded-lg border border-blue-200">
+          <button class="w-full flex justify-between items-center text-left px-4 py-3 font-semibold text-blue-900 hover:bg-blue-50 transition-colors">
+            <span>Tâm thần phân liệt (Schizophrenia) — Tóm lược tiêu chí</span>
+            <svg class="w-5 h-5 shrink-0 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="accordion-content">
+            <div class="px-4 pb-4 text-sm text-slate-700">
+              <ul class="list-disc ml-5 space-y-1 leading-6">
+                <li><span class="font-semibold">Tiêu chuẩn A:</span> ≥2 triệu chứng trong 1 tháng, trong đó phải có ít nhất 1 trong 3 triệu chứng sau: hoang tưởng, ảo giác, ngôn ngữ vô tổ chức.</li>
+                <li><span class="font-semibold">Suy giảm chức năng:</span> Suy giảm đáng kể trong công việc, học tập, quan hệ xã hội hoặc tự chăm sóc.</li>
+                <li><span class="font-semibold">Thời gian:</span> Dấu hiệu rối loạn kéo dài liên tục ≥6 tháng (có thể bao gồm giai đoạn tiền triệu hoặc di chứng).</li>
+                <li><span class="font-semibold">Loại trừ:</span> Các triệu chứng không phải do rối loạn cảm xúc, tác động của chất, hoặc một bệnh cơ thể khác.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion rounded-lg border border-blue-200">
+          <button class="w-full flex justify-between items-center text-left px-4 py-3 font-semibold text-blue-900 hover:bg-blue-50 transition-colors">
+            <span>Rối loạn cảm xúc phân liệt (Schizoaffective Disorder) — Điểm mấu chốt</span>
+            <svg class="w-5 h-5 shrink-0 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="accordion-content">
+            <div class="px-4 pb-4 text-sm text-slate-700">
+              <ul class="list-disc ml-5 space-y-1 leading-6">
+                <li>Một giai đoạn bệnh không gián đoạn, trong đó có một đợt khí sắc chính (trầm cảm nặng hoặc hưng cảm) xảy ra <span class="font-semibold">đồng thời</span> với Tiêu chuẩn A của TTPL.</li>
+                <li>Trong cùng giai đoạn bệnh, phải có hoang tưởng hoặc ảo giác trong ít nhất 2 tuần <span class="font-semibold">mà không có</span> triệu chứng khí sắc nổi bật.</li>
+                <li>Các triệu chứng khí sắc chiếm phần lớn tổng thời gian của giai đoạn bệnh.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roi-loan-trong-pho" class="bg-white rounded-xl shadow-md p-6 border border-gray-200/80">
+        <h2 class="text-2xl font-bold text-blue-800">4. Phân biệt nhanh các rối loạn trong phổ</h2>
+        <div class="mt-4 grid md:grid-cols-3 gap-4">
+            <div class="rounded-lg border border-blue-200 bg-blue-50/50 p-4 h-full">
+                <h3 class="font-semibold text-blue-900">Rối loạn hoang tưởng</h3>
+                <ul class="mt-2 list-disc ml-5 text-sm space-y-1">
+                    <li>Có ≥1 hoang tưởng, kéo dài ≥1 tháng.</li>
+                    <li><span class="font-semibold">Chưa từng</span> đáp ứng Tiêu chuẩn A của TTPL.</li>
+                    <li>Chức năng nhìn chung được bảo tồn, hành vi không kỳ quặc rõ rệt.</li>
+                </ul>
+            </div>
+            <div class="rounded-lg border border-blue-200 bg-blue-50/50 p-4 h-full">
+                <h3 class="font-semibold text-blue-900">Loạn thần ngắn</h3>
+                <ul class="mt-2 list-disc ml-5 text-sm space-y-1">
+                    <li>Có ≥1 triệu chứng dương tính (hoang tưởng, ảo giác, ngôn ngữ rời rạc).</li>
+                    <li>Kéo dài ≥1 ngày nhưng <span class="font-semibold">&lt;1 tháng</span>.</li>
+                    <li>Sau đó hồi phục hoàn toàn chức năng như trước.</li>
+                </ul>
+            </div>
+            <div class="rounded-lg border border-blue-200 bg-blue-50/50 p-4 h-full">
+                <h3 class="font-semibold text-blue-900">Rối loạn dạng phân liệt</h3>
+                <ul class="mt-2 list-disc ml-5 text-sm space-y-1">
+                    <li>Thỏa mãn Tiêu chuẩn A của TTPL.</li>
+                    <li>Thời gian kéo dài <span class="font-semibold">từ 1 tháng đến &lt;6 tháng</span>.</li>
+                    <li>Nếu kéo dài hơn, chẩn đoán sẽ chuyển thành TTPL.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="nguyen-nhan-dieu-tri" class="grid md:grid-cols-2 gap-8">
+      <div id="nguyen-nhan" class="bg-white rounded-xl shadow-md p-6 border border-gray-200/80">
+        <h2 class="text-2xl font-bold text-blue-800">5. Nguyên nhân & Cơ chế</h2>
+        <div class="mt-4 space-y-4">
+            <div class="rounded-lg border border-blue-200 p-4">
+              <h3 class="font-semibold text-blue-900">Sinh học – Thần kinh</h3>
+              <ul class="mt-2 list-disc ml-5 text-sm leading-6">
+                <li><span class="font-semibold">Chất dẫn truyền:</span> Giả thuyết Dopamine là trung tâm, ngoài ra còn có vai trò của Serotonin, Glutamate, GABA.</li>
+                <li><span class="font-semibold">Di truyền:</span> Tính di truyền cao, nguy cơ tăng rõ rệt theo quan hệ huyết thống.</li>
+                <li><span class="font-semibold">Cấu trúc não:</span> Bất thường như giãn não thất, giảm thể tích chất xám ở vỏ não trước trán, hồi hải mã.</li>
+              </ul>
+            </div>
+            <div class="rounded-lg border border-blue-200 p-4">
+              <h3 class="font-semibold text-blue-900">Tâm lý – Xã hội</h3>
+              <ul class="mt-2 list-disc ml-5 text-sm leading-6">
+                 <li><span class="font-semibold">Yếu tố nguy cơ:</span> Sang chấn tâm lý thời thơ ấu, tai biến sản khoa, lạm dụng chất (đặc biệt là cannabis).</li>
+                <li><span class="font-semibold">Môi trường gia đình:</span> Chỉ số "Cảm xúc Bộc lộ" (Expressed Emotion - EE) cao (chỉ trích, thù địch, can thiệp quá mức) là một yếu tố dự báo tái phát mạnh.</li>
+                <li><span class="font-semibold">Stress:</span> Mô hình "Tạng-Stress" cho rằng các yếu tố gây stress trong cuộc sống có thể kích hoạt bệnh trên người có sẵn tạng dễ bị tổn thương.</li>
+              </ul>
+            </div>
+        </div>
+      </div>
+      <div id="dieu-tri" class="bg-white rounded-xl shadow-md p-6 border border-gray-200/80">
+        <h2 class="text-2xl font-bold text-blue-800">6. Điều trị (Khung thực hành)</h2>
+        <div class="mt-4 space-y-4">
+          <div class="rounded-lg border border-blue-200 p-4 bg-blue-50/40">
+            <h3 class="font-semibold text-blue-900">Trị liệu Sinh học</h3>
+            <ul class="mt-2 list-disc ml-5 text-sm">
+              <li><strong>Thuốc chống loạn thần (Antipsychotics):</strong> Là nền tảng và trụ cột của phác đồ điều trị.</li>
+              <li>Liệu pháp sốc điện (ECT): Hiệu quả trong các trường hợp kháng trị, căng trương lực, hoặc có ý định tự sát cao.</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-blue-200 p-4">
+            <h3 class="font-semibold text-blue-900">Trị liệu Tâm lý – Xã hội</h3>
+            <ul class="mt-2 list-disc ml-5 text-sm space-y-1">
+              <li><span class="font-semibold">CBT (Liệu pháp Nhận thức-Hành vi):</span> Giúp giảm niềm tin vào hoang tưởng, đối phó với ảo thanh và giảm triệu chứng âm tính.</li>
+              <li><span class="font-semibold">Liệu pháp gia đình:</span> Giáo dục gia đình, giảm chỉ số EE, cải thiện giao tiếp và kỹ năng giải quyết vấn đề.</li>
+              <li><span class="font-semibold">Huấn luyện kỹ năng xã hội (SST):</span> Cải thiện khả năng giao tiếp và tương tác xã hội qua các bài tập thực hành.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="bg-white rounded-xl shadow-md p-6 border border-gray-200/80">
+      <h2 class="text-2xl font-bold text-blue-800">7. Mini Quiz (10 câu)</h2>
+      <p class="mt-1 text-sm text-slate-600">Chọn đáp án đúng rồi bấm “Chấm điểm” để kiểm tra.</p>
+
+      <div id="quizWrap" class="mt-4 space-y-4"></div>
+
+      <div class="mt-6 flex items-center gap-3">
+        <button id="gradeBtn" class="px-5 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Chấm điểm</button>
+        <button id="resetBtn" class="px-5 py-2 rounded-lg bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">Làm lại</button>
+        <div id="scoreBox" class="ml-auto text-lg font-bold text-blue-900"></div>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 py-4">
+      Nguồn học liệu: “6. Phổ loạn thần.pdf” — Tâm bệnh học (USSH).
+    </footer>
+  </main>
+
+  <script>
+    // Flip cards interactivity
+    document.querySelectorAll('.flip').forEach(el => {
+      const toggleFlip = () => {
+        el.classList.toggle('is-flipped');
+        el.setAttribute('aria-pressed', el.classList.contains('is-flipped'));
+      };
+      el.addEventListener('click', toggleFlip);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleFlip();
+        }
+      });
+    });
+
+    // Accordion interactivity
+    document.querySelectorAll('.accordion > button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accordion = btn.parentElement;
+        const icon = btn.querySelector('svg');
+        accordion.classList.toggle('open');
+        icon.style.transform = accordion.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+    });
+
+    // --- Quiz Logic ---
+    const questions = [
+        { q: "Đặc tính nào KHÔNG thuộc nhóm triệu chứng DƯƠNG TÍNH?", options: ["Ảo giác", "Hoang tưởng", "Ngôn ngữ rời rạc", "Cảm xúc cùn mòn"], answer: 3, hint: "Cảm xúc cùn mòn (affective flattening) là một triệu chứng âm tính điển hình." },
+        { q: "Một bệnh nhân có triệu chứng loạn thần giống TTPL nhưng chỉ kéo dài 4 tháng. Chẩn đoán phù hợp nhất là gì?", options: ["Rối loạn hoang tưởng", "Rối loạn loạn thần ngắn", "Rối loạn dạng phân liệt", "Rối loạn cảm xúc phân liệt"], answer: 2, hint: "Rối loạn dạng phân liệt có triệu chứng giống TTPL nhưng thời gian từ 1 đến dưới 6 tháng." },
+        { q: "Trong TTPL, các dấu hiệu của rối loạn phải kéo dài liên tục tối thiểu bao lâu (tính cả giai đoạn tiền triệu/di chứng)?", options: ["≥ 1 tháng", "≥ 3 tháng", "≥ 6 tháng", "≥ 12 tháng"], answer: 2, hint: "Tiêu chuẩn chẩn đoán của DSM-5 cho TTPL yêu cầu thời gian tối thiểu là 6 tháng." },
+        { q: "Điều nào sau đây mô tả đúng nhất về ảo giác trong phổ loạn thần?", options: ["Bệnh nhân thường dễ dàng nhận ra đó không phải là thật", "Bệnh nhân có thể kiểm soát được sự xuất hiện của chúng", "Loại thường gặp nhất là ảo thanh và bệnh nhân tin chắc là thật", "Chỉ xảy ra khi có rối loạn ý thức (sảng)"], answer: 2, hint: "Ảo giác có đặc tính thật như tri giác thật, không theo ý muốn, và ảo thanh là phổ biến nhất." },
+        { q: "Đặc điểm chính của Rối loạn hoang tưởng là gì?", options: ["Luôn có ảo giác nổi bật không liên quan đến chủ đề hoang tưởng", "Chức năng nhìn chung được bảo tồn, hành vi không kỳ quặc rõ rệt", "Bắt buộc phải từng có một giai đoạn đáp ứng Tiêu chuẩn A của TTPL", "Thời gian của hoang tưởng phải dưới 1 tháng"], answer: 1, hint: "Người bệnh Rối loạn hoang tưởng vẫn duy trì được chức năng khá tốt ngoài ảnh hưởng của hoang tưởng." },
+        { q: "Rối loạn loạn thần ngắn được định nghĩa bởi các triệu chứng kéo dài ít nhất 1 ngày và tối đa:", options: ["< 1 tuần", "< 2 tuần", "< 1 tháng", "< 6 tháng"], answer: 2, hint: "Loạn thần ngắn kéo dài từ 1 ngày đến dưới 1 tháng, sau đó hồi phục hoàn toàn." },
+        { q: "Giả thuyết về chất dẫn truyền thần kinh nào được xem là trung tâm trong cơ chế sinh bệnh học của loạn thần?", options: ["Giả thuyết Dopamine", "Giả thuyết Acetylcholine", "Giả thuyết Histamine", "Giả thuyết Endorphin"], answer: 0, hint: "Giả thuyết Dopamine (cụ thể là sự tăng hoạt động dopamine ở một số vùng não) là giả thuyết sinh học có ảnh hưởng lớn nhất." },
+        { q: "Biện pháp trị liệu TÂM LÝ nào có bằng chứng mạnh mẽ trong việc giảm triệu chứng dương tính và ngăn ngừa tái phát?", options: ["Chỉ dùng thuốc chống loạn thần", "Liệu pháp Nhận thức-Hành vi (CBT)", "Liệu pháp sốc điện (ECT)", "Phân tâm học cổ điển"], answer: 1, hint: "CBT là liệu pháp tâm lý được nghiên cứu nhiều và chứng minh hiệu quả trong việc giúp bệnh nhân đối phó với triệu chứng loạn thần." },
+        { q: "Theo dịch tễ học, tỷ lệ mắc Tâm thần phân liệt suốt đời trong dân số chung là khoảng:", options: ["0.07%", "0.7%", "7%", "17%"], answer: 1, hint: "Con số cần nhớ cho tỷ lệ mắc TTPL suốt đời là xấp xỉ 0.7% (hoặc khoảng 1%)." },
+        { q: "Trong tiên lượng dài hạn (15–25 năm) của TTPL, tỷ lệ tử vong (phần lớn do tự sát) là khoảng:", options: ["~1%", "~5%", "~10%", "~25%"], answer: 2, hint: "Nguy cơ tự sát là một vấn đề nghiêm trọng trong TTPL, với tỷ lệ tử vong khoảng 10%." }
+    ];
+
+    const quizWrap = document.getElementById('quizWrap');
+    const scoreBox = document.getElementById('scoreBox');
+    const gradeBtn = document.getElementById('gradeBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    let graded = false;
+    
+    const renderQuiz = () => {
+        graded = false;
+        quizWrap.innerHTML = '';
+        questions.forEach((q, idx) => {
+            const card = document.createElement('div');
+            card.className = 'rounded-lg border border-blue-200/80 p-4 bg-white transition-colors';
+            card.innerHTML = `
+                <div class="font-medium text-blue-900">Câu ${idx + 1}: ${q.q}</div>
+                <div class="mt-3 grid sm:grid-cols-2 gap-2 text-sm">
+                    ${q.options.map((op, i) => `
+                        <label class="flex items-center gap-3 px-3 py-2.5 rounded-md border cursor-pointer hover:bg-blue-50/80 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-400">
+                            <input type="radio" name="q${idx}" value="${i}" class="shrink-0 accent-blue-600">
+                            <span>${op}</span>
+                        </label>`).join('')}
+                </div>
+                <div class="mt-2 text-xs text-rose-700 hidden" id="hint${idx}"><b>Gợi ý:</b> ${q.hint}</div>
+            `;
+            quizWrap.appendChild(card);
+        });
+        scoreBox.textContent = '';
+        gradeBtn.disabled = false;
+    };
+
+    gradeBtn.addEventListener('click', () => {
+        if (graded) return;
+        graded = true;
+        let correctCount = 0;
+
+        questions.forEach((q, idx) => {
+            const chosenInput = document.querySelector(`input[name="q${idx}"]:checked`);
+            const hintEl = document.getElementById(`hint${idx}`);
+            const options = document.querySelectorAll(`input[name="q${idx}"]`);
+
+            options.forEach(opt => {
+                opt.disabled = true;
+                const label = opt.parentElement;
+                label.classList.remove('hover:bg-blue-50/80', 'cursor-pointer');
+            });
+            
+            if (!chosenInput) {
+                hintEl.classList.remove('hidden');
+                return;
+            }
+
+            const chosenValue = Number(chosenInput.value);
+            const chosenLabel = chosenInput.parentElement;
+
+            if (chosenValue === q.answer) {
+                correctCount++;
+                chosenLabel.classList.add('!bg-green-50', '!border-green-400');
+                chosenLabel.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-auto text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>`;
+            } else {
+                hintEl.classList.remove('hidden');
+                chosenLabel.classList.add('!bg-rose-50', '!border-rose-400');
+                chosenLabel.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-auto text-rose-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.697a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>`;
+                // Highlight the correct answer
+                const correctLabel = document.querySelector(`input[name="q${idx}"][value="${q.answer}"]`).parentElement;
+                correctLabel.classList.add('!bg-green-50', '!border-green-400');
+            }
+        });
+
+        const score = Math.round((correctCount / questions.length) * 100);
+        scoreBox.textContent = `Điểm: ${correctCount}/${questions.length} (${score}%)`;
+        gradeBtn.disabled = true;
+    });
+
+    resetBtn.addEventListener('click', renderQuiz);
+
+    // Initial render
+    renderQuiz();
+  </script>
+</body>
+</html>
+```

@@ -399,8 +399,8 @@
                         // Mark the correct answer if none was selected
                         const correctRadio = questionBlock.querySelector(`input[value="${q.a}"]`);
                         if (correctRadio) {
-                           correctRadio.parentElement.classList.add('bg-yellow-100', 'border-yellow-400');
-                           correctRadio.parentElement.insertAdjacentHTML('beforeend', '<span class="text-sm font-semibold text-yellow-800 ml-auto">Đáp án đúng</span>');
+                           correctRadio.parentElement.classList.add('bg-green-100', 'border-green-400');
+                           correctRadio.parentElement.insertAdjacentHTML('beforeend', '<span class="text-sm font-semibold text-green-800 ml-auto">Đáp án đúng</span>');
                         }
                     }
 

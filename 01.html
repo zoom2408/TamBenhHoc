@@ -7,9 +7,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .card-flip { perspective: 1000px; }
-    .card-inner { transition: transform 0.6s; transform-style: preserve-3d; }
+    .card-inner { position: relative; transition: transform 0.6s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
     .flipped .card-inner { transform: rotateY(180deg); }
-    .card-face { backface-visibility: hidden; }
+    .card-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .card-front {}
     .card-back { transform: rotateY(180deg); }
   </style>
 </head>
@@ -81,14 +82,25 @@
 
         <div class="grid md:grid-cols-2 gap-4">
           <!-- Flashcard 1 -->
-          <div class="card-flip group">
-            <div class="card-inner bg-blue-600 text-white rounded-xl p-4 card-face relative">
-              <div class="absolute right-3 top-3 text-xs bg-white/20 px-2 py-1 rounded-full">Click để lật</div>
-              <h3 class="font-semibold">Bản đồ chất dẫn truyền</h3>
-              <p class="mt-2 text-sm">Khí sắc, lo âu, loạn thần – các hệ serotonin, NE, GABA, dopamine…</p>
+          <div class="card-flip group h-40 md:h-44">
+            <div class="card-inner w-full h-full rounded-xl shadow">
+              <div class="card-face card-front bg-blue-600 text-white rounded-xl p-4 relative">
+                <div class="absolute right-3 top-3 text-xs bg-white/20 px-2 py-1 rounded-full">Click để lật</div>
+                <h3 class="font-semibold">Bản đồ chất dẫn truyền</h3>
+                <p class="mt-2 text-sm">Khí sắc, lo âu, loạn thần – các hệ serotonin, NE, GABA, dopamine…</p>
+              </div>
+              <div class="card-face card-back bg-white rounded-xl p-4 border border-blue-100">
+                <div class="text-slate-700">
+                  <div class="font-semibold text-blue-700">Nhớ nhanh</div>
+                  <ul class="mt-2 list-disc list-inside text-sm">
+                    <li>Khí sắc: <strong>Serotonin + NE</strong></li>
+                    <li>Lo âu: <strong>NE + GABA</strong></li>
+                    <li>TTPL/ADHD/Parkinson: <strong>Dopamine</strong></li>
+                    <li>Điều trị: <strong>SSRI/SNRI</strong> ± ECT/TMS (chỉ định phù hợp)</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div class="card-inner absolute"></div>
-            <div class="mt-2 bg-white rounded-xl p-4 border border-blue-100 shadow card-back hidden"></div>
           </div>
 
           <!-- Key points -->
@@ -280,24 +292,16 @@
 
     // Flashcard simple (click to flip)
     document.querySelectorAll('.card-flip').forEach(wrapper => {
-      // build back side content for the only explicit card in BIO
-      const back = wrapper.querySelector('.card-back');
-      if (back) {
-        back.innerHTML = `
-          <div class="text-slate-700">
-            <div class="font-semibold text-blue-700">Nhớ nhanh</div>
-            <ul class="mt-2 list-disc list-inside text-sm">
-              <li>Khí sắc: <strong>Serotonin + NE</strong></li>
-              <li>Lo âu: <strong>NE + GABA</strong></li>
-              <li>TTPL/ADHD/Parkinson: <strong>Dopamine</strong></li>
-              <li>Điều trị: <strong>SSRI/SNRI</strong> ± ECT/TMS (chỉ định phù hợp)</li>
-            </ul>
-          </div>`;
-      }
-      wrapper.addEventListener('click', () => {
-        wrapper.classList.toggle('flipped');
-        const backEl = wrapper.querySelector('.card-back');
-        if (backEl) backEl.classList.toggle('hidden');
+      // accessibile toggle
+      wrapper.setAttribute('tabindex','0');
+      wrapper.classList.add('cursor-pointer');
+      const toggle = () => wrapper.classList.toggle('flipped');
+      wrapper.addEventListener('click', toggle);
+      wrapper.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
       });
     });
 

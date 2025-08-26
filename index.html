@@ -92,7 +92,7 @@
             </header>
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                <iframe id="content-frame" src="welcome.html" class="w-full h-full border-0" name="content-frame"></iframe>
+                <iframe id="content-frame" src="01.html" class="w-full h-full border-0" name="content-frame"></iframe>
             </main>
         </div>
     </div>
@@ -134,9 +134,10 @@
                 });
             });
 
-            // Tự động active link đầu tiên khi tải trang
+            // Tự động tải và active link đầu tiên khi tải trang
             if(menuLinks.length > 0) {
-                menuLinks[1].classList.add('active-link');
+                contentFrame.src = menuLinks[0].getAttribute('data-target');
+                menuLinks[0].classList.add('active-link');
             }
         });
     </script>

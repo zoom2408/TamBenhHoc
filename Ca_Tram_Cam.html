@@ -1,0 +1,422 @@
+Of course\! I've updated the code for the "Trầm Cảm Chủ Yếu" quiz to use the same modern Tailwind CSS structure and interactive logic as the "Phổ Loạn Thần" example you provided.
+
+Here is the fully functional, updated HTML file. You can save it as an `.html` file and open it in any browser.
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ TƯƠNG TÁC - TRẦM CẢM CHỦ YẾU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A little custom style for better scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
+
+    <div id="app"></div>
+
+    <script>
+        // --- DATA ---
+        // All the case studies and questions are stored here.
+        const cases = [
+            {
+                id: 1,
+                title: "CA 1 - Nữ công nhân 34 tuổi, ý tưởng tự sát và cảm giác tội lỗi nặng",
+                patient: "Bệnh nhân H., nữ 34 tuổi, công nhân xưởng may.",
+                description: [
+                    "Chị H. vào khám vì 'không còn thấy điều gì đáng để sống'. Khoảng 6 tuần nay chị buồn bã hầu như cả ngày, mất hứng thú với việc trông con và nấu ăn, sụt ~4 kg không do ăn kiêng, khó ngủ (thức giấc sớm 4–5h), mệt mỏi, và tập trung kém. Gần đây chị tin mình làm sai đơn hàng khiến công ty thiệt hại lớn, 'đáng bị ở tù', nên nghĩ uống thuốc ngủ quá liều để 'kết thúc'.",
+                    "Không tiền sử rối loạn tâm thần; mẹ từng 'buồn rầu kéo dài' sau ly hôn. Không sử dụng chất. 3 tháng qua tăng ca liên tục, mâu thuẫn vợ chồng.",
+                    "Khám nội tổng quát và xét nghiệm (CTM, TSH, đường huyết) trong giới hạn bình thường.",
+                    "Hợp tác, vẻ mặt trầm, tư duy chậm; nội dung tư duy xoay quanh tội lỗi và vô dụng; ý tưởng tự sát có kế hoạch (uống thuốc ngủ); không ảo giác; định hướng và trí nhớ bảo tồn."
+                ],
+                questions: [
+                    { question: "Chẩn đoán phù hợp nhất?", options: ["A. Rối loạn lưỡng cực hiện tại pha trầm cảm", "B. Trầm cảm chủ yếu, mức độ nặng, có nguy cơ tự sát", "C. Rối loạn lo âu lan tỏa", "D. Rối loạn thích nghi với khí sắc trầm"], correct: "B", explanation: "Có ≥5 triệu chứng trong ≥2 tuần (khí sắc trầm/mất hứng thú, rối loạn giấc ngủ, mệt mỏi, tập trung kém, tội lỗi), suy giảm chức năng và có ý tưởng tự sát có kế hoạch → MDD nặng." },
+                    { question: "Tiêu chuẩn nào bắt buộc phải có ≥1 để chẩn đoán giai đoạn trầm cảm chủ yếu?", options: ["A. Thay đổi cân nặng", "B. Khí sắc trầm hoặc mất hứng thú", "C. Mất ngủ/Ngủ nhiều", "D. Cảm giác vô dụng/tội lỗi"], correct: "B", explanation: "DSM-5-TR: cần ≥5 triệu chứng/2 tuần và phải có khí sắc trầm hoặc mất hứng thú." },
+                    { question: "Dấu hiệu nào làm tăng mức độ nặng trong ca này?", options: ["A. Mất ngủ", "B. Sụt cân", "C. Ý tưởng tự sát có kế hoạch", "D. Mệt mỏi"], correct: "C", explanation: "Ý tưởng/hành vi tự sát làm tăng mức độ nặng, cần ưu tiên an toàn và cân nhắc nhập viện." },
+                    { question: "Điều kiện loại trừ quan trọng để chẩn đoán MDD:", options: ["A. Không có bệnh nội khoa", "B. Không sử dụng chất", "C. Không có rối loạn lo âu", "D. Chưa từng có hưng cảm/hưng cảm nhẹ"], correct: "D", explanation: "MDD yêu cầu chưa từng có hưng cảm/hưng cảm nhẹ; nếu có → lưỡng cực." },
+                    { question: "Với nguy cơ tự sát cao, biện pháp ưu tiên:", options: ["A. Cho thuốc tại nhà", "B. Nhập viện để đảm bảo an toàn", "C. Chỉ tâm lý trị liệu", "D. Theo dõi ngoại trú"], correct: "B", explanation: "Ý tưởng/hành vi tự sát, loạn thần, tiến triển nhanh, nguy cơ cao → nhập viện." },
+                    { question: "Biện pháp can thiệp khẩn cấp khi có ý tưởng tự sát:", options: ["A. Bỏ qua vì chỉ là ý tưởng", "B. Lập kế hoạch an toàn, đường dây hỗ trợ", "C. Chỉ khuyên bệnh nhân", "D. Chờ đến hẹn sau"], correct: "B", explanation: "Ưu tiên lập kế hoạch an toàn, giảm nguy cơ, thông tin đường dây hỗ trợ; xem xét nhập viện." },
+                    { question: "Thuốc đầu tay cho MDD không loạn thần:", options: ["A. Tricyclic", "B. SSRI/SNRI", "C. Lithium", "D. Antipsychotic"], correct: "B", explanation: "SSRI/SNRI là lựa chọn đầu tay trong MDD không loạn thần." },
+                    { question: "Khi nào cân nhắc rTMS?", options: ["A. Điều trị đầu tay", "B. Kháng trị sau 2 phác đồ thích hợp", "C. Chỉ khi có loạn thần", "D. Thay thế hoàn toàn thuốc"], correct: "B", explanation: "rTMS có hiệu quả trong MDD kháng trị sau 2 phác đồ thích hợp." },
+                    { question: "ECT được chỉ định khi:", options: ["A. Mọi trường hợp MDD", "B. Trầm cảm nặng/loạn thần/kháng trị", "C. Chỉ khi có loạn thần", "D. Thay thế thuốc"], correct: "B", explanation: "ECT hiệu quả cao trong trầm cảm nặng/loạn thần/kháng trị." },
+                    { question: "Yếu tố tiên lượng tốt:", options: ["A. Điều trị sớm, đáp ứng tốt, lối sống cân bằng", "B. Khởi phát tuổi nhỏ", "C. Cơn kéo dài, phải nhập viện", "D. Đồng mắc nghiện chất"], correct: "A", explanation: "Điều trị sớm và duy trì giúp giảm tái phát, tiên lượng tốt hơn." }
+                ]
+            },
+            {
+                id: 2,
+                title: "CA 2 - Nam sinh viên 20 tuổi, buồn kéo dài sau thi rớt hay MDD?",
+                patient: "Bệnh nhân T., nam 20 tuổi, sinh viên.",
+                description: [
+                    "Sau khi thi rớt môn quan trọng 3 tuần trước, anh cảm thấy buồn bã dai dẳng, mất hứng thú học tập, ngủ nhiều (10-12h/ngày), ăn ít, tập trung kém, cảm thấy vô dụng. Không có ý tưởng tự sát.",
+                    "Học sinh giỏi trước đây, không tiền sử rối loạn tâm thần. Gia đình có kỳ vọng cao về học tập. Không sử dụng chất.",
+                    "Khám nội khoa và xét nghiệm cơ bản bình thường.",
+                    "Hợp tác, vẻ mặt buồn bã, nói chậm, tự đánh giá bản thân thấp, không có ảo giác hay hoang tưởng."
+                ],
+                questions: [
+                    { question: "Chẩn đoán có khả năng nhất:", options: ["A. Trầm cảm chủ yếu nhẹ-vừa", "B. Rối loạn thích nghi", "C. Tang thương bình thường", "D. Rối loạn lo âu"], correct: "A", explanation: "Sau biến cố, nhưng triệu chứng dai dẳng ≥2 tuần, ≥5 triệu chứng lõi và suy giảm chức năng → MDD nhẹ–vừa." },
+                    { question: "Đặc điểm phân biệt MDD với tang thương:", options: ["A. Thời gian kéo dài", "B. MDD có tự hạ thấp bản thân dai dẳng", "C. Mức độ buồn bã", "D. Rối loạn giấc ngủ"], correct: "B", explanation: "Tang thương thường dao động, vẫn giữ các khoảnh khắc tích cực; MDD buồn dai dẳng, tự hạ thấp bản thân, ý tưởng cái chết kéo dài." },
+                    { question: "Thời gian tối thiểu để chẩn đoán MDD:", options: ["A. 1 tuần", "B. 2 tuần", "C. 1 tháng", "D. 6 tháng"], correct: "B", explanation: "DSM-5-TR: tối thiểu 2 tuần." },
+                    { question: "Triệu chứng nào KHÔNG thuộc 9 tiêu chí chẩn đoán MDD:", options: ["A. Mệt mỏi", "B. Tập trung kém", "C. Cơn hoảng loạn", "D. Rối loạn giấc ngủ"], correct: "C", explanation: "Cơn hoảng loạn không thuộc 9 triệu chứng chẩn đoán MDD." },
+                    { question: "Tiêu chí B của MDD yêu cầu:", options: ["A. Có triệu chứng ≥6 tháng", "B. Gây đau khổ hoặc suy giảm chức năng", "C. Không do chất hoặc bệnh nội khoa", "D. Chưa từng có hưng cảm"], correct: "B", explanation: "Cần gây khổ sở đáng kể hoặc suy giảm chức năng." },
+                    { question: "Tiêu chí C yêu cầu loại trừ:", options: ["A. Rối loạn lo âu", "B. Tác động của chất hoặc bệnh nội khoa", "C. Stress môi trường", "D. Rối loạn nhân cách"], correct: "B", explanation: "Loại trừ do chất hoặc bệnh nội khoa làm giải thích tốt hơn." },
+                    { question: "Yếu tố nhận thức duy trì trầm cảm:", options: ["A. Tư duy tích cực", "B. Quy gán bi quan và nhai lại (rumination)", "C. Tập trung vào giải pháp", "D. Lạc quan hóa"], correct: "B", explanation: "Các kiểu quy gán bi quan và nhai lại làm kéo dài MDD." },
+                    { question: "Tâm lý trị liệu có bằng chứng cho MDD:", options: ["A. Chỉ phân tâm học", "B. CBT, MBCT, ACT", "C. Chỉ liệu pháp nhóm", "D. Chỉ liệu pháp gia đình"], correct: "B", explanation: "CBT/MBCT/ACT có bằng chứng tốt cho MDD." },
+                    { question: "Với nguy cơ tự sát thấp, KHÔNG cần làm ngay:", options: ["A. Giáo dục tâm lý", "B. Lập kế hoạch an toàn cơ bản", "C. Nhập viện bắt buộc", "D. Theo dõi sát"], correct: "C", explanation: "Nhập viện chủ yếu khi có nguy cơ cao/loạn thần/không an toàn." },
+                    { question: "Để giảm tái phát, sau khi ổn định cần:", options: ["A. Ngưng thuốc ngay", "B. Duy trì điều trị thêm ~6 tháng", "C. Chỉ cần tâm lý trị liệu", "D. Không cần theo dõi"], correct: "B", explanation: "Khuyến nghị duy trì điều trị thêm khoảng 6 tháng để phòng tái phát." }
+                ]
+            },
+            {
+                id: 3,
+                title: "CA 3 - Nữ 41 tuổi, sau mất cha 2 tháng: tang thương hay MDD?",
+                patient: "Bệnh nhân M., nữ 41 tuổi.",
+                description: [
+                    "2 tháng sau khi cha mất do ung thư, chị M. vẫn buồn bã dai dẳng, khóc thường xuyên, mất hứng thú với mọi hoạt động, cảm thấy vô giá trị và tội lỗi vì 'không chăm sóc cha tốt', có ý tưởng muốn 'theo cha'.",
+                    "Không tiền sử tâm thần, mối quan hệ gần gũi với cha. Là con gái duy nhất, cảm thấy trách nhiệm lớn trong việc chăm sóc cha.",
+                    "Sụt cân 5kg, mất ngủ, mệt mỏi. Khám nội khoa bình thường.",
+                    "Buồn bã, tự trách mình, có ý tưởng chết nhưng chưa có kế hoạch cụ thể. Không ảo giác."
+                ],
+                questions: [
+                    { question: "Chẩn đoán phù hợp nhất:", options: ["A. Tang thương bình thường", "B. Trầm cảm chủ yếu sau mất mát", "C. Rối loạn thích nghi", "D. Rối loạn lo âu"], correct: "B", explanation: "MDD thường có vô giá trị/tội lỗi, ý tưởng cái chết kéo dài, buồn dai dẳng." },
+                    { question: "Thời gian tối thiểu và điều kiện để chẩn đoán MDD:", options: ["A. 1 tháng, phải có ảo giác", "B. 2 tuần, không bắt buộc ảo giác", "C. 6 tháng, phải có loạn thần", "D. 2 tháng, bắt buộc có ảo giác"], correct: "B", explanation: "Tối thiểu 2 tuần là đủ, không yêu cầu 2 tháng và không bắt buộc ảo giác." },
+                    { question: "Mối quan hệ giữa mất mát và MDD:", options: ["A. Mất mát không bao giờ gây MDD", "B. Mất mát có thể khởi phát MDD", "C. Chỉ có tang thương, không có MDD", "D. Luôn là rối loạn thích nghi"], correct: "B", explanation: "Mất mát có thể khởi phát MDD; cần đánh giá kỹ để phân biệt tang thương bình thường." },
+                    { question: "Thuốc đầu tay cho MDD:", options: ["A. SSRI/SNRI", "B. Tricyclic", "C. MAOI", "D. Antipsychotic đơn thuần"], correct: "A", explanation: "SSRI/SNRI là lựa chọn đầu tay thường dùng trong MDD không loạn thần." },
+                    { question: "Tâm lý trị liệu phù hợp:", options: ["A. CBT, MBCT, ACT", "B. Chỉ phân tâm học", "C. Chỉ liệu pháp hành vi", "D. Không cần tâm lý trị liệu"], correct: "A", explanation: "Các trị liệu nhận thức–chánh niệm–chấp nhận có bằng chứng tốt." },
+                    { question: "Về ảo giác trong MDD:", options: ["A. Luôn phải có", "B. Không bắt buộc; nếu có thì MDD có đặc điểm loạn thần", "C. Chỉ ảo thanh", "D. Chỉ ảo thị"], correct: "B", explanation: "Ảo giác không bắt buộc; nếu có loạn thần thì là MDD có đặc điểm loạn thần." },
+                    { question: "ECT có chỉ định trong:", options: ["A. Trầm cảm nặng/loạn thần/kháng trị", "B. Chỉ trầm cảm nhẹ", "C. Thay thế thuốc hoàn toàn", "D. Mọi trường hợp MDD"], correct: "A", explanation: "ECT hiệu quả cao trong trầm cảm nặng/loạn thần/kháng trị." },
+                    { question: "Tiêu chí loại trừ quan trọng cho MDD:", options: ["A. Chưa từng có hưng cảm/hưng cảm nhẹ", "B. Có rối loạn lo âu", "C. Có stress môi trường", "D. Tuổi trên 40"], correct: "A", explanation: "Chưa từng có hưng cảm/hưng cảm nhẹ là tiêu chí loại trừ quan trọng cho MDD." },
+                    { question: "Đặc điểm của MDD về tiến triển:", options: ["A. Không bao giờ tái phát", "B. Có xu hướng tái phát", "C. Luôn tiến triển nặng hơn", "D. Tự khỏi hoàn toàn"], correct: "B", explanation: "MDD có xu hướng tái phát; cần kế hoạch duy trì và phòng ngừa." },
+                    { question: "Yếu tố nhận thức duy trì triệu chứng:", options: ["A. Quy gán bi quan, bất lực học được", "B. Tư duy tích cực", "C. Lạc quan hóa", "D. Tập trung vào hiện tại"], correct: "A", explanation: "Các kiểu quy gán bi quan, bất lực học được làm duy trì triệu chứng." }
+                ]
+            },
+            {
+                id: 4,
+                title: "CA 4 - Nữ nhân viên 27 tuổi, 'tính tôi vốn buồn bã từ lâu': PDD hay MDD?",
+                patient: "Bệnh nhân L., nữ 27 tuổi, nhân viên văn phòng.",
+                description: [
+                    "Chị L. vào khám vì tháng gần đây cảm thấy trầm trọng hơn: 'Tính tôi vốn buồn bã từ lâu, nhưng tháng nay nghiêm trọng hơn, không muốn làm gì, ngủ suốt, không ăn được, cảm thấy vô vọng hoàn toàn'.",
+                    "Từ 3 năm nay thường xuyên khí sắc thấp, ăn ít, ngủ nhiều, tự đánh giá thấp, tập trung kém, cảm giác tuyệt vọng. Không có giai đoạn bình thường >2 tháng.",
+                    "Sức khỏe tổng quát ổn định, không sử dụng chất.",
+                    "Khí sắc trầm dai dẳng, tự đánh giá thấp, tuyệt vọng. Tháng gần đây triệu chứng nặng hơn rõ rệt."
+                ],
+                questions: [
+                    { question: "Chẩn đoán phù hợp nhất:", options: ["A. Rối loạn khí sắc dai dẳng + MDD (double depression)", "B. Chỉ trầm cảm chủ yếu", "C. Rối loạn thích nghi", "D. Rối loạn lưỡng cực"], correct: "A", explanation: "Khí sắc trầm kéo dài ≥2 năm gợi ý PDD; tháng gần đây đủ tiêu chuẩn MDD → double depression." },
+                    { question: "Thời gian tối thiểu cho chẩn đoán PDD:", options: ["A. 6 tháng", "B. 2 năm ở người lớn", "C. 5 năm", "D. 1 năm"], correct: "B", explanation: "PDD yêu cầu tối thiểu 2 năm ở người lớn (1 năm trẻ em/thanh thiếu niên)." },
+                    { question: "Triệu chứng điển hình của PDD:", options: ["A. Ảo giác", "B. Hoang tưởng", "C. Rối loạn ăn/ngủ, mệt mỏi, tự đánh giá thấp, tuyệt vọng", "D. Cơn hoảng loạn"], correct: "C", explanation: "Triệu chứng điển hình: ăn, ngủ, mệt mỏi, tự đánh giá thấp, tập trung kém, tuyệt vọng." },
+                    { question: "Tiêu chí C của PDD yêu cầu:", options: ["A. Có khoảng trống triệu chứng >6 tháng", "B. Không có khoảng trống triệu chứng >2 tháng trong 2 năm", "C. Có ảo giác", "D. Phải nhập viện"], correct: "B", explanation: "Trong 2 năm không có khoảng trống triệu chứng >2 tháng (tiêu chí C của PDD)." },
+                    { question: "Double depression nghĩa là:", options: ["A. PDD + đợt MDD chồng lên", "B. Hai loại thuốc chống trầm cảm", "C. MDD tái phát 2 lần", "D. Trầm cảm song cực"], correct: "A", explanation: "PDD + đợt MDD chồng lên → double depression." },
+                    { question: "Điều trị PDD thường cần:", options: ["A. Chỉ tâm lý trị liệu", "B. Kết hợp thuốc và tâm lý trị liệu dài hạn", "C. Chỉ thuốc ngắn hạn", "D. Không cần điều trị"], correct: "B", explanation: "PDD thường cần điều trị kết hợp và dài hạn do tính chất dai dẳng." },
+                    { question: "Phân biệt PDD với MDD tái phát:", options: ["A. PDD có các giai đoạn bình thường rõ ràng", "B. PDD là khí sắc trầm dai dẳng, ít giai đoạn bình thường", "C. Không có sự khác biệt", "D. PDD nặng hơn"], correct: "B", explanation: "PDD đặc trưng bởi khí sắc trầm dai dẳng với ít giai đoạn bình thường." },
+                    { question: "Tiên lượng của PDD:", options: ["A. Luôn khỏi hoàn toàn", "B. Cần quản lý dài hạn, có thể cải thiện với điều trị", "C. Không thể điều trị", "D. Tự khỏi sau 2 năm"], correct: "B", explanation: "PDD cần quản lý dài hạn nhưng có thể cải thiện đáng kể với điều trị phù hợp." },
+                    { question: "Yếu tố nguy cơ của PDD:", options: ["A. Khởi phát sớm, yếu tố gen, stress dai dẳng", "B. Chỉ do stress", "C. Chỉ do di truyền", "D. Không có yếu tố nguy cơ rõ ràng"], correct: "A", explanation: "PDD có liên quan đến khởi phát sớm, yếu tố di truyền, và stress môi trường dai dẳng." },
+                    { question: "Khi PDD kết hợp với MDD, ưu tiên điều trị:", options: ["A. Điều trị cả hai đồng thời", "B. Chỉ điều trị MDD", "C. Chỉ điều trị PDD", "D. Chờ MDD tự khỏi"], correct: "A", explanation: "Khi có double depression, cần điều trị toàn diện cho cả PDD và MDD." }
+                ]
+            },
+            {
+                id: 5,
+                title: "CA 5 - Nữ 60 tuổi, tái phát nhiều lần, kháng trị",
+                patient: "Bệnh nhân L., nữ 60 tuổi.",
+                description: [
+                    "Bà L. có 4 cơn trầm cảm trước đây. 4 tháng qua buồn bã dai dẳng, mất hứng thú, sụt 6% cân, thức giấc sớm, chậm chạp tâm thần vận động, tội lỗi, ý nghĩ chết tái diễn (không kế hoạch cụ thể). Đã dùng 2 phác đồ SSRI → SNRI đủ liều/đủ thời gian, chỉ đáp ứng 1 phần.",
+                    "Tăng huyết áp kiểm soát tốt; không chất; con cái sống xa, ít hỗ trợ.",
+                    "Khám nội, xét nghiệm trong giới hạn; loại trừ suy giáp.",
+                    "Dáng vẻ u sầu; nói chậm; không loạn thần; định hướng tốt; chức năng xã hội suy giảm (nghỉ hưu nhưng không còn sinh hoạt cộng đồng)."
+                ],
+                questions: [
+                    { question: "Đánh giá mức độ hiện tại:", options: ["A. Nhẹ", "B. Vừa–nặng, kháng trị một phần", "C. Chỉ rối loạn thích nghi", "D. Hưng cảm nhẹ"], correct: "B", explanation: "Đáp ứng 1 phần sau 2 phác đồ đầy đủ gợi ý kháng trị; triệu chứng nhiều, kéo dài → vừa–nặng." },
+                    { question: "Yếu tố nào tăng nguy cơ tái phát ở bà L.?", options: ["A. Nữ giới", "B. Nhiều cơn trong quá khứ", "C. Sống gần con", "D. Không tăng huyết áp"], correct: "B", explanation: "Số cơn trong quá khứ càng nhiều → nguy cơ tái phát càng cao." },
+                    { question: "Phương án sinh học tiếp theo có bằng chứng:", options: ["A. rTMS", "B. Chỉ vitamin", "C. Chỉ vận động", "D. Không có lựa chọn"], correct: "A", explanation: "rTMS có hiệu quả ở MDD kháng trị; có thể cân nhắc ECT tùy mức độ." },
+                    { question: "Trường hợp nào cân nhắc ECT mạnh mẽ hơn?", options: ["A. Khởi phát mới 1 tuần", "B. Nặng/kháng trị hoặc kèm loạn thần/nguy cơ cao", "C. Triệu chứng thoáng qua", "D. Chỉ mất ngủ"], correct: "B", explanation: "ECT được chỉ định khi cần đáp ứng nhanh, nguy cơ cao, hoặc kèm loạn thần/kháng trị." },
+                    { question: "Về hiệu quả ECT theo tài liệu:", options: ["A. Không có hiệu quả lâu dài", "B. Tỷ lệ thuyên giảm tăng từ ~27% (6 tuần) lên ~63% (2 năm)", "C. 100% thuyên giảm", "D. Chỉ hiệu quả ở người trẻ"], correct: "B", explanation: "Dữ liệu theo dõi cho thấy hiệu quả duy trì và tăng dần theo thời gian với điều trị phù hợp." },
+                    { question: "Theo dõi duy trì để giảm tái phát sau ổn định:", options: ["A. Ngừng thuốc ngay", "B. Duy trì ít nhất 6 tháng", "C. Chỉ 1 tháng", "D. Không cần duy trì"], correct: "B", explanation: "Duy trì 6 tháng sau khi ổn định giúp giảm tái phát." },
+                    { question: "Đặc điểm tiến triển của MDD:", options: ["A. Luôn tự khỏi", "B. Có thể kéo dài nhiều tháng và dễ tái phát", "C. Chỉ kéo dài vài ngày", "D. Không bao giờ tái phát"], correct: "B", explanation: "MDD có thể kéo dài nhiều tháng và dễ tái phát." },
+                    { question: "Với nhiều cơn tái phát và nguy cơ cao:", options: ["A. Cho về nhà", "B. Cân nhắc nhập viện", "C. Chỉ điều trị ngoại trú", "D. Không cần can thiệp"], correct: "B", explanation: "Nguy cơ cao → cần nhập viện để đảm bảo an toàn." },
+                    { question: "Kế hoạch an toàn cần bao gồm:", options: ["A. Chỉ khuyên bệnh nhân", "B. Đầu mối hỗ trợ khẩn và kế hoạch cụ thể", "C. Bỏ qua nguy cơ", "D. Chỉ báo gia đình"], correct: "B", explanation: "Cung cấp đầu mối hỗ trợ khẩn và kế hoạch an toàn thực tế." },
+                    { question: "Yếu tố tiên lượng xấu bao gồm:", options: ["A. Điều trị sớm", "B. Nhiều cơn, kéo dài, môi trường thiếu hỗ trợ", "C. Hỗ trợ gia đình tốt", "D. Khởi phát muộn"], correct: "B", explanation: "Nhiều yếu tố liên quan đến tiên lượng xấu như cơn kéo dài, môi trường xấu, bệnh nội khoa kèm." }
+                ]
+            }
+        ];
+
+        // --- STATE MANAGEMENT ---
+        let state = {
+            answers: {},
+            showResults: false,
+            currentCaseIndex: 0
+        };
+
+        // --- CONSTANTS ---
+        const totalQuestions = cases.reduce((total, caseItem) => total + caseItem.questions.length, 0);
+        const appContainer = document.getElementById('app');
+
+        // --- ACTION HANDLERS ---
+        function handleAnswerChange(caseId, questionIndex, answer) {
+            if (state.showResults) return;
+            state.answers[`${caseId}-${questionIndex}`] = answer;
+            render();
+        }
+
+        function handleSubmit() {
+            state.showResults = true;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        function handleReset() {
+            if (confirm('Bạn có chắc chắn muốn làm lại? Tất cả câu trả lời sẽ bị xóa.')) {
+                state = {
+                    answers: {},
+                    showResults: false,
+                    currentCaseIndex: 0
+                };
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                render();
+            }
+        }
+
+        function setCurrentCase(index) {
+            state.currentCaseIndex = index;
+            render();
+        }
+
+        function navigateCase(direction) {
+            if (direction === 'prev') {
+                state.currentCaseIndex = Math.max(0, state.currentCaseIndex - 1);
+            } else if (direction === 'next') {
+                state.currentCaseIndex = Math.min(cases.length - 1, state.currentCaseIndex + 1);
+            }
+            render();
+        }
+        
+        function calculateScore() {
+            let correct = 0;
+            cases.forEach(caseItem => {
+                caseItem.questions.forEach((question, index) => {
+                    const answerKey = `${caseItem.id}-${index}`;
+                    if (state.answers[answerKey] === question.correct) {
+                        correct++;
+                    }
+                });
+            });
+            return correct;
+        }
+
+        // --- RENDER FUNCTION ---
+        function render() {
+            const currentCase = cases[state.currentCaseIndex];
+            const score = calculateScore();
+            
+            let html = `
+                <div class="max-w-4xl mx-auto px-4 py-8 pb-32">
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h1 class="text-3xl font-bold text-center text-indigo-800 mb-4">
+                            QUIZ TƯƠNG TÁC - TRẦM CẢM CHỦ YẾU
+                        </h1>
+                        <div class="text-center text-gray-600">
+                            <p class="text-lg font-semibold">Môn: TÂM BỆNH HỌC</p>
+                            <p>Bộ đề kiểm tra 5 ca lâm sàng | Tổng số câu: ${totalQuestions}</p>
+                            <p class="text-sm mt-2">Trường ĐH KHXH&NV - Khoa Tâm lý học</p>
+                        </div>
+                    </div>
+            `;
+
+            if (state.showResults) {
+                const percentage = score / totalQuestions;
+                let resultText, resultColor;
+
+                if (percentage >= 0.8) {
+                    resultText = 'Xuất sắc! 🎉';
+                    resultColor = 'bg-green-500';
+                } else if (percentage >= 0.65) {
+                    resultText = 'Khá tốt! 👍';
+                    resultColor = 'bg-blue-500';
+                } else if (percentage >= 0.5) {
+                    resultText = 'Đạt yêu cầu ✓';
+                    resultColor = 'bg-yellow-500';
+                } else {
+                    resultText = 'Cần ôn tập thêm 📚';
+                    resultColor = 'bg-red-500';
+                }
+
+                html += `
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                        <h2 class="text-2xl font-bold text-center mb-4">
+                            <span class="text-indigo-600">KẾT QUẢ BÀI LÀM</span>
+                        </h2>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold mb-2">
+                                <span class="text-green-600">${score}</span>
+                                <span class="text-gray-400">/</span>
+                                <span class="text-blue-600">${totalQuestions}</span>
+                            </div>
+                            <div class="text-lg text-gray-600 mb-4">
+                                Điểm số: ${((score / totalQuestions) * 10).toFixed(1)}/10
+                            </div>
+                            <div class="inline-block px-4 py-2 rounded-full text-white font-semibold ${resultColor}">
+                                ${resultText}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                <div class="bg-white rounded-lg shadow-lg p-4 mb-8">
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        ${cases.map((caseItem, index) => `
+                            <button
+                                onclick="setCurrentCase(${index})"
+                                class="px-4 py-2 rounded-lg font-medium transition-colors ${
+                                    state.currentCaseIndex === index
+                                    ? 'bg-indigo-600 text-white'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }"
+                            >
+                                Ca ${caseItem.id}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            html += `
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-indigo-800 mb-2">${currentCase.title}</h2>
+                        <p class="text-lg text-gray-700 font-semibold">${currentCase.patient}</p>
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">TRÌNH BÀY BỆNH:</h3>
+                        ${currentCase.description.map((paragraph, index) => `
+                            <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                                <p class="text-gray-700 leading-relaxed">
+                                    <span class="font-semibold">(${index + 1})</span> ${paragraph}
+                                </p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">CÂU HỎI TRẮC NGHIỆM:</h3>
+                        ${currentCase.questions.map((q, qIndex) => {
+                            let questionHtml = `
+                                <div class="mb-6 p-6 border border-gray-200 rounded-lg">
+                                    <div class="mb-4">
+                                        <h4 class="font-semibold text-gray-800 text-base leading-relaxed">
+                                            Câu hỏi ${qIndex + 1}. ${q.question}
+                                        </h4>
+                                    </div>
+                                    <div class="space-y-3">
+                            `;
+                            
+                            q.options.forEach((option, oIndex) => {
+                                const optionLetter = ['A', 'B', 'C', 'D'][oIndex];
+                                const answerKey = `${currentCase.id}-${qIndex}`;
+                                const isSelected = state.answers[answerKey] === optionLetter;
+                                const isCorrect = q.correct === optionLetter;
+                                
+                                let buttonClass = 'w-full text-left p-3 border-2 rounded-lg transition-colors ';
+                                
+                                if (state.showResults) {
+                                    if (isCorrect) {
+                                        buttonClass += 'border-green-500 bg-green-50 text-green-800';
+                                    } else if (isSelected && !isCorrect) {
+                                        buttonClass += 'border-red-500 bg-red-50 text-red-800';
+                                    } else {
+                                        buttonClass += 'border-gray-200 bg-gray-50 text-gray-600';
+                                    }
+                                } else {
+                                    if (isSelected) {
+                                        buttonClass += 'border-indigo-500 bg-indigo-50 text-indigo-800';
+                                    } else {
+                                        buttonClass += 'border-gray-200 hover:border-gray-300 hover:bg-gray-50';
+                                    }
+                                }
+
+                                questionHtml += `
+                                    <button
+                                        onclick="handleAnswerChange(${currentCase.id}, ${qIndex}, '${optionLetter}')"
+                                        class="${buttonClass}"
+                                        ${state.showResults ? 'disabled' : ''}
+                                    >
+                                        ${option}
+                                        ${state.showResults && isCorrect ? '<span class="ml-2 text-green-600 font-semibold">✓</span>' : ''}
+                                        ${state.showResults && isSelected && !isCorrect ? '<span class="ml-2 text-red-600 font-semibold">✗</span>' : ''}
+                                    </button>
+                                `;
+                            });
+                            
+                            questionHtml += `</div>`;
+                            
+                            if (state.showResults) {
+                                questionHtml += `
+                                    <div class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+                                        <p class="text-sm text-blue-800">
+                                            <span class="font-semibold">Giải thích:</span> ${q.explanation}
+                                        </p>
+                                    </div>
+                                `;
+                            }
+                            
+                            questionHtml += `</div>`;
+                            return questionHtml;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+
+            html += `
+                <div class="flex justify-between mb-8">
+                    <button
+                        onclick="navigateCase('prev')"
+                        ${state.currentCaseIndex === 0 ? 'disabled' : ''}
+                        class="px-6 py-3 bg-gray-500 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-colors"
+                    >
+                        ← Ca trước
+                    </button>
+                    <button
+                        onclick="navigateCase('next')"
+                        ${state.currentCaseIndex === cases.length - 1 ? 'disabled' : ''}
+                        class="px-6 py-3 bg-gray-500 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-colors"
+                    >
+                        Ca tiếp theo →
+                    </button>
+                </div>
+            `;
+
+            html += `
+                </div>
+                <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4">
+                    <div class="max-w-4xl mx-auto flex gap-4 justify-center">
+                        <button
+                            onclick="handleSubmit()"
+                            class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
+                        >
+                            ${state.showResults ? 'XEM LẠI KẾT QUẢ' : 'NỘP BÀI'}
+                        </button>
+                        <button
+                            onclick="handleReset()"
+                            class="px-8 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors shadow-lg"
+                        >
+                            LÀM LẠI
+                        </button>
+                    </div>
+                    <div class="text-center mt-2 text-sm text-gray-600">
+                        Đã trả lời: ${Object.keys(state.answers).length}/${totalQuestions} câu
+                    </div>
+                </div>
+            `;
+
+            appContainer.innerHTML = html;
+        }
+
+        // --- INITIAL RENDER ---
+        document.addEventListener('DOMContentLoaded', render);
+    </script>
+
+</body>
+</html>
+```

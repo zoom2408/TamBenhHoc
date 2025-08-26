@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>OCD & Các rối loạn liên quan — Học nhanh (Tailwind, tông xanh)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      .no-print{ display:none !important; }
+      .card { box-shadow: none !important; border: 1px solid #e5e7eb !important; }
+      body { color: #111827; }
+    }
+  </style>
+</head>
+<body class="bg-blue-50 text-slate-800">
+  <!-- Header -->
+  <header class="bg-white border-b border-blue-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-xl md:text-2xl font-bold text-blue-700">OCD & Các rối loạn liên quan — Tóm tắt, So sánh & Bài test</h1>
+      <div class="flex gap-2 no-print">
+        <button onclick="window.print();" class="px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
+          In / Lưu PDF
+        </button>
+        <button id="resetBtn" class="px-3 py-2 rounded-lg bg-white border border-blue-300 text-blue-700 hover:bg-blue-50 transition">
+          Reset Quiz
+        </button>
+      </div>
+    </div>
+    <!-- Tabs -->
+    <nav class="max-w-6xl mx-auto px-2 pb-3 no-print">
+      <ul class="flex flex-wrap gap-2">
+        <li><button data-tab="tongquan" class="tab active px-3 py-2 bg-blue-600 text-white rounded-lg">Tổng quan</button></li>
+        <li><button data-tab="dsm" class="tab px-3 py-2 bg-white text-blue-700 border border-blue-300 rounded-lg">Chẩn đoán (DSM)</button></li>
+        <li><button data-tab="compare" class="tab px-3 py-2 bg-white text-blue-700 border border-blue-300 rounded-lg">So sánh nhanh</button></li>
+        <li><button data-tab="sinhhoc" class="tab px-3 py-2 bg-white text-blue-700 border border-blue-300 rounded-lg">Cơ chế & Sinh học</button></li>
+        <li><button data-tab="dieutri" class="tab px-3 py-2 bg-white text-blue-700 border border-blue-300 rounded-lg">Điều trị</button></li>
+        <li><button data-tab="quiz" class="tab px-3 py-2 bg-white text-blue-700 border border-blue-300 rounded-lg">Thực hành (Quiz)</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 space-y-8">
+    <!-- TỔNG QUAN -->
+    <section id="tab-tongquan" class="tab-panel">
+      <div class="card bg-white rounded-2xl p-6 shadow-sm border border-blue-100">
+        <h2 class="text-xl font-semibold text-blue-700 mb-4">Điểm nhớ nhanh về OCD</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">Định nghĩa cốt lõi</h3>
+            <p class="text-sm leading-relaxed">
+              <span class="font-medium">Ám ảnh</span> = ý nghĩ/hình ảnh/thúc giục xâm nhập gây lo; 
+              <span class="font-medium">Cưỡng chế</span> = hành vi lặp/hành vi tinh thần để giảm lo hay phòng hệ quả — 
+              nhưng <em>không liên quan thực tế</em> hoặc <em>quá mức</em>.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">Cặp ám ảnh–cưỡng chế điển hình</h3>
+            <ul class="list-disc pl-5 text-sm space-y-1">
+              <li>Sợ dơ bẩn/lan truyền → rửa/lau/né</li>
+              <li>Đối xứng/chính xác → sắp xếp/đếm</li>
+              <li>Lo gây hại người khác → kiểm tra/xưng tội</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">Dịch tễ & Đồng mắc</h3>
+            <p class="text-sm">Hiện mắc 12 tháng ~1,2% (na ná toàn cầu). Đồng mắc cao với lo âu khác; ~41% có trầm cảm/lưỡng cực.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">Cơ chế nhận thức duy trì</h3>
+            <ul class="list-disc pl-5 text-sm space-y-1">
+              <li>Thổi phồng trách nhiệm</li>
+              <li>Liên hợp suy nghĩ–hành động (TAF)</li>
+              <li>Không dung nạp sự không chắc chắn</li>
+              <li>“Nhiễm bẩn trong tâm trí” (mental contamination)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DSM -->
+    <section id="tab-dsm" class="tab-panel hidden">
+      <div class="card bg-white rounded-2xl p-6 shadow-sm border border-blue-100 space-y-4">
+        <h2 class="text-xl font-semibold text-blue-700">Tiêu chuẩn DSM — Tóm tắt có thể check</h2>
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800 mb-2">Ám ảnh (Obsessions)</h3>
+            <label class="flex items-start gap-2">
+              <input type="checkbox" class="mt-1">
+              <span>Ý nghĩ/hình ảnh/thúc giục xâm nhập, không mong muốn, gây lo/khổ sở rõ.</span>
+            </label>
+            <label class="flex items-start gap-2 mt-2">
+              <input type="checkbox" class="mt-1">
+              <span>Cố bỏ qua/kìm nén/trung hòa (dẫn đến cưỡng chế).</span>
+            </label>
+          </div>
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800 mb-2">Cưỡng chế (Compulsions)</h3>
+            <label class="flex items-start gap-2">
+              <input type="checkbox" class="mt-1">
+              <span>Hành vi lặp (rửa/sắp xếp/kiểm tra) hoặc hành vi tinh thần (đếm/cầu nguyện…)</span>
+            </label>
+            <label class="flex items-start gap-2 mt-2">
+              <input type="checkbox" class="mt-1">
+              <span>Nhằm giảm lo/phòng hệ quả, nhưng thường <em>không liên quan thực tế</em> hoặc <em>quá mức</em>.</span>
+            </label>
+          </div>
+        </div>
+        <div class="text-xs text-slate-600">
+          *Tài liệu: DSM tóm lược — dùng cho mục đích học tập.
+        </div>
+      </div>
+    </section>
+
+    <!-- SO SÁNH -->
+    <section id="tab-compare" class="tab-panel hidden">
+      <div class="card bg-white rounded-2xl p-6 shadow-sm border border-blue-100">
+        <h2 class="text-xl font-semibold text-blue-700 mb-4">Bảng so sánh nhanh — nhóm “OCD & liên quan”</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-blue-200 rounded-xl overflow-hidden">
+            <thead class="bg-blue-100 text-blue-900">
+              <tr>
+                <th class="px-3 py-2 text-left">Rối loạn</th>
+                <th class="px-3 py-2 text-left">Đặc trưng lõi</th>
+                <th class="px-3 py-2 text-left">Ám ảnh?</th>
+                <th class="px-3 py-2 text-left">Cưỡng chế?</th>
+                <th class="px-3 py-2 text-left">Ví dụ/Hành vi</th>
+                <th class="px-3 py-2 text-left">Gợi ý can thiệp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd:bg-white even:bg-blue-50/40">
+                <td class="px-3 py-2 font-medium">OCD</td>
+                <td class="px-3 py-2">Ám ảnh xâm nhập + cưỡng chế (hành vi/tinh thần) để giảm lo</td>
+                <td class="px-3 py-2">Có</td>
+                <td class="px-3 py-2">Có</td>
+                <td class="px-3 py-2">Rửa/kiểm tra/sắp xếp/đếm…</td>
+                <td class="px-3 py-2">ERP + CBT; SSRI/Clomipramine khi cần</td>
+              </tr>
+              <tr class="odd:bg-white even:bg-blue-50/40">
+                <td class="px-3 py-2 font-medium">BDD (Mặc cảm cơ thể)</td>
+                <td class="px-3 py-2">Ám ảnh về “khuyết điểm” ngoại hình + hành vi lặp liên quan</td>
+                <td class="px-3 py-2">Có (trọng tâm ngoại hình)</td>
+                <td class="px-3 py-2">Có (soi gương, che giấu…)</td>
+                <td class="px-3 py-2">Soi gương nhiều, chụp góc “đẹp”, né giao tiếp</td>
+                <td class="px-3 py-2">CBT trọng tâm hình ảnh cơ thể ± ERP</td>
+              </tr>
+              <tr class="odd:bg-white even:bg-blue-50/40">
+                <td class="px-3 py-2 font-medium">Tích trữ (Hoarding)</td>
+                <td class="px-3 py-2">Khó vứt bỏ đồ → tích tụ, giảm chức năng</td>
+                <td class="px-3 py-2">Thường Không</td>
+                <td class="px-3 py-2">Có (giữ/lưu trữ)</td>
+                <td class="px-3 py-2">Chất đống đồ, nguy cơ vệ sinh/an toàn</td>
+                <td class="px-3 py-2">CBT, can thiệp môi trường/gia đình</td>
+              </tr>
+              <tr class="odd:bg-white even:bg-blue-50/40">
+                <td class="px-3 py-2 font-medium">Nhổ tóc (Trichotillomania)</td>
+                <td class="px-3 py-2">Hành vi nhổ tóc lặp lại → rụng tóc</td>
+                <td class="px-3 py-2">Không</td>
+                <td class="px-3 py-2">Có (hành vi lặp)</td>
+                <td class="px-3 py-2">Nhổ tóc, khó cưỡng</td>
+                <td class="px-3 py-2">Huấn luyện thay đổi thói quen, kỹ thuật xao nhãng</td>
+              </tr>
+              <tr class="odd:bg-white even:bg-blue-50/40">
+                <td class="px-3 py-2 font-medium">Bóc da (Excoriation)</td>
+                <td class="px-3 py-2">Bốc/nhặt da lặp lại → tổn thương</td>
+                <td class="px-3 py-2">Không</td>
+                <td class="px-3 py-2">Có (hành vi lặp)</td>
+                <td class="px-3 py-2">Bóc da, khó dứt</td>
+                <td class="px-3 py-2">Huấn luyện thay đổi thói quen, ERP tinh chỉnh</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-600 mt-3">*Bảng tóm tắt phục vụ ghi nhớ nhanh trong nhóm rối loạn liên quan OCD.</p>
+      </div>
+    </section>
+
+    <!-- SINH HỌC -->
+    <section id="tab-sinhhoc" class="tab-panel hidden">
+      <div class="card bg-white rounded-2xl p-6 shadow-sm border border-blue-100 space-y-4">
+        <h2 class="text-xl font-semibold text-blue-700">Cơ chế & Sinh học – dễ nhớ</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">Mạng não liên quan</h3>
+            <ul class="list-disc pl-5 text-sm space-y-1">
+              <li>Frontostriatal (trán–thể vân), nhân accumbens: kiểm soát ức chế & hành vi lặp</li>
+              <li>ACC (đai trước): giám sát lỗi, thường hoạt hóa quá mức</li>
+              <li>Hạch hạnh nhân: điều hòa sợ</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">Dẫn truyền thần kinh</h3>
+            <ul class="list-disc pl-5 text-sm space-y-1">
+              <li>Serotonin: liên quan nhất; SSRI làm giảm hoạt hóa quá mức mạch trán–thể vân</li>
+              <li>Dopamine: cũng góp phần trong triệu chứng OCD</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+          <h3 class="font-semibold text-blue-800 mb-1">Yếu tố nhận thức duy trì</h3>
+          <ol class="list-decimal pl-5 text-sm space-y-1">
+            <li><span class="font-medium">Thổi phồng trách nhiệm</span>: “Nếu tôi không kiểm tra, điều xấu xảy ra sẽ do tôi”.</li>
+            <li><span class="font-medium">TAF</span> (liên hợp suy nghĩ–hành động): “Nghĩ tới tai nạn = tai nạn xảy ra”.</li>
+            <li><span class="font-medium">Không dung nạp bất định</span>: cần chắc chắn 100% → kiểm tra/ritual.</li>
+            <li><span class="font-medium">Nhiễm bẩn trong tâm trí</span>: cảm giác “dơ từ bên trong” do hình ảnh/ký ức xúc phạm → tắm rửa/trung hòa.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ĐIỀU TRỊ -->
+    <section id="tab-dieutri" class="tab-panel hidden">
+      <div class="card bg-white rounded-2xl p-6 shadow-sm border border-blue-100 space-y-4">
+        <h2 class="text-xl font-semibold text-blue-700">Điều trị: ERP & thuốc (tóm lược thao tác)</h2>
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">ERP – 3 điểm mấu chốt</h3>
+            <ol class="list-decimal pl-5 space-y-1">
+              <li>Đánh giá & sắp hạng tình huống/ý nghĩ kích lo (thang khó chịu).</li>
+              <li>Tiếp xúc theo bậc thang lặp lại đến khi lo giảm rõ.</li>
+              <li><span class="font-medium">Chặn ritual</span> (không rửa/không kiểm tra/không đếm trong khi tiếp xúc).</li>
+            </ol>
+            <p class="mt-2 text-xs text-slate-600">Bằng chứng hiệu quả lâu dài ~75% trường hợp; linh hoạt nhiều bối cảnh.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h3 class="font-semibold text-blue-800">Thuốc & lưu ý</h3>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>SSRI hoặc clomipramine (theo chỉ định).</li>
+              <li>Cần thời gian đủ liều/đủ dài; tái phát tăng nếu ngưng sớm.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-xs text-slate-600">*Giáo dục BN & gia đình: hiểu vòng lặp OCD, đặt mục tiêu “chịu đựng khó chịu” thay vì triệt tiêu ý nghĩ.</div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="tab-quiz" class="tab-panel hidden">
+      <div class="card bg-white rounded-2xl p-6 shadow-sm border border-blue-100">
+        <h2 class="text-xl font-semibold text-blue-700 mb-1">Bài kiểm tra thực hành</h2>
+        <p class="text-sm text-slate-600 mb-4">Chọn 10 câu ngẫu nhiên mỗi lần. Bấm “Chấm điểm” để xem kết quả & giải thích.</p>
+
+        <div class="flex flex-wrap gap-2 mb-4 no-print">
+          <button id="btnNewSet" class="px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Tạo bộ câu hỏi mới</button>
+          <button id="btnGrade" class="px-3 py-2 rounded-lg bg-white border border-blue-300 text-blue-700 hover:bg-blue-50">Chấm điểm</button>
+          <span id="score" class="ml-auto text-sm font-medium text-blue-800"></span>
+        </div>
+
+        <ol id="quizList" class="space-y-4"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500">
+    Tài liệu học tập nội bộ — dành cho môn Tâm bệnh học. Nguồn: slide “OCD & các rối loạn liên quan”.
+  </footer>
+
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.tab-panel');
+    function showTab(name){
+      panels.forEach(p => p.classList.toggle('hidden', !p.id.endsWith(name)));
+      tabs.forEach(t => {
+        const active = t.dataset.tab === name;
+        t.classList.toggle('bg-blue-600', active);
+        t.classList.toggle('text-white', active);
+        t.classList.toggle('border', !active);
+        t.classList.toggle('border-blue-300', !active);
+        t.classList.toggle('bg-white', !active);
+        t.classList.toggle('text-blue-700', !active);
+      });
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+    tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+
+    // Default tab
+    showTab('tongquan');
+
+    // Quiz data (built from the course file)
+    const POOL = [
+      {
+        q: "Định nghĩa nào mô tả đúng nhất về cặp ám ảnh–cưỡng chế trong OCD?",
+        a: ["Ý nghĩ/hình ảnh xâm nhập gây lo + hành vi lặp/hành vi tinh thần để giảm lo hay phòng hệ quả.",
+            "Sợ hãi có tác nhân đặc hiệu + né tránh ngay.",
+            "Buồn bã ≥2 tuần + mất hứng thú.",
+            "Ý tưởng bị hại + ảo giác thính giác."],
+        c: 0,
+        e: "DSM mô tả ám ảnh (xâm nhập, gây lo) và cưỡng chế (hành vi/tinh thần để trung hòa) — thường không liên quan thực tế hoặc quá mức."
+      },
+      {
+        q: "Ví dụ cặp ám ảnh–cưỡng chế điển hình nào sau đây là đúng?",
+        a: ["Sợ dơ bẩn → rửa/lau/né", "Sợ dơ bẩn → ăn kiêng", "Đối xứng → ngủ nhiều", "Sợ bị hại → xem tivi"],
+        c: 0,
+        e: "Các cặp thường gặp: dơ bẩn→rửa; đối xứng→sắp xếp/đếm; lo gây hại→kiểm tra/xưng tội."
+      },
+      {
+        q: "Mục đích của cưỡng chế là giảm lo hoặc phòng hệ quả, nhưng thực tế thường:",
+        a: ["Liên quan trực tiếp và đủ để phòng nguy cơ", "Không liên quan thực tế hoặc quá mức, thậm chí làm khó chịu hơn",
+            "Tạo cảm xúc tích cực bền vững", "Luôn làm hết lo ngay"],
+        c: 1,
+        e: "Hành vi cưỡng chế thường không liên hệ thực tế với tai họa sợ hãi và có tính quá mức."
+      },
+      {
+        q: "‘Nghĩ tới tai nạn = tai nạn xảy ra thật’ là ví dụ của:",
+        a: ["Thổi phồng trách nhiệm", "Liên hợp suy nghĩ–hành động (TAF)", "Không dung nạp bất định", "Thiên kiến xác nhận"],
+        c: 1,
+        e: "TAF: đồng nhất suy nghĩ với hành động/hệ quả thực."
+      },
+      {
+        q: "‘Nếu tôi không kiểm tra đủ 10 lần, chuyện xấu xảy ra là lỗi của tôi’ là:",
+        a: ["Thổi phồng trách nhiệm", "Ám thị tích cực", "Tự quy lỗi thích nghi", "Bỏ qua trách nhiệm"],
+        c: 0,
+        e: "Mô hình Salkovskis: trách nhiệm bị phóng đại duy trì ritual."
+      },
+      {
+        q: "Không dung nạp bất định dẫn tới hành vi nào?",
+        a: ["Chấp nhận rủi ro hợp lý", "Kiểm tra/ritual để đạt chắc chắn tuyệt đối", "Phớt lờ khả năng rủi ro", "Tăng hoạt động thể lực"],
+        c: 1,
+        e: "Nhu cầu chắc chắn → kiểm tra lặp."
+      },
+      {
+        q: "‘Nhiễm bẩn trong tâm trí’ ám chỉ:",
+        a: ["Chỉ bẩn khi tiếp xúc chất bẩn", "Cảm giác dơ từ bên trong do hình ảnh/ký ức/xúc phạm, không cần tiếp xúc vật lý",
+            "Bẩn do rối loạn chuyển hóa", "Chỉ gặp ở BDD"],
+        c: 1,
+        e: "Mental contamination: kích hoạt bởi ký ức/hình ảnh xúc phạm, liên hệ ritual rửa."
+      },
+      {
+        q: "Mạng não nào liên quan mạnh đến OCD?",
+        a: ["Thùy chẩm–tiểu não", "Frontostriatal (trán–thể vân), ACC, hạch hạnh nhân", "Hồi hải mã–đồi thị duy nhất", "Mạng DMN duy nhất"],
+        c: 1,
+        e: "Frontostriatal + ACC (giám sát lỗi) + amygdala (sợ)."
+      },
+      {
+        q: "Bước KHÔNG đúng khi làm ERP:",
+        a: ["Đánh giá & sắp hạng kích hoạt", "Tiếp xúc lặp lại đến khi lo giảm", "Cho phép ritual ở lần đầu để ‘xả lo’", "Chặn ritual trong khi tiếp xúc"],
+        c: 2,
+        e: "ERP cần chặn ritual; không ‘xả’ ritual ở lần đầu."
+      },
+      {
+        q: "Hiệu quả ERP nói chung (ước tính):",
+        a: ["~15%", "~40%", "~75%", "~100%"],
+        c: 2,
+        e: "Tổng quan cho thấy ERP hữu ích lâu dài khoảng ba phần tư ca."
+      },
+      {
+        q: "Thuốc hỗ trợ hàng đầu cho OCD:",
+        a: ["Benzodiazepine đơn trị kéo dài", "SSRI hoặc clomipramine (theo chỉ định)", "Chống loạn thần liều cao đơn trị mọi ca", "Chỉ thảo dược"],
+        c: 1,
+        e: "SSRI/Clomipramine có bằng chứng; tránh dừng sớm."
+      },
+      {
+        q: "Trong nhổ tóc/bóc da điển hình, thường:",
+        a: ["Có ám ảnh xâm nhập về gây hại", "Không có ám ảnh; hành vi lặp mang tính cưỡng chế", "Có ảo giác", "Chỉ gặp ở trẻ em"],
+        c: 1,
+        e: "Trichotillomania/Excoriation: hành vi lặp, không ám ảnh cốt lõi."
+      },
+      {
+        q: "Hiện mắc 12 tháng của OCD (ước tính):",
+        a: ["~0,1%", "~1,2%", "~5%", "~10%"],
+        c: 1,
+        e: "Tài liệu dịch tễ nêu ~1,2% và tương tự nhiều quốc gia."
+      },
+      {
+        q: "Đồng mắc thường gặp của OCD:",
+        a: ["Không có đồng mắc", "Chủ yếu lo âu khác và trầm cảm/lưỡng cực", "Chỉ rối loạn ăn uống", "Chỉ rối loạn giấc ngủ"],
+        c: 1,
+        e: "Đồng mắc lo âu cao; ~41% có trầm cảm/lưỡng cực."
+      }
+    ];
+
+    let currentSet = [];
+
+    function pickN(arr, n){
+      const a = [...arr];
+      for(let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i],a[j]]=[a[j],a[i]];
+      }
+      return a.slice(0,n);
+    }
+
+    function renderQuiz(){
+      const container = document.getElementById('quizList');
+      container.innerHTML = "";
+      currentSet.forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.className = "rounded-xl border border-blue-200 p-4";
+        li.innerHTML = `
+          <div class="font-medium text-blue-800 mb-2">Câu ${idx+1}. ${item.q}</div>
+          <div class="space-y-2">
+            ${item.a.map((opt,i)=>`
+              <label class="flex items-start gap-2">
+                <input type="radio" name="q${idx}" value="${i}" class="mt-1">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="mt-2 hidden text-sm" id="exp-${idx}">
+            <div class="mt-2 p-3 rounded-lg bg-blue-50 border border-blue-200">
+              <span class="font-semibold">Giải thích:</span> ${item.e}
+            </div>
+          </div>
+        `;
+        container.appendChild(li);
+      });
+      document.getElementById('score').textContent = "";
+    }
+
+    function newSet(){
+      currentSet = pickN(POOL, 10);
+      renderQuiz();
+    }
+
+    document.getElementById('btnNewSet').addEventListener('click', newSet);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      newSet();
+      showTab('quiz');
+    });
+
+    document.getElementById('btnGrade').addEventListener('click', () => {
+      let correct = 0;
+      currentSet.forEach((item, idx) => {
+        const chosen = document.querySelector(`input[name="q${idx}"]:checked`);
+        const exp = document.getElementById(`exp-${idx}`);
+        if(chosen && +chosen.value === item.c){ correct++; }
+        exp.classList.remove('hidden');
+      });
+      document.getElementById('score').textContent = `Kết quả: ${correct}/${currentSet.length}`;
+    });
+
+    // Initialize
+    newSet();
+  </script>
+</body>
+</html>

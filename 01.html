@@ -1,387 +1,598 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Các tiếp cận Tâm bệnh học — Học liệu tương tác</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Các tiếp cận Tâm bệnh học (USSH) – Interactive</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .card-flip { perspective: 1000px; }
-    .card-inner { position: relative; transition: transform 0.6s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
-    .flipped .card-inner { transform: rotateY(180deg); }
-    .card-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-    .card-front {}
-    .card-back { transform: rotateY(180deg); }
+    :root{--brand:#2563eb;}
+    @media print{
+      @page{size:A4;margin:14mm 14mm 16mm;}
+      .no-print{display:none!important}
+      .print\:block{display:block!important}
+      .print\:mt-0{margin-top:0!important}
+      .section{page-break-inside:avoid}
+      .card{break-inside:avoid}
+    }
+    .prose p{margin:0.3rem 0}
+    .chip{border:1px solid rgba(37,99,235,.25);color:#1e40af;background:rgba(37,99,235,.06)}
+    .kbd{border:1px solid #cbd5e1;border-bottom-width:2px;border-right-width:2px;border-radius:.375rem;padding:.1rem .35rem;font:600 12px ui-monospace,monospace}
+    .table-g{border-collapse:separate;border-spacing:0}
+    .table-g th,.table-g td{border:1px solid #e5e7eb;padding:.6rem .7rem;vertical-align:top}
+    .table-g th{background:#f1f5f9;font-weight:700}
+    .table-g tr:nth-child(even) td{background:#f8fafc}
+    .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .55rem;border-radius:999px;background:rgba(37,99,235,.08);color:#1e40af;font-weight:600;font-size:.8rem}
+    .shadow-soft{box-shadow:0 10px 25px rgba(2,6,23,.08),0 2px 6px rgba(2,6,23,.06)}
+    html{scroll-behavior:smooth}
+  .section{scroll-margin-top:140px}
+  .nav-link.active{outline:2px solid rgba(37,99,235,.25);background:#eff6ff;color:#1d4ed8}
+  @media print{.section{display:block!important}}
   </style>
 </head>
-<body class="bg-blue-50 text-slate-800">
-  <!-- Hero -->
-  <header class="bg-gradient-to-br from-blue-700 to-blue-900 text-white">
-    <div class="max-w-6xl mx-auto px-6 py-10">
-      <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Các tiếp cận trong Tâm bệnh học</h1>
+<body class="bg-slate-50 text-slate-800 selection:bg-blue-200/70">
+  <!-- Header -->
+  <header class="no-print border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <div class="h-9 w-9 grid place-items-center rounded-xl bg-blue-600 text-white font-bold">TBH</div>
+      <div class="flex-1">
+        <h1 class="text-lg sm:text-xl font-bold text-slate-900">Các tiếp cận Tâm bệnh học (USSH) – Tóm tắt tương tác</h1>
+        <p class="text-slate-500 text-sm">Blue theme • Tailwind • Có bài test & nút in PDF</p>
+      </div>
+      <div class="flex gap-2">
+        <button id="printBtn" class="no-print inline-flex items-center gap-2 rounded-xl bg-blue-600 px-3.5 py-2 text-white font-semibold hover:bg-blue-700 transition shadow-soft" title="In ra PDF (⌘/Ctrl + P)">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 7V3h12v4h2a2 2 0 0 1 2 2v6h-4v4H6v-4H2V9a2 2 0 0 1 2-2h2zm2-2h8v2H8V5zm8 14v-4H8v4h8zm-1-9h2v2h-2v-2z"/></svg>
+          In ra PDF
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Tabs -->
-  <nav class="bg-white shadow sticky top-0 z-10">
-    <div class="max-w-6xl mx-auto px-2">
-      <div class="flex overflow-x-auto no-scrollbar" id="tabBar">
-        <button data-tab="overview" class="tab-btn px-4 py-3 text-blue-700 border-b-2 border-blue-700 font-medium">Tổng quan</button>
-        <button data-tab="bio" class="tab-btn px-4 py-3 hover:text-blue-700">Sinh học</button>
-        <button data-tab="psychodynamic" class="tab-btn px-4 py-3 hover:text-blue-700">Phân tâm–Tâm động</button>
-        <button data-tab="behavior" class="tab-btn px-4 py-3 hover:text-blue-700">Hành vi</button>
-        <button data-tab="cognitive" class="tab-btn px-4 py-3 hover:text-blue-700">Nhận thức</button>
-        <button data-tab="humanistic" class="tab-btn px-4 py-3 hover:text-blue-700">Nhân văn–Hiện sinh</button>
-        <button data-tab="socio" class="tab-btn px-4 py-3 hover:text-blue-700">Văn hoá–Xã hội</button>
-        <button data-tab="quiz" class="tab-btn px-4 py-3 hover:text-blue-700">Mini-Quiz</button>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-blue-50 to-sky-50 print:mt-0">
+    <div class="max-w-6xl mx-auto px-4 py-8 sm:py-10">
+      <div class="grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">Bản đồ tri thức các tiếp cận</h2>
+          <p class="mt-2 text-slate-600">Tóm lược ngắn gọn các <span class="font-semibold">quan điểm – từ sinh học, phân tâm/tâm động, hành vi/nhận thức, nhân văn/hiện sinh đến văn hoá – xã hội</span>. Kéo xuống để xem bảng so sánh, lược đồ CBT, và làm bài kiểm tra nhanh.</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="pill">Sinh học</span>
+            <span class="pill">Phân tâm – Tâm động</span>
+            <span class="pill">Hành vi</span>
+            <span class="pill">Nhận thức/CBT</span>
+            <span class="pill">Nhân văn – Hiện sinh</span>
+            <span class="pill">Văn hoá – Xã hội</span>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 shadow-soft border border-slate-200">
+          <ol class="list-decimal pl-6 space-y-2 text-sm text-slate-700">
+            <li>👉 Duyệt <em>thẻ nội dung</em> để ghi nhớ ý chính.</li>
+            <li>📊 Xem <em>bảng so sánh</em> giữa <strong>Hiện đại ↔ Hậu hiện đại</strong> và <strong>Bệnh lý hoá ↔ Phi/Giải bệnh lý hoá</strong>.</li>
+            <li>🧠 Ôn <em>lược đồ nhận thức–hành vi</em> (CBT).</li>
+            <li>📝 Làm <em>bài test</em> & xem giải thích.</li>
+            <li>🖨️ Bấm <span class="kbd">Ctrl</span>+<span class="kbd">P</span> (hoặc <span class="kbd">⌘</span>+<span class="kbd">P</span>) để in ra PDF.</li>
+          </ol>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Quick Nav -->
+  <nav class="no-print sticky top-[60px] z-30 bg-white/80 backdrop-blur border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex flex-wrap items-center gap-2">
+      <a href="#approaches" data-target="approaches" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100">Thẻ tiếp cận</a>
+      <a href="#comparisons" data-target="comparisons" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold bg-slate-50 text-slate-700 hover:bg-slate-100">Bảng so sánh</a>
+      <a href="#cbt" data-target="cbt" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold bg-slate-50 text-slate-700 hover:bg-slate-100">CBT & lược đồ</a>
+      <a href="#quiz" data-target="quiz" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold bg-slate-50 text-slate-700 hover:bg-slate-100">Bài test</a>
+      <span class="ml-auto flex items-center gap-2 text-xs sm:text-sm">
+        <button id="modeTabs" class="px-3 py-1.5 rounded-lg font-semibold text-slate-700 border border-slate-200 hover:bg-slate-50">Tabs</button>
+        <button id="modeScroll" class="px-3 py-1.5 rounded-lg font-semibold text-slate-700 border border-slate-200 hover:bg-slate-50">Cuộn</button>
+      </span>
     </div>
   </nav>
 
-  <main class="max-w-6xl mx-auto p-6 space-y-8">
-    <!-- Tổng quan -->
-    <section id="overview" class="tab-pane">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100">
-        <h2 class="text-2xl font-bold text-blue-800">Bản đồ tổng quan</h2>
-        <p class="mt-3">Học phần nhấn mạnh: <span class="font-semibold">phổ sức khỏe tâm thần</span>, <span class="font-semibold">tiếp cận đa nhân tố</span> (sinh học–tâm lý–xã hội) và <span class="font-semibold">tiếp cận dòng đời</span> (bối cảnh phát triển theo thời gian).</p>
-        <ul class="mt-4 grid md:grid-cols-3 gap-3 text-sm">
-          <li class="bg-blue-50 border border-blue-100 rounded-xl p-3"><span class="font-semibold">Phổ rộng</span>: không nhị nguyên “bệnh/không bệnh” — chú ý mức độ, bối cảnh, chức năng.</li>
-          <li class="bg-blue-50 border border-blue-100 rounded-xl p-3"><span class="font-semibold">Đa nhân tố</span>: não &amp; nội tiết–nhận thức–học tập–ý nghĩa–hệ thống xã hội.</li>
-          <li class="bg-blue-50 border border-blue-100 rounded-xl p-3"><span class="font-semibold">Dòng đời</span>: yếu tố tiền sử, gắn bó sớm, các ngưỡng phát triển, sang chấn.</li>
-        </ul>
-        <div class="mt-6">
-          <h3 class="font-semibold text-blue-700 mb-2">Các nhóm tiếp cận</h3>
-          <div class="grid md:grid-cols-5 gap-3 text-sm">
-            <div class="rounded-xl p-3 border border-blue-200 bg-blue-50">Sinh học</div>
-            <div class="rounded-xl p-3 border border-blue-200 bg-blue-50">Phân tâm–Tâm động</div>
-            <div class="rounded-xl p-3 border border-blue-200 bg-blue-50">Hành vi</div>
-            <div class="rounded-xl p-3 border border-blue-200 bg-blue-50">Nhận thức</div>
-            <div class="rounded-xl p-3 border border-blue-200 bg-blue-50">Nhân văn–Hiện sinh</div>
-          </div>
-          <div class="mt-3 text-sm rounded-xl p-3 border border-blue-200 bg-blue-50">+ Bổ sung góc nhìn <span class="font-semibold">Văn hoá–Xã hội</span> để giải cấu trúc định kiến và chú ý quyền lực–ngôn ngữ trong thực hành.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sinh học -->
-    <section id="bio" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100 space-y-6">
-        <header>
-          <h2 class="text-2xl font-bold text-blue-800">Tiếp cận Sinh học</h2>
-          <p class="mt-2 text-sm text-slate-600">Não bộ, hệ nội tiết, di truyền/biểu sinh; biến đổi cấu trúc–chức năng và dẫn truyền thần kinh.</p>
-        </header>
-
-        <div class="grid md:grid-cols-2 gap-4">
-          <!-- Flashcard 1 -->
-          <div class="card-flip group h-40 md:h-44">
-            <div class="card-inner w-full h-full rounded-xl shadow">
-              <div class="card-face card-front bg-blue-600 text-white rounded-xl p-4 relative">
-                <div class="absolute right-3 top-3 text-xs bg-white/20 px-2 py-1 rounded-full">Click để lật</div>
-                <h3 class="font-semibold">Bản đồ chất dẫn truyền</h3>
-                <p class="mt-2 text-sm">Khí sắc, lo âu, loạn thần – các hệ serotonin, NE, GABA, dopamine…</p>
-              </div>
-              <div class="card-face card-back bg-white rounded-xl p-4 border border-blue-100">
-                <div class="text-slate-700">
-                  <div class="font-semibold text-blue-700">Nhớ nhanh</div>
-                  <ul class="mt-2 list-disc list-inside text-sm">
-                    <li>Khí sắc: <strong>Serotonin + NE</strong></li>
-                    <li>Lo âu: <strong>NE + GABA</strong></li>
-                    <li>TTPL/ADHD/Parkinson: <strong>Dopamine</strong></li>
-                    <li>Điều trị: <strong>SSRI/SNRI</strong> ± ECT/TMS (chỉ định phù hợp)</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Key points -->
-          <div class="space-y-3">
-            <div class="p-3 rounded-xl bg-blue-50 border border-blue-100">
-              <p class="text-sm"><span class="font-semibold">Khí sắc:</span> Serotonin &amp; Norepinephrine; <span class="font-semibold">Lo âu:</span> NE &amp; GABA; <span class="font-semibold">TTPL/ADHD/Parkinson:</span> Dopamine.</p>
-            </div>
-            <div class="p-3 rounded-xl bg-blue-50 border border-blue-100">
-              <p class="text-sm"><span class="font-semibold">Hóa dược liệu pháp:</span> điều biến tái hấp thu/nồng độ chất dẫn truyền.</p>
-            </div>
-          </div>
-        </div>
-
-        <details class="group">
-          <summary class="cursor-pointer text-blue-700 font-semibold">Điều trị sinh học (mở/đóng)</summary>
-          <div class="mt-3 grid md:grid-cols-3 gap-3 text-sm">
-            <div class="bg-blue-50 border border-blue-100 rounded-xl p-3">
-              <div class="font-semibold">Thuốc hướng thần</div>
-              <p>SSRI/SNRI, thuốc chống loạn thần… cân nhắc lợi ích–tác dụng phụ.</p>
-            </div>
-            <div class="bg-blue-50 border border-blue-100 rounded-xl p-3">
-              <div class="font-semibold">ECT</div>
-              <p>2–3 lần/tuần (4–12 tuần), hữu ích trong trầm cảm nặng/kháng trị và nguy cơ tự sát.</p>
-            </div>
-            <div class="bg-blue-50 border border-blue-100 rounded-xl p-3">
-              <div class="font-semibold">TMS</div>
-              <p>Kích thích từ xuyên sọ, ít tác dụng phụ; chống chỉ định khi có thiết bị kim loại vùng đầu/cổ.</p>
-            </div>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- Phân tâm – Tâm động -->
-    <section id="psychodynamic" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100 space-y-4">
-        <h2 class="text-2xl font-bold text-blue-800">Phân tâm – Tâm động</h2>
-        <ul class="mt-2 text-sm grid md:grid-cols-2 gap-3">
-          <li class="bg-blue-50 border border-blue-100 rounded-xl p-3">Cái Tôi suy yếu; cơ chế phòng vệ cứng nhắc/thiếu hiệu quả.</li>
-          <li class="bg-blue-50 border border-blue-100 rounded-xl p-3">Cắm chốt/thoái lùi giai đoạn phát triển; vấn đề gắn bó sớm.</li>
-        </ul>
-        <div class="grid md:grid-cols-4 gap-3 text-sm">
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Mục tiêu:</span> làm sáng tỏ xung đột vô thức</div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Kỹ thuật:</span> liên tưởng tự do</div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100">phân tích chuyển cảm/giấc mơ</div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100">diễn dịch</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Hành vi -->
-    <section id="behavior" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100 space-y-6">
-        <h2 class="text-2xl font-bold text-blue-800">Tiếp cận Hành vi</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-            <h3 class="font-semibold">Nguyên tắc lõi</h3>
-            <ul class="mt-2 text-sm space-y-1">
-              <li>Hành vi được học và duy trì bởi hệ quả.</li>
-              <li><span class="font-semibold">Củng cố + / –</span> | <span class="font-semibold">Trừng phạt + / –</span>.</li>
-              <li>Điều kiện hoá cổ điển: tiếp nhận, dập tắt, phục hồi, khái quát, phân biệt.</li>
-              <li>Học tập xã hội (Bandura): mô hình hoá/quan sát → sợ/né tránh.</li>
-            </ul>
-          </div>
-          <div class="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-            <h3 class="font-semibold">Ứng dụng trị liệu</h3>
-            <ul class="mt-2 text-sm space-y-1">
-              <li>Phơi nhiễm/giải mẫn cảm có hệ thống</li>
-              <li>Tràn ngập (flooding)</li>
-              <li>Kích hoạt hành vi</li>
-              <li>Huấn luyện kỹ năng</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Nhận thức -->
-    <section id="cognitive" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100 space-y-6">
-        <h2 class="text-2xl font-bold text-blue-800">Tiếp cận Nhận thức</h2>
-        <p class="text-sm">Cảm xúc/hành vi do <span class="font-semibold">diễn giải</span> của chúng ta về sự kiện, không phải sự kiện tự thân.</p>
-        <div class="grid md:grid-cols-3 gap-3 text-sm">
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Mô hình A-B-C:</span> A (kích hoạt) → B (xử lý nhận thức) → C (cảm xúc/hành vi)</div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Beck:</span> méo nhận thức về bản thân–thế giới–tương lai</div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Mục tiêu trị liệu:</span> nhận diện–thách thức niềm tin sai; thay đổi sơ đồ nhận thức</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Nhân văn – Hiện sinh -->
-    <section id="humanistic" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100 space-y-6">
-        <h2 class="text-2xl font-bold text-blue-800">Nhân văn – Hiện sinh</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-            <h3 class="font-semibold">Nhân văn (Rogers, Maslow)</h3>
-            <ul class="mt-2 text-sm space-y-1">
-              <li>Trọng con người, kinh nghiệm chủ quan, tự do lựa chọn.</li>
-              <li>Liên minh trị liệu, chấp nhận vô điều kiện, phản hồi đồng cảm.</li>
-              <li>Mục tiêu: tự hiện thực hoá bản thân.</li>
-            </ul>
-          </div>
-          <div class="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-            <h3 class="font-semibold">Hiện sinh – 4 trụ cốt</h3>
-            <ul class="mt-2 text-sm space-y-1">
-              <li>Cái chết – Sống</li>
-              <li>Tự do – Trách nhiệm</li>
-              <li>Hư vô – Ý nghĩa</li>
-              <li>Cô đơn – Kết nối</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Văn hoá – Xã hội -->
-    <section id="socio" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100 space-y-6">
-        <h2 class="text-2xl font-bold text-blue-800">Văn hoá – Xã hội</h2>
-        <p class="text-sm">Cá nhân được định hình trong bối cảnh gia đình–xã hội; điều kiện kinh tế–chính trị, chuẩn mực &amp; định kiến ảnh hưởng sâu sắc đến sức khỏe tâm thần.</p>
-        <div class="grid md:grid-cols-3 gap-3 text-sm">
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Hệ thống gia đình:</span> ý nghĩa triệu chứng trong vận hành hệ; tái cấu trúc tương tác.</div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Giới &amp; quyền lực:</span> bất bình đẳng giới, ngôn ngữ–quyền lực; can thiệp nữ quyền/LGBTIQ+-affirmative.</div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-100"><span class="font-semibold">Liệu pháp xã hội:</span> cặp đôi/hôn nhân; trần thuật; vận động giảm kỳ thị.</div>
-        </div>
-        <details class="group">
-          <summary class="cursor-pointer text-blue-700 font-semibold">Ví dụ minh hoạ nghiên cứu (mở/đóng)</summary>
-          <p class="mt-2 text-sm">Tương quan độ dày vỏ não bên phải và mức độ bình đẳng giới giữa các quốc gia – gợi ý ảnh hưởng môi trường xã hội lên thần kinh học.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- Quiz -->
-    <section id="quiz" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl shadow p-6 border border-blue-100">
-        <h2 class="text-2xl font-bold text-blue-800">Mini-Quiz (6 câu)</h2>
-        <p class="text-sm text-slate-600">Chọn đáp án đúng, bấm “Chấm điểm”.</p>
-        <div id="quizBox" class="mt-4 space-y-4"></div>
-        <div class="mt-4 flex items-center gap-3">
-          <button id="gradeBtn" class="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Chấm điểm</button>
-          <button id="resetBtn" class="px-4 py-2 rounded-xl bg-white border border-blue-200 hover:bg-blue-50">Làm lại</button>
-          <div id="scoreArea" class="ml-auto font-semibold"></div>
-        </div>
-        <p class="text-xs text-slate-500 mt-4">Nguồn câu hỏi dựa trên nội dung bài giảng “Các tiếp cận TBH” (USSH).</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="max-w-6xl mx-auto p-6 text-xs text-slate-500">
-    <div class="bg-blue-100/60 border border-blue-200 rounded-xl p-4">
-      <p><strong>Lưu ý học thuật:</strong> Học liệu này tóm tắt ý chính để ôn tập nhanh và không thay thế tham vấn/chẩn đoán điều trị lâm sàng.</p>
+  <!-- Thẻ tiếp cận -->
+  <section id="approaches" class="section max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-5">
+      <h3 class="text-xl font-bold text-slate-900">1) Thẻ nội dung – Các tiếp cận chính</h3>
+      <p class="text-slate-600">Bấm vào từng thẻ để bung nội dung.</p>
     </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <!-- Sinh học -->
+      <details class="group card bg-white rounded-2xl border border-slate-200 shadow-soft open:shadow-md">
+        <summary class="cursor-pointer list-none p-4 flex items-start justify-between">
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900">Tiếp cận <span class="text-blue-700">Sinh học</span></h4>
+            <p class="text-sm text-slate-600">Não bộ, nội tiết, di truyền; chất dẫn truyền thần kinh; hoá dược liệu pháp.</p>
+          </div>
+          <svg class="h-5 w-5 text-slate-400 group-open:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="px-4 pb-4 prose">
+          <ul class="list-disc pl-5">
+            <li><b>Trọng tâm:</b> Não điều khiển hành vi; vai trò <i>hệ nội tiết</i>, <i>di truyền/biểu sinh</i>.</li>
+            <li><b>Neurotransmitters tiêu biểu:</b> khí sắc ↔ <i>serotonin & norepinephrine</i>; loạn thần/Parkinson/ADHD ↔ <i>dopamine</i>; lo âu ↔ <i>norepinephrine & GABA</i>.</li>
+            <li><b>Trị liệu sinh học:</b> hoá dược (tăng/giảm hoạt tính hoặc tái hấp thu), các can thiệp sinh học khác.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Phân tâm/Tâm động -->
+      <details class="group card bg-white rounded-2xl border border-slate-200 shadow-soft">
+        <summary class="cursor-pointer list-none p-4 flex items-start justify-between">
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900">Tiếp cận <span class="text-blue-700">Phân tâm – Tâm động</span></h4>
+            <p class="text-sm text-slate-600">Vô thức, xung năng, gắn bó; củng cố cái tôi; liên tưởng tự do, chuyển cảm…</p>
+          </div>
+          <svg class="h-5 w-5 text-slate-400 group-open:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="px-4 pb-4 prose">
+          <ul class="list-disc pl-5">
+            <li><b>Mục tiêu:</b> giải quyết xung đột vô thức; tăng sức mạnh cái <i>Tôi</i>.</li>
+            <li><b>Kỹ thuật:</b> liên tưởng tự do, phân tích giấc mơ, diễn dịch, làm việc với <i>chuyển cảm</i>.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Hành vi -->
+      <details class="group card bg-white rounded-2xl border border-slate-200 shadow-soft">
+        <summary class="cursor-pointer list-none p-4 flex items-start justify-between">
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900">Tiếp cận <span class="text-blue-700">Hành vi</span></h4>
+            <p class="text-sm text-slate-600">Điều kiện hoá cổ điển (Pavlov, “Albert bé bỏng”), thao tác, học tập xã hội.</p>
+          </div>
+          <svg class="h-5 w-5 text-slate-400 group-open:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="px-4 pb-4 prose">
+          <ul class="list-disc pl-5">
+            <li><b>5 nguyên lý ĐKHCĐ:</b> tiếp nhận, dập tắt, phục hồi tự phát, khái quát hoá, phân biệt kích thích.</li>
+            <li><b>Ứng dụng:</b> phơi nhiễm/giải mẫn cảm, huấn luyện kỹ năng, dập tắt né tránh.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Nhận thức/CBT -->
+      <details class="group card bg-white rounded-2xl border border-slate-200 shadow-soft">
+        <summary class="cursor-pointer list-none p-4 flex items-start justify-between">
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900">Tiếp cận <span class="text-blue-700">Nhận thức (CBT)</span></h4>
+            <p class="text-sm text-slate-600">Lệch lạc nhận thức, giản đồ, tái cấu trúc nhận thức + can thiệp hành vi.</p>
+          </div>
+          <svg class="h-5 w-5 text-slate-400 group-open:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="px-4 pb-4 prose">
+          <ul class="list-disc pl-5">
+            <li><b>CBT là “cây dù”</b> tích hợp nhận thức–hành vi; chú trọng thử nghiệm hành vi, tái cấu trúc, loại bỏ hành vi an toàn.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Nhân văn – Hiện sinh -->
+      <details class="group card bg-white rounded-2xl border border-slate-200 shadow-soft">
+        <summary class="cursor-pointer list-none p-4 flex items-start justify-between">
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900">Tiếp cận <span class="text-blue-700">Nhân văn – Hiện sinh</span></h4>
+            <p class="text-sm text-slate-600">Quan hệ trị liệu thuận lợi, tự hiện thực hoá; 4 cặp đối lập hiện sinh.</p>
+          </div>
+          <svg class="h-5 w-5 text-slate-400 group-open:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="px-4 pb-4 prose">
+          <ul class="list-disc pl-5">
+            <li><b>Mục tiêu:</b> thiết lập quan hệ tích cực, giúp TC tự quyết, tìm ý nghĩa.</li>
+            <li><b>4 trụ cột:</b> Sống–Cái chết; Tự do–Trách nhiệm; Hư vô–Ý nghĩa; Cô đơn–Kết nối.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Văn hoá – Xã hội -->
+      <details class="group card bg-white rounded-2xl border border-slate-200 shadow-soft">
+        <summary class="cursor-pointer list-none p-4 flex items-start justify-between">
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900">Tiếp cận <span class="text-blue-700">Văn hoá – Xã hội</span></h4>
+            <p class="text-sm text-slate-600">Hệ thống gia đình; nữ quyền; tham vấn khẳng định LGBTIQ+; liệu pháp trần thuật.</p>
+          </div>
+          <svg class="h-5 w-5 text-slate-400 group-open:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="px-4 pb-4 prose">
+          <ul class="list-disc pl-5">
+            <li><b>Quan điểm:</b> cá tính hình thành trong khuôn khổ xã hội; điều kiện kinh tế–chính trị ảnh hưởng sâu sắc SKTT.</li>
+            <li><b>Ví dụ nghiên cứu:</b> liên hệ bình đẳng giới quốc gia và khác biệt độ dày vỏ não giữa giới.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Bảng so sánh -->
+  <section id="comparisons" class="section max-w-6xl mx-auto px-4 py-8">
+    <h3 class="text-xl font-bold text-slate-900 mb-4">2) Bảng so sánh nhanh</h3>
+
+    <!-- Hiện đại vs Hậu hiện đại -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-soft mb-6">
+      <h4 class="text-lg font-semibold text-blue-700 mb-2">Hiện đại ↔ Hậu hiện đại</h4>
+      <div class="overflow-x-auto">
+        <table class="table-g w-full text-sm">
+          <thead>
+            <tr>
+              <th>Khía cạnh</th>
+              <th>Hiện đại</th>
+              <th>Hậu hiện đại</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Thực tại</td>
+              <td>Khách quan, tồn tại độc lập</td>
+              <td>Được kiến tạo bởi diễn ngôn, quyền lực</td>
+            </tr>
+            <tr>
+              <td>Phương pháp</td>
+              <td>Định lượng, quy luật phổ quát (đại tự sự)</td>
+              <td>Định tính, nhấn mạnh cá nhân/đa nguyên (vi tự sự)</td>
+            </tr>
+            <tr>
+              <td>Hàm ý lâm sàng</td>
+              <td>Chẩn đoán – phân loại – điều trị theo tiêu chuẩn</td>
+              <td>Phản biện nhãn dán, chú trọng ngôn ngữ – bối cảnh – quyền lực</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bệnh lý hoá vs Phi/Giải bệnh lý hoá -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-soft mb-6">
+      <h4 class="text-lg font-semibold text-blue-700 mb-2">Nhãn quan: Bệnh lý hoá – Phi bệnh lý hoá – Giải bệnh lý hoá</h4>
+      <div class="overflow-x-auto">
+        <table class="table-g w-full text-sm">
+          <thead>
+            <tr>
+              <th>Đề mục</th>
+              <th>Bệnh lý hoá</th>
+              <th>Phi bệnh lý hoá</th>
+              <th>Giải bệnh lý hoá</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Quan điểm</td>
+              <td>SKTT là rối loạn; cần tiêu chí Y khoa</td>
+              <td>SKTT là một phần đời sống; thận trọng dán nhãn</td>
+              <td>Chất vấn định nghĩa & quyền lực tạo–duy trì nhãn</td>
+            </tr>
+            <tr>
+              <td>Tương quan trị liệu</td>
+              <td>Chuyên gia–bệnh nhân (quyền lực bất cân xứng)</td>
+              <td colspan="2">Hướng tới cân bằng: người đồng hành – thân chủ (hai chủ thể)</td>
+            </tr>
+            <tr>
+              <td>Ứng dụng</td>
+              <td>DSM/ICD, can thiệp chuẩn hoá</td>
+              <td>Trọng trải nghiệm chủ quan</td>
+              <td>Nữ quyền, trần thuật, khẳng định đa dạng thần kinh…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bảng “Tiếp cận – Từ khoá – Công cụ” -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-soft">
+      <h4 class="text-lg font-semibold text-blue-700 mb-2">Bảng gợi ý: Tiếp cận – Từ khoá – Công cụ trị liệu</h4>
+      <div class="overflow-x-auto">
+        <table class="table-g w-full text-sm">
+          <thead>
+            <tr>
+              <th>Tiếp cận</th>
+              <th>Từ khoá lõi</th>
+              <th>Ví dụ can thiệp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sinh học</td>
+              <td>Não, nội tiết, di truyền, chất dẫn truyền</td>
+              <td>Thuốc điều chỉnh 5-HT/NE/DA/GABA; can thiệp sinh học</td>
+            </tr>
+            <tr>
+              <td>Phân tâm – Tâm động</td>
+              <td>Vô thức, xung năng, gắn bó, cơ chế phòng vệ</td>
+              <td>Liên tưởng tự do, phân tích giấc mơ, làm việc với chuyển cảm</td>
+            </tr>
+            <tr>
+              <td>Hành vi</td>
+              <td>ĐKHCĐ, thao tác, học tập xã hội, dập tắt</td>
+              <td>Phơi nhiễm/giải mẫn cảm, huấn luyện kỹ năng</td>
+            </tr>
+            <tr>
+              <td>Nhận thức/CBT</td>
+              <td>Giản đồ, tự động âm, tái cấu trúc, hành vi an toàn</td>
+              <td>CBT theo mô hình nhận thức–hành vi</td>
+            </tr>
+            <tr>
+              <td>Nhân văn – Hiện sinh</td>
+              <td>Liên minh trị liệu, tự hiện thực hoá, ý nghĩa</td>
+              <td>Liệu pháp lấy TC làm trung tâm, trị liệu hiện sinh</td>
+            </tr>
+            <tr>
+              <td>Văn hoá – Xã hội</td>
+              <td>Hệ thống, diễn ngôn, quyền lực, giai tầng, giới</td>
+              <td>Hệ thống gia đình, nữ quyền, khẳng định LGBTIQ+, trần thuật</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CBT & Lược đồ -->
+  <section id="cbt" class="section max-w-6xl mx-auto px-4 py-8">
+    <h3 class="text-xl font-bold text-slate-900 mb-4">3) Lược đồ Nhận thức – Hành vi (CBT)</h3>
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-soft">
+      <div class="grid md:grid-cols-5 gap-3 items-stretch">
+        <div class="md:col-span-1 border border-blue-100 bg-blue-50 rounded-xl p-3">
+          <h5 class="font-semibold text-blue-800">Tình huống</h5>
+          <p class="text-sm text-slate-700">Kích hoạt (ngoại cảnh/nội cảm)</p>
+        </div>
+        <div class="md:col-span-1 border rounded-xl p-3">
+          <h5 class="font-semibold">Tự động âm</h5>
+          <p class="text-sm">Nghĩ méo mó, niềm tin cốt lõi</p>
+        </div>
+        <div class="md:col-span-1 border rounded-xl p-3">
+          <h5 class="font-semibold">Cảm xúc</h5>
+          <p class="text-sm">Buồn/lo/tức… mức SUDs</p>
+        </div>
+        <div class="md:col-span-1 border rounded-xl p-3">
+          <h5 class="font-semibold">Hành vi</h5>
+          <p class="text-sm">Né tránh/ritual/hành vi an toàn</p>
+        </div>
+        <div class="md:col-span-1 border rounded-xl p-3">
+          <h5 class="font-semibold">Thử nghiệm</h5>
+          <p class="text-sm">Tái cấu trúc, tiếp xúc, kỹ năng</p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">Gợi ý thực hành: xác định suy nghĩ tự động → thách thức bằng chứng → lập hành vi thử nghiệm nhỏ, giảm dần an toàn giả.</p>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section id="quiz" class="section max-w-6xl mx-auto px-4 py-8">
+    <h3 class="text-xl font-bold text-slate-900 mb-3">4) Bài kiểm tra nhanh</h3>
+    <p class="text-slate-600 mb-4">Chọn đáp án đúng nhất. Bấm <b>Nộp bài</b> để xem điểm & giải thích. Bấm <b>Làm lại</b> để xáo câu.</p>
+
+    <div id="quizBox" class="space-y-4"></div>
+
+    <div class="mt-4 flex items-center gap-3">
+      <button id="submitBtn" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-white font-semibold hover:bg-blue-700 transition shadow-soft">
+        Nộp bài
+      </button>
+      <button id="resetBtn" class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-blue-700 font-semibold border border-blue-200 hover:bg-blue-50 transition">Làm lại</button>
+      <span id="score" class="font-semibold text-slate-700"></span>
+    </div>
+  </section>
+
+  <!-- Footer note for print -->
+  <footer class="print:block hidden text-xs text-slate-500 max-w-6xl mx-auto px-4 pb-8">
+    Tài liệu tóm lược học tập nội bộ – Môn Tâm bệnh học (USSH). Tự in phục vụ học tập cá nhân.
   </footer>
 
   <script>
-    // Tabs
-    const tabs = document.querySelectorAll('.tab-btn');
-    const panes = document.querySelectorAll('.tab-pane');
-    tabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabs.forEach(b => b.classList.remove('text-blue-700','border-b-2','border-blue-700','font-medium'));
-        btn.classList.add('text-blue-700','border-b-2','border-blue-700','font-medium');
-        panes.forEach(p => p.classList.add('hidden'));
-        document.getElementById(btn.dataset.tab).classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
+    // Print handler
+    document.getElementById('printBtn').addEventListener('click',()=>window.print());
 
-    // Fast mode toggles long details (details/summary & lists)
-    const fastToggle = document.getElementById('fastToggle');
-    const detailSelectors = () => [
-      ...document.querySelectorAll('details'),
-      ...document.querySelectorAll('ul li'),
-      ...document.querySelectorAll('div.p-3.rounded-xl.bg-blue-50')
-    ];
-    const applyFastMode = () => {
-      detailSelectors().forEach(el => {
-        if (fastToggle.checked) {
-          if (el.tagName.toLowerCase() === 'details') el.open = false;
-          el.classList.add('opacity-90');
-        } else {
-          el.classList.remove('opacity-90');
-        }
-      });
-    };
-    fastToggle.addEventListener('change', applyFastMode);
-    applyFastMode();
-
-    // Flashcard simple (click to flip)
-    document.querySelectorAll('.card-flip').forEach(wrapper => {
-      // accessibile toggle
-      wrapper.setAttribute('tabindex','0');
-      wrapper.classList.add('cursor-pointer');
-      const toggle = () => wrapper.classList.toggle('flipped');
-      wrapper.addEventListener('click', toggle);
-      wrapper.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggle();
-        }
-      });
-    });
-
-    // Quiz
-    const questions = [
+    // Quiz data (12 câu)
+    const Q = [
       {
-        q: "Cặp chất dẫn truyền gắn nhiều với rối loạn khí sắc là:",
-        a: ["Dopamine & GABA", "Serotonin & Norepinephrine", "Acetylcholine & GABA", "Glutamate & Endorphin"],
-        c: 1
+        s: 'Quan điểm nào nhấn mạnh não bộ, hệ nội tiết và di truyền/biểu sinh trong giải thích rối loạn?',
+        a: ['Phân tâm – Tâm động','Sinh học','Nhân văn – Hiện sinh','Văn hoá – Xã hội'],
+        c: 1,
+        r: 'Tiếp cận sinh học: não, nội tiết, di truyền; biến đổi dẫn truyền thần kinh.'
       },
       {
-        q: "Trong mô hình A-B-C của Ellis, 'B' là:",
-        a: ["Sự kiện kích hoạt", "Phản ứng cảm xúc", "Quá trình xử lý/diễn giải nhận thức", "Hành vi quan sát được"],
-        c: 2
+        s: 'Cặp chất dẫn truyền gắn với rối loạn khí sắc thường được nhắc đến là?',
+        a: ['Dopamine & GABA','Serotonin & Norepinephrine','Acetylcholine & Glutamate','Histamine & GABA'],
+        c: 1,
+        r: 'Khí sắc ↔ serotonin & norepinephrine; lo âu ↔ NE & GABA; loạn thần ↔ dopamine.'
       },
       {
-        q: "Nguyên tắc hành vi: 'bớt đi yếu tố gây khó chịu để tăng khả năng xảy ra hành vi' gọi là:",
-        a: ["Củng cố dương", "Trừng phạt dương", "Củng cố âm", "Trừng phạt âm"],
-        c: 2
+        s: 'Mục tiêu cốt lõi của trị liệu phân tâm – tâm động là?',
+        a: ['Tăng dopamine thể vân','Giải quyết xung đột vô thức, củng cố cái “Tôi”','Giảm cortisol bằng thiền định','Tăng giao tiếp không bạo lực'],
+        c: 1,
+        r: 'Phân tâm/tâm động hướng tới vô thức và sức mạnh bản ngã; kỹ thuật như liên tưởng tự do, chuyển cảm.'
       },
       {
-        q: "ECT thường phù hợp nhất khi:",
-        a: ["Lo âu nhẹ", "Trầm cảm nặng/kháng trị, nguy cơ tự sát", "Mất ngủ tạm thời", "Ám sợ đặc hiệu nhẹ"],
-        c: 1
+        s: 'Trong hành vi học, thí nghiệm nào kinh điển về điều kiện hoá nỗi sợ?',
+        a: ['Skinner – Hộp mèo','Watson – “Albert bé bỏng”','Bandura – Búp bê Bobo','Ebbinghaus – Đường cong quên'],
+        c: 1,
+        r: '“Albert bé bỏng” minh hoạ điều kiện hoá cổ điển nỗi sợ.'
       },
       {
-        q: "Một kỹ thuật cốt lõi của tiếp cận Hành vi trong lo âu là:",
-        a: ["Giải mẫn cảm/phơi nhiễm theo bậc thang", "Phân tích giấc mơ", "Thôi miên", "Phản xạ có điều kiện của Pavlov không áp dụng trị liệu"],
-        c: 0
+        s: 'Không thuộc 5 nguyên lý điều kiện hoá cổ điển:',
+        a: ['Tiếp nhận (acquisition)','Phân biệt kích thích','Phục hồi tự phát','Tăng cường dương (positive reinforcement)'],
+        c: 3,
+        r: 'Tăng cường dương là khái niệm của điều kiện hoá thao tác, không phải 5 nguyên lý ĐKHCĐ.'
       },
       {
-        q: "Tiếp cận Văn hoá–Xã hội thường sử dụng:",
-        a: ["Trị liệu hệ thống gia đình, nữ quyền/LGBTIQ+-affirmative, trần thuật", "Chỉ dùng thuốc", "Chỉ phân tích chuyển cảm", "Chỉ luyện thở"],
-        c: 0
+        s: 'CBT kết hợp những thành phần nào?',
+        a: ['Chỉ tái cấu trúc nhận thức','Chỉ phơi nhiễm','Nhận thức + hành vi (tái cấu trúc, thử nghiệm hành vi, giảm an toàn giả)','Chỉ phân tích giấc mơ'],
+        c: 2,
+        r: 'CBT là “cây dù” tích hợp nhận thức–hành vi.'
+      },
+      {
+        s: 'Trụ cột KHÔNG thuộc trị liệu hiện sinh:',
+        a: ['Sống–Cái chết','Tự do–Trách nhiệm','Thưởng–Phạt','Hư vô–Ý nghĩa'],
+        c: 2,
+        r: '4 cặp: Sống–Cái chết; Tự do–Trách nhiệm; Hư vô–Ý nghĩa; Cô đơn–Kết nối.'
+      },
+      {
+        s: 'Tiếp cận văn hoá – xã hội nhấn mạnh điều gì?',
+        a: ['Hành vi do phản xạ đơn thuần','Cá tính phát triển trong ràng buộc xã hội; các điều kiện KTXH ảnh hưởng SKTT','Chỉ cấu trúc não bộ quyết định','Chỉ do gen'],
+        c: 1,
+        r: 'Quan điểm VH–XH: gắn hệ thống, giai tầng, giới, tổ chức xã hội với SKTT; gồm trị liệu hệ thống gia đình, nữ quyền, trần thuật…'
+      },
+      {
+        s: 'Ví dụ can thiệp thuộc tiếp cận văn hoá – xã hội:',
+        a: ['Liệu pháp hệ thống gia đình, tham vấn khẳng định LGBTIQ+','ECT','rTMS','Liệu pháp ánh sáng'],
+        c: 0,
+        r: 'Các liệu pháp tiêu biểu: hệ thống gia đình, cặp đôi, nữ quyền, trần thuật, khẳng định LGBTIQ+.'
+      },
+      {
+        s: 'Cặp mô tả đúng về Hiện đại ↔ Hậu hiện đại:',
+        a: ['Khách quan ↔ Kiến tạo bởi diễn ngôn; định lượng ↔ định tính; đại tự sự ↔ vi tự sự','Chủ quan ↔ Khách quan; định tính ↔ định lượng','Sinh học ↔ Tâm xã hội','Lượng hoá ↔ Không đo được'],
+        c: 0,
+        r: 'Bảng so sánh: Hiện đại – khách quan, phổ quát, định lượng; Hậu hiện đại – kiến tạo, đa nguyên, định tính.'
+      },
+      {
+        s: 'Phát biểu đúng về nhãn quan “bệnh lý hoá – phi/giải bệnh lý hoá”:',
+        a: ['Chỉ nên dùng mô hình bệnh để giải thích tất cả','Cần cân bằng quyền lực trong trị liệu, xem xét trải nghiệm chủ quan & diễn ngôn xã hội','Luôn phủ nhận chẩn đoán','Chỉ có ý nghĩa trong nội khoa'],
+        c: 1,
+        r: 'Phi/Giải bệnh lý hoá nhấn mạnh chủ thể–chủ thể, phản biện quyền lực nhãn dán.'
+      },
+      {
+        s: 'Ví dụ ghép đúng tiếp cận – công cụ:',
+        a: ['Hành vi – ECT','Phân tâm – Liên tưởng tự do/Chuyển cảm','Sinh học – Phơi nhiễm','Hiện sinh – Thuốc chống loạn thần'],
+        c: 1,
+        r: 'Phân tâm dùng liên tưởng tự do, làm việc với chuyển cảm; sinh học dùng hoá dược; hành vi dùng phơi nhiễm.'
       }
     ];
-    const quizBox = document.getElementById('quizBox');
-    function renderQuiz() {
-      quizBox.innerHTML = "";
-      questions.forEach((it, i) => {
+
+    let order = [];
+    const box = document.getElementById('quizBox');
+    function shuffle(arr){return arr.sort(()=>Math.random()-0.5)}
+    function render(){
+      order = shuffle([...Array(Q.length).keys()]);
+      box.innerHTML = '';
+      order.forEach((qi, idx)=>{
+        const q = Q[qi];
         const card = document.createElement('div');
-        card.className = "border border-blue-100 rounded-xl p-4 bg-blue-50";
-        const q = document.createElement('p');
-        q.className = "font-semibold";
-        q.textContent = `Câu ${i+1}. ${it.q}`;
-        card.appendChild(q);
-        const opts = document.createElement('div');
-        opts.className = "mt-2 grid md:grid-cols-2 gap-2";
-        it.a.forEach((opt, j) => {
-          const id = `q${i}_a${j}`;
-          const lbl = document.createElement('label');
-          lbl.className = "flex items-center gap-2 p-2 rounded-lg bg-white border hover:border-blue-300 cursor-pointer";
-          lbl.innerHTML = `<input type="radio" name="q${i}" id="${id}" value="${j}" class="text-blue-600"><span>${opt}</span>`;
-          opts.appendChild(lbl);
-        });
-        card.appendChild(opts);
-        const ans = document.createElement('div');
-        ans.id = `ans${i}`;
-        ans.className = "mt-2 text-sm";
-        card.appendChild(ans);
-        quizBox.appendChild(card);
-      });
+        card.className = 'card bg-white rounded-2xl border border-slate-200 p-4 shadow-soft';
+        card.innerHTML = `
+          <div class="font-semibold text-slate-900">Câu ${idx+1}. ${q.s}</div>
+          <div class="mt-2 grid sm:grid-cols-2 gap-2">
+            ${q.a.map((opt,i)=>`
+              <label class="flex items-start gap-2 border rounded-lg p-2 hover:bg-slate-50 cursor-pointer">
+                <input type="radio" name="q${idx}" value="${i}" class="mt-1">
+                <span>${String.fromCharCode(65+i)}. ${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="mt-2 hidden text-sm text-slate-700" id="explain-${idx}"><b>Giải thích:</b> ${q.r}</div>
+        `;
+        box.appendChild(card);
+      })
+      document.getElementById('score').textContent='';
     }
-    renderQuiz();
 
-    document.getElementById('gradeBtn').addEventListener('click', () => {
-      let score = 0;
-      questions.forEach((it, i) => {
-        const sel = document.querySelector(`input[name="q${i}"]:checked`);
-        const ansBox = document.getElementById(`ans${i}`);
-        if (!sel) {
-          ansBox.innerHTML = `<span class="text-slate-500">Chưa chọn đáp án.</span>`;
-          return;
+    function grade(){
+      let correct=0;
+      order.forEach((qi, idx)=>{
+        const q = Q[qi];
+        const chosen = document.querySelector(`input[name=q${idx}]:checked`);
+        const exp = document.getElementById(`explain-${idx}`);
+        exp.classList.remove('hidden');
+        const labels = box.querySelectorAll(`input[name=q${idx}]`);
+        labels.forEach((inp,i)=>{
+          const parent = inp.closest('label');
+          parent.classList.remove('bg-green-50','bg-red-50','border-green-300','border-red-300');
+          if(i===q.c){ parent.classList.add('bg-green-50','border-green-300'); }
+          if(chosen && Number(chosen.value)!==q.c && i===Number(chosen.value)){
+            parent.classList.add('bg-red-50','border-red-300');
+          }
+        });
+        if(chosen && Number(chosen.value)===q.c) correct++;
+      })
+      document.getElementById('score').textContent = `Điểm: ${correct}/${Q.length}`;
+      window.scrollTo({top:document.getElementById('score').offsetTop-80,behavior:'smooth'});
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', grade);
+    document.getElementById('resetBtn').addEventListener('click', render);
+
+    render();
+
+    // ===== Tabs & Smooth-Nav Fix =====
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sectionsMap = {
+      approaches: document.getElementById('approaches'),
+      comparisons: document.getElementById('comparisons'),
+      cbt: document.getElementById('cbt'),
+      quiz: document.getElementById('quiz')
+    };
+    const btnTabs = document.getElementById('modeTabs');
+    const btnScroll = document.getElementById('modeScroll');
+    let mode = 'tabs';
+
+    function setActiveLink(id){
+      navLinks.forEach(a=>{
+        a.classList.remove('active','bg-blue-50','text-blue-700');
+        a.classList.add('bg-slate-50','text-slate-700');
+        if(a.dataset.target===id){
+          a.classList.add('active','bg-blue-50','text-blue-700');
+          a.classList.remove('bg-slate-50','text-slate-700');
         }
-        const val = parseInt(sel.value, 10);
-        if (val === it.c) {
-          score++;
-          ansBox.innerHTML = `<span class="text-green-700 font-semibold">Đúng</span>`;
+      })
+    }
+    function showSection(id){
+      Object.values(sectionsMap).forEach(sec=>sec.classList.add('hidden'));
+      if(sectionsMap[id]) sectionsMap[id].classList.remove('hidden');
+    }
+    function setMode(newMode){
+      mode = newMode;
+      if(mode==='tabs'){
+        // --- FIX ---
+        // When switching from scroll to tabs, we now check which link was active
+        // from the IntersectionObserver. This makes the transition smoother
+        // by keeping the user on the section they were viewing.
+        const activeLink = document.querySelector('.nav-link.active');
+        const id = activeLink?.dataset.target || (location.hash||'').slice(1) || navLinks[0]?.dataset.target || 'approaches';
+        showSection(id); setActiveLink(id);
+      }else{
+        Object.values(sectionsMap).forEach(sec=>sec.classList.remove('hidden'));
+      }
+      btnTabs.classList.toggle('bg-blue-600', mode==='tabs');
+      btnTabs.classList.toggle('text-white', mode==='tabs');
+      btnScroll.classList.toggle('bg-blue-600', mode==='scroll');
+      btnScroll.classList.toggle('text-white', mode==='scroll');
+    }
+
+    navLinks.forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.dataset.target;
+        if(mode==='tabs'){
+          e.preventDefault();
+          showSection(id); setActiveLink(id);
+          history.replaceState(null,'',`#${id}`);
         } else {
-          ansBox.innerHTML = `<span class="text-red-700 font-semibold">Sai</span> — đáp án đúng: <strong>${it.a[it.c]}</strong>`;
+          setActiveLink(id);
+          // smooth scroll to anchor (already enabled via CSS)
         }
       });
-      document.getElementById('scoreArea').textContent = `Điểm: ${score}/${questions.length}`;
     });
 
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      renderQuiz();
-      document.getElementById('scoreArea').textContent = "";
+    // Auto-highlight in scroll mode
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        if(mode!=='scroll') return;
+        // Find the entry that is most visible in the viewport
+        const visibleEntry = entries.find(e => e.isIntersecting);
+        if (visibleEntry) {
+            setActiveLink(visibleEntry.target.id);
+        }
+      }, {rootMargin:'-50% 0px -50% 0px', threshold:0.01});
+      Object.values(sectionsMap).forEach(sec=> io.observe(sec));
+    }
+
+    // Switch buttons
+    btnTabs.addEventListener('click', ()=> setMode('tabs'));
+    btnScroll.addEventListener('click', ()=> setMode('scroll'));
+
+    // Ensure all visible for print
+    window.addEventListener('beforeprint', ()=>{
+      Object.values(sectionsMap).forEach(sec=>sec.classList.remove('hidden'));
     });
+
+    // Init: default Tabs mode
+    setMode('tabs');
+
   </script>
 </body>
 </html>

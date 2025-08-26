@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ TƯƠNG TÁC - OCD VÀ CÁC RỐI LOẠN LIÊN QUAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
+
+    <div class="min-h-screen p-4 pb-24">
+        <div class="max-w-4xl mx-auto">
+            <header class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-blue-800 mb-2">
+                    QUIZ TƯƠNG TÁC - OCD VÀ CÁC RỐI LOẠN LIÊN QUAN
+                </h1>
+                <p class="text-lg text-blue-600">
+                    Dựa trên Ca 5.pdf - 5 Ca Lâm Sàng (50 Câu Hỏi)
+                </p>
+                <div class="text-sm text-gray-600 mt-2">
+                    Thời gian: 60 phút | Mã đề: OCD-50Q-A1
+                </div>
+            </header>
+
+            <div id="results-summary" class="hidden mb-6 p-6 rounded-xl shadow-lg bg-green-100 border-2 border-green-300">
+                <h2 class="text-2xl font-bold text-center mb-4">
+                    KẾT QUẢ BÀI THI
+                </h2>
+                <div class="text-center">
+                    <p class="text-xl">
+                        Điểm số: <span class="font-bold">50/50</span> (100.0%)
+                    </p>
+                    <p class="text-lg mt-2 font-semibold text-green-700">
+                        🎉 Xuất sắc!
+                    </p>
+                </div>
+            </div>
+
+            <nav class="mb-6">
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-600 text-white">
+                        CA 1
+                    </button>
+                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
+                        CA 2
+                    </button>
+                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
+                        CA 3
+                    </button>
+                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
+                        CA 4
+                    </button>
+                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
+                        CA 5
+                    </button>
+                </div>
+            </nav>
+
+            <main id="clinical-cases-container" class="space-y-8">
+                
+                <article id="case-ca1" class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6">
+                        <h2 class="text-2xl font-bold mb-2">CA 1 - Ám ảnh nhiễm bẩn, rửa tay/né tránh</h2>
+                        <p class="text-blue-100">N.T.H., nữ, 28 tuổi, nhân viên QA thực phẩm</p>
+                    </header>
+                    <section class="p-6">
+                        <div class="grid md:grid-cols-2 gap-4 mb-8">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">(1) Triệu chứng hiện tại</h4>
+                                <p class="text-gray-700 text-sm leading-relaxed">Đến khám vì "cứ thấy người mình bẩn và phải rửa cho sạch". 6 tháng nay, H. tắm rửa 3–4 lần/ngày (mỗi lần 40–60 phút), giặt riêng toàn bộ quần áo, tránh chạm tay vào tay nắm cửa công ty; dùng khăn giấy để bấm thang máy. Mỗi khi nhớ lại chuyện bị đồng nghiệp nam nói lời xúc phạm, H. "cảm thấy dơ bẩn từ bên trong" và phải tắm ngay. Thời gian dành cho tắm/rửa >2 giờ/ngày, đi làm muộn, hiệu suất giảm. H. nhận ra "phi lý" nhưng không kìm được thôi thúc.</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">(2) Tiền sử – bối cảnh</h4>
+                                <p class="text-gray-700 text-sm leading-relaxed">Không bệnh nội khoa đáng kể. Từng bị người yêu cũ lăng mạ, xem là "sự phản bội" và từ đó nhạy cảm với cảm giác dơ bẩn. Gia đình không ai mắc rối loạn tâm thần. Ngủ kém, lo âu tăng khi không được tắm.</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">(3) Khám lâm sàng – cận lâm sàng</h4>
+                                <p class="text-gray-700 text-sm leading-relaxed">Sinh hiệu bình thường; các xét nghiệm máu, chức năng gan, thận, tuyến giáp bình thường. Không dấu thần kinh khu trú.</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">(4) Khám tâm thần</h4>
+                                <p class="text-gray-700 text-sm leading-relaxed">Tỉnh táo, định hướng tốt. Khí sắc lo âu, bồn chồn. Tư duy: xuất hiện ý nghĩ xâm nhập "mình bẩn", đi kèm cưỡng chế rửa/lau để trung hòa khó chịu; có né tránh. Mức độ insight khá: thừa nhận hành vi quá mức, không hợp lý nhưng khó cưỡng. Không hoang tưởng, không ảo giác.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2">
+                                CÂU HỎI (10 câu, chọn A-D):
+                            </h3>
+                            <fieldset class="p-4 rounded-lg border-2 bg-gray-50 border-gray-200 hover:border-blue-300">
+                                <legend class="font-medium text-gray-800 mb-3 w-full">
+                                    Câu 1: Tổ hợp triệu chứng nào dưới đây phù hợp nhất với định nghĩa ám ảnh và cưỡng chế?
+                                </legend>
+                                <div class="space-y-2">
+                                    <label class="flex items-start space-x-3 cursor-pointer">
+                                        <input type="radio" name="ca1_0" value="0" class="mt-1 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-700">A. Ý nghĩ xâm nhập gây lo âu + hành vi lặp lại để trung hòa/giảm lo</span>
+                                    </label>
+                                    <label class="flex items-start space-x-3 cursor-pointer">
+                                        <input type="radio" name="ca1_0" value="1" class="mt-1 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-700">B. Sợ hãi rõ rệt có tác nhân đặc hiệu, né tránh nhất quán</span>
+                                    </label>
+                                    <label class="flex items-start space-x-3 cursor-pointer">
+                                        <input type="radio" name="ca1_0" value="2" class="mt-1 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-700">C. Trạng thái buồn chán kéo dài ≥2 tuần, giảm hứng thú, ý nghĩ tội lỗi</span>
+                                    </label>
+                                    <label class="flex items-start space-x-3 cursor-pointer">
+                                        <input type="radio" name="ca1_0" value="3" class="mt-1 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-700">D. Ý tưởng bị theo dõi, bị hại, kết hợp ảo thính</span>
+                                    </label>
+                                </div>
+                                <div class="hidden mt-4 p-3 bg-blue-100 rounded-lg">
+                                    <p class="text-sm"><span class="font-medium text-blue-800">Đáp án đúng: A</span></p>
+                                    <p class="text-sm text-blue-700 mt-1"><span class="font-medium">Giải thích:</span> OCD bao gồm ám ảnh (ý nghĩ xâm nhập gây lo âu) và cưỡng chế (hành vi lặp lại để giảm lo âu)</p>
+                                </div>
+                            </fieldset>
+                            
+                            </div>
+                    </section>
+                </article>
+
+                </main>
+
+            <footer class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-blue-200 shadow-lg p-4">
+                <div class="max-w-4xl mx-auto flex justify-center space-x-4">
+                    <button class="px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
+                        📊 Nộp Bài & Xem Kết Quả
+                    </button>
+                    <button class="px-8 py-3 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors shadow-lg">
+                        🔄 Làm Lại
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Học nhanh: Các Rối Loạn Lo Âu (tương tác)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* In ra PDF gọn gàng */
+    @media print{
+      .no-print{ display:none !important; }
+      .card{ box-shadow:none !important; }
+      body{ background:white !important; }
+      a[href]:after{ content:""; }
+    }
+    /* Tooltip đơn giản */
+    .hint:hover .hint-bubble{ opacity:1; transform:translateY(0) scale(1); }
+  </style>
+</head>
+<body class="bg-blue-50 text-slate-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-blue-100">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-blue-600 text-white grid place-content-center font-bold">ANX</div>
+      <div>
+        <h1 class="text-xl font-semibold text-blue-700">Học nhanh – 9. Các Rối Loạn Lo Âu</h1>
+        <p class="text-sm text-slate-500">Tóm tắt có tương tác • Chủ đề, bảng so sánh, bài kiểm tra, in PDF</p>
+      </div>
+      <div class="ml-auto flex gap-2">
+        <button onclick="window.print()" class="no-print inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 7V3h12v4H6zm12 2H6a4 4 0 0 0-4 4v3h4v5h12v-5h4v-3a4 4 0 0 0-4-4zM8 19v-3h8v3H8z"/></svg>
+          In ra PDF
+        </button>
+        <button id="expandAll" class="no-print inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-blue-300 text-blue-700 hover:bg-blue-100 transition">
+          Mở/đóng tất cả
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-4 space-y-6">
+    <!-- Tóm tắt nhanh -->
+    <section class="card bg-white rounded-2xl shadow-sm p-5">
+      <h2 class="text-lg font-semibold text-blue-700 mb-3">1) Tóm tắt ý chính</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl border border-blue-100 bg-blue-50/60">
+          <h3 class="font-semibold text-blue-800">Sợ vs Lo (não bộ)</h3>
+          <ul class="list-disc pl-5 text-sm leading-relaxed">
+            <li><span class="font-medium">Sợ</span>: phản ứng thoáng qua trước đe doạ rõ (amygdala); <span class="font-medium">Lo</span>: trạng thái kéo dài trước đe doạ <em>không chắc chắn</em> (BST). </li>
+            <li>Các mạng vùng vỏ trán–amygdala mở rộng cùng tham gia dự đoán đe doạ, tùy “chắc chắn” vs “không chắc chắn”.</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl border border-blue-100">
+          <h3 class="font-semibold text-blue-800">Cốt lõi theo rối loạn</h3>
+          <ul class="list-disc pl-5 text-sm leading-relaxed">
+            <li><b>Ám sợ đặc hiệu</b>: sợ rõ một đối tượng/tình huống; <b>Agoraphobia</b>: sợ nơi khó thoát/khó được trợ giúp.</li>
+            <li><b>Lo âu xã hội</b>: sợ bị đánh giá tiêu cực khi bị quan sát.</li>
+            <li><b>Hoảng loạn</b>: cơn kịch phát + diễn giải thảm hoạ cảm giác cơ thể (mô hình Clark).</li>
+            <li><b>GAD</b>: lo quá mức, khó kiểm soát ≥6 tháng + ≥3/6 triệu chứng.</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl border border-blue-100">
+          <h3 class="font-semibold text-blue-800">Nguyên tắc điều trị thực hành</h3>
+          <ul class="list-disc pl-5 text-sm leading-relaxed">
+            <li><b>CBT</b>: giáo dục mô hình, <b>phơi nhiễm</b> (ngoại cảnh/nội cảm), <b>tái cấu trúc nhận thức</b>, <b>chặn hành vi an toàn/né tránh</b>.</li>
+            <li><b>Thuốc</b> (tuỳ chẩn đoán): SSRI/SNRI cho GAD; hoảng loạn dùng thuốc có thể hiệu quả ngắn hạn nhưng tái phát cao hơn so với CBT.</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl border border-blue-100">
+          <h3 class="font-semibold text-blue-800">Hiệu quả</h3>
+          <ul class="list-disc pl-5 text-sm leading-relaxed">
+            <li>Hoảng loạn: sau CBT ~<b>85%</b> hết cơn; tái phát 1 năm ~<b>26%</b> (so với nhóm thuốc ~<b>40%</b>).</li>
+            <li>GAD: CBT cho lo lắng đem lại cải thiện đáng kể dài hạn.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accordion: Kiến thức -->
+    <section class="card bg-white rounded-2xl shadow-sm divide-y">
+      <details class="group p-5" open>
+        <summary class="flex items-center justify-between cursor-pointer">
+          <h2 class="text-lg font-semibold text-blue-700">2) Sợ – Lo & mạng lưới não</h2>
+          <span class="text-blue-500 group-open:rotate-180 transition">▾</span>
+        </summary>
+        <div class="pt-3 text-sm leading-7">
+          <p><b>Sợ</b>: phản ứng tức thì trước đe doạ rõ (amygdala). <b>Lo</b>: trạng thái kéo dài trước bất định (BST – bed nucleus of the stria terminalis). Vỏ trán (MCC, AI/FrO, dlPFC/FP) hoạt hoá mạnh khi dự đoán đe doạ <i>không chắc chắn</i>; BST và amygdala lưng hoạt hoá hơn trong dự đoán đe doạ <i>chắc chắn</i>. </p>
+          <ul class="mt-2 grid md:grid-cols-2 gap-2">
+            <li class="p-3 bg-blue-50 rounded-lg">Điểm nhớ: sợ ≠ lo; nhưng có chồng lấp mạch; luyện tập giúp <i>ức chế biểu hiện</i> sợ.</li>
+            <li class="p-3 bg-blue-50 rounded-lg">Ứng dụng: giải thích cho bệnh nhân để giảm sợ cảm giác cơ thể (psychoeducation).</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="group p-5">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <h2 class="text-lg font-semibold text-blue-700">3) Hoảng loạn – mô hình Clark & can thiệp</h2>
+          <span class="text-blue-500 group-open:rotate-180 transition">▾</span>
+        </summary>
+        <div class="pt-3 text-sm leading-7 space-y-3">
+          <p><b>Mô hình Clark</b>: cá nhân diễn giải các tín hiệu cơ thể (tim nhanh, chóng mặt, hụt hơi…) theo hướng <i>thảm hoạ</i> → tăng sợ → tăng kích thích sinh lý → vòng xoắn hoảng loạn. Hai quá trình duy trì chính: <b>tự giám sát cơ thể quá mức</b> và <b>né tránh/hành vi an toàn</b>.</p>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="p-3 rounded-lg border border-blue-100">
+              <h3 class="font-medium text-blue-800 mb-1">CBT – khối can thiệp</h3>
+              <ul class="list-disc pl-5">
+                <li>Giáo dục mô hình & bình thường hoá triệu chứng</li>
+                <li>Tiếp xúc nội cảm/ngoại cảnh có hướng dẫn</li>
+                <li>Luyện thở/chú ý cơ thể hợp lý</li>
+                <li>Tái cấu trúc nhận thức thảm hoá</li>
+                <li>Chặn hành vi an toàn</li>
+              </ul>
+            </div>
+            <div class="p-3 rounded-lg border border-blue-100">
+              <h3 class="font-medium text-blue-800 mb-1">Kết quả & chiến lược</h3>
+              <ul class="list-disc pl-5">
+                <li>Sau trị liệu: ~85% hết cơn; sau 1 năm: CBT tái phát ~26% &lt; thuốc ~40%.</li>
+                <li>Đặt mục tiêu: ngưng cơn, phòng tái phát, phục hồi chức năng.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="group p-5">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <h2 class="text-lg font-semibold text-blue-700">4) GAD – tiêu chuẩn & quản lý</h2>
+          <span class="text-blue-500 group-open:rotate-180 transition">▾</span>
+        </summary>
+        <div class="pt-3 text-sm leading-7 space-y-2">
+          <p><b>Chẩn đoán</b>: lo quá mức, khó kiểm soát ≥6 tháng, kèm ≥3/6 triệu chứng (bồn chồn, mệt, khó tập trung, cáu kỉnh, căng cơ, rối loạn giấc ngủ), gây ảnh hưởng chức năng và loại trừ nguyên nhân cơ thể/chất.</p>
+          <p><b>Điều trị</b>: CBT (giảm lo/siêu-lo), SSRI/SNRI là hàng đầu khi dùng thuốc.</p>
+        </div>
+      </details>
+
+      <details class="group p-5">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <h2 class="text-lg font-semibold text-blue-700">5) Bảng so sánh nhanh các rối loạn thường gặp</h2>
+          <span class="text-blue-500 group-open:rotate-180 transition">▾</span>
+        </summary>
+        <div class="pt-3 overflow-x-auto">
+          <table class="min-w-full text-sm border border-blue-200 rounded-lg overflow-hidden">
+            <thead class="bg-blue-100 text-blue-900">
+              <tr>
+                <th class="px-3 py-2 text-left">Mục</th>
+                <th class="px-3 py-2 text-left">Ám sợ đặc hiệu</th>
+                <th class="px-3 py-2 text-left">Hoảng loạn</th>
+                <th class="px-3 py-2 text-left">Agoraphobia</th>
+                <th class="px-3 py-2 text-left">Lo âu xã hội</th>
+                <th class="px-3 py-2 text-left">GAD</th>
+              </tr>
+            </thead>
+            <tbody class="[&>tr:nth-child(even)]:bg-blue-50/40">
+              <tr>
+                <td class="px-3 py-2 font-medium">Trọng tâm sợ/lo</td>
+                <td class="px-3 py-2">Đối tượng/tình huống cụ thể</td>
+                <td class="px-3 py-2">Cơn kịch phát + diễn giải thảm hoạ cảm giác cơ thể</td>
+                <td class="px-3 py-2">Nơi khó thoát/khó được trợ giúp</td>
+                <td class="px-3 py-2">Bị quan sát/đánh giá tiêu cực</td>
+                <td class="px-3 py-2">Lo khái quát nhiều lĩnh vực</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium">Thời gian</td>
+                <td class="px-3 py-2">Thường ≥6 tháng</td>
+                <td class="px-3 py-2">≥1 tháng lo/né sau cơn (tiêu chí B)</td>
+                <td class="px-3 py-2">Dai dẳng</td>
+                <td class="px-3 py-2">Dai dẳng</td>
+                <td class="px-3 py-2">≥6 tháng + ≥3/6 triệu chứng</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium">Né tránh & hành vi an toàn</td>
+                <td class="px-3 py-2">Rất thường gặp; duy trì bệnh</td>
+                <td class="px-3 py-2">Né kích hoạt nội cảm/ngoại cảnh; tự giám sát cơ thể</td>
+                <td class="px-3 py-2">Đi cùng người thân, tránh nơi đông/chật</td>
+                <td class="px-3 py-2">Nhìn xuống, nói nhỏ, che mặt…</td>
+                <td class="px-3 py-2">Tránh đối diện vấn đề; trấn an quá mức</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium">Điều trị nền tảng</td>
+                <td class="px-3 py-2">Phơi nhiễm theo bậc thang</td>
+                <td class="px-3 py-2">CBT (tiếp xúc nội cảm, tái cấu trúc…)</td>
+                <td class="px-3 py-2">Tiếp xúc tình huống sợ + giảm an toàn</td>
+                <td class="px-3 py-2">Phơi nhiễm xã hội + nhận thức</td>
+                <td class="px-3 py-2">CBT; SSRI/SNRI khi cần</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-slate-500 mt-2">Bảng gợi ý ôn tập; đối chiếu chi tiết tiêu chí trong slide nguồn.</p>
+        </div>
+      </details>
+
+      <details class="group p-5">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <h2 class="text-lg font-semibold text-blue-700">6) Từ viết tắt</h2>
+          <span class="text-blue-500 group-open:rotate-180 transition">▾</span>
+        </summary>
+        <div class="pt-3 text-sm">
+          <ul class="grid md:grid-cols-3 gap-2">
+            <li><b>CBT</b>: Liệu pháp nhận thức–hành vi</li>
+            <li><b>BST</b>: Bed Nucleus of the Stria Terminalis</li>
+            <li><b>GAD</b>: Generalized Anxiety Disorder</li>
+            <li><b>SSRI/SNRI</b>: Thuốc tăng serotonin/noradrenaline</li>
+            <li><b>ERP</b>: Tiếp xúc–ngăn hành vi đáp ứng (trong OCD)</li>
+            <li><b>AI/MCC/dlPFC</b>: Vùng vỏ trán–đảo–đai</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Bài kiểm tra thực hành -->
+    <section class="card bg-white rounded-2xl shadow-sm p-5">
+      <div class="flex items-center gap-3 mb-3">
+        <h2 class="text-lg font-semibold text-blue-700">7) Bài kiểm tra thực hành (15 câu)</h2>
+        <span class="text-xs text-slate-500">Kết quả chấm tức thì • chọn 1 đáp án</span>
+      </div>
+      <ol id="quiz" class="space-y-4"></ol>
+      <div class="mt-4 flex gap-2">
+        <button id="gradeBtn" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">Chấm điểm</button>
+        <button id="resetBtn" class="px-4 py-2 rounded-lg border border-blue-300 text-blue-700 hover:bg-blue-100 transition">Làm lại</button>
+        <div id="score" class="ml-auto font-medium text-blue-800"></div>
+      </div>
+    </section>
+
+    <!-- Tài liệu & ghi chú in -->
+    <section class="card bg-white rounded-2xl shadow-sm p-5">
+      <h2 class="text-lg font-semibold text-blue-700 mb-2">8) Ghi chú khi in PDF</h2>
+      <ul class="list-disc pl-5 text-sm">
+        <li>Trang in bao gồm toàn bộ nội dung đã mở. Nhấn “Mở/đóng tất cả” trước khi in nếu muốn gom trọn kiến thức.</li>
+        <li>Bài test không hiển thị đáp án trên bản in trừ khi bạn bấm “Chấm điểm”.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto p-6 text-xs text-slate-500">
+    © 2025 – Học liệu tương tác (phiên bản tóm tắt dùng nội bộ).
+  </footer>
+
+  <script>
+    // Mở/đóng tất cả <details>
+    const expandBtn = document.getElementById('expandAll');
+    expandBtn.addEventListener('click', ()=>{
+      const all = document.querySelectorAll('details');
+      const hasClosed = Array.from(all).some(d=>!d.open);
+      all.forEach(d=> d.open = hasClosed);
+    });
+
+    // Bộ câu hỏi (15 câu) — bám nội dung slide
+    const QUESTIONS = [
+      {
+        q: "Điểm khác nhau cốt lõi giữa Sợ và Lo theo mạng lưới não?",
+        opts: [
+          "Sợ: amygdala; Lo: BST (đe doạ không chắc chắn).",
+          "Cả hai chỉ do vỏ trán.",
+          "Sợ và Lo hoàn toàn không liên quan mạch não.",
+          "Sợ luôn kéo dài hơn Lo."
+        ],
+        a: 0
+      },
+      {
+        q: "Trong mô hình Clark về hoảng loạn, điều gì kích hoạt vòng xoắn triệu chứng?",
+        opts: [
+          "Diễn giải thảm hoạ các cảm giác cơ thể.",
+          "Thiếu ngủ 1 đêm.",
+          "Tất cả do dopamine.",
+          "Thiếu ăn."
+        ],
+        a: 0
+      },
+      {
+        q: "Hai tiến trình duy trì hoảng loạn thường gặp:",
+        opts: [
+          "Hoang tưởng và ảo giác.",
+          "Tự giám sát cơ thể quá mức và né tránh/hành vi an toàn.",
+          "Ghen tuông và kích động.",
+          "Mất trí nhớ và buồn bã."
+        ],
+        a: 1
+      },
+      {
+        q: "Thành phần KHÔNG thuộc khối can thiệp CBT cho hoảng loạn:",
+        opts: [
+          "Giáo dục mô hình.",
+          "Tiếp xúc nội cảm/ngoại cảnh.",
+          "Tăng hành vi an toàn để 'đỡ sợ'.",
+          "Tái cấu trúc nhận thức."
+        ],
+        a: 2
+      },
+      {
+        q: "GAD yêu cầu thời lượng tối thiểu:",
+        opts: ["≥ 2 tuần", "≥ 1 tháng", "≥ 6 tháng", "Không yêu cầu thời gian"],
+        a: 2
+      },
+      {
+        q: "Bộ triệu chứng GAD cần có tối thiểu (người lớn):",
+        opts: ["1/6", "2/6", "3/6", "5/9"],
+        a: 2
+      },
+      {
+        q: "Trọng tâm sợ trong lo âu xã hội là:",
+        opts: [
+          "Nơi khó thoát hiểm.",
+          "Bị đánh giá tiêu cực khi bị quan sát.",
+          "Động vật nguy hiểm.",
+          "Bệnh nan y."
+        ],
+        a: 1
+      },
+      {
+        q: "Agoraphobia điển hình tránh:",
+        opts: [
+          "Phòng thí nghiệm y sinh.",
+          "Tàu điện, siêu thị, rạp chiếu phim đông người.",
+          "Chó mèo.",
+          "Khu vui chơi trẻ em."
+        ],
+        a: 1
+      },
+      {
+        q: "Ám sợ đặc hiệu thường cần thời lượng:",
+        opts: ["≥ 1 tuần", "≥ 1 tháng", "≥ 6 tháng", "Không yêu cầu"],
+        a: 2
+      },
+      {
+        q: "Khi có cơn hoảng loạn nhưng KHÔNG có lo/hành vi tránh kéo dài ≥1 tháng, ghi nhận:",
+        opts: [
+          "Rối loạn hoảng loạn.",
+          "Cơn hoảng loạn (specifier) cho rối loạn khác (nếu có).",
+          "Lo âu xã hội.",
+          "Ám sợ đặc hiệu."
+        ],
+        a: 1
+      },
+      {
+        q: "Yếu tố duy trì sợ quan trọng trong ám sợ/hoảng loạn là:",
+        opts: [
+          "Né tránh và các hành vi an toàn.",
+          "Uống vitamin C.",
+          "Ngủ trưa mỗi ngày.",
+          "Tập thể dục cường độ cao."
+        ],
+        a: 0
+      },
+      {
+        q: "Trong hoảng loạn, mục tiêu trị liệu tổng quát KHÔNG bao gồm:",
+        opts: [
+          "Ngưng cơn và phòng tái phát.",
+          "Giảm né tránh/hành vi an toàn.",
+          "Phục hồi chức năng.",
+          "Cấm hoàn toàn ra ngoài suốt đời."
+        ],
+        a: 3
+      },
+      {
+        q: "SSRI/SNRI là lựa chọn thuốc hàng đầu cho:",
+        opts: ["Ám sợ đặc hiệu", "GAD", "Lo âu xã hội luôn luôn", "Agoraphobia đơn thuần"],
+        a: 1
+      },
+      {
+        q: "Hiệu quả hoảng loạn sau CBT so với thuốc:",
+        opts: [
+          "CBT ~85% hết cơn; tái phát 1 năm ~26% < thuốc ~40%.",
+          "Cả hai giống nhau 60%.",
+          "Thuốc 85% tốt hơn.",
+          "CBT chỉ 26%."
+        ],
+        a: 0
+      },
+      {
+        q: "Khi tư vấn bệnh nhân về Sợ vs Lo, diễn giải đúng là:",
+        opts: [
+          "Sợ = đe doạ rõ; Lo = đe doạ không chắc chắn; mạch não có chồng lấp.",
+          "Sợ và Lo giống hệt nhau.",
+          "Sợ chỉ do thiếu ngủ.",
+          "Lo chỉ do hormone."
+        ],
+        a: 0
+      }
+    ];
+
+    // Render quiz
+    const quizEl = document.getElementById('quiz');
+    function renderQuiz(){
+      quizEl.innerHTML = '';
+      QUESTIONS.forEach((item, idx)=>{
+        const li = document.createElement('li');
+        li.className = "p-4 rounded-xl border border-blue-100";
+        const opts = item.opts.map((t,i)=>`
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="radio" name="q${idx}" value="${i}" class="mt-1">
+            <span>${t}</span>
+          </label>`).join('');
+        li.innerHTML = `
+          <div class="font-medium text-blue-800 mb-2">Câu ${idx+1}. ${item.q}</div>
+          <div class="space-y-2">${opts}</div>
+          <div class="mt-2 text-sm hidden" id="fb-${idx}"></div>
+        `;
+        quizEl.appendChild(li);
+      });
+      document.getElementById('score').textContent = '';
+    }
+    renderQuiz();
+
+    // Grade
+    document.getElementById('gradeBtn').addEventListener('click', ()=>{
+      let correct=0;
+      QUESTIONS.forEach((item, idx)=>{
+        const chosen = document.querySelector(`input[name="q${idx}"]:checked`);
+        const fb = document.getElementById(`fb-${idx}`);
+        fb.className = "mt-2 text-sm";
+        if(chosen && Number(chosen.value)===item.a){
+          correct++;
+          fb.textContent = "✓ Chính xác";
+          fb.classList.add("text-green-700");
+        }else{
+          fb.innerHTML = `✗ Sai — Đáp án đúng: <b>${String.fromCharCode(65+item.a)}</b>`;
+          fb.classList.add("text-red-600");
+        }
+        fb.classList.remove("hidden");
+      });
+      const scoreTxt = `Điểm: ${correct}/${QUESTIONS.length} (${Math.round(correct/QUESTIONS.length*100)}%)`;
+      document.getElementById('score').textContent = scoreTxt;
+      window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'});
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', renderQuiz);
+  </script>
+</body>
+</html>

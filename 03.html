@@ -3,25 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Phổ lưỡng cực – Tài liệu học tương tác</title>
+  <title>Phổ lưỡng cực – Học liệu tương tác</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Flip cards */
     .flip { perspective: 1000px; }
-    .flip-inner { transition: transform .6s; transform-style: preserve-3d; }
+    .flip-inner { position: relative; transition: transform .6s; transform-style: preserve-3d; }
     .flip.is-flipped .flip-inner { transform: rotateY(180deg); }
-    .flip-face { backface-visibility: hidden; }
-    .flip-back { transform: rotateY(180deg); }
+    .flip-face, .flip-back { backface-visibility: hidden; }
+    .flip-back { transform: rotateY(180deg); position: absolute; inset: 0; }
+
+    /* Exam print layout */
+    .print-header { display: none; }
+    .watermark { display:none; }
+    @media print {
+      @page { size: A4; margin: 16mm; }
+      .no-print { display: none !important; }
+      .print-header { display: block; }
+      .print-break { break-before: page; }
+      .watermark {
+        display:block;
+        position: fixed; inset: 0;
+        pointer-events: none; opacity: .06;
+        font-size: 120px; font-weight: 800;
+        transform: rotate(-24deg);
+        color: #1d4ed8; /* blue-700 */
+        text-align: center; line-height: 100vh;
+        z-index: 0;
+      }
+      /* ensure content overlays watermark nicely */
+      main, section, article, table, form, fieldset, footer { position: relative; z-index: 1; }
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
-  <!-- Header -->
+  <!-- SCREEN HEADER -->
   <header class="bg-gradient-to-r from-blue-700 to-blue-500 text-white">
     <div class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
       <h1 class="text-xl md:text-2xl font-bold">Phổ lưỡng cực – Tài liệu học tương tác</h1>
-      <div class="flex gap-2">
-        <button onclick="window.print()"
+      <div class="flex gap-2 no-print">
+        <button id="btn-print"
                 class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20">
-          🖨️ In ra PDF
+          🧾 Xuất PDF (bố cục Đề mẫu)
         </button>
         <button id="btn-compact"
                 class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20">
@@ -31,15 +54,43 @@
     </div>
   </header>
 
+  <!-- PRINT HEADER (Đề mẫu) -->
+  <div id="exam-header" class="print-header max-w-6xl mx-auto px-4 pt-4">
+    <div class="flex items-start justify-between">
+      <div class="text-sm">
+        <div class="font-semibold">TRƯỜNG/ĐƠN VỊ: ……………………………</div>
+        <div class="font-semibold">MÔN: TÂM BỆNH HỌC – CHỦ ĐỀ: PHỔ LƯỠNG CỰC</div>
+      </div>
+      <div class="text-sm border border-slate-400 rounded-md p-2">
+        <div class="font-semibold">MÃ ĐỀ: <span id="ma-de">LC-000</span></div>
+        <div>Thời gian: 30 phút</div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm mt-3">
+      <div>Họ và tên: ..................................................</div>
+      <div>MSSV/ID: ..................................................</div>
+      <div>Lớp/Nhóm: ..............................................</div>
+    </div>
+    <div class="mt-3 text-sm rounded-lg border-l-4 border-blue-600 bg-blue-50 p-3">
+      <div class="font-semibold text-blue-800">HƯỚNG DẪN</div>
+      <ul class="list-disc pl-5">
+        <li>Khoanh tròn 1 đáp án đúng cho mỗi câu.</li>
+        <li>Không sử dụng tài liệu; giữ trật tự phòng thi.</li>
+        <li>Điểm tối đa: 10; mỗi câu đúng 0.42 (24 câu).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="watermark">TÂM BỆNH HỌC</div>
+
   <main class="max-w-6xl mx-auto px-4 py-8">
     <!-- Bản đồ nhanh -->
     <section class="mb-8">
       <h2 class="text-2xl font-semibold text-blue-700 mb-2">Bản đồ 5 phút</h2>
       <p class="text-sm text-slate-600 mb-4">Bốn trụ cột: Chẩn đoán • Sàng lọc • Dịch tễ & Nguy cơ • Điều trị</p>
       <div class="grid md:grid-cols-4 gap-4">
-        <!-- Card 1 -->
+        <!-- Card 1: DX -->
         <article class="group rounded-2xl border bg-white shadow-sm hover:shadow-md">
-          <button data-acc="dx" class="w-full text-left p-4">
+          <button data-acc="dx" class="w-full text-left p-4 no-print">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm uppercase tracking-wider text-blue-600 font-semibold">Chẩn đoán</div>
@@ -50,16 +101,15 @@
           </button>
           <div id="acc-dx" class="hidden px-4 pb-4 text-sm leading-relaxed">
             <ul class="list-disc pl-5">
-              <li><b>Hưng cảm:</b> ≥ 1 tuần <i>hoặc</i> mọi thời gian nếu cần nhập viện (DSM-5-TR). <span class="text-blue-700">— chuẩn thời lượng</span></li>
-              <li><b>Hưng cảm nhẹ:</b> ≥ 4 ngày; thay đổi quan sát được nhưng không cần nhập viện/không suy giảm chức năng nặng.</li>
-              <li><b>Hỗn hợp:</b> cùng lúc triệu chứng tăng khí sắc & trầm cảm → <span class="font-semibold">nguy cơ tự sát tăng</span>.</li>
+              <li><b>Hưng cảm:</b> ≥ 1 tuần hoặc mọi thời gian nếu cần nhập viện; suy giảm chức năng rõ, có thể loạn thần.</li>
+              <li><b>Hưng cảm nhẹ:</b> ≥ 4 ngày; thay đổi quan sát được, không cần nhập viện/không suy giảm nặng, không loạn thần.</li>
+              <li><b>Đặc điểm hỗn hợp:</b> đồng thời triệu chứng “lên” và “xuống” → nguy cơ tự sát tăng, cần lượng giá an toàn.</li>
             </ul>
-            <p class="mt-2 text-slate-600">Lưu ý: BN thường trình diện ở pha trầm cảm → dễ chẩn nhầm MDD.</p>
           </div>
         </article>
-        <!-- Card 2 -->
+        <!-- Card 2: Screening -->
         <article class="group rounded-2xl border bg-white shadow-sm hover:shadow-md">
-          <button data-acc="screen" class="w-full text-left p-4">
+          <button data-acc="screen" class="w-full text-left p-4 no-print">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm uppercase tracking-wider text-blue-600 font-semibold">Sàng lọc</div>
@@ -70,15 +120,15 @@
           </button>
           <div id="acc-screen" class="hidden px-4 pb-4 text-sm leading-relaxed">
             <ul class="list-disc pl-5">
-              <li><b>MDQ:</b> 13 câu, sàng lọc phổ lưỡng cực; độ tin cậy trong cộng đồng ~28%.</li>
-              <li><b>HCL-32:</b> rà lịch sử hưng cảm nhẹ.</li>
-              <li><b>PHQ-9:</b> lượng giá nhanh mức trầm cảm hiện tại.</li>
+              <li><b>MDQ:</b> tầm soát phổ lưỡng cực (lịch sử triệu chứng “lên mood”).</li>
+              <li><b>HCL-32:</b> nhạy với hưng cảm nhẹ (RLLC II).</li>
+              <li><b>PHQ-9:</b> lượng giá mức trầm cảm hiện tại.</li>
             </ul>
           </div>
         </article>
-        <!-- Card 3 -->
+        <!-- Card 3: Epi -->
         <article class="group rounded-2xl border bg-white shadow-sm hover:shadow-md">
-          <button data-acc="epi" class="w-full text-left p-4">
+          <button data-acc="epi" class="w-full text-left p-4 no-print">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm uppercase tracking-wider text-blue-600 font-semibold">Dịch tễ & Nguy cơ</div>
@@ -89,34 +139,94 @@
           </button>
           <div id="acc-epi" class="hidden px-4 pb-4 text-sm leading-relaxed">
             <ul class="list-disc pl-5">
-              <li>RLLC I ~1% suốt đời; RLLC ít phổ biến hơn MDD.</li>
-              <li>~90% tái phát hưng cảm lần 2 trong 5 năm.</li>
-              <li>Đồng mắc rượu/chất rất cao (~2/3); tự sát: 25–50% có hành vi, ~15% tử vong.</li>
-              <li>Pha trầm cảm chiếm ưu thế, đặc biệt ở RLLC II.</li>
+              <li>RLLC I suốt đời ~1%; RLLC II thấp hơn nhưng trầm cảm chiếm ưu thế.</li>
+              <li>~90% có cơn hưng cảm thứ hai trong 5 năm đầu.</li>
+              <li>Đồng mắc rượu/chất cao; nguy cơ tự sát nổi bật.</li>
             </ul>
           </div>
         </article>
-        <!-- Card 4 -->
+        <!-- Card 4: Tx -->
         <article class="group rounded-2xl border bg-white shadow-sm hover:shadow-md">
-          <button data-acc="tx" class="w-full text-left p-4">
+          <button data-acc="tx" class="w-full text-left p-4 no-print">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm uppercase tracking-wider text-blue-600 font-semibold">Điều trị</div>
-                <div class="text-base font-medium">Lithium • Các giai đoạn • Cảnh báo</div>
+                <div class="text-base font-medium">Lithium • Giai đoạn • Cảnh báo</div>
               </div>
               <span class="text-blue-600">▼</span>
             </div>
           </button>
           <div id="acc-tx" class="hidden px-4 pb-4 text-sm leading-relaxed">
             <ul class="list-disc pl-5">
-              <li><b>3 giai đoạn:</b> Cấp (an toàn/khống chế) → Củng cố (mất triệu chứng) → Duy trì (≥1 năm; có thể suốt đời).</li>
-              <li><b>Lithium:</b> bằng chứng mạnh ngăn tái phát & giảm nguy cơ tự sát.</li>
-              <li><b>Cảnh báo:</b> trầm cảm trong RLLC <u>không dùng chống trầm cảm đơn trị</u> vì nguy cơ “hưng hoá”.</li>
-              <li>ECT: cân nhắc khi nặng/kháng trị hoặc có nguy cơ cao.</li>
+              <li><b>3 giai đoạn:</b> Cấp → Củng cố → Duy trì (kéo dài; có thể suốt đời).</li>
+              <li><b>Lithium:</b> giảm tái phát & nguy cơ tự sát; cân nhắc valproate/atypicals/ECT tùy pha & nặng.</li>
+              <li><b>Tránh</b> chống trầm cảm đơn trị trong trầm cảm RLLC (nguy cơ chuyển cực/hưng hóa).</li>
             </ul>
           </div>
         </article>
       </div>
+    </section>
+
+    <!-- BẢNG SO SÁNH -->
+    <section class="mb-10">
+      <h3 class="text-xl font-semibold text-blue-700 mb-3">Bảng so sánh: RLLC I vs RLLC II vs Đặc điểm hỗn hợp</h3>
+      <div class="overflow-x-auto bg-white border rounded-2xl shadow-sm">
+        <table class="min-w-full text-sm">
+          <thead class="bg-blue-50 text-blue-900">
+            <tr class="text-left">
+              <th class="p-3">Tiêu chí</th>
+              <th class="p-3">RLLC I</th>
+              <th class="p-3">RLLC II</th>
+              <th class="p-3">Đặc điểm hỗn hợp*</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y">
+            <tr>
+              <td class="p-3 font-medium">Dạng cơn “lên”</td>
+              <td class="p-3">≥ 1 cơn <b>hưng cảm</b> (có thể loạn thần/nhập viện)</td>
+              <td class="p-3"><b>Hưng cảm nhẹ</b> (≥4 ngày), <u>không</u> loạn thần/nhập viện</td>
+              <td class="p-3">Triệu chứng “lên” <i>và</i> “xuống” cùng lúc</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Thời lượng tối thiểu</td>
+              <td class="p-3">Hưng cảm ≥ 7 ngày (hoặc bất kỳ nếu nhập viện)</td>
+              <td class="p-3">Hưng nhẹ ≥ 4 ngày</td>
+              <td class="p-3">Đáp ứng tiêu chí pha hiện tại + số triệu chứng đối cực</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Suy giảm chức năng</td>
+              <td class="p-3">Rõ rệt; thường cần can thiệp</td>
+              <td class="p-3">Không suy giảm <i>nặng</i></td>
+              <td class="p-3">Thường <b>nặng</b> do xung đột khí sắc</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Loạn thần</td>
+              <td class="p-3">Có thể có</td>
+              <td class="p-3">Không</td>
+              <td class="p-3">Có thể xuất hiện (tùy pha)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Kiểu diễn tiến</td>
+              <td class="p-3">Chu kỳ; tái phát cao (~90% hưng lần 2/5 năm)</td>
+              <td class="p-3">Pha <b>trầm cảm</b> thường chiếm ưu thế</td>
+              <td class="p-3">Nguy cơ <b>tự sát</b> tăng</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Sàng lọc gợi ý</td>
+              <td class="p-3">MDQ</td>
+              <td class="p-3">HCL-32 (tập trung hưng nhẹ)</td>
+              <td class="p-3">MDQ/HCL-32 + khai thác chi tiết</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Điều trị gợi ý</td>
+              <td class="p-3">Ổn định khí sắc (Lithium/Valproate/Atypicals), ECT khi nặng</td>
+              <td class="p-3">Như RLLC I; <b>tránh</b> chống trầm cảm đơn trị</td>
+              <td class="p-3">Xử trí an toàn ưu tiên; phối hợp chống hưng & chống trầm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">*“Đặc điểm hỗn hợp” là đặc tả pha (manic/hypomanic/depressive) kèm đủ số triệu chứng đối cực.</p>
     </section>
 
     <!-- Flashcards -->
@@ -130,8 +240,8 @@
               <div class="text-sm text-blue-600 font-semibold mb-2">Hưng cảm</div>
               <p class="text-slate-700">Nhấn để xem tiêu chuẩn thời lượng</p>
             </div>
-            <div class="flip-back absolute inset-0 rounded-2xl border bg-blue-50 p-4">
-              <p class="text-sm"><b>≥ 1 tuần</b> hoặc bất kỳ thời gian nào nếu cần nhập viện; tăng khí sắc/năng lượng + cụm triệu chứng đi kèm, suy giảm đáng kể.</p>
+            <div class="flip-back rounded-2xl border bg-blue-50 p-4">
+              <p class="text-sm"><b>≥ 1 tuần</b> hoặc bất kỳ nếu cần nhập viện; suy giảm chức năng rõ; có thể loạn thần.</p>
             </div>
           </div>
         </div>
@@ -142,8 +252,8 @@
               <div class="text-sm text-blue-600 font-semibold mb-2">Hưng cảm nhẹ</div>
               <p class="text-slate-700">Nhấn để xem tiêu chuẩn thời lượng</p>
             </div>
-            <div class="flip-back absolute inset-0 rounded-2xl border bg-blue-50 p-4">
-              <p class="text-sm"><b>≥ 4 ngày</b>; thay đổi quan sát được nhưng <i>không</i> cần nhập viện/không suy giảm chức năng nặng.</p>
+            <div class="flip-back rounded-2xl border bg-blue-50 p-4">
+              <p class="text-sm"><b>≥ 4 ngày</b>; thay đổi quan sát được; không nhập viện/không loạn thần.</p>
             </div>
           </div>
         </div>
@@ -154,13 +264,13 @@
               <div class="text-sm text-blue-600 font-semibold mb-2">Đặc điểm hỗn hợp</div>
               <p class="text-slate-700">Nhấn để xem lâm sàng then chốt</p>
             </div>
-            <div class="flip-back absolute inset-0 rounded-2xl border bg-blue-50 p-4">
-              <p class="text-sm">Triệu chứng tăng khí sắc (năng lượng/ý tưởng dồn dập) <i>kèm</i> bi quan/vô vọng → <b>tăng nguy cơ tự sát</b>, cần lượng giá khẩn.</p>
+            <div class="flip-back rounded-2xl border bg-blue-50 p-4">
+              <p class="text-sm">“Lên” và “xuống” cùng lúc → xung động, mất ngủ, vô vọng; <b>nguy cơ tự sát</b> tăng, ưu tiên an toàn.</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-3 text-xs text-slate-500">Ghi chú: BN thường đến khám ở pha trầm cảm → cần chủ động khai thác tiền sử “lên mood”.</div>
+      <div class="mt-3 text-xs text-slate-500">Ghi chú: BN thường đến khám ở pha trầm cảm → chủ động hỏi lịch sử “lên mood”.</div>
     </section>
 
     <!-- Cảnh báo -->
@@ -168,18 +278,18 @@
       <div class="rounded-2xl border-l-4 border-blue-600 bg-blue-50 p-4">
         <h4 class="font-semibold text-blue-800">⚠️ Cảnh báo điều trị quan trọng</h4>
         <ul class="list-disc pl-5 text-sm leading-relaxed text-slate-700 mt-1">
-          <li>Trầm cảm trong rối loạn lưỡng cực: <b>tránh chống trầm cảm đơn trị</b> (nguy cơ “hưng hoá”).</li>
+          <li>Trầm cảm trong RLLC: <b>tránh chống trầm cảm đơn trị</b> (nguy cơ chuyển cực/hưng hoá).</li>
           <li><b>Lithium</b> là nền tảng duy trì: giảm tái phát và nguy cơ tự sát; cân nhắc ECT khi nặng/kháng trị.</li>
-          <li>Giáo dục người nhà: nhận diện cảnh báo tự sát, cách tiếp cận hỗ trợ, quản lý stress.</li>
+          <li>Giáo dục gia đình: nhận diện cảnh báo tự sát, hỗ trợ ngủ & tuân thủ điều trị.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Quiz -->
-    <section class="mb-16">
-      <h3 class="text-xl font-semibold text-blue-700 mb-3">Mini-quiz (8 câu)</h3>
+    <!-- QUIZ (24 CÂU) -->
+    <section class="mb-16 print-break">
+      <h3 class="text-xl font-semibold text-blue-700 mb-3">Bộ câu hỏi luyện thi (24 câu)</h3>
       <form id="quiz" class="space-y-6">
-        <!-- Q1 -->
+        <!-- Câu 1-8: giữ nguyên logic cũ -->
         <fieldset class="bg-white border rounded-2xl p-4">
           <legend class="font-medium">1) Thời lượng tối thiểu của <b>hưng cảm</b> theo DSM-5-TR là…</legend>
           <div class="mt-2 space-y-1 text-sm">
@@ -188,9 +298,9 @@
             <label class="block"><input type="radio" name="q1" value="C" class="mr-2">C) ≥ 2 tuần</label>
             <label class="block"><input type="radio" name="q1" value="D" class="mr-2">D) ≥ 1 tháng</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q1">Đáp án đúng: B. (Hưng cảm ≥1 tuần hoặc mọi thời gian nếu cần nhập viện).</p>
+          <p class="hidden mt-2 text-xs" data-explain="q1">Đáp án: B – tiêu chuẩn thời lượng hưng cảm.</p>
         </fieldset>
-        <!-- Q2 -->
+
         <fieldset class="bg-white border rounded-2xl p-4">
           <legend class="font-medium">2) Thời lượng tối thiểu của <b>hưng cảm nhẹ</b> là…</legend>
           <div class="mt-2 space-y-1 text-sm">
@@ -199,9 +309,9 @@
             <label class="block"><input type="radio" name="q2" value="A" class="mr-2">A) ≥ 2 tuần</label>
             <label class="block"><input type="radio" name="q2" value="D" class="mr-2">D) ≥ 1 tháng</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q2">Đáp án đúng: C. (Hưng cảm nhẹ ≥4 ngày).</p>
+          <p class="hidden mt-2 text-xs" data-explain="q2">Đáp án: C – hưng nhẹ ≥ 4 ngày.</p>
         </fieldset>
-        <!-- Q3 -->
+
         <fieldset class="bg-white border rounded-2xl p-4">
           <legend class="font-medium">3) Công cụ sàng lọc hữu ích để rà <b>hưng cảm nhẹ</b> là…</legend>
           <div class="mt-2 space-y-1 text-sm">
@@ -210,9 +320,9 @@
             <label class="block"><input type="radio" name="q3" value="C" class="mr-2">C) CAPS-5</label>
             <label class="block"><input type="radio" name="q3" value="D" class="mr-2">D) PCL-5</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q3">Đáp án đúng: A. (HCL-32).</p>
+          <p class="hidden mt-2 text-xs" data-explain="q3">Đáp án: A – HCL-32.</p>
         </fieldset>
-        <!-- Q4 -->
+
         <fieldset class="bg-white border rounded-2xl p-4">
           <legend class="font-medium">4) Trong trầm cảm của RLLC II, <b>đơn trị chống trầm cảm</b> có thể gây…</legend>
           <div class="mt-2 space-y-1 text-sm">
@@ -221,20 +331,20 @@
             <label class="block"><input type="radio" name="q4" value="C" class="mr-2">C) Không ảnh hưởng</label>
             <label class="block"><input type="radio" name="q4" value="D" class="mr-2">D) Luôn gây loạn thần</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q4">Đáp án đúng: B. (Nguy cơ hưng hoá).</p>
+          <p class="hidden mt-2 text-xs" data-explain="q4">Đáp án: B – nguy cơ chuyển cực.</p>
         </fieldset>
-        <!-- Q5 -->
+
         <fieldset class="bg-white border rounded-2xl p-4">
-          <legend class="font-medium">5) Yếu tố <b>tăng nguy cơ tự sát</b> trong RLLC:</legend>
+          <legend class="font-medium">5) Yếu tố <b>tăng nguy cơ tự sát</b> trong RLLC là…</legend>
           <div class="mt-2 space-y-1 text-sm">
             <label class="block"><input type="radio" name="q5" value="D" class="mr-2">D) Tất cả đúng (mất ngủ kéo dài, xung động, lạm dụng rượu)</label>
             <label class="block"><input type="radio" name="q5" value="A" class="mr-2">A) Mất ngủ kéo dài</label>
             <label class="block"><input type="radio" name="q5" value="B" class="mr-2">B) Tính xung động</label>
             <label class="block"><input type="radio" name="q5" value="C" class="mr-2">C) Lạm dụng rượu</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q5">Đáp án đúng: D. (Các yếu tố trên đều làm tăng nguy cơ).</p>
+          <p class="hidden mt-2 text-xs" data-explain="q5">Đáp án: D – cả ba đều làm tăng nguy cơ.</p>
         </fieldset>
-        <!-- Q6 -->
+
         <fieldset class="bg-white border rounded-2xl p-4">
           <legend class="font-medium">6) Biện pháp có bằng chứng giảm nguy cơ tự sát lâu dài:</legend>
           <div class="mt-2 space-y-1 text-sm">
@@ -243,52 +353,227 @@
             <label class="block"><input type="radio" name="q6" value="C" class="mr-2">C) Z-drug</label>
             <label class="block"><input type="radio" name="q6" value="D" class="mr-2">D) Stimulant</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q6">Đáp án đúng: B. (Lithium).</p>
+          <p class="hidden mt-2 text-xs" data-explain="q6">Đáp án: B – Lithium.</p>
         </fieldset>
-        <!-- Q7 -->
+
         <fieldset class="bg-white border rounded-2xl p-4">
-          <legend class="font-medium">7) Phát biểu đúng về <b>dịch tễ</b>:</legend>
+          <legend class="font-medium">7) Phát biểu đúng về dịch tễ:</legend>
           <div class="mt-2 space-y-1 text-sm">
-            <label class="block"><input type="radio" name="q7" value="B" class="mr-2">B) Tỉ lệ mắc suốt đời RLLC I khoảng ~1% ở phương Tây</label>
+            <label class="block"><input type="radio" name="q7" value="B" class="mr-2">B) Tỉ lệ mắc suốt đời RLLC I khoảng ~1%</label>
             <label class="block"><input type="radio" name="q7" value="A" class="mr-2">A) RLLC phổ biến hơn MDD</label>
             <label class="block"><input type="radio" name="q7" value="C" class="mr-2">C) Chỉ gặp ở nữ</label>
             <label class="block"><input type="radio" name="q7" value="D" class="mr-2">D) Luôn khởi phát ở tuổi già</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q7">Đáp án đúng: B.</p>
+          <p class="hidden mt-2 text-xs" data-explain="q7">Đáp án: B.</p>
         </fieldset>
-        <!-- Q8 -->
+
         <fieldset class="bg-white border rounded-2xl p-4">
-          <legend class="font-medium">8) Nhận định đúng về <b>diễn tiến</b>:</legend>
+          <legend class="font-medium">8) Nhận định đúng về diễn tiến:</legend>
           <div class="mt-2 space-y-1 text-sm">
-            <label class="block"><input type="radio" name="q8" value="A" class="mr-2">A) 90% BN sẽ có cơn hưng cảm thứ hai trong vòng 5 năm sau cơn đầu tiên</label>
-            <label class="block"><input type="radio" name="q8" value="B" class="mr-2">B) Hiếm khi tái phát</label>
+            <label class="block"><input type="radio" name="q8" value="A" class="mr-2">A) 90% BN có cơn hưng cảm thứ hai trong 5 năm</label>
+            <label class="block"><input type="radio" name="q8" value="B" class="mr-2">B) Hiếm tái phát</label>
             <label class="block"><input type="radio" name="q8" value="C" class="mr-2">C) Không liên quan nhập viện</label>
             <label class="block"><input type="radio" name="q8" value="D" class="mr-2">D) Luôn chỉ có một cơn</label>
           </div>
-          <p class="hidden mt-2 text-xs" data-explain="q8">Đáp án đúng: A.</p>
+          <p class="hidden mt-2 text-xs" data-explain="q8">Đáp án: A.</p>
         </fieldset>
 
-        <div class="flex items-center gap-3">
+        <!-- Câu 9-24: thêm mới -->
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">9) Đặc điểm nào <b>không</b> phù hợp với hưng cảm nhẹ?</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q9" value="C" class="mr-2">C) Có loạn thần</label>
+            <label class="block"><input type="radio" name="q9" value="A" class="mr-2">A) ≥ 4 ngày</label>
+            <label class="block"><input type="radio" name="q9" value="B" class="mr-2">B) Không cần nhập viện</label>
+            <label class="block"><input type="radio" name="q9" value="D" class="mr-2">D) Thay đổi quan sát được</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q9">Đáp án: C – hưng nhẹ không có loạn thần.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">10) Công cụ sàng lọc tập trung vào <b>lịch sử</b> các giai đoạn “lên”:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q10" value="A" class="mr-2">A) MDQ</label>
+            <label class="block"><input type="radio" name="q10" value="B" class="mr-2">B) HAM-D</label>
+            <label class="block"><input type="radio" name="q10" value="C" class="mr-2">C) BDI-II</label>
+            <label class="block"><input type="radio" name="q10" value="D" class="mr-2">D) GAD-7</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q10">Đáp án: A – MDQ sàng lọc phổ lưỡng cực.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">11) Lựa chọn phù hợp nhất để <b>duy trì</b> giảm tái phát:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q11" value="B" class="mr-2">B) Lithium</label>
+            <label class="block"><input type="radio" name="q11" value="A" class="mr-2">A) Benzodiazepine</label>
+            <label class="block"><input type="radio" name="q11" value="C" class="mr-2">C) Zolpidem</label>
+            <label class="block"><input type="radio" name="q11" value="D" class="mr-2">D) SSRI đơn trị</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q11">Đáp án: B.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">12) Phát biểu đúng về “đặc điểm hỗn hợp”:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q12" value="D" class="mr-2">D) Nguy cơ tự sát tăng cần ưu tiên an toàn</label>
+            <label class="block"><input type="radio" name="q12" value="A" class="mr-2">A) Luôn là loạn thần</label>
+            <label class="block"><input type="radio" name="q12" value="B" class="mr-2">B) Chỉ xuất hiện ở RLLC I</label>
+            <label class="block"><input type="radio" name="q12" value="C" class="mr-2">C) Không cần quan tâm điều trị</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q12">Đáp án: D.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">13) Khi nghi ngờ trầm cảm trong RLLC, việc nào quan trọng nhất?</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q13" value="A" class="mr-2">A) Khai thác tiền sử giai đoạn “lên” (hưng/hưng nhẹ)</label>
+            <label class="block"><input type="radio" name="q13" value="B" class="mr-2">B) Bắt đầu SSRI ngay</label>
+            <label class="block"><input type="radio" name="q13" value="C" class="mr-2">C) Bỏ qua nguy cơ tự sát</label>
+            <label class="block"><input type="radio" name="q13" value="D" class="mr-2">D) Chỉ dùng thuốc ngủ</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q13">Đáp án: A.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">14) Yếu tố nào hay gặp <b>đồng mắc</b> với RLLC?</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q14" value="C" class="mr-2">C) Sử dụng rượu/chất</label>
+            <label class="block"><input type="radio" name="q14" value="A" class="mr-2">A) Tăng huyết áp</label>
+            <label class="block"><input type="radio" name="q14" value="B" class="mr-2">B) Cận thị</label>
+            <label class="block"><input type="radio" name="q14" value="D" class="mr-2">D) Viêm da cơ địa</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q14">Đáp án: C.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">15) Trong cơn hưng cảm nặng/kháng trị, lựa chọn nào có thể cân nhắc?</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q15" value="A" class="mr-2">A) ECT</label>
+            <label class="block"><input type="radio" name="q15" value="B" class="mr-2">B) Vitamin C</label>
+            <label class="block"><input type="radio" name="q15" value="C" class="mr-2">C) Thuốc ho</label>
+            <label class="block"><input type="radio" name="q15" value="D" class="mr-2">D) Chỉ liệu pháp ngủ</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q15">Đáp án: A.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">16) Phát biểu đúng về RLLC II:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q16" value="D" class="mr-2">D) Pha trầm cảm chiếm ưu thế lâm sàng</label>
+            <label class="block"><input type="radio" name="q16" value="A" class="mr-2">A) Bắt buộc có loạn thần</label>
+            <label class="block"><input type="radio" name="q16" value="B" class="mr-2">B) Hưng cảm ≥ 7 ngày</label>
+            <label class="block"><input type="radio" name="q16" value="C" class="mr-2">C) Không có hưng nhẹ</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q16">Đáp án: D.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">17) Đặc điểm nào có thể gợi ý “chuyển cực” do chống trầm cảm?</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q17" value="B" class="mr-2">B) Mất ngủ + nói nhanh + ý tưởng dồn dập sau khi tăng liều</label>
+            <label class="block"><input type="radio" name="q17" value="A" class="mr-2">A) Buồn ngủ nhiều</label>
+            <label class="block"><input type="radio" name="q17" value="C" class="mr-2">C) Ăn ngon miệng</label>
+            <label class="block"><input type="radio" name="q17" value="D" class="mr-2">D) Giảm lo âu</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q17">Đáp án: B.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">18) Mục tiêu của giai đoạn <b>củng cố</b> là:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q18" value="A" class="mr-2">A) Duy trì lui bệnh và phòng tái phát sớm</label>
+            <label class="block"><input type="radio" name="q18" value="B" class="mr-2">B) Chỉ xử trí mất ngủ</label>
+            <label class="block"><input type="radio" name="q18" value="C" class="mr-2">C) Ngừng mọi thuốc ngay khi đỡ</label>
+            <label class="block"><input type="radio" name="q18" value="D" class="mr-2">D) Chỉ tư vấn không thuốc</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q18">Đáp án: A.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">19) Khi BN có đặc điểm hỗn hợp, việc nào sau đây <b>ưu tiên</b>?</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q19" value="D" class="mr-2">D) Lượng giá an toàn & nguy cơ tự sát</label>
+            <label class="block"><input type="radio" name="q19" value="A" class="mr-2">A) Chỉ theo dõi</label>
+            <label class="block"><input type="radio" name="q19" value="B" class="mr-2">B) Chỉ liệu pháp thư giãn</label>
+            <label class="block"><input type="radio" name="q19" value="C" class="mr-2">C) Uống cafe nhiều hơn</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q19">Đáp án: D.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">20) Phát biểu đúng về MDQ/HCL-32:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q20" value="B" class="mr-2">B) Công cụ sàng lọc, <b>không</b> thay thế chẩn đoán lâm sàng</label>
+            <label class="block"><input type="radio" name="q20" value="A" class="mr-2">A) Là tiêu chuẩn vàng chẩn đoán</label>
+            <label class="block"><input type="radio" name="q20" value="C" class="mr-2">C) Chỉ dùng cho người ≥ 60 tuổi</label>
+            <label class="block"><input type="radio" name="q20" value="D" class="mr-2">D) Dùng để đo IQ</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q20">Đáp án: B.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">21) Yếu tố giúp dự báo tái phát ở RLLC:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q21" value="A" class="mr-2">A) Thiếu ngủ, stress, không tuân thủ thuốc</label>
+            <label class="block"><input type="radio" name="q21" value="B" class="mr-2">B) Uống nước lọc</label>
+            <label class="block"><input type="radio" name="q21" value="C" class="mr-2">C) Đi bộ 10 phút</label>
+            <label class="block"><input type="radio" name="q21" value="D" class="mr-2">D) Ngủ đúng giờ</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q21">Đáp án: A.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">22) Dấu hiệu <b>động năng</b> thường thấy trong hưng cảm:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q22" value="C" class="mr-2">C) Nói nhanh, tăng hoạt động, giảm nhu cầu ngủ</label>
+            <label class="block"><input type="radio" name="q22" value="A" class="mr-2">A) Chậm chạp tâm thần vận động</label>
+            <label class="block"><input type="radio" name="q22" value="B" class="mr-2">B) Tụt khí sắc kéo dài</label>
+            <label class="block"><input type="radio" name="q22" value="D" class="mr-2">D) Hoang tưởng tội lỗi</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q22">Đáp án: C.</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">23) Trong duy trì, mục tiêu nồng độ huyết thanh của Lithium (tham khảo) thường ở mức:</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q23" value="B" class="mr-2">B) ~0.6–0.8 mEq/L (tùy cá thể & khuyến cáo từng cơ sở)</label>
+            <label class="block"><input type="radio" name="q23" value="A" class="mr-2">A) 0.0 mEq/L</label>
+            <label class="block"><input type="radio" name="q23" value="C" class="mr-2">C) 3.5–4.0 mEq/L</label>
+            <label class="block"><input type="radio" name="q23" value="D" class="mr-2">D) Không cần theo dõi</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q23">Đáp án: B – phạm vi gợi ý thường dùng khi duy trì (điều chỉnh theo cá thể/khuyến cáo).</p>
+        </fieldset>
+
+        <fieldset class="bg-white border rounded-2xl p-4">
+          <legend class="font-medium">24) Lựa chọn nào <b>không phù hợp</b> khi xử trí trầm cảm trong RLLC?</legend>
+          <div class="mt-2 space-y-1 text-sm">
+            <label class="block"><input type="radio" name="q24" value="D" class="mr-2">D) SSRI đơn trị, không phối hợp ổn định khí sắc</label>
+            <label class="block"><input type="radio" name="q24" value="A" class="mr-2">A) Cân nhắc thêm ổn định khí sắc</label>
+            <label class="block"><input type="radio" name="q24" value="B" class="mr-2">B) Theo dõi sát nguy cơ chuyển cực</label>
+            <label class="block"><input type="radio" name="q24" value="C" class="mr-2">C) Giáo dục bệnh nhân & gia đình</label>
+          </div>
+          <p class="hidden mt-2 text-xs" data-explain="q24">Đáp án: D.</p>
+        </fieldset>
+
+        <div class="flex items-center gap-3 no-print">
           <button type="button" id="btn-grade"
                   class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Chấm điểm</button>
+          <button type="reset"
+                  class="px-4 py-2 rounded-lg border border-blue-600 text-blue-700 hover:bg-blue-50">Làm lại</button>
           <div id="score" class="text-sm text-slate-700"></div>
         </div>
       </form>
     </section>
 
-    <!-- Tham khảo nhanh (nguồn trong tài liệu dự án) -->
+    <!-- Tham khảo nhanh -->
     <section class="mb-8 text-xs text-slate-500">
-      <h4 class="font-semibold text-slate-700 mb-1">Nguồn trong <i>7. Phổ lưỡng cực.pdf</i> (trích yếu):</h4>
-      <ul class="list-disc pl-5">
-        <li>Dịch tễ, sàng lọc MDQ/HCL-32/PHQ-9; chẩn đoán thường đến trễ & dễ nhầm MDD. :contentReference[oaicite:9]{index=9} :contentReference[oaicite:10]{index=10} :contentReference[oaicite:11]{index=11}</li>
-        <li>Nguy cơ/diễn tiến: 90% có cơn hưng cảm thứ hai trong 5 năm; pha trầm cảm chiếm ưu thế; đồng mắc chất & tự sát. :contentReference[oaicite:12]{index=12} :contentReference[oaicite:13]{index=13} :contentReference[oaicite:14]{index=14}</li>
-        <li>Điều trị: giai đoạn cấp–củng cố–duy trì; Lithium giảm tái phát/tự sát; thận trọng với chống trầm cảm đơn trị. :contentReference[oaicite:15]{index=15} :contentReference[oaicite:16]{index=16} :contentReference[oaicite:17]{index=17}</li>
-      </ul>
+      <h4 class="font-semibold text-slate-700 mb-1">Nguồn nội bộ: <i>7. Phổ lưỡng cực.pdf</i> (tóm tắt phục vụ học tập).</h4>
+      <p>Trọng tâm: tiêu chuẩn hưng cảm/hưng nhẹ, sàng lọc MDQ/HCL-32, dịch tễ – nguy cơ tự sát, nguyên tắc điều trị theo giai đoạn, vai trò Lithium & cảnh báo chuyển cực khi dùng chống trầm cảm đơn trị.</p>
     </section>
   </main>
 
   <footer class="max-w-6xl mx-auto px-4 pb-10 text-xs text-slate-500">
-    <p>Tài liệu phục vụ học tập nội bộ môn Tâm bệnh học – trích lược từ <i>7. Phổ lưỡng cực.pdf</i>.</p>
+    <p>Tài liệu học tập nội bộ – dùng cho mục đích đào tạo.</p>
   </footer>
 
   <script>
@@ -305,8 +590,24 @@
       document.body.classList.toggle('text-sm');
     });
 
+    // Exam code generator
+    function genMaDe(){
+      const n = Math.floor(100 + Math.random()*900);
+      document.getElementById('ma-de').textContent = 'LC-' + n;
+    }
+    genMaDe();
+
+    // Print button
+    document.getElementById('btn-print').addEventListener('click', ()=>{
+      window.print();
+    });
+
     // Quiz grading
-    const answers = { q1:'B', q2:'C', q3:'A', q4:'B', q5:'D', q6:'B', q7:'B', q8:'A' };
+    const answers = {
+      q1:'B', q2:'C', q3:'A', q4:'B', q5:'D', q6:'B', q7:'B', q8:'A',
+      q9:'C', q10:'A', q11:'B', q12:'D', q13:'A', q14:'C', q15:'A', q16:'D',
+      q17:'B', q18:'A', q19:'D', q20:'B', q21:'A', q22:'C', q23:'B', q24:'D'
+    };
     document.getElementById('btn-grade').addEventListener('click', ()=>{
       let correct = 0, total = Object.keys(answers).length;
       Object.entries(answers).forEach(([k,v])=>{
@@ -315,7 +616,8 @@
         if (explain) explain.classList.remove('hidden');
         if (chosen && chosen.value === v) { correct++; }
       });
-      document.getElementById('score').textContent = `Kết quả: ${correct}/${total} câu đúng`;
+      const scoreText = `Kết quả: ${correct}/${total} câu đúng • Điểm ~ ${(correct/total*10).toFixed(2)}`;
+      document.getElementById('score').textContent = scoreText;
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
   </script>

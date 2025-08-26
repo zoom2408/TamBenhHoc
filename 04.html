@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tâm bệnh học — Trầm cảm chủ yếu (MDD)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      .no-print { display:none !important; }
+      .print-block { display:block !important; }
+      body { color: #000; }
+      a { text-decoration:none; color:#000 }
+      .page { box-shadow:none !important; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-blue-50 to-white text-slate-800 min-h-screen">
+  <!-- Header -->
+  <header class="sticky top-0 z-30 backdrop-blur bg-white/70 border-b border-blue-100">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-blue-600 text-white grid place-content-center font-bold">MDD</div>
+      <div class="flex-1">
+        <h1 class="text-xl md:text-2xl font-semibold text-blue-700">Trầm cảm chủ yếu — Tài liệu học tương tác</h1>
+        <p class="text-sm text-slate-500">Tóm tắt theo slide môn Tâm bệnh học (DSM‑5‑TR), kèm so sánh, luyện tập & in PDF</p>
+      </div>
+      <div class="no-print flex items-center gap-2">
+        <button id="printBtn" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 active:scale-[0.98]">In ra PDF</button>
+        <button id="resetQuiz" class="px-3 py-2 rounded-lg border border-blue-200 text-blue-700 hover:bg-blue-50">Làm lại bài</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-4 md:p-6 space-y-8">
+    <!-- Hero / Overview -->
+    <section class="page rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden">
+      <div class="p-6 md:p-8 grid md:grid-cols-3 gap-6 items-center">
+        <div class="md:col-span-2">
+          <h2 class="text-2xl font-bold text-blue-700">Bức tranh nhanh</h2>
+          <ul class="mt-3 space-y-2 text-slate-700 leading-relaxed">
+            <li>• <span class="font-semibold">Chẩn đoán MDD</span>: ≥5 triệu chứng/≥2 tuần và phải có <em>khí sắc trầm</em> hoặc <em>mất hứng thú</em>; gây khổ sở/suy giảm; không do chất/bệnh; chưa từng có hưng cảm/hưng cảm nhẹ.</li>
+            <li>• <span class="font-semibold">Phân biệt trọng tâm</span>: Mất mát (tang thương) vs MDD; PDD (dai dẳng ≥2 năm) vs MDD.</li>
+            <li>• <span class="font-semibold">Điều trị</span>: SSRI/SNRI đầu tay; rTMS/ECT khi kháng trị hoặc nặng/có loạn thần; duy trì sau ổn định để phòng tái phát.</li>
+            <li>• <span class="font-semibold">Cơ chế</span>: Mạng lưới não (PFC, sgACC, amygdala…); yếu tố nhận thức (Bộ ba nhận thức, quy gán nội tại‑ổn định‑toàn thể, bất lực học được), thiên lệch chú ý/diễn giải.</li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-5 border border-blue-100">
+          <p class="text-sm text-slate-600">Hướng dẫn sử dụng</p>
+          <ol class="list-decimal list-inside text-slate-700 mt-2 space-y-1">
+            <li>Mở các thẻ kiến thức bên dưới → đọc tiêu chuẩn, bảng so sánh.</li>
+            <li>Làm <strong>Practical Test</strong> (15 câu) → xem giải thích & điểm.</li>
+            <li>Dùng nút <strong>In ra PDF</strong> để xuất bản tóm lược.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Knowledge Accordions -->
+    <section class="grid md:grid-cols-2 gap-6">
+      <!-- DSM-5-TR Criteria -->
+      <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden">
+        <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
+          <span class="font-semibold text-blue-800">Tiêu chuẩn DSM‑5‑TR cho MDD</span>
+          <span class="text-blue-600">▼</span>
+        </button>
+        <div class="p-6 space-y-3 hidden" data-panel>
+          <p><span class="font-semibold">A.</span> ≥5/9 triệu chứng trong ≥2 tuần, phải có <em>khí sắc trầm</em> hoặc <em>mất hứng thú</em> (giấc ngủ, khẩu vị/cân nặng, TT vận động, mệt mỏi, vô dụng/tội lỗi, tập trung, ý tưởng chết/tự sát).</p>
+          <p><span class="font-semibold">B.</span> Gây khổ sở/suy giảm chức năng đáng kể.</p>
+          <p><span class="font-semibold">C.</span> Không do tác động sinh lý của chất/bệnh nội khoa.</p>
+          <p><span class="font-semibold">D.</span> Không nằm trong phổ loạn thần phân liệt, TTPL, RL hoang tưởng…</p>
+          <p><span class="font-semibold">E.</span> Chưa từng có hưng cảm/hưng cảm nhẹ.</p>
+          <div class="text-xs text-slate-500">Xem thêm: phân loại mức độ (nhẹ/trung bình/nặng), thuyên giảm một phần/hoàn toàn, tiến triển mạn tính.</div>
+        </div>
+      </article>
+
+      <!-- Severity & Course -->
+      <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden">
+        <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
+          <span class="font-semibold text-blue-800">Mức độ & diễn tiến</span>
+          <span class="text-blue-600">▼</span>
+        </button>
+        <div class="p-6 space-y-3 hidden" data-panel>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Nhẹ</strong>: ít triệu chứng, đau buồn nhưng quản lý được; suy giảm nhẹ.</li>
+            <li><strong>Trung bình</strong>: giữa nhẹ và nặng.</li>
+            <li><strong>Nặng</strong>: nhiều triệu chứng/cường độ cao, có thể kèm loạn thần.</li>
+            <li><strong>Thuyên giảm một phần</strong>: còn triệu chứng nhưng chưa đủ tiêu chuẩn, < 2 tháng.</li>
+            <li><strong>Thuyên giảm hoàn toàn</strong>: 2 tháng không còn triệu chứng đáng kể.</li>
+            <li><strong>Mạn tính</strong>: triệu chứng dai dẳng > 2 năm.</li>
+          </ul>
+          <p class="text-sm text-slate-600">Duy trì điều trị thêm ~6 tháng sau khi ổn định giúp giảm nguy cơ tái phát.</p>
+        </div>
+      </article>
+
+      <!-- Comparison: Grief vs MDD -->
+      <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden md:col-span-2">
+        <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
+          <span class="font-semibold text-blue-800">Bảng so sánh: Tang thương (mất mát) vs MDD</span>
+          <span class="text-blue-600">▼</span>
+        </button>
+        <div class="p-6 hidden" data-panel>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left border border-blue-100 rounded-xl overflow-hidden">
+              <thead class="bg-blue-600 text-white">
+                <tr>
+                  <th class="p-3">Tiêu chí</th>
+                  <th class="p-3">Tang thương/mất mát</th>
+                  <th class="p-3">MDD</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Cảm xúc</td>
+                  <td class="p-3">Đau khổ, trống rỗng</td>
+                  <td class="p-3">Buồn chán, mất hứng thú</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                  <td class="p-3 font-semibold">Diễn biến</td>
+                  <td class="p-3">Dao động & giảm dần theo thời gian</td>
+                  <td class="p-3">Dai dẳng, ngày càng tiêu cực</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Yếu tố tích cực</td>
+                  <td class="p-3">Vẫn giữ được</td>
+                  <td class="p-3">Mất dần</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                  <td class="p-3 font-semibold">Lòng tự tôn</td>
+                  <td class="p-3">Ít ảnh hưởng</td>
+                  <td class="p-3">Tự hạ thấp, nghi ngờ</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Ý nghĩ về cái chết</td>
+                  <td class="p-3">Nghiêng về đoàn tụ/ký ức; giảm dần</td>
+                  <td class="p-3">Kéo dài dai dẳng; cảm thấy cuộc sống vô nghĩa</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- Comparison: PDD vs MDD -->
+      <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden md:col-span-2">
+        <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
+          <span class="font-semibold text-blue-800">Bảng so sánh: Trầm cảm dai dẳng (PDD) vs Trầm cảm chủ yếu (MDD)</span>
+          <span class="text-blue-600">▼</span>
+        </button>
+        <div class="p-6 hidden" data-panel>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left border border-blue-100 rounded-xl overflow-hidden">
+              <thead class="bg-blue-600 text-white">
+                <tr>
+                  <th class="p-3">Tiêu chí</th>
+                  <th class="p-3">PDD</th>
+                  <th class="p-3">MDD</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Thời gian</td>
+                  <td class="p-3">≥ 2 năm (≥1 năm ở TE/TTN); không quá 2 tháng trống triệu chứng</td>
+                  <td class="p-3">≥ 2 tuần/giai đoạn</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                  <td class="p-3 font-semibold">Triệu chứng lõi</td>
+                  <td class="p-3">Khí sắc trầm hầu hết các ngày + ≥2: ngủ, ăn, mệt, tự đánh giá thấp, khó tập trung, tuyệt vọng</td>
+                  <td class="p-3">≥5/9: khí sắc trầm/mất hứng thú + các nhóm giấc ngủ, ăn, TT vận động, mệt, tội lỗi, tập trung, ý tưởng chết</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Mối quan hệ với hưng cảm</td>
+                  <td class="p-3">Chưa từng có hưng cảm/hưng cảm nhẹ</td>
+                  <td class="p-3">Chưa từng có hưng cảm/hưng cảm nhẹ (nếu có → lưỡng cực)</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                  <td class="p-3 font-semibold">Tình huống đặc biệt</td>
+                  <td class="p-3">Có thể chồng lấp giai đoạn MDD → “double depression”</td>
+                  <td class="p-3">Có đặc điểm mức độ, thuyên giảm một phần/hoàn toàn</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- Bio-psycho model -->
+      <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden md:col-span-2">
+        <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
+          <span class="font-semibold text-blue-800">Yếu tố sinh học — tâm lý (tóm tắt dễ nhớ)</span>
+          <span class="text-blue-600">▼</span>
+        </button>
+        <div class="p-6 grid md:grid-cols-3 gap-5 hidden" data-panel>
+          <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-4">
+            <h4 class="font-semibold text-blue-800">Não trạng</h4>
+            <ul class="text-sm mt-2 space-y-1">
+              <li>• Rối loạn <em>mạng</em> não thay vì 1 vùng đơn lẻ.</li>
+              <li>• Liên quan: PFC, sgACC, hạch hạnh nhân, thể vân bụng, hồi hải mã…</li>
+            </ul>
+          </div>
+          <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-4">
+            <h4 class="font-semibold text-blue-800">Tâm lý</h4>
+            <ul class="text-sm mt-2 space-y-1">
+              <li>• <em>Bộ ba nhận thức</em> (bản thân — thế giới — tương lai).</li>
+              <li>• Bất lực học được; quy gán nội tại‑ổn định‑toàn thể.</li>
+              <li>• Thiên lệch chú ý/diễn giải với kích thích tiêu cực.</li>
+            </ul>
+          </div>
+          <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-4">
+            <h4 class="font-semibold text-blue-800">Điều trị & Tiên lượng</h4>
+            <ul class="text-sm mt-2 space-y-1">
+              <li>• SSRI/SNRI đầu tay; cân nhắc rTMS/ECT khi kháng trị hoặc nặng/loạn thần.</li>
+              <li>• Duy trì ~6 tháng sau ổn định để giảm tái phát.</li>
+              <li>• Tiên lượng tốt: điều trị sớm, đáp ứng tốt, lối sống cân bằng.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Practical Test -->
+    <section class="page rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden">
+      <div class="p-6 md:p-8">
+        <h3 class="text-2xl font-bold text-blue-700">Practical Test — Kiểm tra nhanh 15 câu</h3>
+        <p class="text-slate-600 mt-1">Chọn 1 đáp án đúng nhất. Xem giải thích sau khi nộp.</p>
+        <div id="quiz" class="mt-6 space-y-6"></div>
+        <div class="mt-6 flex items-center gap-3">
+          <button id="submitQuiz" class="no-print px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Nộp bài</button>
+          <div id="score" class="text-blue-800 font-semibold"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer note for print -->
+    <section class="print-block hidden rounded-2xl border border-blue-200 p-4 text-center text-sm text-slate-600">
+      <div class="font-semibold">TRƯỜNG ĐH KHXH&NV — Môn Tâm bệnh học | Chủ đề: Trầm cảm chủ yếu (MDD)</div>
+      <div>Tài liệu tóm tắt tự học — xuất từ web tương tác (Tailwind, chủ đề xanh dương)</div>
+    </section>
+  </main>
+
+  <script>
+    // Accordion behavior
+    document.querySelectorAll('[data-acc]').forEach((btn)=>{
+      btn.addEventListener('click', ()=>{
+        const panel = btn.parentElement.querySelector('[data-panel]');
+        panel.classList.toggle('hidden');
+      });
+    });
+
+    // Print to PDF
+    document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+
+    // Quiz data (15 Qs)
+    const QUESTIONS = [
+      {
+        q: 'Điều kiện tối thiểu để chẩn đoán một giai đoạn MDD theo DSM‑5‑TR là gì?',
+        opts: ['≥5 triệu chứng/≥2 tuần và phải có khí sắc trầm hoặc mất hứng thú', '≥4 triệu chứng bất kỳ trong 1 tuần', 'Chỉ cần ý tưởng tự sát', 'Chỉ cần mất ngủ kéo dài'],
+        a: 0,
+        exp: 'DSM‑5‑TR yêu cầu ≥5/9 triệu chứng trong ≥2 tuần và phải có khí sắc trầm hoặc mất hứng thú.'
+      },
+      {
+        q: 'Tiêu chí B của MDD nhấn mạnh điểm nào?',
+        opts: ['Phải có loạn thần', 'Gây khổ sở/suy giảm chức năng đáng kể', 'Bắt buộc có sụt cân', 'Bắt buộc nhập viện'],
+        a: 1,
+        exp: 'Tiêu chí B: các triệu chứng gây khổ sở lâm sàng đáng kể hoặc suy giảm chức năng xã hội/nghề nghiệp.'
+      },
+      {
+        q: 'Tiêu chí E của MDD yêu cầu:',
+        opts: ['Không có tiền sử lo âu', 'Chưa từng có hưng cảm/hưng cảm nhẹ', 'Không có rối loạn giấc ngủ', 'Phải có ám ảnh cưỡng bức'],
+        a: 1,
+        exp: 'Nếu từng có hưng cảm/hưng cảm nhẹ thì thuộc phổ lưỡng cực, không chẩn đoán MDD đơn thuần.'
+      },
+      {
+        q: 'Đặc điểm nào nghiêng về tang thương hơn là MDD?',
+        opts: ['Buồn dai dẳng, tự hạ thấp, ý nghĩ cái chết kéo dài', 'Đau buồn dao động, vẫn còn các mặt tích cực', 'Mất hứng thú toàn diện', 'Tội lỗi quá mức, vô dụng'],
+        a: 1,
+        exp: 'Tang thương thường dao động và giảm dần, người bệnh còn giữ các mặt tích cực.'
+      },
+      {
+        q: 'Trong PDD (trầm cảm dai dẳng), yêu cầu thời gian là:',
+        opts: ['≥ 6 tháng', '≥ 2 năm (≥1 năm ở TE/TTN)', '≥ 1 tháng', 'Không cần thời gian'],
+        a: 1,
+        exp: 'PDD yêu cầu khí sắc trầm hầu hết các ngày trong ≥2 năm (≥1 năm ở trẻ em/TTN).'
+      },
+      {
+        q: 'Mức độ “nặng” trong MDD thường bao gồm:',
+        opts: ['Ít triệu chứng và dễ quản lý', 'Cường độ cao, nhiều triệu chứng, có thể kèm loạn thần', 'Không suy giảm chức năng', 'Chỉ rối loạn giấc ngủ'],
+        a: 1,
+        exp: 'Mức độ nặng: nhiều triệu chứng, khó quản lý, có thể có đặc điểm loạn thần.'
+      },
+      {
+        q: '“Thuyên giảm hoàn toàn” được hiểu là:',
+        opts: ['Hết triệu chứng 1 tuần', '2 tháng không còn triệu chứng đáng kể', 'Còn 1–2 triệu chứng nhẹ', 'Chỉ giảm lo âu'],
+        a: 1,
+        exp: 'Định nghĩa: trong 2 tháng qua không còn dấu/triệu chứng đáng kể.'
+      },
+      {
+        q: 'Lựa chọn đầu tay thường dùng cho MDD không loạn thần:',
+        opts: ['SSRI/SNRI', 'BZD đơn trị dài hạn', 'MAOI luôn ưu tiên', 'Chỉ liệu pháp thư giãn'],
+        a: 0,
+        exp: 'SSRI/SNRI là lựa chọn đầu tay được khuyến nghị rộng rãi.'
+      },
+      {
+        q: 'Khi MDD kháng trị hoặc nặng/có loạn thần, cân nhắc thủ thuật nào?',
+        opts: ['Liệu pháp ánh sáng duy nhất', 'TMS/ECT tùy trường hợp', 'Chỉ tăng liều benzodiazepine', 'Không có biện pháp nào'],
+        a: 1,
+        exp: 'rTMS dùng cho kháng trị; ECT hiệu quả cao trong nặng/loạn thần/kháng trị.'
+      },
+      {
+        q: 'Yếu tố di truyền trong MDD được mô tả như:',
+        opts: ['Tỷ lệ di truyền ~5%', '30–50% ở song sinh cùng trứng; con của cha/mẹ MDD có nguy cơ gấp đôi', '100% do gen', 'Không liên quan di truyền'],
+        a: 1,
+        exp: 'Các tổng hợp cho thấy đóng góp di truyền đáng kể (ước tính 30–50%).'
+      },
+      {
+        q: 'Về não trạng, bằng chứng hiện nay ủng hộ:',
+        opts: ['Một “vùng trầm cảm” duy nhất', 'Rối loạn chức năng mạng lưới giữa nhiều vùng', 'Chỉ vỏ trán lạc lối', 'Chỉ tiểu não'],
+        a: 1,
+        exp: 'Nghiên cứu hiện đại nhấn mạnh mạng lưới (PFC, sgACC, amygdala, thể vân bụng, hippocampus…).'
+      },
+      {
+        q: '“Bộ ba nhận thức” của Beck gồm:',
+        opts: ['Bản thân — thế giới — tương lai', 'Gia đình — công việc — xã hội', 'Quá khứ — hiện tại — tương lai', 'Cảm xúc — hành vi — cơ thể'],
+        a: 0,
+        exp: 'Ba trục nhận thức tiêu cực: bản thân, thế giới (trải nghiệm), tương lai.'
+      },
+      {
+        q: 'Ví dụ về quy gán bất lợi trong MDD:',
+        opts: ['Ngoại tại — không ổn định — cụ thể', 'Nội tại — ổn định — toàn thể', 'Ngẫu nhiên — thay đổi — khu trú', 'Không quy gán'],
+        a: 1,
+        exp: 'Mẫu quy gán bi quan: nội tại (do tôi), ổn định (luôn như vậy), toàn thể (mọi mặt).'
+      },
+      {
+        q: 'Khuyến nghị phòng tái phát sau khi ổn định:',
+        opts: ['Ngưng thuốc ngay', 'Duy trì điều trị khoảng 6 tháng', 'Chỉ tập thể dục', 'Không cần theo dõi'],
+        a: 1,
+        exp: 'Duy trì sau ổn định giúp giảm nguy cơ tái phát rõ rệt.'
+      },
+      {
+        q: 'Tình huống nào gợi “double depression”?',
+        opts: ['Không có tiền sử buồn kéo dài', 'PDD ≥2 năm, gần đây bùng đợt đủ tiêu chuẩn MDD', 'Chỉ lo âu xã hội', 'Chỉ hoảng loạn'],
+        a: 1,
+        exp: 'PDD nền kéo dài + đợt MDD chồng lên → double depression.'
+      },
+      {
+        q: 'Trong lâm sàng, dấu hiệu nào là <em>cờ đỏ</em> cần ưu tiên an toàn/nhập viện?',
+        opts: ['Mất ngủ đơn thuần', 'Ý tưởng/hành vi tự sát, MDD có loạn thần', 'Mệt mỏi nhẹ', 'Thèm ngọt'],
+        a: 1,
+        exp: 'Nguy cơ tự sát/loạn thần là chỉ định ưu tiên an toàn, có thể cần nhập viện.'
+      }
+    ];
+
+    // Render Quiz
+    const quizEl = document.getElementById('quiz');
+    function renderQuiz() {
+      quizEl.innerHTML = '';
+      QUESTIONS.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'rounded-2xl border border-blue-100 p-4';
+        card.innerHTML = `
+          <div class="font-medium text-slate-800">${idx+1}. ${item.q}</div>
+          <div class="mt-3 grid gap-2">
+            ${item.opts.map((opt,i)=>`
+              <label class="flex items-start gap-2 p-2 rounded-lg border hover:border-blue-300 cursor-pointer">
+                <input type="radio" name="q${idx}" value="${i}" class="mt-1">
+                <span>${opt}</span>
+              </label>`).join('')}
+          </div>
+          <div class="mt-2 text-sm text-slate-600 hidden" id="exp-${idx}">💡 <span class="italic">Giải thích:</span> ${item.exp}</div>
+        `;
+        quizEl.appendChild(card);
+      });
+      document.getElementById('score').textContent = '';
+    }
+    renderQuiz();
+
+    // Submit
+    document.getElementById('submitQuiz').addEventListener('click', ()=>{
+      let correct = 0; let total = QUESTIONS.length;
+      QUESTIONS.forEach((item, idx)=>{
+        const chosen = document.querySelector(`input[name="q${idx}"]:checked`);
+        const exp = document.getElementById(`exp-${idx}`);
+        if(chosen && Number(chosen.value) === item.a){
+          correct++;
+          exp.classList.remove('text-slate-600');
+          exp.classList.add('text-green-700');
+        } else {
+          exp.classList.remove('text-slate-600');
+          exp.classList.add('text-rose-700');
+        }
+        exp.classList.remove('hidden');
+      });
+      document.getElementById('score').textContent = `Kết quả: ${correct}/${total} câu đúng`;
+    });
+
+    // Reset
+    document.getElementById('resetQuiz').addEventListener('click', ()=>{
+      renderQuiz();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  </script>
+</body>
+</html>

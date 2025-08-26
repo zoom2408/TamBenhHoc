@@ -56,7 +56,7 @@
     </section>
 
     <!-- Knowledge Accordions -->
-    <section class="grid md:grid-cols-2 gap-6">
+    <section class="space-y-6">
       <!-- DSM-5-TR Criteria -->
       <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden">
         <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
@@ -182,14 +182,14 @@
           </div>
         </div>
       </article>
-
-      <!-- Bio-psycho model -->
+    <!-- Bio-psycho model -->
+    <section class="space-y-6">
       <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden md:col-span-2">
         <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
           <span class="font-semibold text-blue-800">Yếu tố sinh học — tâm lý (tóm tắt dễ nhớ)</span>
           <span class="text-blue-600">▼</span>
         </button>
-        <div class="p-6 grid md:grid-cols-3 gap-5 hidden" data-panel>
+        <div class="p-6 space-y-4 hidden" data-panel>
           <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-4">
             <h4 class="font-semibold text-blue-800">Não trạng</h4>
             <ul class="text-sm mt-2 space-y-1">
@@ -215,7 +215,94 @@
           </div>
         </div>
       </article>
+
+      <!-- Comparison: MDD vs Bipolar Depression -->
+      <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden md:col-span-2">
+        <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
+          <span class="font-semibold text-blue-800">Bảng so sánh: MDD vs Trầm cảm trong Rối loạn lưỡng cực (pha trầm)</span>
+          <span class="text-blue-600">▼</span>
+        </button>
+        <div class="p-6 hidden" data-panel>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left border border-blue-100 rounded-xl overflow-hidden">
+              <thead class="bg-blue-600 text-white">
+                <tr>
+                  <th class="p-3">Tiêu chí</th>
+                  <th class="p-3">MDD (đơn cực)</th>
+                  <th class="p-3">Pha trầm trong RLLC</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Tiền sử hưng cảm/hưng cảm nhẹ</td>
+                  <td class="p-3">Không bao giờ (nếu có → không chẩn đoán MDD)</td>
+                  <td class="p-3">Thường có trong quá khứ hoặc sàng lọc dương tính (MDQ/HCL‑32)</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                  <td class="p-3 font-semibold">Khởi phát & diễn tiến</td>
+                  <td class="p-3">Đợt ≥2 tuần; có thể tái phát</td>
+                  <td class="p-3">Tái diễn nhiều pha; dễ bị chẩn đoán nhầm là MDD khi đến khám trong pha trầm</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Đặc điểm đi kèm</td>
+                  <td class="p-3">Có thể melancholic/atypical, lo âu, loạn thần</td>
+                  <td class="p-3">Dễ có <em>mixed features</em> (kích động, giảm ngủ, ý nghĩ tự sát nhưng vẫn tăng sinh lực)</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                  <td class="p-3 font-semibold">Sàng lọc hỗ trợ</td>
+                  <td class="p-3">PHQ‑9 (triệu chứng trầm cảm)</td>
+                  <td class="p-3">MDQ, HCL‑32; khai thác kỹ tiền sử khí sắc tăng</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="p-3 font-semibold">Điều trị đầu tay thường gặp</td>
+                  <td class="p-3">SSRI/SNRI ± CBT; rTMS/ECT khi kháng trị/nặng</td>
+                  <td class="p-3">Ổn định khí sắc (Lithium, các thuốc ổn định khác/thuốc chống loạn thần không điển hình); <span class="font-semibold">tránh đơn trị CTC</span> vì nguy cơ lật hưng cảm</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                  <td class="p-3 font-semibold">Nguy cơ tự sát/tàn phế</td>
+                  <td class="p-3">Tăng so với dân số chung</td>
+                  <td class="p-3">Rất cao; cần đánh giá an toàn chặt chẽ</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- Abbreviation table -->
+      <article class="rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden md:col-span-2">
+        <button class="w-full text-left p-5 bg-blue-600/5 hover:bg-blue-600/10 transition flex items-center justify-between" data-acc>
+          <span class="font-semibold text-blue-800">Bảng từ viết tắt</span>
+          <span class="text-blue-600">▼</span>
+        </button>
+        <div class="p-6 hidden" data-panel>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left border border-blue-100 rounded-xl overflow-hidden">
+              <thead class="bg-blue-600 text-white">
+                <tr>
+                  <th class="p-3">Viết tắt</th>
+                  <th class="p-3">Diễn giải</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr class="bg-white"><td class="p-3 font-semibold">MDD</td><td class="p-3">Major Depressive Disorder — Trầm cảm chủ yếu</td></tr>
+                <tr class="bg-blue-50/40"><td class="p-3 font-semibold">PDD</td><td class="p-3">Persistent Depressive Disorder — Trầm cảm dai dẳng</td></tr>
+                <tr class="bg-white"><td class="p-3 font-semibold">RLLC</td><td class="p-3">Rối loạn lưỡng cực (Bipolar disorder)</td></tr>
+                <tr class="bg-blue-50/40"><td class="p-3 font-semibold">HC / HCL‑32</td><td class="p-3">Hypomania Checklist — Thang sàng lọc hưng cảm nhẹ 32 mục</td></tr>
+                <tr class="bg-white"><td class="p-3 font-semibold">MDQ</td><td class="p-3">Mood Disorder Questionnaire — Sàng lọc lưỡng cực</td></tr>
+                <tr class="bg-blue-50/40"><td class="p-3 font-semibold">PHQ‑9</td><td class="p-3">Patient Health Questionnaire‑9 — Sàng lọc trầm cảm</td></tr>
+                <tr class="bg-white"><td class="p-3 font-semibold">CTC / SSRI / SNRI</td><td class="p-3">Thuốc chống trầm cảm / Ức chế tái hấp thu serotonin chọn lọc / Ức chế tái hấp thu serotonin‑noradrenalin</td></tr>
+                <tr class="bg-blue-50/40"><td class="p-3 font-semibold">ECT</td><td class="p-3">Electroconvulsive Therapy — Liệu pháp sốc điện</td></tr>
+                <tr class="bg-white"><td class="p-3 font-semibold">rTMS</td><td class="p-3">Repetitive Transcranial Magnetic Stimulation — Kích thích từ xuyên sọ lặp lại</td></tr>
+                <tr class="bg-blue-50/40"><td class="p-3 font-semibold">CBT / MBCT / ACT</td><td class="p-3">Liệu pháp nhận thức‑hành vi / Chánh niệm‑nhận thức / Chấp nhận‑cam kết</td></tr>
+                <tr class="bg-white"><td class="p-3 font-semibold">PFC / sgACC</td><td class="p-3">Vỏ não trước trán / Hồi đai trước dưới</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
     </section>
+
 
     <!-- Practical Test -->
     <section class="page rounded-3xl bg-white shadow-sm border border-blue-100 overflow-hidden">

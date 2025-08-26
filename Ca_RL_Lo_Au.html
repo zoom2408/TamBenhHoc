@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ TƯƠNG TÁC - CÁC RỐI LOẠN LO ÂU</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A little custom style for better scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
+
+    <!-- Main container for the quiz app -->
+    <div id="app"></div>
+
+    <script>
+        // --- DATA ---
+        // All the case studies and questions are stored here.
+        const cases = [
+            {
+                id: 1,
+                title: "CA LÂM SÀNG 1 — Ám sợ đặc hiệu (máu–chích–chấn thương)",
+                patient: "N.T.L, nữ 20 tuổi, sinh viên điều dưỡng",
+                description: [
+                    "Mô tả 'choáng váng, buồn nôn, tay lạnh' mỗi khi nhìn thấy kim tiêm hoặc máu trong giờ thực tập. Tránh vào phòng thủ thuật, xin đổi môn vì 'không chịu nổi cảnh lấy máu'. Tình trạng kéo dài khoảng 8–9 tháng, ngày càng né tránh tiếp xúc.",
+                    "Không bệnh nội khoa, không dùng chất. Từ nhỏ sợ nhìn cảnh đứt tay, từng ngất khi xem video chấn thương. Gia đình kể gần đây em xem tin tức tai nạn nhiều (gợi ý học qua quan sát/gián tiếp).",
+                    "Khám nội khoa bình thường. Huyết áp, đường huyết trong giới hạn.",
+                    "Trong buổi tham vấn, bệnh nhân căng thẳng khi nói tới 'xét nghiệm máu', muốn rời phòng khi thấy hình kim tiêm. Không có ý tưởng kỳ quái."
+                ],
+                questions: [
+                    { question: "Tiêu chí nào KHÔNG thuộc 'Ám sợ đặc hiệu'?", options: ["A. Sợ/lo hãi tức thì trước kích thích đặc hiệu", "B. Né tránh/nhịn chịu với lo âu dữ dội", "C. Thời gian ≥6 tháng", "D. Bắt buộc có cơn hoảng loạn toàn phát mỗi lần tiếp xúc"], correct: "D", explanation: "Ám sợ đặc hiệu không bắt buộc phải có cơn hoảng loạn toàn phát mỗi lần tiếp xúc, mặc dù phản ứng sợ hãi có thể rất dữ dội." },
+                    { question: "Dấu hiệu 'xem clip tai nạn rồi sợ kim tiêm' minh họa cơ chế:", options: ["A. Điều kiện hóa cổ điển", "B. Học qua quan sát/gián tiếp", "C. Củng cố tích cực", "D. Nhạy cảm hóa"], correct: "B", explanation: "Nỗi sợ có thể hình thành khi quan sát người khác trải qua sự kiện đáng sợ hoặc nhận thông tin tiêu cực, đây là cơ chế học qua quan sát/gián tiếp." },
+                    { question: "Với phân nhóm 'máu–chích–bị thương', yếu tố cảm xúc thường đi kèm là:", options: ["A. Cảm xúc ghê sợ/nhạy cảm với ghê sợ", "B. Giận dữ", "C. Hưng phấn", "D. Buồn bã"], correct: "A", explanation: "Phân nhóm này có đặc trưng là phản ứng phế vị mạnh (vasovagal response) dẫn đến ngất, và cảm xúc ghê tởm (disgust) thường nổi bật hơn là sợ hãi đơn thuần." },
+                    { question: "Tiêu chí 'không tương xứng nguy cơ thực tế' thuộc mục (ký hiệu DSM):", options: ["A. A", "B. B", "C. D", "D. F"], correct: "C", explanation: "Theo DSM-5, tiêu chí D của Ám sợ đặc hiệu nêu rõ: 'Nỗi sợ hãi hoặc lo lắng không tương xứng với sự nguy hiểm thực tế do đối tượng hoặc tình huống cụ thể gây ra'." },
+                    { question: "Điều trị nền tảng nhất (first-line về kỹ thuật hành vi) cho ca này là:", options: ["A. Thôi miên", "B. Phơi nhiễm có hệ thống/tiếp xúc dần", "C. Phân tích giấc mơ", "D. Chỉ dùng benzodiazepine dài hạn"], correct: "B", explanation: "Liệu pháp phơi nhiễm (Exposure Therapy) là can thiệp tâm lý có bằng chứng mạnh mẽ nhất cho ám sợ đặc hiệu, giúp bệnh nhân dần đối mặt với nỗi sợ một cách có kiểm soát." },
+                    { question: "'Tránh vào phòng thủ thuật' là ví dụ của:", options: ["A. Hành vi an toàn/né tránh duy trì sợ", "B. Tiếp xúc nội cảm", "C. Củng cố tích cực", "D. Phản điều kiện hóa"], correct: "A", explanation: "Hành vi né tránh giúp giảm lo âu tức thời nhưng lại củng cố và duy trì nỗi sợ trong dài hạn, ngăn cản quá trình học hỏi rằng đối tượng/tình huống đó không nguy hiểm." },
+                    { question: "Chẩn đoán phân biệt KHÔNG trực tiếp nằm trong nhóm loại trừ của tiêu chí G là:", options: ["A. Rối loạn ám ảnh–cưỡng bức (OCD)", "B. Rối loạn hoảng loạn", "C. Rối loạn stress sau sang chấn (PTSD)", "D. Rối loạn ăn uống"], correct: "D", explanation: "Tiêu chí G của Ám sợ đặc hiệu liệt kê các rối loạn như OCD, PTSD, Lo âu xã hội... làm chẩn đoán phân biệt, nhưng không trực tiếp đề cập đến Rối loạn ăn uống." },
+                    { question: "'Dai dẳng ≥6 tháng' giúp phân biệt với:", options: ["A. Rối loạn điều chỉnh", "B. Phản ứng sợ thoáng qua", "C. Rối loạn khí sắc", "D. Rối loạn nhân cách"], correct: "B", explanation: "Tiêu chí thời gian giúp phân biệt một rối loạn đã định hình với các nỗi sợ thoáng qua, phổ biến và không gây suy giảm chức năng, đặc biệt ở trẻ em." },
+                    { question: "Nếu theo tiếp cận phân tâm học về ám sợ, trọng tâm can thiệp là:", options: ["A. Ý thức hóa xung đột vô thức, làm việc với chuyển di", "B. Tăng benzodiazepine", "C. Tập thể dục cường độ cao", "D. Biofeedback duy nhất"], correct: "A", explanation: "Lý thuyết phân tâm học cho rằng ám sợ là sự dịch chuyển của một xung đột nội tâm vô thức (ví dụ: xung đột Oedipus) sang một đối tượng bên ngoài." },
+                    { question: "Phát biểu đúng về dịch tễ ám sợ đặc hiệu:", options: ["A. Nữ ≈ nam", "B. Nữ thường cao hơn nam (≈2:1)", "C. Chỉ gặp ở trẻ em", "D. Chỉ gặp ở người già"], correct: "B", explanation: "Các nghiên cứu dịch tễ học cho thấy tỷ lệ mắc ám sợ đặc hiệu ở nữ giới cao hơn nam giới, với tỷ lệ xấp xỉ 2:1." }
+                ]
+            },
+            {
+                id: 2,
+                title: "CA LÂM SÀNG 2 — Rối loạn hoảng loạn (Panic Disorder)",
+                patient: "H., nam 28 tuổi",
+                description: [
+                    "Xuất hiện cơn đột ngột 'hụt hơi, tim đập nhanh, chóng mặt, sợ chết' khi đang ngồi xe buýt; đạt đỉnh trong vài phút. Trong 2 tháng có 4 cơn bất ngờ, kèm lo dai dẳng 'lại bị nữa' nên ngại tập thể dục/đi xa.",
+                    "Không dùng chất kích thích. Công việc căng thẳng gần đây. Mẹ từng 'yếu tim'.",
+                    "Tầm soát: điện tim, chức năng tuyến giáp, X-quang phổi bình thường (loại trừ nguyên nhân cơ thể/chất).",
+                    "Khám tâm thần: cảnh giác nội thân cao, liên tục 'soi' nhịp tim; tránh chạy bộ."
+                ],
+                questions: [
+                    { question: "Tập hợp triệu chứng phù hợp nhất một cơn hoảng loạn điển hình là:", options: ["A. Tăng nhịp tim, khó thở, đau ngực, sợ chết…", "B. Khí sắc trầm liên tục 2 tuần", "C. Vui buồn thất thường 1 ngày", "D. Chán ăn kéo dài 6 tháng"], correct: "A", explanation: "Một cơn hoảng loạn là một đợt sợ hãi hoặc khó chịu dữ dội đột ngột, đạt đến đỉnh điểm trong vòng vài phút, với các triệu chứng như tim đập nhanh, khó thở, đau ngực, sợ chết." },
+                    { question: "Vì sao cần xét nghiệm tuyến giáp/ECG?", options: ["A. Là tiêu chí bắt buộc của chẩn đoán", "B. Để loại trừ nguyên nhân y khoa/chất", "C. Để xác định mức độ nặng", "D. Vì mọi cơn hoảng loạn đều do tim"], correct: "B", explanation: "Các tình trạng y khoa như cường giáp, rối loạn nhịp tim, hoặc tác dụng của chất có thể gây ra các triệu chứng giống hệt cơn hoảng loạn. Việc loại trừ các nguyên nhân này là bước đầu tiên và quan trọng nhất." },
+                    { question: "Hành vi 'tránh tập thể dục vì sợ cơn tái phát' thuộc tiêu chí:", options: ["A. A", "B. B (thay đổi hành vi kém thích nghi kéo dài ≥1 tháng)", "C. C", "D. D"], correct: "B", explanation: "Tiêu chí B của Rối loạn hoảng loạn yêu cầu sau cơn hoảng loạn phải có ít nhất 1 tháng lo lắng dai dẳng về việc có thêm cơn hoặc hậu quả của chúng, hoặc có sự thay đổi hành vi đáng kể liên quan đến các cơn." },
+                    { question: "Điểm lõi trong mô hình nhận thức Clark (1986) về hoảng loạn là:", options: ["A. Diễn giải cảm giác cơ thể theo hướng thảm họa → vòng xoắn tăng kích thích", "B. Xung đột Ấy–Siêu tôi", "C. Rối loạn dẫn truyền dopamine", "D. Học qua quan sát"], correct: "A", explanation: "Mô hình nhận thức-hành vi cho rằng cơn hoảng loạn được kích hoạt và duy trì bởi việc diễn giải sai lầm các cảm giác cơ thể bình thường thành các dấu hiệu của một thảm họa sắp xảy ra (ví dụ, 'tim đập nhanh' = 'sắp đột quỵ')." },
+                    { question: "Hai quá trình duy trì hoảng loạn theo mô hình nhận thức–hành vi là:", options: ["A. Tự giám sát cơ thể quá mức và né tránh", "B. Ảo giác và hoang tưởng", "C. Củng cố tích cực và trừng phạt", "D. Phủ định và dồn nén"], correct: "A", explanation: "Bệnh nhân trở nên quá cảnh giác với các cảm giác cơ thể (tự giám sát) và né tránh các tình huống/hoạt động mà họ tin rằng sẽ gây ra các cảm giác đó, điều này ngăn họ nhận ra rằng diễn giải của mình là sai." },
+                    { question: "Phác đồ can thiệp CBT có những thành phần nào sau đây?", options: ["A. Giáo dục mô hình – tiếp xúc (kích phát nội cảm/ngoại cảnh) – luyện thở – tái cấu trúc nhận thức – chặn hành vi an toàn", "B. Tập gym cường độ cao", "C. Tự kỷ ám thị", "D. Chỉ thuốc an thần"], correct: "A", explanation: "CBT cho rối loạn hoảng loạn là một liệu pháp đa thành phần, bao gồm việc giáo dục bệnh nhân, giúp họ đối mặt với các cảm giác cơ thể (tiếp xúc nội cảm) và các tình huống bị né tránh, đồng thời thách thức các diễn giải thảm họa." },
+                    { question: "So sánh kết quả sau kết thúc trị liệu: nhóm CBT vs. nhóm thuốc + thư giãn:", options: ["A. CBT ~85% hết cơn hoảng loạn (tốt hơn)", "B. Cả hai như nhau 60%", "C. Thuốc + thư giãn ~85%", "D. CBT 26%"], correct: "A", explanation: "Các nghiên cứu lớn (ví dụ của Barlow và cộng sự) cho thấy CBT chuyên biệt cho rối loạn hoảng loạn có hiệu quả vượt trội so với thuốc và các liệu pháp không chuyên biệt khác trong việc loại bỏ cơn hoảng loạn." },
+                    { question: "Sau 1 năm, tỷ lệ tái phát ước tính:", options: ["A. CBT ~26% < Thuốc ~40%", "B. CBT ~60% > Thuốc ~26%", "C. CBT = Thuốc", "D. Cả hai 10%"], correct: "A", explanation: "CBT có ưu điểm là hiệu quả bền vững và tỷ lệ tái phát thấp hơn so với điều trị bằng thuốc đơn thuần, vì bệnh nhân học được các kỹ năng tự quản lý lâu dài." },
+                    { question: "Khi nào dùng 'cơn hoảng loạn (specifier)' thay vì chẩn đoán Rối loạn hoảng loạn?", options: ["A. Khi có cơn kịch phát nhưng không có lo/hành vi tránh kéo dài ≥1 tháng", "B. Khi có hoang tưởng", "C. Khi có trầm cảm", "D. Khi do dùng chất"], correct: "A", explanation: "Specifier 'cơn hoảng loạn' được sử dụng khi một người có cơn hoảng loạn trong bối cảnh một rối loạn khác (ví dụ: trầm cảm, PTSD, ám sợ) nhưng không đáp ứng đủ tiêu chí B (lo lắng/né tránh kéo dài) để chẩn đoán Rối loạn hoảng loạn." },
+                    { question: "Tiêu chí D trong RL hoảng loạn nhắc phân biệt với:", options: ["A. Lo âu xã hội, ám sợ đặc hiệu, PTSD, OCD, lo âu chia ly…", "B. Rối loạn ăn uống", "C. Rối loạn nhân cách", "D. Rối loạn giấc ngủ"], correct: "A", explanation: "Tiêu chí D nhấn mạnh rằng các cơn hoảng loạn không được giải thích tốt hơn bởi một rối loạn tâm thần khác, ví dụ như hoảng loạn khi đối mặt với tình huống xã hội (Lo âu xã hội) hoặc khi nhớ lại sang chấn (PTSD)." }
+                ]
+            },
+            {
+                id: 3,
+                title: "CA LÂM SÀNG 3 — Rối loạn lo âu lan tỏa (GAD)",
+                patient: "U., nữ 35 tuổi",
+                description: [
+                    "'Lo mọi thứ': sức khỏe cha mẹ, công việc, tài chính, an toàn con cái. Khó kiểm soát lo lắng, gần như ngày nào cũng lo ≥8 tháng.",
+                    "Kèm bồn chồn, dễ mệt, khó tập trung, căng cơ cổ–vai, khó ngủ, dễ cáu. Ảnh hưởng hiệu suất làm việc và chăm con.",
+                    "Không dùng chất, cường giáp âm tính. Gần đây có biến cố công việc (tác nhân stress).",
+                    "Khám tâm thần: tập trung kém, nét mặt căng; bệnh nhân nói 'em còn lo là mình sẽ 'lo mãi' không dứt' (siêu-lo lắng)."
+                ],
+                questions: [
+                    { question: "Tổ hợp chẩn đoán phù hợp nhất là:", options: ["A. Rối loạn lo âu lan tỏa (GAD): lo quá mức ≥6 tháng, khó kiểm soát, ≥3/6 triệu chứng, ảnh hưởng chức năng", "B. Rối loạn hoảng loạn", "C. Ám sợ đặc hiệu", "D. Trầm cảm đơn thuần"], correct: "A", explanation: "Ca bệnh mô tả đầy đủ các tiêu chí chính của GAD: lo lắng lan tỏa, khó kiểm soát, kéo dài và kèm theo các triệu chứng cơ thể, gây suy giảm chức năng." },
+                    { question: "Điểm nào giúp phân biệt GAD với 'lo tính cách'?", options: ["A. Thời gian ≥6 tháng và ảnh hưởng chức năng rõ", "B. Phải có cơn hoảng loạn", "C. Phải có ám sợ", "D. Phải có PTSD"], correct: "A", explanation: "Lo lắng là một đặc điểm bình thường, nhưng trong GAD, nó trở nên quá mức, khó kiểm soát, kéo dài và gây ra đau khổ hoặc suy giảm chức năng đáng kể trong cuộc sống." },
+                    { question: "'Em lo rằng sẽ lo mãi không dứt' minh họa:", options: ["A. Lo thực tế", "B. Siêu-lo lắng (meta-worry)", "C. Ám sợ", "D. Cưỡng bức"], correct: "B", explanation: "Siêu-lo lắng, hay lo lắng về chính sự lo lắng, là một đặc điểm nhận thức cốt lõi trong GAD. Bệnh nhân có những niềm tin tiêu cực về sự lo lắng của mình (ví dụ: 'lo lắng sẽ làm mình phát điên')." },
+                    { question: "Nhận định đúng về diễn tiến GAD:", options: ["A. Thường mạn tính, dai dẳng; điều trị muộn do hay đi khám nội khoa", "B. Chỉ phát bệnh ở tuổi già", "C. Tự khỏi nhanh trong vài tuần", "D. Luôn có rối loạn tâm thần nặng kèm"], correct: "A", explanation: "GAD thường có diễn tiến mạn tính với các giai đoạn thuyên giảm và tái phát. Nhiều bệnh nhân tìm đến các bác sĩ đa khoa vì các triệu chứng cơ thể (căng cơ, mệt mỏi) trước khi được chẩn đoán tâm thần." },
+                    { question: "Nhận định đúng về dịch tễ giới tính trong GAD:", options: ["A. Nam = nữ", "B. Nữ được chẩn đoán nhiều hơn", "C. Chỉ trẻ em", "D. Chỉ người già"], correct: "B", explanation: "Giống như nhiều rối loạn lo âu khác, GAD phổ biến ở nữ giới hơn nam giới, với tỷ lệ khoảng 2:1." },
+                    { question: "Thuốc hàng đầu được khuyến nghị cho GAD:", options: ["A. Benzodiazepine đơn trị lâu dài", "B. SSRI/SNRI là lựa chọn đầu tay", "C. Chỉ dùng an thần kháng histamine", "D. Không thuốc nào có bằng chứng"], correct: "B", explanation: "Các thuốc chống trầm cảm như SSRI (ví dụ: escitalopram, sertraline) và SNRI (ví dụ: venlafaxine, duloxetine) là lựa chọn đầu tay để điều trị GAD lâu dài." },
+                    { question: "Bằng chứng về CBT cho GAD: sau 1 năm, khoảng … báo cáo cải thiện đáng kể:", options: ["A. 20%", "B. 40%", "C. 60%", "D. 90%"], correct: "C", explanation: "CBT cho GAD cho thấy hiệu quả tốt và bền vững, với khoảng 60% bệnh nhân báo cáo cải thiện đáng kể và duy trì sau 1 năm theo dõi." },
+                    { question: "Phát biểu nào sau phù hợp tiếp cận nhận thức (Beck) trong GAD?", options: ["A. Giản đồ tiêu cực/khái quát hóa củng cố lo lắng", "B. Chỉ do noradrenaline", "C. Chỉ do microbiome", "D. Do dopamine"], correct: "A", explanation: "Theo mô hình của Beck, người bị GAD có các giản đồ (niềm tin cốt lõi) về thế giới là nguy hiểm và bản thân là yếu đuối, dẫn đến việc họ liên tục quét môi trường để tìm kiếm các mối đe dọa tiềm tàng." },
+                    { question: "Trước khi chẩn đoán GAD cần loại trừ:", options: ["A. Cường giáp, tác dụng chất (caffeine, kích thích…)", "B. Viêm gan", "C. Đau xơ cơ", "D. Viêm khớp"], correct: "A", explanation: "Các triệu chứng của GAD (bồn chồn, tim đập nhanh, khó ngủ) có thể bị gây ra hoặc làm trầm trọng thêm bởi các tình trạng y khoa (như cường giáp) hoặc việc sử dụng các chất (như caffeine)." },
+                    { question: "Khác biệt khái niệm 'sợ' và 'lo' ở cấp mạng lưới não:", options: ["A. Sợ liên quan hạch hạnh nhân; Lo liên quan BNST (giường nhân vân stria terminalis)", "B. Cả hai không liên quan não", "C. Đều do dopaminergic", "D. Sợ = vỏ trán; Lo = tiểu não"], correct: "A", explanation: "Nghiên cứu khoa học thần kinh cho thấy 'sợ' (phản ứng với mối đe dọa tức thời) chủ yếu liên quan đến hạch hạnh nhân, trong khi 'lo' (hướng đến tương lai, không chắc chắn) liên quan nhiều hơn đến vùng BNST." }
+                ]
+            },
+            {
+                id: 4,
+                title: "CA LÂM SÀNG 4 — Agoraphobia (Chứng sợ khoảng rộng)",
+                patient: "Ch., nữ 32 tuổi",
+                description: [
+                    "Sau 1 cơn choáng cách đây 5 tháng, bắt đầu tránh tàu điện, rạp chiếu phim, siêu thị đông người vì 'nếu có chuyện thì không thoát/không ai giúp kịp'. Chỉ ra ngoài khi có người thân đi kèm.",
+                    "Không dùng chất. Công việc ảnh hưởng nặng, xin làm từ xa.",
+                    "Tầm soát tim–phổi–nội tiết bình thường.",
+                    "Trong phỏng vấn, bệnh nhân thừa nhận nhiều tình huống sợ nằm ở nơi khó thoát/khó có trợ giúp."
+                ],
+                questions: [
+                    { question: "Đặc trưng cốt lõi của agoraphobia là sợ:", options: ["A. Tình huống khó thoát/khó được giúp đỡ nếu xuất hiện triệu chứng", "B. Bị đánh giá tiêu cực", "C. Vật/động vật cụ thể", "D. Bệnh tật vô phương cứu chữa"], correct: "A", explanation: "Nỗi sợ trung tâm của agoraphobia không phải là chính các địa điểm, mà là ý nghĩ rằng nếu các triệu chứng giống hoảng loạn hoặc các triệu chứng mất năng lực khác xảy ra, việc thoát khỏi nơi đó hoặc nhận được sự giúp đỡ sẽ rất khó khăn." },
+                    { question: "Tình huống tránh nào gợi ý nhất agoraphobia?", options: ["A. Thuyết trình trước lớp", "B. Phòng chích ngừa", "C. Tàu điện/siêu thị/rạp chiếu phim", "D. Thấy chó mèo"], correct: "C", explanation: "DSM-5 liệt kê 5 tình huống điển hình của agoraphobia: sử dụng phương tiện giao thông công cộng, ở nơi không gian mở, ở nơi không gian kín, đứng xếp hàng hoặc ở trong đám đông, và ở một mình bên ngoài nhà." },
+                    { question: "Nếu bệnh nhân không có cơn hoảng loạn lặp lại, chẩn đoán nhiều khả năng là:", options: ["A. Agoraphobia", "B. Rối loạn hoảng loạn", "C. Cơn hoảng loạn (specifier)", "D. Rối loạn cưỡng bức"], correct: "A", explanation: "Theo DSM-5, Agoraphobia là một chẩn đoán riêng biệt. Một người có thể bị Agoraphobia mà không cần có tiền sử Rối loạn hoảng loạn." },
+                    { question: "Hành vi 'chỉ ra ngoài khi có người thân đi kèm' là:", options: ["A. Hành vi an toàn duy trì lo", "B. Tiếp xúc nội cảm", "C. Trừng phạt", "D. Đối kháng cổ điển"], correct: "A", explanation: "Đây là một hành vi an toàn cổ điển. Nó làm giảm lo âu tạm thời nhưng củng cố niềm tin rằng bệnh nhân không thể tự mình đối phó, do đó duy trì rối loạn." },
+                    { question: "Thành phần cốt lõi trong điều trị hành vi là:", options: ["A. Tiếp xúc theo bậc thang với các tình huống sợ", "B. Cấm hoàn toàn ra đường", "C. Uống thuốc dài hạn đơn trị", "D. Nhịn ăn"], correct: "A", explanation: "Liệu pháp phơi nhiễm thực tế (in vivo exposure) là nền tảng của điều trị. Bệnh nhân cùng nhà trị liệu xây dựng một hệ thống phân cấp các tình huống bị né tránh và dần dần đối mặt với chúng." },
+                    { question: "Khi tư vấn giáo dục, nên giải thích khác biệt sợ vs lo như thế nào?", options: ["A. Sợ = đe dọa rõ; Lo = mối đe dọa không chắc chắn (mạng lưới não khác nhau)", "B. Cả hai giống nhau", "C. Chỉ do nội tiết", "D. Chỉ do tâm linh"], correct: "A", explanation: "Sợ là phản ứng với một mối nguy hiểm xác định, ngay trước mắt (fight-or-flight). Lo là một trạng thái phức tạp hơn, hướng đến tương lai, liên quan đến sự chuẩn bị cho một mối nguy hiểm có thể xảy ra." },
+                    { question: "Trường hợp có cơn hoảng loạn lặp lại kèm né tránh lâu dài, cân nhắc:", options: ["A. RL hoảng loạn kèm agoraphobia (phối chẩn)", "B. Trầm cảm", "C. Rối loạn cưỡng bức", "D. Rối loạn nhân cách"], correct: "A", explanation: "Khi một người đáp ứng đủ tiêu chí cho cả Rối loạn hoảng loạn và Agoraphobia, cả hai chẩn đoán đều được đưa ra." },
+                    { question: "Phân biệt với RL hoảng loạn:", options: ["A. RL hoảng loạn cần các cơn kịch phát bất ngờ với ≥4/13 triệu chứng", "B. Lo âu xã hội cần ảo giác", "C. RL hoảng loạn không có né tránh", "D. Lo âu xã hội cần PTSD"], correct: "A", explanation: "Chẩn đoán Rối loạn hoảng loạn yêu cầu phải có các cơn hoảng loạn bất ngờ, tái diễn. Agoraphobia có thể xảy ra mà không có các cơn hoảng loạn toàn phát." },
+                    { question: "Nếu bệnh nhân chỉ hoảng khi thuyết trình, chẩn đoán phù hợp hơn là:", options: ["A. Lo âu xã hội", "B. Rối loạn hoảng loạn", "C. Cơn hoảng loạn biệt định", "D. Ám sợ đặc hiệu"], correct: "A", explanation: "Nếu cơn hoảng loạn chỉ xảy ra trong các tình huống xã hội cụ thể do sợ bị đánh giá tiêu cực, chẩn đoán phù hợp hơn là Rối loạn lo âu xã hội." },
+                    { question: "Hành vi 'nhìn xuống, nói nhỏ, mang khẩu trang để che mặt đỏ' là ví dụ:", options: ["A. Hành vi an toàn duy trì lo", "B. Tự trừng phạt", "C. Rối loạn ý nghĩ", "D. Khoe khoang"], correct: "A", explanation: "Đây là các hành vi an toàn tinh vi trong Rối loạn lo âu xã hội, nhằm mục đích che giấu các triệu chứng lo âu và tránh sự chú ý, nhưng lại duy trì nỗi sợ bị đánh giá." }
+                ]
+            },
+            {
+                id: 5,
+                title: "CA LÂM SÀNG 5 — Rối loạn lo âu xã hội (Social Anxiety Disorder)",
+                patient: "Q., nam 19 tuổi",
+                description: [
+                    "Từ THPT đã sợ thuyết trình, mặt đỏ, tay run, tim đập nhanh khi phải nói trước nhóm bạn; thời gian >1 năm. Đại học càng né môn thuyết trình, tránh đi họp câu lạc bộ vì 'sợ bị đánh giá là ngu'. Ảnh hưởng điểm số, quan hệ xã hội.",
+                    "Không dùng chất. Gia đình nhận xét 'cháu hiền, ngại giao tiếp' từ nhỏ. Gần đây xem nhiều mạng xã hội, sợ bình luận tiêu cực.",
+                    "Khám nội khoa bình thường.",
+                    "Phỏng vấn: tập trung mạnh vào 'mình nói sai thì sao', tránh nhìn mắt người khác, né tình huống xã hội có thể bị quan sát."
+                ],
+                questions: [
+                    { question: "Chẩn đoán nghi ngờ nhất:", options: ["A. Rối loạn lo âu xã hội", "B. Ám sợ đặc hiệu", "C. GAD", "D. Rối loạn hoảng loạn"], correct: "A", explanation: "Nỗi sợ cốt lõi của bệnh nhân tập trung vào các tình huống xã hội nơi anh ta có thể bị người khác xem xét, đánh giá, và anh ta né tránh các tình huống đó. Đây là đặc trưng của Rối loạn lo âu xã hội." },
+                    { question: "Đặc trưng trung tâm của lo âu xã hội:", options: ["A. Sợ bị đánh giá tiêu cực trong tình huống xã hội/biểu hiện", "B. Sợ không gian kín", "C. Sợ máu", "D. Sợ bệnh"], correct: "A", explanation: "Nỗi sợ bị người khác xem xét kỹ lưỡng và đánh giá tiêu cực là hạt nhân của Rối loạn lo âu xã hội, dẫn đến né tránh các tình huống tương tác hoặc biểu diễn." },
+                    { question: "Cơ chế duy trì thường gặp cần can thiệp là:", options: ["A. Tự tập trung quá mức vào bản thân và hành vi an toàn", "B. Dồn nén xung đột", "C. Thiếu hụt serotonin", "D. Điều kiện hóa cổ điển"], correct: "A", explanation: "Người bệnh thường quá tập trung vào các triệu chứng lo âu của mình và sử dụng các hành vi an toàn (ví dụ: tránh giao tiếp bằng mắt, chuẩn bị bài nói quá kỹ) để cố gắng ngăn chặn sự đánh giá tiêu cực, nhưng điều này lại duy trì sự lo lắng." },
+                    { question: "Phân biệt với agoraphobia:", options: ["A. Lo âu xã hội sợ bị đánh giá; agoraphobia sợ khó thoát/không được giúp", "B. Cả hai như nhau", "C. Agoraphobia luôn có hoảng loạn", "D. Lo âu xã hội chỉ ở trường học"], correct: "A", explanation: "Lý do né tránh là điểm phân biệt quan trọng: người bị lo âu xã hội tránh đám đông vì sợ bị đánh giá, trong khi người bị agoraphobia tránh đám đông vì sợ khó thoát nếu bị hoảng loạn." },
+                    { question: "Điều trị CBT cho lo âu xã hội bao gồm:", options: ["A. Tiếp xúc tình huống xã hội, tái cấu trúc nhận thức, luyện kỹ năng xã hội", "B. Chỉ dùng thuốc", "C. Thôi miên", "D. Phân tích giấc mơ"], correct: "A", explanation: "CBT cho lo âu xã hội là một liệu pháp toàn diện, bao gồm việc thách thức các suy nghĩ tiêu cực, thực hành đối mặt với các tình huống xã hội theo bậc thang, và đôi khi là rèn luyện các kỹ năng xã hội." },
+                    { question: "Nếu chỉ sợ nói trước đám đông, specifier là:", options: ["A. Chỉ liên quan đến biểu diễn (performance only)", "B. Lan tỏa", "C. Nặng", "D. Mạn tính"], correct: "A", explanation: "DSM-5 có một specifier 'chỉ liên quan đến biểu diễn' cho những trường hợp mà nỗi sợ bị giới hạn trong việc nói hoặc biểu diễn trước công chúng, không xảy ra trong các tình huống xã hội thông thường khác." },
+                    { question: "Yếu tố 'nhút nhát từ nhỏ' gợi ý:", options: ["A. Ức chế hành vi là một yếu tố nguy cơ", "B. Không liên quan", "C. Do di truyền 100%", "D. Do chế độ ăn"], correct: "A", explanation: "Ức chế hành vi (Behavioral Inhibition) là một đặc điểm khí chất từ thời thơ ấu, đặc trưng bởi xu hướng rụt rè, thận trọng và thu mình trước những điều mới lạ, và nó là một yếu tố nguy cơ đã được xác định cho sự phát triển của Rối loạn lo âu xã hội." },
+                    { question: "Thuốc được FDA chấp thuận cho lo âu xã hội:", options: ["A. SSRI/SNRI", "B. Thuốc chống loạn thần", "C. Lithium", "D. Thuốc ngủ"], correct: "A", explanation: "Các thuốc chống trầm cảm nhóm SSRI (như paroxetine, sertraline) và SNRI (như venlafaxine) là các lựa chọn dược lý đầu tay được FDA chấp thuận cho Rối loạn lo âu xã hội." },
+                    { question: "Mô hình nhận thức của Clark & Wells nhấn mạnh vai trò của:", options: ["A. Xử lý bản thân như một đối tượng xã hội và hình ảnh tiêu cực về bản thân", "B. Mất cân bằng hóa chất não", "C. Trải nghiệm sang chấn thời thơ ấu", "D. Yếu tố văn hóa"], correct: "A", explanation: "Mô hình này cho rằng người bệnh bước vào tình huống xã hội với những giả định tiêu cực, sau đó họ chuyển sự chú ý vào bên trong, giám sát bản thân và các triệu chứng lo âu, tạo ra một hình ảnh tiêu cực về cách người khác nhìn nhận họ." },
+                    { question: "Tiên lượng của lo âu xã hội không điều trị:", options: ["A. Thường mạn tính và ảnh hưởng chức năng lâu dài", "B. Tự khỏi sau tuổi 30", "C. Chỉ ảnh hưởng học tập", "D. Không ảnh hưởng gì"], correct: "A", explanation: "Nếu không được điều trị, Rối loạn lo âu xã hội thường có diễn tiến mạn tính, gây ra những suy giảm đáng kể và lâu dài trong học tập, nghề nghiệp và các mối quan hệ xã hội." }
+                ]
+            }
+        ];
+
+        // --- STATE MANAGEMENT ---
+        // These variables act like the 'state' in React.
+        let state = {
+            answers: {},
+            showResults: false,
+            currentCaseIndex: 0
+        };
+
+        // --- CONSTANTS ---
+        const totalQuestions = cases.reduce((total, caseItem) => total + caseItem.questions.length, 0);
+        const appContainer = document.getElementById('app');
+
+        // --- ACTION HANDLERS ---
+        // Functions that modify the state and trigger a re-render.
+
+        function handleAnswerChange(caseId, questionIndex, answer) {
+            if (state.showResults) return; // Don't allow changes after submitting
+            state.answers[`${caseId}-${questionIndex}`] = answer;
+            render();
+        }
+
+        function handleSubmit() {
+            state.showResults = true;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        function handleReset() {
+            state = {
+                answers: {},
+                showResults: false,
+                currentCaseIndex: 0
+            };
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        function setCurrentCase(index) {
+            state.currentCaseIndex = index;
+            render();
+        }
+
+        function navigateCase(direction) {
+            const newIndex = state.currentCaseIndex + (direction === 'next' ? 1 : -1);
+            if (newIndex >= 0 && newIndex < cases.length) {
+                state.currentCaseIndex = newIndex;
+                const targetElement = document.getElementById('app');
+                if (targetElement) {
+                   targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                render();
+            }
+        }
+        
+        function calculateScore() {
+            let correct = 0;
+            cases.forEach(caseItem => {
+                caseItem.questions.forEach((question, index) => {
+                    const answerKey = `${caseItem.id}-${index}`;
+                    if (state.answers[answerKey] === question.correct) {
+                        correct++;
+                    }
+                });
+            });
+            return correct;
+        }
+
+        // --- RENDER FUNCTION ---
+        // This function generates the HTML for the entire app based on the current state.
+        // It's called every time the state changes.
+
+        function render() {
+            const currentCase = cases[state.currentCaseIndex];
+            const score = calculateScore();
+            
+            let html = `
+                <div class="max-w-4xl mx-auto px-4 py-8 pb-32">
+                    <!-- Header -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h1 class="text-3xl font-bold text-center text-indigo-800 mb-4">
+                            QUIZ TƯƠNG TÁC - CÁC RỐI LOẠN LO ÂU
+                        </h1>
+                        <div class="text-center text-gray-600">
+                            <p class="text-lg font-semibold">Môn: TÂM BỆNH HỌC</p>
+                            <p>Bộ đề kiểm tra 5 ca lâm sàng | Tổng số câu: ${totalQuestions}</p>
+                            <p class="text-sm mt-2">Trường ĐH KHXH&NV - Khoa Tâm lý học</p>
+                        </div>
+                    </div>
+            `;
+
+            // Results Summary (only shown if showResults is true)
+            if (state.showResults) {
+                const percentage = totalQuestions > 0 ? score / totalQuestions : 0;
+                const resultText = percentage >= 0.8 ? 'Xuất sắc!' : percentage >= 0.6 ? 'Khá tốt' : 'Cần ôn lại';
+                const resultColor = percentage >= 0.8 ? 'bg-green-500' : percentage >= 0.6 ? 'bg-yellow-500' : 'bg-red-500';
+
+                html += `
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                        <h2 class="text-2xl font-bold text-center mb-4">
+                            <span class="text-indigo-600">KẾT QUẢ BÀI LÀM</span>
+                        </h2>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold mb-2">
+                                <span class="text-green-600">${score}</span>
+                                <span class="text-gray-400">/</span>
+                                <span class="text-blue-600">${totalQuestions}</span>
+                            </div>
+                            <div class="text-lg text-gray-600 mb-4">
+                                Điểm số: ${totalQuestions > 0 ? ((score / totalQuestions) * 10).toFixed(1) : '0.0'}/10
+                            </div>
+                            <div class="inline-block px-4 py-2 rounded-full text-white font-semibold ${resultColor}">
+                                ${resultText}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Case Navigation
+            html += `
+                <div class="bg-white rounded-lg shadow-lg p-4 mb-8">
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        ${cases.map((caseItem, index) => `
+                            <button
+                                onclick="setCurrentCase(${index})"
+                                class="px-4 py-2 rounded-lg font-medium transition-colors ${
+                                    state.currentCaseIndex === index
+                                    ? 'bg-indigo-600 text-white'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }"
+                            >
+                                Ca ${caseItem.id}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Current Case Details
+            html += `
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-indigo-800 mb-2">${currentCase.title}</h2>
+                        <p class="text-lg text-gray-700 font-semibold">${currentCase.patient}</p>
+                    </div>
+                    <!-- Case Description -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">TRÌNH BÀY BỆNH:</h3>
+                        ${currentCase.description.map((paragraph, index) => `
+                            <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                                <p class="text-gray-700 leading-relaxed">
+                                    <span class="font-semibold">(${index + 1})</span> ${paragraph}
+                                </p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <!-- Questions -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">CÂU HỎI TRẮC NGHIỆM:</h3>
+                        ${currentCase.questions.map((q, qIndex) => {
+                            let questionHtml = `
+                                <div class="mb-6 p-6 border border-gray-200 rounded-lg">
+                                    <div class="mb-4">
+                                        <h4 class="font-semibold text-gray-800 text-base leading-relaxed">
+                                            Câu ${qIndex + 1}. ${q.question}
+                                        </h4>
+                                    </div>
+                                    <div class="space-y-3">
+                            `;
+                            
+                            q.options.forEach((option, oIndex) => {
+                                const optionLetter = ['A', 'B', 'C', 'D'][oIndex];
+                                const answerKey = `${currentCase.id}-${qIndex}`;
+                                const isSelected = state.answers[answerKey] === optionLetter;
+                                const isCorrect = q.correct === optionLetter;
+                                
+                                let buttonClass = 'w-full text-left p-3 border-2 rounded-lg transition-colors ';
+                                
+                                if (state.showResults) {
+                                    if (isCorrect) {
+                                        buttonClass += 'border-green-500 bg-green-50 text-green-800';
+                                    } else if (isSelected && !isCorrect) {
+                                        buttonClass += 'border-red-500 bg-red-50 text-red-800';
+                                    } else {
+                                        buttonClass += 'border-gray-200 bg-gray-50 text-gray-600';
+                                    }
+                                } else {
+                                    if (isSelected) {
+                                        buttonClass += 'border-indigo-500 bg-indigo-50 text-indigo-800';
+                                    } else {
+                                        buttonClass += 'border-gray-200 hover:border-gray-300 hover:bg-gray-50';
+                                    }
+                                }
+
+                                questionHtml += `
+                                    <button
+                                        onclick="handleAnswerChange(${currentCase.id}, ${qIndex}, '${optionLetter}')"
+                                        class="${buttonClass}"
+                                        ${state.showResults ? 'disabled' : ''}
+                                    >
+                                        ${option}
+                                        ${state.showResults && isCorrect ? '<span class="ml-2 text-green-600 font-semibold">✓</span>' : ''}
+                                        ${state.showResults && isSelected && !isCorrect ? '<span class="ml-2 text-red-600 font-semibold">✗</span>' : ''}
+                                    </button>
+                                `;
+                            });
+                            
+                            questionHtml += `</div>`;
+                            
+                            if (state.showResults) {
+                                questionHtml += `
+                                    <div class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+                                        <p class="text-sm text-blue-800">
+                                            <span class="font-semibold">Giải thích:</span> ${q.explanation}
+                                        </p>
+                                    </div>
+                                `;
+                            }
+                            
+                            questionHtml += `</div>`;
+                            return questionHtml;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Navigation between cases
+            html += `
+                <div class="flex justify-between mb-8">
+                    <button
+                        onclick="navigateCase('prev')"
+                        ${state.currentCaseIndex === 0 ? 'disabled' : ''}
+                        class="px-6 py-3 bg-gray-500 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-colors"
+                    >
+                        ← Ca trước
+                    </button>
+                    <button
+                        onclick="navigateCase('next')"
+                        ${state.currentCaseIndex === cases.length - 1 ? 'disabled' : ''}
+                        class="px-6 py-3 bg-gray-500 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-colors"
+                    >
+                        Ca tiếp theo →
+                    </button>
+                </div>
+            `;
+
+            // Sticky Bottom Bar
+            html += `
+                </div> <!-- Closes the main content container -->
+                <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4">
+                    <div class="max-w-4xl mx-auto flex gap-4 justify-center">
+                        <button
+                            onclick="handleSubmit()"
+                            class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg ${state.showResults ? 'opacity-50 cursor-not-allowed' : ''}"
+                            ${state.showResults ? 'disabled' : ''}
+                        >
+                            ${state.showResults ? 'ĐÃ NỘP BÀI' : 'NỘP BÀI'}
+                        </button>
+                        <button
+                            onclick="handleReset()"
+                            class="px-8 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors shadow-lg"
+                        >
+                            LÀM LẠI
+                        </button>
+                    </div>
+                    <div class="text-center mt-2 text-sm text-gray-600">
+                        Đã trả lời: ${Object.keys(state.answers).length}/${totalQuestions} câu
+                    </div>
+                </div>
+            `;
+
+            appContainer.innerHTML = html;
+        }
+
+        // --- INITIAL RENDER ---
+        // Render the app for the first time when the page loads.
+        document.addEventListener('DOMContentLoaded', render);
+    </script>
+
+</body>
+</html>

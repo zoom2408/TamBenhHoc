@@ -3,136 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ TƯƠNG TÁC - OCD VÀ CÁC RỐI LOẠN LIÊN QUAN</title>
+    <title>Quiz Tương Tác - OCD và Các Rối Loạn Liên Quan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A little bit of custom CSS for a smoother experience */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            padding-bottom: 120px; /* Make space for the sticky footer */
+        }
+        .case-section {
+            display: none;
+        }
+        .case-section.active {
+            display: block;
+        }
+        .show-all .case-section {
+            display: block !important;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
-
-    <div class="min-h-screen p-4 pb-24">
-        <div class="max-w-4xl mx-auto">
-            <header class="text-center mb-8">
-                <h1 class="text-4xl font-bold text-blue-800 mb-2">
-                    QUIZ TƯƠNG TÁC - OCD VÀ CÁC RỐI LOẠN LIÊN QUAN
-                </h1>
-                <p class="text-lg text-blue-600">
-                    Dựa trên Ca 5.pdf - 5 Ca Lâm Sàng (50 Câu Hỏi)
-                </p>
-                <div class="text-sm text-gray-600 mt-2">
-                    Thời gian: 60 phút | Mã đề: OCD-50Q-A1
-                </div>
-            </header>
-
-            <div id="results-summary" class="hidden mb-6 p-6 rounded-xl shadow-lg bg-green-100 border-2 border-green-300">
-                <h2 class="text-2xl font-bold text-center mb-4">
-                    KẾT QUẢ BÀI THI
-                </h2>
-                <div class="text-center">
-                    <p class="text-xl">
-                        Điểm số: <span class="font-bold">50/50</span> (100.0%)
-                    </p>
-                    <p class="text-lg mt-2 font-semibold text-green-700">
-                        🎉 Xuất sắc!
-                    </p>
-                </div>
+<body class="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8">
+    <div class="max-w-5xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-2">
+                QUIZ TƯƠNG TÁC - OCD VÀ CÁC RỐI LOẠN LIÊN QUAN
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600">
+                Dựa trên Ca 5.pdf - 5 Ca Lâm Sàng (50 Câu Hỏi)
+            </p>
+            <div class="text-sm text-slate-500 mt-2">
+                <span>Thời gian: 60 phút</span> | <span>Mã đề: OCD-50Q-A1</span>
             </div>
+        </header>
 
-            <nav class="mb-6">
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-600 text-white">
-                        CA 1
-                    </button>
-                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        CA 2
-                    </button>
-                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        CA 3
-                    </button>
-                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        CA 4
-                    </button>
-                    <button class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        CA 5
-                    </button>
-                </div>
-            </nav>
-
-            <main id="clinical-cases-container" class="space-y-8">
-                
-                <article id="case-ca1" class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6">
-                        <h2 class="text-2xl font-bold mb-2">CA 1 - Ám ảnh nhiễm bẩn, rửa tay/né tránh</h2>
-                        <p class="text-blue-100">N.T.H., nữ, 28 tuổi, nhân viên QA thực phẩm</p>
-                    </header>
-                    <section class="p-6">
-                        <div class="grid md:grid-cols-2 gap-4 mb-8">
-                            <div class="bg-blue-50 p-4 rounded-lg">
-                                <h4 class="font-semibold text-blue-800 mb-2">(1) Triệu chứng hiện tại</h4>
-                                <p class="text-gray-700 text-sm leading-relaxed">Đến khám vì "cứ thấy người mình bẩn và phải rửa cho sạch". 6 tháng nay, H. tắm rửa 3–4 lần/ngày (mỗi lần 40–60 phút), giặt riêng toàn bộ quần áo, tránh chạm tay vào tay nắm cửa công ty; dùng khăn giấy để bấm thang máy. Mỗi khi nhớ lại chuyện bị đồng nghiệp nam nói lời xúc phạm, H. "cảm thấy dơ bẩn từ bên trong" và phải tắm ngay. Thời gian dành cho tắm/rửa >2 giờ/ngày, đi làm muộn, hiệu suất giảm. H. nhận ra "phi lý" nhưng không kìm được thôi thúc.</p>
-                            </div>
-                            <div class="bg-blue-50 p-4 rounded-lg">
-                                <h4 class="font-semibold text-blue-800 mb-2">(2) Tiền sử – bối cảnh</h4>
-                                <p class="text-gray-700 text-sm leading-relaxed">Không bệnh nội khoa đáng kể. Từng bị người yêu cũ lăng mạ, xem là "sự phản bội" và từ đó nhạy cảm với cảm giác dơ bẩn. Gia đình không ai mắc rối loạn tâm thần. Ngủ kém, lo âu tăng khi không được tắm.</p>
-                            </div>
-                            <div class="bg-blue-50 p-4 rounded-lg">
-                                <h4 class="font-semibold text-blue-800 mb-2">(3) Khám lâm sàng – cận lâm sàng</h4>
-                                <p class="text-gray-700 text-sm leading-relaxed">Sinh hiệu bình thường; các xét nghiệm máu, chức năng gan, thận, tuyến giáp bình thường. Không dấu thần kinh khu trú.</p>
-                            </div>
-                            <div class="bg-blue-50 p-4 rounded-lg">
-                                <h4 class="font-semibold text-blue-800 mb-2">(4) Khám tâm thần</h4>
-                                <p class="text-gray-700 text-sm leading-relaxed">Tỉnh táo, định hướng tốt. Khí sắc lo âu, bồn chồn. Tư duy: xuất hiện ý nghĩ xâm nhập "mình bẩn", đi kèm cưỡng chế rửa/lau để trung hòa khó chịu; có né tránh. Mức độ insight khá: thừa nhận hành vi quá mức, không hợp lý nhưng khó cưỡng. Không hoang tưởng, không ảo giác.</p>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <h3 class="text-xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2">
-                                CÂU HỎI (10 câu, chọn A-D):
-                            </h3>
-                            <fieldset class="p-4 rounded-lg border-2 bg-gray-50 border-gray-200 hover:border-blue-300">
-                                <legend class="font-medium text-gray-800 mb-3 w-full">
-                                    Câu 1: Tổ hợp triệu chứng nào dưới đây phù hợp nhất với định nghĩa ám ảnh và cưỡng chế?
-                                </legend>
-                                <div class="space-y-2">
-                                    <label class="flex items-start space-x-3 cursor-pointer">
-                                        <input type="radio" name="ca1_0" value="0" class="mt-1 text-blue-600 focus:ring-blue-500">
-                                        <span class="text-sm text-gray-700">A. Ý nghĩ xâm nhập gây lo âu + hành vi lặp lại để trung hòa/giảm lo</span>
-                                    </label>
-                                    <label class="flex items-start space-x-3 cursor-pointer">
-                                        <input type="radio" name="ca1_0" value="1" class="mt-1 text-blue-600 focus:ring-blue-500">
-                                        <span class="text-sm text-gray-700">B. Sợ hãi rõ rệt có tác nhân đặc hiệu, né tránh nhất quán</span>
-                                    </label>
-                                    <label class="flex items-start space-x-3 cursor-pointer">
-                                        <input type="radio" name="ca1_0" value="2" class="mt-1 text-blue-600 focus:ring-blue-500">
-                                        <span class="text-sm text-gray-700">C. Trạng thái buồn chán kéo dài ≥2 tuần, giảm hứng thú, ý nghĩ tội lỗi</span>
-                                    </label>
-                                    <label class="flex items-start space-x-3 cursor-pointer">
-                                        <input type="radio" name="ca1_0" value="3" class="mt-1 text-blue-600 focus:ring-blue-500">
-                                        <span class="text-sm text-gray-700">D. Ý tưởng bị theo dõi, bị hại, kết hợp ảo thính</span>
-                                    </label>
-                                </div>
-                                <div class="hidden mt-4 p-3 bg-blue-100 rounded-lg">
-                                    <p class="text-sm"><span class="font-medium text-blue-800">Đáp án đúng: A</span></p>
-                                    <p class="text-sm text-blue-700 mt-1"><span class="font-medium">Giải thích:</span> OCD bao gồm ám ảnh (ý nghĩ xâm nhập gây lo âu) và cưỡng chế (hành vi lặp lại để giảm lo âu)</p>
-                                </div>
-                            </fieldset>
-                            
-                            </div>
-                    </section>
-                </article>
-
-                </main>
-
-            <footer class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-blue-200 shadow-lg p-4">
-                <div class="max-w-4xl mx-auto flex justify-center space-x-4">
-                    <button class="px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
-                        📊 Nộp Bài & Xem Kết Quả
-                    </button>
-                    <button class="px-8 py-3 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors shadow-lg">
-                        🔄 Làm Lại
-                    </button>
-                </div>
-            </footer>
+        <div id="resultsSection" class="mb-8 p-6 rounded-xl shadow-md" style="display: none;">
+            <h2 class="text-2xl font-bold text-center mb-4">KẾT QUẢ BÀI THI</h2>
+            <div class="text-center">
+                <p class="text-xl">
+                    Điểm số: <span id="scoreDisplay" class="font-bold">0/50</span> (<span id="percentageDisplay">0</span>%)
+                </p>
+                <p id="resultMessage" class="text-lg mt-2 font-semibold">
+                    🎉 Xuất sắc!
+                </p>
+            </div>
         </div>
+
+        <nav class="mb-8">
+            <div class="flex flex-wrap gap-2 justify-center">
+                <button onclick="showCase('ca1')" class="case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400" data-case="ca1">CA 1</button>
+                <button onclick="showCase('ca2')" class="case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400" data-case="ca2">CA 2</button>
+                <button onclick="showCase('ca3')" class="case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400" data-case="ca3">CA 3</button>
+                <button onclick="showCase('ca4')" class="case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400" data-case="ca4">CA 4</button>
+                <button onclick="showCase('ca5')" class="case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400" data-case="ca5">CA 5</button>
+            </div>
+        </nav>
+
+        <main id="casesContainer" class="space-y-8 show-all">
+            
+            <section class="case-section bg-white rounded-xl shadow-md overflow-hidden border border-slate-200" data-case="ca1">
+                <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                    <h2 class="text-2xl font-bold mb-2">CA 1 - Ám ảnh nhiễm bẩn, rửa tay/né tránh</h2>
+                    <p class="text-blue-100">N.T.H., nữ, 28 tuổi, nhân viên QA thực phẩm</p>
+                </header>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(1) Triệu chứng hiện tại</h4><p class="text-slate-700 text-sm leading-relaxed">Đến khám vì \"cứ thấy người mình bẩn và phải rửa cho sạch\". 6 tháng nay, H. tắm rửa 3–4 lần/ngày (mỗi lần 40–60 phút), giặt riêng toàn bộ quần áo, tránh chạm tay vào tay nắm cửa công ty; dùng khăn giấy để bấm thang máy. Mỗi khi nhớ lại chuyện bị đồng nghiệp nam nói lời xúc phạm, H. \"cảm thấy dơ bẩn từ bên trong\" và phải tắm ngay. Thời gian dành cho tắm/rửa >2 giờ/ngày, đi làm muộn, hiệu suất giảm. H. nhận ra \"phi lý\" nhưng không kìm được thôi thúc.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(2) Tiền sử – bối cảnh</h4><p class="text-slate-700 text-sm leading-relaxed">Không bệnh nội khoa đáng kể. Từng bị người yêu cũ lăng mạ, xem là \"sự phản bội\" và từ đó nhạy cảm với cảm giác dơ bẩn. Gia đình không ai mắc rối loạn tâm thần. Ngủ kém, lo âu tăng khi không được tắm.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(3) Khám lâm sàng – cận lâm sàng</h4><p class="text-slate-700 text-sm leading-relaxed">Sinh hiệu bình thường; các xét nghiệm máu, chức năng gan, thận, tuyến giáp bình thường. Không dấu thần kinh khu trú.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(4) Khám tâm thần</h4><p class="text-slate-700 text-sm leading-relaxed">Tỉnh táo, định hướng tốt. Khí sắc lo âu, bồn chồn. Tư duy: xuất hiện ý nghĩ xâm nhập \"mình bẩn\", đi kèm cưỡng chế rửa/lau để trung hòa khó chịu; có né tránh. Mức độ insight khá: thừa nhận hành vi quá mức, không hợp lý nhưng khó cưỡng. Không hoang tưởng, không ảo giác.</p></div>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2">CÂU HỎI (10 câu, chọn A-D):</h3>
+                        <div id="ca1-questions" class="space-y-4"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="case-section bg-white rounded-xl shadow-md overflow-hidden border border-slate-200" data-case="ca2">
+                <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                    <h2 class="text-2xl font-bold mb-2">CA 2 - Ám ảnh đều, kiểm soát (checking/arranging)</h2>
+                    <p class="text-blue-100">P.V.M., nam, 19 tuổi, sinh viên</p>
+                </header>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(1) Triệu chứng hiện tại</h4><p class="text-slate-700 text-sm leading-relaxed">Đến khám vì 10 tháng nay phải kiểm tra khóa cửa, tắt điện, tắt gas nhiều lần trước khi ra khỏi nhà (8-12 lần mỗi sáng). Phải sắp xếp sách vở, dụng cụ học tập theo thứ tự nhất định, nếu không \"cảm thấy có chuyện xui xẻo sẽ xảy ra\". Mất 1-2 giờ mỗi sáng cho việc kiểm tra và sắp xếp, thường đến trường muộn.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(2) Tiền sử – bối cảnh</h4><p class="text-slate-700 text-sm leading-relaxed">Từ nhỏ đã có tính cầu toàn, thích sự ngăn nắp. Không tiền sử tâm thần. Không sử dụng chất. Triệu chứng khởi phát sau khi vào đại học, áp lực học tập tăng cao.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(3) Khám lâm sàng – cận lâm sàng</h4><p class="text-slate-700 text-sm leading-relaxed">Sinh hiệu ổn định. Xét nghiệm máu, chức năng gan thận bình thường. Không có dấu hiệu bất thường về thần kinh.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(4) Khám tâm thần</h4><p class="text-slate-700 text-sm leading-relaxed">Tiếp xúc tốt, có insight về tình trạng. Ám ảnh về \"chuyện xui\" nếu không kiểm tra/sắp xếp. Cưỡng chế kiểm tra và sắp xếp theo ritual cố định. Lo âu tăng cao khi bị gián đoạn ritual. Không có triệu chứng tâm thần khác.</p></div>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2">CÂU HỎI (10 câu, chọn A-D):</h3>
+                        <div id="ca2-questions" class="space-y-4"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="case-section bg-white rounded-xl shadow-md overflow-hidden border border-slate-200" data-case="ca3">
+                <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                    <h2 class="text-2xl font-bold mb-2">CA 3 - Chứng nhổ tóc (Trichotillomania)</h2>
+                    <p class="text-blue-100">L.T.A., nữ, 16 tuổi, học sinh</p>
+                </header>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(1) Triệu chứng hiện tại</h4><p class="text-slate-700 text-sm leading-relaxed">Đến khám cùng mẹ vì 8 tháng nay có hành vi nhổ tóc trên đỉnh đầu khi căng thẳng, buồn chán hoặc khi học bài. Tóc vùng đỉnh đầu thưa thớt rõ rệt, có một số chỗ hói nhỏ. A. cảm thấy \"căng thẳng trước khi nhổ\" và \"thoải mái sau khi nhổ xong\". Cố gắng kiểm soát nhưng không thành công, phải đội mũ đi học để che giấu.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(2) Tiền sử – bối cảnh</h4><p class="text-slate-700 text-sm leading-relaxed">Không tiền sử tâm thần khác. Không sử dụng chất. Áp lực học tập cao do chuẩn bị thi đại học. Gia đình có mâu thuẫn về việc học của A. Từ nhỏ có thói quen cắn móng tay khi lo lắng.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(3) Khám lâm sàng – cận lâm sàng</h4><p class="text-slate-700 text-sm leading-relaxed">Tình trạng dinh dưỡng tốt. Da đầu có những vùng tóc thưa, một số nang lông bị viêm nhẹ. Không có dấu hiệu bệnh da liễu khác.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(4) Khám tâm thần</h4><p class="text-slate-700 text-sm leading-relaxed">Hợp tác khá, hơi e ngại khi nói về vấn đề. Có insight một phần, biết hành vi \"không tốt\" nhưng khó kiểm soát. Mô tả cảm giác căng thẳng trước khi nhổ và cảm giác thoả mãn sau khi nhổ. Không có ám ảnh rõ ràng đi trước hành vi nhổ tóc.</p></div>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2">CÂU HỎI (10 câu, chọn A-D):</h3>
+                        <div id="ca3-questions" class="space-y-4"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="case-section bg-white rounded-xl shadow-md overflow-hidden border border-slate-200" data-case="ca4">
+                <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                    <h2 class="text-2xl font-bold mb-2">CA 4 - Rối loạn mặc cảm cơ thể (BDD) - biến thể mặc cảm cơ bắp</h2>
+                    <p class="text-blue-100">L.T.T., nam, 24 tuổi, nhân viên phòng gym</p>
+                </header>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(1) Triệu chứng hiện tại</h4><p class="text-slate-700 text-sm leading-relaxed">Than phiền \"cơ ngực và tay quá nhỏ, nhìn yếu đuối\". 1 năm nay, T. soi gương nhiều lần/ngày, dùng app chụp góc \"tăng cơ\"; so sánh cơ thể với người khác; tập luyện quá mức; chế độ ăn kiêng nghiêm ngặt; cân nhắc dùng steroid. Tránh mặc áo phông sáng màu, hạn chế giao tiếp, từ chối hẹn hò vì \"xấu hổ về thân hình\".</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(2) Tiền sử – bối cảnh</h4><p class="text-slate-700 text-sm leading-relaxed">Không rối loạn ăn uống. Không bệnh nội khoa. Bạn bè từng trêu chọc ngoại hình.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(3) Khám lâm sàng – cận lâm sàng</h4><p class="text-slate-700 text-sm leading-relaxed">BMI 23, sức cơ bình thường. Xét nghiệm cơ bản bình thường.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(4) Khám tâm thần</h4><p class="text-slate-700 text-sm leading-relaxed">Mặc cảm rõ về một \"khuyết điểm\" ngoại hình không đáng kể/không hiện hữu; hành vi soi gương/chải chuốt lặp lại, so sánh cơ thể, né tránh xã hội. Không ảo tưởng cơ thể.</p></div>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2">CÂU HỎI (10 câu, chọn A-D):</h3>
+                        <div id="ca4-questions" class="space-y-4"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="case-section bg-white rounded-xl shadow-md overflow-hidden border border-slate-200" data-case="ca5">
+                <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                    <h2 class="text-2xl font-bold mb-2">CA 5 - Rối loạn tích trữ (không có ám ảnh), nguy cơ an toàn sinh hoạt</h2>
+                    <p class="text-blue-100">Đ.T.L., nữ, 58 tuổi, sống một mình</p>
+                </header>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(1) Triệu chứng hiện tại</h4><p class="text-slate-700 text-sm leading-relaxed">Con trai đưa đến vì \"nhà không thể bước vào\". 5 năm gần đây, L. không thể vứt bỏ báo/tạp chí/quần áo cũ, túi nilon, hóa đơn; mua thêm kệ để chứa; lối đi bị che kín; bếp và phòng tắm bị chất đống. Khi con trai đề nghị dọn, bà hoảng sợ, đau khổ dữ dội và trì hoãn.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(2) Tiền sử – bối cảnh</h4><p class="text-slate-700 text-sm leading-relaxed">Tính cầu toàn, do dự từ trước. Không lạm dụng chất. Thu nhập hạn chế, từng sống đơn thân lâu năm. Hàng xóm phàn nàn mùi ẩm mốc.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(3) Khám lâm sàng – cận lâm sàng</h4><p class="text-slate-700 text-sm leading-relaxed">Dinh dưỡng trung bình; không bệnh cấp. Nhà ở có nguy cơ cháy nổ, té ngã.</p></div>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-slate-800 mb-2">(4) Khám tâm thần</h4><p class="text-slate-700 text-sm leading-relaxed">Tỉnh, định hướng tốt. Không ám ảnh xâm nhập về bẩn/hại. Khó vứt bỏ đồ vật do \"sợ cần đến\", \"bỏ thì tiếc\", gắn bó quá mức; tích trữ dẫn đến suy giảm chức năng (vệ sinh, an toàn, xung đột xã hội).</p></div>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2">CÂU HỎI (10 câu, chọn A-D):</h3>
+                        <div id="ca5-questions" class="space-y-4"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-slate-200 shadow-lg p-4">
+            <div class="max-w-5xl mx-auto flex justify-center items-center gap-4">
+                <button onclick=\"submitQuiz()\" id=\"submitBtn\" class=\"px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500\">
+                    📊 Nộp Bài & Xem Kết Quả
+                </button>
+                <button onclick=\"resetQuiz()\" class=\"px-8 py-3 bg-slate-200 text-slate-800 font-semibold rounded-lg hover:bg-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400\">
+                    🔄 Làm Lại
+                </button>
+            </div>
+        </footer>
     </div>
 
+    <script>
+        // --- DATA ---
+        const clinicalCases = [
+            {
+                id: 'ca1',
+                questions: [
+                    { text: 'Tổ hợp triệu chứng nào dưới đây phù hợp nhất với định nghĩa ám ảnh và cưỡng chế?', options: ['Ý nghĩ xâm nhập gây lo âu + hành vi lặp lại để trung hòa/giảm lo', 'Sợ hãi rõ rệt có tác nhân đặc hiệu, né tránh nhất quán', 'Trạng thái buồn chán kéo dài ≥2 tuần, giảm hứng thú, ý nghĩ tội lỗi', 'Ý tưởng bị theo dõi, bị hại, kết hợp ảo thính'], correct: 0, explanation: 'OCD bao gồm ám ảnh (ý nghĩ xâm nhập gây lo âu) và cưỡng chế (hành vi lặp lại để giảm lo âu).' },
+                    { text: 'Đặc điểm "cảm giác dơ bẩn từ bên trong" gợi ý cơ chế nào?', options: ['Dung nạp không chắc chắn', 'Nhiễm bẩn trong tâm trí', 'Lệch lạc tri giác thị giác', 'Sợ hãi tình huống cụ thể'], correct: 1, explanation: '"Nhiễm bẩn trong tâm trí" (mental contamination) là cơ chế nhận thức đặc trưng trong OCD, liên quan đến cảm giác bẩn từ bên trong mà không cần tiếp xúc vật lý.' },
+                    { text: 'Điều kiện B trong tiêu chuẩn OCD nhấn mạnh:', options: ['Triệu chứng kéo dài ≥6 tháng', 'Triệu chứng chiếm nhiều thời gian (thường >1h/ngày) hoặc suy giảm chức năng đáng kể', 'Có tối thiểu 3 cụm triệu chứng', 'Có tiền sử gia đình OCD'], correct: 1, explanation: 'Tiêu chuẩn B của DSM-5 cho OCD yêu cầu các ám ảnh hoặc cưỡng chế phải tốn thời gian (ví dụ, >1 giờ mỗi ngày) hoặc gây ra đau khổ hoặc suy giảm chức năng đáng kể về mặt lâm sàng.' },
+                    { text: 'Hành vi tắm/rửa trong ca này có tính chất:', options: ['Thực tế liên quan trực tiếp đến nguy cơ bị bệnh', 'Rõ ràng quá mức và không liên quan thực tế đến sự kiện đáng sợ', 'Luôn làm giảm lo âu ngay lập tức', 'Chỉ là thói quen vệ sinh tốt'], correct: 1, explanation: 'Hành vi rửa tắm 3-4 lần/ngày, mỗi lần 40-60 phút là quá mức và không tương xứng với nguy cơ thực tế, một đặc điểm cốt lõi của hành vi cưỡng chế.' },
+                    { text: 'Chẩn biệt KHÔNG phù hợp nhất với ca này:', options: ['Ám sợ đặc hiệu (bẩn)', 'Rối loạn lo âu lan tỏa', 'Rối loạn hoảng loạn', 'Rối loạn mặc cảm cơ thể'], correct: 3, explanation: 'Rối loạn mặc cảm cơ thể (BDD) tập trung vào những khiếm khuyết tưởng tượng về ngoại hình, hoàn toàn không liên quan đến chủ đề nhiễm bẩn của ca này.' },
+                    { text: 'Liệu pháp hàng đầu có bằng chứng mạnh:', options: ['Liệu pháp phân tâm cổ điển đơn trị', 'ERP (tiếp xúc – ngăn hành vi đáp ứng), kết hợp tái cấu trúc nhận thức', 'Chỉ thư giãn – hít thở, tránh phơi nhiễm', 'Thôi miên'], correct: 1, explanation: 'ERP (Exposure and Response Prevention), một hình thức của CBT, được coi là điều trị chuẩn vàng và hiệu quả nhất cho OCD.' },
+                    { text: 'Khi lập thang phơi nhiễm cho ERP, bước KHÔNG đúng:', options: ['Đánh giá các tình huống gợi lo, sắp theo thứ bậc', 'Tiếp xúc lặp lại tới khi lo giảm', 'Cho phép thực hiện cưỡng chế ở lần tiếp xúc đầu để "xả lo"', 'Ngăn tránh/rituals trong khi tiếp xúc'], correct: 2, explanation: 'Nguyên tắc cốt lõi của ERP là "ngăn chặn hành vi đáp ứng". Việc cho phép thực hiện cưỡng chế sẽ củng cố vòng lặp OCD và làm mất tác dụng của liệu pháp.' },
+                    { text: 'Thuốc hỗ trợ có bằng chứng:', options: ['Chỉ benzodiazepine dài hạn', 'SSRI hoặc clomipramine (theo chỉ định)', 'Thuốc chống loạn thần đơn trị cho mọi trường hợp', 'Chỉ thảo dược'], correct: 1, explanation: 'Các thuốc ức chế tái hấp thu serotonin có chọn lọc (SSRI) và clomipramine (một TCA) là các loại thuốc hạng nhất được khuyến cáo cho điều trị OCD.' },
+                    { text: 'Yếu tố nhận thức phù hợp nhất với né tránh rửa trong ca này:', options: ['Liên tưởng "bẩn bên trong" kích hoạt bởi ký ức bị xúc phạm → rửa để "trung hòa"', 'Tự ti về cơ thể', 'Lệch lạc tri giác thị giác', 'Sợ hãi tình huống cụ thể'], correct: 0, explanation: 'Cơ chế liên tưởng giữa ký ức bị xúc phạm và cảm giác bẩn, dẫn đến hành vi rửa để trung hòa cảm giác đó là một ví dụ điển hình của nhiễm bẩn trong tâm trí.' },
+                    { text: 'Chỉ dấu cảnh báo cần sàng lọc thêm ở bệnh nhân OCD:', options: ['Ý tưởng tham vọng', 'Ý nghĩ/hành vi tự sát (tỉ lệ có ý định cao)', 'Tăng hoạt động thể lực', 'Sút cân nhanh'], correct: 1, explanation: 'Bệnh nhân OCD có tỷ lệ ý tưởng và hành vi tự sát cao hơn đáng kể so với dân số chung, do đó việc sàng lọc nguy cơ này là cực kỳ quan trọng.' }
+                ]
+            },
+            {
+                id: 'ca2',
+                questions: [
+                    { text: 'Loại ám ảnh chủ yếu trong ca này:', options: ['Ám ảnh nhiễm bẩn', 'Ám ảnh về tổn hại/nguy hiểm + tư duy ma thuật', 'Ám ảnh tôn giáo', 'Ám ảnh tình dục'], correct: 1, explanation: 'Ám ảnh về một sự kiện xấu ("chuyện xui") sẽ xảy ra, kết hợp với niềm tin rằng một hành vi ritual (sắp xếp) có thể ngăn chặn nó, là ví dụ của tư duy ma thuật và ám ảnh về tổn hại.' },
+                    { text: 'Hành vi cưỡng chế chủ yếu:', options: ['Rửa/làm sạch', 'Kiểm tra (checking) và sắp xếp (arranging)', 'Đếm', 'Lặp lại từ ngữ'], correct: 1, explanation: 'Các hành vi được mô tả rõ ràng trong ca bệnh là kiểm tra khóa, điện, gas và sắp xếp đồ đạc theo một trật tự nhất định.' },
+                    { text: 'Đặc điểm "tư duy ma thuật" thể hiện qua:', options: ['Tin rằng việc không thực hiện ritual sẽ dẫn đến "chuyện xui"', 'Nghe thấy tiếng ma', 'Nhìn thấy ma', 'Tin mình có siêu năng lực'], correct: 0, explanation: 'Tư duy ma thuật trong OCD là niềm tin rằng một hành vi nào đó (sắp xếp sách) có thể ngăn chặn một kết quả không liên quan (chuyện xui xẻo xảy ra).' },
+                    { text: 'Chẩn đoán phù hợp nhất:', options: ['Rối loạn lo âu lan tỏa', 'Rối loạn ám ảnh cưỡng chế', 'Rối loạn nhân cách cưỡng chế', 'Rối loạn lo âu xã hội'], correct: 1, explanation: 'Ca bệnh có đầy đủ các yếu tố của OCD: ám ảnh (sợ chuyện xui) và cưỡng chế (kiểm tra, sắp xếp) gây suy giảm chức năng đáng kể (mất >1h/ngày, đi học muộn).' },
+                    { text: 'Phân biệt với rối loạn nhân cách cưỡng chế (OCPD):', options: ['OCD: có ám ảnh rõ rệt, triệu chứng là ego-dystonic; OCPD: không có ám ảnh thực sự, các hành vi là ego-syntonic', 'Không có sự khác biệt', 'Chỉ khác về tuổi khởi phát', 'Chỉ khác về giới tính'], correct: 0, explanation: 'Trong OCD, các triệu chứng gây khó chịu cho bản thân (ego-dystonic). Trong OCPD, các đặc điểm (cầu toàn, ngăn nắp) được xem là hợp lý và mong muốn (ego-syntonic) và không có ám ảnh-cưỡng chế thực sự.' },
+                    { text: 'Nguyên tắc điều trị ERP cho trường hợp này:', options: ['Tăng dần thời gian kiểm tra', 'Phơi nhiễm với lo âu (không kiểm tra/sắp xếp) + ngăn chặn ritual', 'Chỉ dùng thuốc', 'Cho phép kiểm tra 1 lần duy nhất'], correct: 1, explanation: 'ERP yêu cầu bệnh nhân đối mặt với tình huống gây lo âu (ví dụ: ra khỏi nhà mà không kiểm tra) và đồng thời ngăn chặn hành vi cưỡng chế.' },
+                    { text: 'Thời gian điển hình cho một session ERP:', options: ['5-10 phút', '45-90 phút (cho đến khi lo âu giảm tự nhiên)', '3-4 giờ', 'Cả ngày'], correct: 1, explanation: 'Một phiên ERP thường kéo dài đủ lâu (thường là 45-90 phút) để cho phép quá trình quen nhờn (habituation) xảy ra, tức là lo âu tăng lên rồi giảm xuống một cách tự nhiên mà không cần thực hiện ritual.' },
+                    { text: 'Yếu tố dự báo tốt cho điều trị:', options: ['Tuổi khởi phát muộn', 'Có insight tốt về tính không hợp lý của triệu chứng', 'Có nhiều comorbidity', 'Thời gian mắc bệnh dài'], correct: 1, explanation: 'Khi bệnh nhân nhận thức được rằng các ám ảnh và cưỡng chế của mình là vô lý hoặc quá mức (insight tốt), họ có xu hướng hợp tác tốt hơn và có kết quả điều trị tốt hơn.' },
+                    { text: 'Biến chứng thường gặp nếu không điều trị:', options: ['Tăng cân', 'Trầm cảm thứ phát, suy giảm chức năng xã hội/học tập', 'Tăng huyết áp', 'Rối loạn tiêu hóa'], correct: 1, explanation: 'OCD không được điều trị thường dẫn đến sự suy giảm nghiêm trọng về chất lượng cuộc sống, chức năng xã hội/học tập/nghề nghiệp và thường đi kèm với các rối loạn khác như trầm cảm.' },
+                    { text: 'Đặc điểm của ritual trong OCD:', options: ['Linh hoạt, dễ thay đổi', 'Cứng nhắc, theo trình tự cố định, khó thay đổi', 'Chỉ thực hiện khi có người khác', 'Chỉ thực hiện vào ban đêm'], correct: 1, explanation: 'Các hành vi cưỡng chế hoặc ritual trong OCD thường có tính cứng nhắc, phải được thực hiện theo những quy tắc hoặc trình tự rất cụ thể.' }
+                ]
+            },
+            {
+                id: 'ca3',
+                questions: [
+                    { text: 'Chẩn đoán chính cho ca này:', options: ['OCD', 'Rối loạn nhổ tóc (Trichotillomania)', 'Rối loạn bóc da', 'Rối loạn tích trữ'], correct: 1, explanation: 'Hành vi nhổ tóc lặp đi lặp lại dẫn đến rụng tóc, cùng với các nỗ lực không thành công để ngăn chặn, là triệu chứng cốt lõi của Trichotillomania.' },
+                    { text: 'Đặc điểm phân biệt trichotillomania với OCD:', options: ['Trichotillomania có ám ảnh rõ ràng', 'Trichotillomania: có xung động/urge, KHÔNG có ám ảnh rõ ràng như OCD', 'Không có sự khác biệt', 'Chỉ khác về vị trí'], correct: 1, explanation: 'Điểm phân biệt quan trọng là Trichotillomania được thúc đẩy bởi một xung động hoặc cảm giác căng thẳng (urge) chứ không phải bởi một ý nghĩ ám ảnh (obsession) cụ thể như trong OCD.' },
+                    { text: 'Trình tự cảm xúc điển hình:', options: ['Bình thường → nhổ tóc → hối hận', 'Căng thẳng/urge → nhổ tóc → thoải mái/thỏa mãn tạm thời', 'Vui vẻ → nhổ tóc → buồn', 'Buồn → nhổ tóc → vui'], correct: 1, explanation: 'Chu kỳ điển hình của các rối loạn tập trung vào cơ thể (BFRBs) là: cảm giác căng thẳng hoặc thôi thúc tăng lên, thực hiện hành vi, và sau đó là cảm giác giải tỏa, hài lòng hoặc nhẹ nhõm tạm thời.' },
+                    { text: 'Vị trí nhổ tóc thường gặp nhất:', options: ['Lông mày', 'Da đầu (đỉnh đầu, thái dương)', 'Lông mi', 'Tóc mu'], correct: 1, explanation: 'Da đầu là vị trí phổ biến nhất, tiếp theo là lông mày và lông mi.' },
+                    { text: 'Yếu tố kích thích phổ biến:', options: ['Chỉ khi ngủ', 'Căng thẳng, lo âu, buồn chán, tập trung (học bài, xem TV)', 'Chỉ khi vui vẻ', 'Chỉ khi ăn'], correct: 1, explanation: 'Hành vi nhổ tóc thường xảy ra trong các trạng thái cảm xúc tiêu cực (căng thẳng, lo âu) hoặc trong các tình huống tĩnh tại, ít vận động (buồn chán, học bài, xem TV).' },
+                    { text: 'Biện pháp che giấu thường gặp:', options: ['Không che giấu', 'Đội mũ, dùng tóc giả, thay đổi kiểu tóc', 'Cạo hết tóc', 'Nhuộm tóc'], correct: 1, explanation: 'Do cảm giác xấu hổ và mặc cảm, bệnh nhân thường nỗ lực che giấu tình trạng rụng tóc bằng mũ, tóc giả, hoặc các kiểu tóc đặc biệt.' },
+                    { text: 'Phương pháp điều trị chính:', options: ['Chỉ dùng thuốc', 'Huấn luyện đảo ngược thói quen (Habit Reversal Training)', 'Chỉ cắt ngắn tóc', 'Đeo găng tay suốt ngày'], correct: 1, explanation: 'Habit Reversal Training (HRT), một loại trị liệu hành vi, là phương pháp điều trị tâm lý có bằng chứng mạnh mẽ nhất cho Trichotillomania.' },
+                    { text: 'Thành phần của Habit Reversal Training bao gồm:', options: ['Chỉ tránh kích thích', 'Nhận thức về hành vi + phát triển phản ứng cạnh tranh + thay đổi môi trường', 'Chỉ dùng thuốc', 'Chỉ tâm lý trị liệu nhóm'], correct: 1, explanation: 'HRT bao gồm ba thành phần chính: (1) Huấn luyện nhận thức về hành vi, (2) Phát triển một phản ứng cạnh tranh (ví dụ: nắm chặt tay thay vì nhổ tóc), và (3) Hỗ trợ xã hội và thay đổi môi trường.' },
+                    { text: 'Biến chứng thường gặp:', options: ['Tăng cân', 'Nhiễm trùng da đầu, rối loạn tiêu hóa nếu nuốt tóc (trichophagia)', 'Tăng huyết áp', 'Đau đầu'], correct: 1, explanation: 'Ngoài tổn thương da đầu, một biến chứng y khoa nghiêm trọng là trichophagia (nuốt tóc), có thể dẫn đến hình thành búi tóc trong dạ dày-ruột (trichobezoar) và gây tắc ruột.' },
+                    { text: 'Yếu tố dự báo tốt:', options: ['Tuổi khởi phát muộn', 'Khởi phát sớm, có insight, hợp tác điều trị tốt', 'Có nhiều vị trí nhổ', 'Kéo dài nhiều năm'], correct: 1, explanation: 'Các yếu tố như khởi phát sớm (dễ thay đổi hành vi hơn), nhận thức rõ về vấn đề và động lực hợp tác điều trị cao thường liên quan đến kết quả điều trị tốt hơn.' }
+                ]
+            },
+            {
+                id: 'ca4',
+                questions: [
+                    { text: 'Dấu hiệu lõi của BDD:', options: ['Sợ bị đánh giá xã hội chung chung', 'Ám ảnh về khiếm khuyết ngoại hình (không đáng kể/không có), kèm hành vi lặp lại liên quan', 'Lo về tăng cân', 'Rối loạn ăn uống'], correct: 1, explanation: 'BDD được đặc trưng bởi sự bận tâm quá mức về một hoặc nhiều khiếm khuyết ngoại hình mà người khác không nhận thấy hoặc cho là không đáng kể, đi kèm với các hành vi lặp lại (ví dụ: soi gương, so sánh).' },
+                    { text: 'Biểu hiện nào ủng hộ "mặc cảm cơ bắp":', options: ['Tin rằng cơ bắp "quá nhỏ" dù khách quan bình thường; tập quá mức; cân nhắc steroid', 'Chỉ tăng cân', 'Sợ bay', 'Sợ máu'], correct: 0, explanation: 'Mặc cảm cơ bắp (Muscle dysmorphia) là một dạng của BDD, đặc trưng bởi niềm tin rằng cơ thể không đủ cơ bắp hoặc quá nhỏ bé, dẫn đến các hành vi như tập luyện quá mức và chế độ ăn kiêng nghiêm ngặt.' },
+                    { text: 'Hành vi nào thường gặp ở BDD:', options: ['Né tránh phương tiện công cộng', 'Soi gương, chải chuốt quá mức, so sánh cơ thể', 'Kiểm tra ổ khóa nhiều lần', 'Đếm thầm'], correct: 1, explanation: 'Các hành vi lặp lại (compulsions) trong BDD bao gồm soi gương, chải chuốt, che giấu, tìm kiếm sự trấn an, và so sánh ngoại hình của mình với người khác.' },
+                    { text: 'Chẩn biệt cần cân nhắc:', options: ['Hoảng loạn', 'Rối loạn ăn uống (trọng tâm vào cân nặng/ăn uống vs. khuyết điểm ngoại hình)', 'PTSD', 'Rối loạn nhân cách chống đối'], correct: 1, explanation: 'Cần phân biệt BDD với rối loạn ăn uống. Mặc dù cả hai đều liên quan đến hình ảnh cơ thể, nhưng BDD tập trung vào các "khuyết điểm" cụ thể, trong khi rối loạn ăn uống tập trung chủ yếu vào cân nặng và hình dáng tổng thể.' },
+                    { text: 'Hướng can thiệp chính:', options: ['CBT với ERP + tái cấu trúc nhận thức + giới hạn hành vi kiểm tra', 'Chỉ dùng thuốc', 'Chỉ tập thể dục', 'Phẫu thuật thẩm mỹ'], correct: 0, explanation: 'CBT, đặc biệt là bao gồm ERP, là phương pháp điều trị hàng đầu. Nó giúp bệnh nhân đối mặt với các tình huống xã hội mà họ né tránh và giảm các hành vi kiểm tra lặp đi lặp lại.' },
+                    { text: 'Tại sao phẫu thuật thẩm mỹ không được khuyến khích:', options: ['Quá đắt', 'Không cải thiện triệu chứng BDD, có thể làm tệ hơn', 'Không an toàn', 'Mất thời gian'], correct: 1, explanation: 'Can thiệp thẩm mỹ hầu như không bao giờ làm giảm bớt các triệu chứng BDD. Bệnh nhân thường không hài lòng với kết quả và có thể chuyển sự bận tâm sang một bộ phận cơ thể khác hoặc làm cho triệu chứng tồi tệ hơn.' },
+                    { text: 'Kỹ thuật ERP cho BDD bao gồm:', options: ['Tăng thời gian soi gương', 'Phơi nhiễm với tình huống xã hội + hạn chế soi gương/chải chuốt', 'Tránh hoàn toàn mọi tương tác xã hội', 'Chỉ ở nhà'], correct: 1, explanation: 'ERP cho BDD bao gồm việc dần dần phơi nhiễm bệnh nhân với các tình huống mà họ sợ hãi (ví dụ: mặc quần áo họ né tránh) trong khi ngăn họ thực hiện các hành vi cưỡng chế (ví dụ: hạn chế soi gương).' },
+                    { text: 'Thuốc có bằng chứng hiệu quả:', options: ['SSRI (liều cao)', 'Chỉ benzodiazepine', 'Chỉ thuốc chống loạn thần', 'Không có thuốc nào hiệu quả'], correct: 0, explanation: 'Các thuốc SSRI, thường ở liều cao hơn so với liều điều trị trầm cảm, là lựa chọn dược lý hàng đầu cho BDD.' },
+                    { text: 'Tình trạng comorbid thường gặp:', options: ['Tăng huyết áp', 'Trầm cảm, lo âu xã hội, OCD', 'Đái tháo đường', 'Bệnh tim'], correct: 1, explanation: 'BDD có tỷ lệ đồng mắc rất cao với các rối loạn khác, đặc biệt là rối loạn trầm cảm chủ yếu, rối loạn lo âu xã hội và OCD.' },
+                    { text: 'Dấu hiệu cần can thiệp khẩn cấp:', options: ['Tập gym nhiều', 'Ý tưởng/hành vi tự sát, cô lập xã hội hoàn toàn', 'Ăn nhiều protein', 'Soi gương 1 lần/ngày'], correct: 1, explanation: 'BDD có tỷ lệ ý tưởng và hành vi tự sát rất cao. Bất kỳ dấu hiệu nào về ý định tự tử hoặc sự cô lập xã hội nghiêm trọng đều cần được can thiệp khẩn cấp.' }
+                ]
+            },
+            {
+                id: 'ca5',
+                questions: [
+                    { text: 'Đặc điểm cốt lõi của rối loạn tích trữ:', options: ['Khó vứt bỏ đồ đạc (không có ám ảnh), kèm tích tụ gây suy giảm chức năng', 'Sợ vi khuẩn nên tránh chạm', 'Soi gương nhiều', 'Nhổ tóc'], correct: 0, explanation: 'Rối loạn tích trữ (Hoarding Disorder) được định nghĩa bởi sự khó khăn dai dẳng trong việc vứt bỏ hoặc chia tay với tài sản, bất kể giá trị thực tế của chúng, dẫn đến sự tích tụ làm lộn xộn không gian sống và suy giảm chức năng.' },
+                    { text: 'Vật dụng tích trữ thường gặp:', options: ['Vật bén nhọn', 'Báo/tạp chí/quần áo/túi/sách/giấy tờ…', 'Vũ khí', 'Thuốc men'], correct: 1, explanation: 'Các vật dụng được tích trữ phổ biến nhất bao gồm báo, tạp chí, quần áo cũ, túi, sách và giấy tờ.' },
+                    { text: 'Hệ lụy thường gặp ở tích trữ mức nặng:', options: ['Nguy cơ hỏa hoạn/té ngã/vệ sinh kém, xung đột gia đình – hàng xóm', 'Dị ứng phấn hoa', 'Đau thắt ngực', 'Tăng trương lực cơ'], correct: 0, explanation: 'Sự lộn xộn quá mức tạo ra các mối nguy hiểm nghiêm trọng về an toàn (nguy cơ cháy nổ, té ngã), vệ sinh (sâu bọ, nấm mốc) và gây ra xung đột xã hội đáng kể.' },
+                    { text: 'Tính khí/đặc điểm thường đi kèm:', options: ['Quyết đoán cao', 'Thiếu quyết đoán, trì hoãn, cầu toàn, khó tổ chức', 'Xúc cảm phẳng lặng', 'Nhiệt tình xã hội'], correct: 1, explanation: 'Những người mắc chứng tích trữ thường có các đặc điểm tính cách như thiếu quyết đoán, trì hoãn, cầu toàn và gặp khó khăn trong việc tổ chức, sắp xếp.' },
+                    { text: 'Chẩn biệt với OCD dựa vào:', options: ['Không có sự khác biệt', 'Hoarding: không có ám ảnh xâm nhập điển hình; OCD: có ám ảnh rõ ràng', 'Chỉ khác tuổi', 'Chỉ khác giới tính'], correct: 1, explanation: 'Trong rối loạn tích trữ, việc tích trữ không phải là kết quả của các ý nghĩ ám ảnh xâm nhập (ví dụ, sợ hãi về việc bị nhiễm bẩn) như trong OCD. Sự khó khăn trong việc vứt bỏ là triệu chứng chính.' },
+                    { text: 'Lý do khó vứt bỏ thường gặp:', options: ['Sợ ma', 'Gắn bó cảm xúc, sợ cần dùng sau này, tiếc của', 'Sợ bị trộm', 'Muốn bán kiếm tiền'], correct: 1, explanation: 'Các lý do phổ biến bao gồm niềm tin rằng các món đồ sẽ hữu ích trong tương lai, sự gắn bó tình cảm mạnh mẽ với đồ vật, hoặc cảm giác tiếc nuối khi vứt bỏ.' },
+                    { text: 'Phương pháp điều trị chính:', options: ['CBT chuyên biệt cho hoarding + kỹ năng tổ chức + exposure', 'Chỉ dọn dẹp cưỡng bức', 'Chỉ dùng thuốc', 'Bỏ qua không điều trị'], correct: 0, explanation: 'Mô hình CBT chuyên biệt cho rối loạn tích trữ là phương pháp điều trị hiệu quả nhất. Nó tập trung vào việc huấn luyện kỹ năng ra quyết định, tổ chức và thực hành loại bỏ đồ vật một cách có hệ thống.' },
+                    { text: 'Tại sao không nên dọn dẹp cưỡng bức:', options: ['Mất tiền', 'Gây stress/trauma tâm lý, tái phát nhanh, không giải quyết được nguyên nhân', 'Mất thời gian', 'Không có lý do'], correct: 1, explanation: 'Việc dọn dẹp cưỡng bức mà không có sự đồng ý và tham gia của bệnh nhân thường gây ra đau khổ tâm lý nghiêm trọng, phá vỡ mối quan hệ trị liệu và không giải quyết được các vấn đề cốt lõi, dẫn đến tái phát nhanh chóng.' },
+                    { text: 'Kỹ thuật exposure trong điều trị hoarding:', options: ['Vứt hết đồ trong 1 ngày', 'Luyện tập vứt bỏ từng món đồ nhỏ theo thứ bậc từ dễ đến khó', 'Đốt hết đồ', 'Cho hết đồ đi'], correct: 1, explanation: 'Việc thực hành loại bỏ đồ vật được thực hiện theo một hệ thống phân cấp, bắt đầu với những món đồ ít gây lo lắng nhất và tiến dần đến những món đồ khó hơn, cho phép bệnh nhân dần dần xây dựng khả năng chịu đựng đau khổ.' },
+                    { text: 'Dấu hiệu cần can thiệp khẩn cấp:', options: ['Mua quá nhiều đồ', 'Nguy cơ an toàn nghiêm trọng: cháy nổ, sập nhà, không thể tiếp cận toilet/bếp', 'Nhà hơi bừa bộn', 'Có mùi khó chịu nhẹ'], correct: 1, explanation: 'Khi việc tích trữ tạo ra mối đe dọa trực tiếp đến sức khỏe và an toàn (ví dụ: lối thoát hiểm bị chặn, nguy cơ cháy nổ, điều kiện vệ sinh không an toàn), cần phải có sự can thiệp của các cơ quan chức năng hoặc đội ngũ đa ngành.' }
+                ]
+            }
+        ];
+
+        // --- STATE ---
+        let currentCase = null;
+        let answers = {};
+        let showResults = false;
+
+        // --- LOGIC ---
+        function initializeQuiz() {
+            generateAllQuestions();
+        }
+
+        function generateAllQuestions() {
+            clinicalCases.forEach(generateQuestionsForCase);
+        }
+
+        function generateQuestionsForCase(case_) {
+            const container = document.getElementById(`${case_.id}-questions`);
+            if (!container) return;
+            container.innerHTML = '';
+            case_.questions.forEach((question, questionIndex) => {
+                const questionDiv = document.createElement('div');
+                const questionKey = `${case_.id}_${questionIndex}`;
+                questionDiv.className = 'question-container p-4 rounded-lg border bg-white border-slate-200 transition-all duration-200 hover:border-blue-500 hover:shadow-sm';
+                questionDiv.setAttribute('data-question', questionKey);
+                const globalQuestionNumber = getGlobalQuestionNumber(case_.id, questionIndex);
+                questionDiv.innerHTML = `
+                    <h4 class="font-medium text-slate-800 mb-3">
+                        Câu ${globalQuestionNumber}: ${question.text}
+                    </h4>
+                    <div class="space-y-2">
+                        ${question.options.map((option, optionIndex) => `
+                            <label class="flex items-start p-3 rounded-md transition-colors hover:bg-slate-100 cursor-pointer">
+                                <input 
+                                    type="radio" 
+                                    name="${questionKey}" 
+                                    value="${optionIndex}"
+                                    class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300"
+                                    onchange="handleAnswerChange('${case_.id}', ${questionIndex}, ${optionIndex})"
+                                />
+                                <span class="ml-3 text-sm text-slate-700">
+                                    ${String.fromCharCode(65 + optionIndex)}. ${option}
+                                </span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="explanation-container" style="display: none;"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+        
+        function getGlobalQuestionNumber(caseId, questionIndex) {
+            const caseIndex = clinicalCases.findIndex(c => c.id === caseId);
+            return caseIndex * 10 + questionIndex + 1;
+        }
+
+        function handleAnswerChange(caseId, questionIndex, answer) {
+            const key = `${caseId}_${questionIndex}`;
+            answers[key] = answer;
+        }
+
+        function showCase(caseId) {
+            const container = document.getElementById('casesContainer');
+            const buttons = document.querySelectorAll('.case-nav-btn');
+            
+            if (currentCase === caseId) {
+                currentCase = null;
+                container.className = 'space-y-8 show-all';
+                buttons.forEach(btn => btn.className = 'case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400');
+            } else {
+                currentCase = caseId;
+                container.className = 'space-y-8';
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-case') === caseId) {
+                        btn.className = 'case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-blue-600 text-white border-blue-600 shadow-sm';
+                    } else {
+                        btn.className = 'case-nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400';
+                    }
+                });
+                document.querySelectorAll('.case-section').forEach(section => {
+                    section.classList.toggle('active', section.getAttribute('data-case') === caseId);
+                });
+            }
+        }
+
+        function calculateResults() {
+            let totalQuestions = clinicalCases.reduce((sum, case_) => sum + case_.questions.length, 0);
+            let correctAnswers = 0;
+            clinicalCases.forEach(case_ => {
+                case_.questions.forEach((question, index) => {
+                    const key = `${case_.id}_${index}`;
+                    if (answers[key] === question.correct) {
+                        correctAnswers++;
+                    }
+                });
+            });
+            return { totalQuestions, correctAnswers };
+        }
+
+        function submitQuiz() {
+            showResults = true;
+            const { totalQuestions, correctAnswers } = calculateResults();
+            const percentage = totalQuestions > 0 ? (correctAnswers / totalQuestions * 100).toFixed(1) : 0;
+            
+            document.getElementById('scoreDisplay').textContent = `${correctAnswers}/${totalQuestions}`;
+            document.getElementById('percentageDisplay').textContent = percentage;
+            
+            const resultsSection = document.getElementById('resultsSection');
+            const resultMessage = document.getElementById('resultMessage');
+            
+            if (percentage >= 80) {
+                resultsSection.className = 'mb-8 p-6 rounded-xl shadow-md bg-green-100 border-l-4 border-green-500';
+                resultMessage.className = 'text-lg mt-2 font-semibold text-green-800';
+                resultMessage.textContent = '🎉 Xuất sắc! Bạn đã nắm vững kiến thức.';
+            } else if (percentage >= 50) {
+                resultsSection.className = 'mb-8 p-6 rounded-xl shadow-md bg-yellow-100 border-l-4 border-yellow-500';
+                resultMessage.className = 'text-lg mt-2 font-semibold text-yellow-800';
+                resultMessage.textContent = '👍 Tốt! Bạn đã đạt yêu cầu.';
+            } else {
+                resultsSection.className = 'mb-8 p-6 rounded-xl shadow-md bg-red-100 border-l-4 border-red-500';
+                resultMessage.className = 'text-lg mt-2 font-semibold text-red-800';
+                resultMessage.textContent = '💪 Cần cố gắng thêm! Hãy xem lại các câu sai.';
+            }
+            
+            resultsSection.style.display = 'block';
+            window.scrollTo(0, 0);
+            
+            updateQuestionDisplays();
+            document.querySelectorAll('input[type="radio"]').forEach(input => input.disabled = true);
+        }
+
+        function updateQuestionDisplays() {
+            clinicalCases.forEach(case_ => {
+                case_.questions.forEach((question, questionIndex) => {
+                    const questionKey = `${case_.id}_${questionIndex}`;
+                    const questionDiv = document.querySelector(`[data-question="${questionKey}"]`);
+                    const userAnswer = answers[questionKey];
+                    
+                    if (!questionDiv) return;
+                    
+                    const isCorrect = userAnswer === question.correct;
+                    const isAnswered = userAnswer !== undefined;
+
+                    if (isAnswered) {
+                        if (isCorrect) {
+                            questionDiv.className = 'question-container p-4 rounded-lg border bg-green-50 border-green-400';
+                        } else {
+                            questionDiv.className = 'question-container p-4 rounded-lg border bg-red-50 border-red-400';
+                        }
+                    }
+
+                    const labels = questionDiv.querySelectorAll('label span');
+                    labels.forEach((label, optionIndex) => {
+                        if (optionIndex === question.correct) {
+                            label.className = 'ml-3 text-sm font-semibold text-green-800';
+                        } else if (isAnswered && optionIndex === userAnswer && !isCorrect) {
+                            label.className = 'ml-3 text-sm font-semibold text-red-800 line-through';
+                        } else {
+                            label.className = 'ml-3 text-sm text-slate-700';
+                        }
+                    });
+
+                    const explanationContainer = questionDiv.querySelector('.explanation-container');
+                    explanationContainer.innerHTML = `
+                        <div class="mt-4 p-3 rounded-lg bg-blue-50 border-l-4 border-blue-400">
+                            <p class="text-sm text-blue-900">
+                                <span class="font-semibold">Đáp án đúng: ${String.fromCharCode(65 + question.correct)}</span>
+                            </p>
+                            <p class="text-sm text-slate-800 mt-1">
+                                <span class="font-semibold">Giải thích:</span> ${question.explanation}
+                            </p>
+                        </div>
+                    `;
+                    explanationContainer.style.display = 'block';
+                });
+            });
+        }
+
+        function resetQuiz() {
+            answers = {};
+            showResults = false;
+            currentCase = null;
+            
+            document.getElementById('resultsSection').style.display = 'none';
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.disabled = false;
+                input.checked = false;
+            });
+
+            document.querySelectorAll('.question-container').forEach(div => {
+                div.className = 'question-container p-4 rounded-lg border bg-white border-slate-200 transition-all duration-200 hover:border-blue-500 hover:shadow-sm';
+                div.querySelectorAll('label span').forEach(span => span.className = 'ml-3 text-sm text-slate-700');
+                const explanation = div.querySelector('.explanation-container');
+                if (explanation) explanation.style.display = 'none';
+            });
+            
+            showCase(null); // This will reset navigation to show all
+        }
+
+        // --- INITIALIZE ---
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
 </body>
 </html>

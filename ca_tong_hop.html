@@ -186,10 +186,12 @@
     // Init
     renderCards('');
 
-    // Search
-    searchEl.addEventListener('input', (e) => {
-      renderCards(e.target.value || '');
-    });
+    // Search (optional – only if search element exists)
+    if (searchEl) {
+      searchEl.addEventListener('input', (e) => {
+        renderCards(e.target.value || '');
+      });
+    }
 
     // Print
     document.getElementById('printBtn').addEventListener('click', () => window.print());

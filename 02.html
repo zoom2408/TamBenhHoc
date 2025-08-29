@@ -8,9 +8,9 @@
   <style>
     /* Flip card fix: đảm bảo nội dung không bị ngược khi lật */
     .flip { perspective: 1000px; }
-    .flip-inner { transform-style: preserve-3d; transition: transform .6s; }
+    .flip-inner { display: grid; transform-style: preserve-3d; transition: transform .6s; }
     .flip.is-flipped .flip-inner { transform: rotateY(180deg); }
-    .flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .flip-face { grid-area: 1/1; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
     .flip-back { transform: rotateY(180deg); }
     /* Smooth accordion */
     .accordion-content { max-height: 0; overflow: hidden; transition: max-height .35s ease; }

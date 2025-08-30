@@ -29,10 +29,11 @@
 
             <nav id="nav-menu">
                 <div>
-                    <div class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <div class="section-header flex justify-between items-center cursor-pointer py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                         Kiến thức
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div id="quiz-submenu" class="text-sm ml-4 mt-1">
+                    <div class="submenu text-sm ml-4 mt-1">
                         <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="01.html">
                             Các tiếp cận TBH 
                         </a>
@@ -54,10 +55,11 @@
                     </div>
                 </div>
                 <div>
-                    <div class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <div class="section-header flex justify-between items-center cursor-pointer py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                         Kiểm tra
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div id="quiz-submenu" class="text-sm ml-4 mt-1">
+                    <div class="submenu text-sm ml-4 mt-1">
                         <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="quiz.html">
                             Tổng hợp
                         </a>
@@ -118,6 +120,18 @@
             const contentFrame = document.getElementById('content-frame');
             const navMenu = document.getElementById('nav-menu');
             const menuLinks = navMenu.querySelectorAll('a[data-target]');
+            const sectionHeaders = navMenu.querySelectorAll('.section-header');
+
+            // Toggle submenus
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const submenu = header.nextElementSibling;
+                    const icon = header.querySelector('i');
+                    submenu.classList.toggle('hidden');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
 
             // Toggle sidebar trên di động
             hamburgerButton.addEventListener('click', () => {

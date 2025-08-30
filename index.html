@@ -31,7 +31,7 @@
                 <div>
                     <div class="section-header flex justify-between items-center cursor-pointer py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                         Kiến thức (Gen từ GPT)
-                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-up"></i>
                     </div>
                     <div class="submenu text-sm ml-4 mt-1">
                         <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="01.html">
@@ -59,7 +59,7 @@
                         Kiến thức (Gen từ Claude)
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="submenu text-sm ml-4 mt-1">
+                    <div class="submenu text-sm ml-4 mt-1 hidden">
                         <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="01_Claude.html">
                             Các tiếp cận TBH 
                         </a>
@@ -85,7 +85,7 @@
                         Kiểm tra
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="submenu text-sm ml-4 mt-1">
+                    <div class="submenu text-sm ml-4 mt-1 hidden">
                         <a href="#" class="menu-link block py-2 px-4 rounded transition duration-200 hover:bg-gray-600" data-target="quiz.html">
                             Tổng hợp
                         </a>
@@ -110,16 +110,16 @@
                     </div>
                 </div>
             </nav>
-            <div class="flex p-4 space-x-4 text-white mt-auto mb-10">
-
+            <div class="flex p-4 space-x-4 text-white mt-auto mb-8">
+                <a href="https://drive.google.com/drive/folders/101148IK_8lVlL1TJ_Sl2Wf65XZYjSt6G?usp=drive_link" class="group relative">
                     <i class="fab fa-google-drive text-2xl"></i>
                     <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-700 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap">Tài liệu môn học</span>
                 </a>
-
+                <a href="https://drive.google.com/drive/folders/1w2fUZrEokw5GuZX3ZnP9bu53DLWpLmDI?usp=drive_link" class="group relative">
                     <i class="fas fa-file-audio text-2xl"></i>
                     <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-700 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap">Records by Hoàng Vũ</span>
                 </a>
-
+                <a href="https://open.spotify.com/show/22VZyXfAXz6T75O7WWCKEY?si=610a0583e6ff48d4" class="group relative">
                     <i class="fab fa-spotify text-2xl"></i>
                     <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-700 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap">Đối thoại thú vị</span>
                 </a>
@@ -150,15 +150,41 @@
             const navMenu = document.getElementById('nav-menu');
             const menuLinks = navMenu.querySelectorAll('a[data-target]');
             const sectionHeaders = navMenu.querySelectorAll('.section-header');
+            const submenus = navMenu.querySelectorAll('.submenu');
 
-            // Toggle submenus
+            // Initialize submenu states
+            submenus.forEach((submenu, index) => {
+                const icon = submenu.previousElementSibling.querySelector('i');
+                if (index === 0) {
+                    submenu.classList.remove('hidden');
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    submenu.classList.add('hidden');
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+
+            // Toggle submenus and ensure only one is open at a time
             sectionHeaders.forEach(header => {
                 header.addEventListener('click', () => {
                     const submenu = header.nextElementSibling;
-                    const icon = header.querySelector('i');
-                    submenu.classList.toggle('hidden');
-                    icon.classList.toggle('fa-chevron-down');
-                    icon.classList.toggle('fa-chevron-up');
+                    const isHidden = submenu.classList.contains('hidden');
+
+                    submenus.forEach(sm => {
+                        sm.classList.add('hidden');
+                        const smIcon = sm.previousElementSibling.querySelector('i');
+                        smIcon.classList.remove('fa-chevron-up');
+                        smIcon.classList.add('fa-chevron-down');
+                    });
+
+                    if (isHidden) {
+                        submenu.classList.remove('hidden');
+                        const icon = header.querySelector('i');
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
                 });
             });
 

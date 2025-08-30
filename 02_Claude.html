@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phổ Loạn Thần - Học Tập Tương Tác</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-tab {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: perspective(1000px) rotateX(0deg);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: perspective(1000px) rotateX(5deg) translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .symptoms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .symptom-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .symptom-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .severity-spectrum {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .severity-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            margin: 0 10px;
+            min-width: 150px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .severity-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .option {
+            background: rgba(255,255,255,0.8);
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: rgba(255,255,255,0.95);
+            border-color: #667eea;
+        }
+
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .option.incorrect {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, #e3ffe7 0%, #d9e7ff 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .epidemiology-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .diagnostic-criteria {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .interactive-diagram {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brain-visualization {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            background: radial-gradient(circle, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                margin: 5px;
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .severity-spectrum {
+                flex-direction: column;
+            }
+            
+            .severity-item {
+                margin: 10px 0;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+            border-bottom: 1px dashed #333;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 PHỔ LOẠN THẦN</h1>
+            <p class="subtitle">Hệ thống học tập tương tác - Tâm thần phân liệt và các rối loạn liên quan</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">Đặng Khánh An - M.A</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview')">Tổng Quan</button>
+            <button class="nav-tab" onclick="showSection('symptoms')">Triệu Chứng</button>
+            <button class="nav-tab" onclick="showSection('diagnosis')">Chẩn Đoán</button>
+            <button class="nav-tab" onclick="showSection('epidemiology')">Dịch Tễ Học</button>
+            <button class="nav-tab" onclick="showSection('cases')">Ca Bệnh</button>
+            <button class="nav-tab" onclick="showSection('quiz')">Kiểm Tra</button>
+        </div>
+
+        <!-- TỔNG QUAN -->
+        <div id="overview" class="content-section active">
+            <div class="card">
+                <h3>🎯 Định Nghĩa Phổ Loạn Thần</h3>
+                <p>Phổ loạn thần là một nhóm các rối loạn tâm thần được đặc trưng bởi sự hiện diện của <strong>ít nhất một</strong> trong năm đặc điểm chính theo DSM-5:</p>
+            </div>
+
+            <div class="symptoms-grid">
+                <div class="symptom-card" onclick="highlightSymptom(this)">
+                    <h4>👁️ Ảo Giác</h4>
+                    <p>Nhận thức sai về các kích thích không tồn tại trong thực tế</p>
+                </div>
+                <div class="symptom-card" onclick="highlightSymptom(this)">
+                    <h4>🧠 Hoang Tưởng</h4>
+                    <p>Niềm tin sai lầm, cố định, không thể thay đổi</p>
+                </div>
+                <div class="symptom-card" onclick="highlightSymptom(this)">
+                    <h4>💭 Suy Nghĩ Phi Tổ Chức</h4>
+                    <p>Lời nói rời rạc, không mạch lạc, khó hiểu</p>
+                </div>
+                <div class="symptom-card" onclick="highlightSymptom(this)">
+                    <h4>🏃 Hành Vi Bất Thường</h4>
+                    <p>Hành vi vô tổ chức hoặc vận động bất thường rõ rệt</p>
+                </div>
+                <div class="symptom-card" onclick="highlightSymptom(this)">
+                    <h4>😶 Triệu Chứng Âm Tính</h4>
+                    <p>Giảm sút hoặc mất các chức năng bình thường</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Phổ Nghiêm Trọng</h3>
+                <div class="severity-spectrum">
+                    <div class="severity-item" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
+                        <h4>Ít nghiêm trọng</h4>
+                        <p>Rối loạn hoang tưởng</p>
+                    </div>
+                    <div class="severity-item" style="background: linear-gradient(135deg, #ffd89b, #19547b);">
+                        <h4>→</h4>
+                        <p>Rối loạn loạn thần ngắn</p>
+                    </div>
+                    <div class="severity-item" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <h4>→</h4>
+                        <p>Rối loạn dạng phân liệt</p>
+                    </div>
+                    <div class="severity-item" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <h4>→</h4>
+                        <p>Tâm thần phân liệt</p>
+                    </div>
+                    <div class="severity-item" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <h4>Nghiêm trọng hơn</h4>
+                        <p>Rối loạn cảm xúc phân liệt</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-diagram">
+                <h3>🧠 Hình Ảnh Hóa Não Bộ</h3>
+                <div class="brain-visualization" onclick="toggleBrainInfo()">
+                    <div id="brain-info">
+                        <p>🧠 Não bộ trong phổ loạn thần</p>
+                        <p style="font-size: 1rem; opacity: 0.8;">Nhấp để xem thông tin chi tiết</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRIỆU CHỨNG -->
+        <div id="symptoms" class="content-section">
+            <div class="card">
+                <h3>➕ Triệu Chứng Dương Tính</h3>
+                <p>Là những biểu hiện bất thường xuất hiện thêm vào, vượt quá những trải nghiệm bình thường của con người, thể hiện sự méo mó về nhận thức và cảm nhận thực tại.</p>
+            </div>
+
+            <div class="symptoms-grid">
+                <div class="symptom-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                    <h4>👁️ Ảo Giác</h4>
+                    <ul style="margin-top: 15px;">
+                        <li>Ảo thanh (phổ biến nhất)</li>
+                        <li>Ảo thị</li>
+                        <li>Ảo xúc</li>
+                        <li>Ảo khứu/ảo vị</li>
+                    </ul>
+                </div>
+                <div class="symptom-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <h4>🧠 Hoang Tưởng</h4>
+                    <ul style="margin-top: 15px;">
+                        <li>Hoang tưởng bị hại</li>
+                        <li>Hoang tưởng kích thước to</li>
+                        <li>Hoang tưởng tham chiếu</li>
+                        <li>Hoang tưởng tôn giáo/tình dục</li>
+                    </ul>
+                </div>
+                <div class="symptom-card" style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);">
+                    <h4>💭 Suy Nghĩ Phi Tổ Chức</h4>
+                    <ul style="margin-top: 15px;">
+                        <li>Trật đường ray</li>
+                        <li>Không mạch lạc</li>
+                        <li>Neologism (từ ngữ tự tạo)</li>
+                        <li>Word salad</li>
+                    </ul>
+                </div>
+                <div class="symptom-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h4>🏃 Hành Vi Bất Thường</h4>
+                    <ul style="margin-top: 15px;">
+                        <li>Hành vi vô tổ chức</li>
+                        <li>Catatonia</li>
+                        <li>Tăng động không mục đích</li>
+                        <li>Hành vi kỳ quặc</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, #434343 0%, #000000 100%);">
+                <h3>➖ Triệu Chứng Âm Tính</h3>
+                <p>Là sự giảm sút hoặc mất đi các chức năng bình thường của con người.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                        <h4>😶 Cảm Xúc Cùn Mòn</h4>
+                        <p style="font-size: 0.9rem;">Giảm hoặc mất khả năng biểu lộ cảm xúc</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                        <h4>🤐 Ít Nói (Alogia)</h4>
+                        <p style="font-size: 0.9rem;">Giảm sản xuất ngôn ngữ</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                        <h4>😴 Mất Ý Chí (Avolition)</h4>
+                        <p style="font-size: 0.9rem;">Giảm động lực và khả năng khởi xướng hoạt động</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                        <h4>😑 Mất Khoái Cảm</h4>
+                        <p style="font-size: 0.9rem;">Không có khả năng cảm nhận niềm vui</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHẨN ĐOÁN -->
+        <div id="diagnosis" class="content-section">
+            <div class="card">
+                <h3>📋 Tiêu Chuẩn Chẩn Đoán DSM-5</h3>
+                <p>Hệ thống chẩn đoán theo DSM-5 cho Tâm thần phân liệt</p>
+            </div>
+
+            <div class="diagnostic-criteria">
+                <h4>Tiêu Chuẩn A</h4>
+                <p><strong>Có hai (hoặc nhiều hơn) trong các triệu chứng sau, mỗi triệu chứng xuất hiện trong một khoảng thời gian đáng kể trong thời kỳ 1 tháng</strong> (hoặc ít hơn nếu điều trị thành công). <em>Ít nhất phải có một trong ba triệu chứng (1), (2), hoặc (3)</em>:</p>
+                <ol style="margin: 15px 0 15px 30px;">
+                    <li>Hoang tưởng</li>
+                    <li>Ảo giác</li>
+                    <li>Ngôn ngữ rời rạc (ví dụ: thường xuyên trật đường ray hoặc không mạch lạc)</li>
+                    <li>Hành vi rối loạn trầm trọng hoặc căng trương lực</li>
+                    <li>Triệu chứng âm tính (tức là, biểu hiện cảm xúc cùn mòn hoặc mất ý chí)</li>
+                </ol>
+            </div>
+
+            <div class="diagnostic-criteria" style="border-left-color: #28a745;">
+                <h4>Tiêu Chuẩn B</h4>
+                <p><strong>Trong một khoảng thời gian đáng kể kể từ khi khởi phát rối loạn</strong>, mức độ hoạt động chức năng trong một hoặc nhiều lĩnh vực chính như công việc, mối quan hệ liên cá nhân, hoặc tự chăm sóc bản thân, giảm sút rõ rệt so với mức độ trước khi khởi phát.</p>
+            </div>
+
+            <div class="diagnostic-criteria" style="border-left-color: #ffc107;">
+                <h4>Tiêu Chuẩn C</h4>
+                <p><strong>Các dấu hiệu liên tục của rối loạn kéo dài ít nhất 6 tháng</strong>. Thời kỳ 6 tháng này phải bao gồm ít nhất 1 tháng có các triệu chứng (hoặc ít hơn nếu điều trị thành công) đáp ứng Tiêu chuẩn A.</p>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%); color: #333;">
+                <h3>🔍 Chẩn Đoán Phân Biệt</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h4 style="color: #007bff;">Rối Loạn Hoang Tưởng</h4>
+                        <p>• Chỉ có hoang tưởng ≥1 tháng<br>
+                        • Chưa đáp ứng tiêu chuẩn A của TTPL<br>
+                        • Chức năng không suy giảm đáng kể</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h4 style="color: #28a745;">Rối Loạn Dạng Phân Liệt</h4>
+                        <p>• Đáp ứng tiêu chuẩn A của TTPL<br>
+                        • Thời gian: ≥1 tháng nhưng <6 tháng<br>
+                        • Có thể trở về mức trước bệnh</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h4 style="color: #dc3545;">Rối Loạn Loạn Thần Ngắn</h4>
+                        <p>• Ít nhất 1 triệu chứng dương tính<br>
+                        • Thời gian: ≥1 ngày nhưng <1 tháng<br>
+                        • Trở về mức chức năng trước bệnh</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h4 style="color: #6f42c1;">Rối Loạn Loạn Thần Do Chất</h4>
+                        <p>• Xuất hiện trong/ngay sau dùng chất<br>
+                        • Test độc chất dương tính<br>
+                        • Cải thiện khi ngưng chất</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DỊCH TỄ HỌC -->
+        <div id="epidemiology" class="content-section">
+            <div class="card">
+                <h3>📊 Thống Kê Dịch Tễ Học</h3>
+                <p>Các con số thống kê quan trọng về Phổ loạn thần và Tâm thần phân liệt</p>
+            </div>
+
+            <div class="epidemiology-stats">
+                <div class="stat-card">
+                    <h3>0.7%</h3>
+                    <p>Tỉ lệ mắc cả đời<br>Tâm thần phân liệt</p>
+                </div>
+                <div class="stat-card">
+                    <h3>1.4:1</h3>
+                    <p>Tỉ lệ nam : nữ<br>Nam mắc nhiều hơn</p>
+                </div>
+                <div class="stat-card">
+                    <h3>15-35</h3>
+                    <p>Tuổi khởi phát chính<br>(tuổi)</p>
+                </div>
+                <div class="stat-card">
+                    <h3>20%</h3>
+                    <p>Nỗ lực tự tử<br>ít nhất 1 lần</p>
+                </div>
+                <div class="stat-card">
+                    <h3>50%</h3>
+                    <p>Có ý tưởng<br>tự sát</p>
+                </div>
+                <div class="stat-card">
+                    <h3>10%</h3>
+                    <p>Tự sát<br>thành công</p>
+                </div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); color: #333;">
+                <h3>🌍 Thống Kê Toàn Cầu</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 10px;">
+                        <h4>Phổ Loạn Thần</h4>
+                        <p><strong>0.3 - 0.7%</strong> dân số thế giới<br>
+                        <small>(van Os & Kapur, 2009)</small></p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 10px;">
+                        <h4>Khởi Phát</h4>
+                        <p>Nam có tuổi khởi phát <strong>sớm hơn nữ</strong><br>
+                        <small>(Harner, 2000)</small></p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 10px;">
+                        <h4>Tiên Lượng</h4>
+                        <p><strong>Ít nghiêm trọng hơn</strong> ở các nước đang phát triển<br>
+                        <small>(Thara et al., 1994)</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);">
+                <h3>⚠️ Yếu Tố Nguy Cơ</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <h4>🧬 Di Truyền</h4>
+                        <p>Tiền sử gia đình</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <h4>🏙️ Môi Trường</h4>
+                        <p>Thành thị, căng thẳng</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <h4>🍺 Chất Gây Nghiện</h4>
+                        <p>Cannabis, amphetamine</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <h4>👶 Chu Sinh</h4>
+                        <p>Biến chứng thai kỳ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CA BỆNH -->
+        <div id="cases" class="content-section">
+            <div class="card">
+                <h3>📝 Các Ca Bệnh Thực Tế</h3>
+                <p>Nghiên cứu các ca bệnh điển hình để hiểu rõ hơn về phổ loạn thần</p>
+            </div>
+
+            <div class="case-study">
+                <h4>🔍 CA 1: Tâm Thần Phân Liệt</h4>
+                <p><strong>Bệnh nhân:</strong> N.V.T., nam, 28 tuổi, thất nghiệp</p>
+                
+                <div style="background: white; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h5>📋 Tiền sử bệnh:</h5>
+                    <p>8 tháng gần đây: giảm quan tâm công việc, tránh giao tiếp, nghi ngờ được theo dõi, nghe tiếng nói trong đầu ra lệnh và bình luận. Không quan tâm vệ sinh cá nhân. Bố có tiền sử "tâm thần".</p>
+                </div>
+
+                <div style="background: white; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h5>🔍 Khám tâm thần:</h5>
+                    <p>Hợp tác từng lúc, nghi ngờ mục đích thăm khám. <span class="tooltip" data-tooltip="Niềm tin sai lầm cố định">Hoang tưởng bị hại</span> có hệ thống. <span class="tooltip" data-tooltip="Nghe tiếng không có thực">Ảo thanh bình luận và ra lệnh</span>. Tư duy rời rạc, thiếu mạch lạc logic. <span class="tooltip" data-tooltip="Triệu chứng âm tính">Cảm xúc cùn mòn</span>. Không ý thức bệnh.</p>
+                </div>
+
+                <button class="btn" onclick="toggleCaseAnalysis('case1')">Phân Tích Ca Bệnh</button>
+                <div id="case1" style="display: none; background: #e8f5e8; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                    <h5>💡 Phân Tích:</h5>
+                    <p><strong>Chẩn đoán:</strong> Tâm thần phân liệt</p>
+                    <p><strong>Căn cứ:</strong></p>
+                    <ul>
+                        <li>✅ Đáp ứng tiêu chuẩn A: có ≥2 triệu chứng (hoang tưởng, ảo giác, tư duy rời rạc, triệu chứng âm tính)</li>
+                        <li>✅ Tiêu chuẩn B: suy giảm chức năng rõ rệt</li>
+                        <li>✅ Tiêu chuẩn C: kéo dài 8 tháng (≥6 tháng)</li>
+                        <li>🧬 Yếu tố nguy cơ: tiền sử gia đình</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h4>🔍 CA 2: Rối Loạn Dạng Phân Liệt</h4>
+                <p><strong>Bệnh nhân:</strong> P.Q.K., nam, 19 tuổi, sinh viên</p>
+                
+                <div style="background: white; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h5>📋 Tiền sử bệnh:</h5>
+                    <p>6 tuần trước: thay đổi đột ngột - bối rối, phát biểu lộn xộn, nghe tiếng người cãi nhau, tin bạn cùng phòng cài máy đọc suy nghĩ. Trước đây học giỏi, giao tiếp tốt.</p>
+                </div>
+
+                <div style="background: white; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h5>🔍 Khám tâm thần:</h5>
+                    <p>Trật đường ray, hoang tưởng chi phối, ảo thanh bình luận. Không cùn mòn cảm xúc rõ. Tỏ ra <span class="tooltip" data-tooltip="Yếu tố tiên lượng tốt">bối rối/hoang mang về thực tại</span>.</p>
+                </div>
+
+                <button class="btn" onclick="toggleCaseAnalysis('case2')">Phân Tích Ca Bệnh</button>
+                <div id="case2" style="display: none; background: #fff3cd; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                    <h5>💡 Phân Tích:</h5>
+                    <p><strong>Chẩn đoán:</strong> Rối loạn dạng phân liệt</p>
+                    <p><strong>Căn cứ:</strong></p>
+                    <ul>
+                        <li>✅ Đáp ứng tiêu chuẩn A của TTPL</li>
+                        <li>✅ Thời gian: 3.5 tháng (≥1 tháng nhưng <6 tháng)</li>
+                        <li>🌟 Yếu tố tiên lượng tốt: khởi phát nhanh, bối rối, tiền bệnh tốt</li>
+                        <li>📈 Đáp ứng tốt với antipsychotic</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h4>🔍 CA 3: Rối Loạn Loạn Thần Do Chất</h4>
+                <p><strong>Bệnh nhân:</strong> L.V.H., nam, 23 tuổi</p>
+                
+                <div style="background: white; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h5>📋 Tiền sử bệnh:</h5>
+                    <p>3 tuần sau "đốt cỏ" liên tục và dùng "đá": nghe tiếng đàn ông dọa giết, tin hàng xóm gắn thiết bị ghi âm. Mất ngủ, tim đập nhanh, cáu gắt.</p>
+                </div>
+
+                <div style="background: white; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h5>🔍 Xét nghiệm:</h5>
+                    <p>Test nước tiểu: <strong>dương tính THC và amphetamine</strong>. Mạch 112/phút. Sau 72 giờ ngưng chất: ảo thanh giảm đáng kể. Sau 2 tuần: hết ảo giác.</p>
+                </div>
+
+                <button class="btn" onclick="toggleCaseAnalysis('case3')">Phân Tích Ca Bệnh</button>
+                <div id="case3" style="display: none; background: #f8d7da; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                    <h5>💡 Phân Tích:</h5>
+                    <p><strong>Chẩn đoán:</strong> Rối loạn loạn thần do chất</p>
+                    <p><strong>Căn cứ:</strong></p>
+                    <ul>
+                        <li>✅ Ảo giác/hoang tưởng xuất hiện trong/ngay sau dùng chất</li>
+                        <li>✅ Test độc chất dương tính</li>
+                        <li>✅ Dấu giao cảm (tim nhanh, mất ngủ)</li>
+                        <li>✅ Cải thiện nhanh khi ngưng chất</li>
+                        <li>🚫 Không có tiền sử tâm thần trước đó</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- KIỂM TRA -->
+        <div id="quiz" class="content-section">
+            <div class="card">
+                <h3>🎯 Kiểm Tra Kiến Thức</h3>
+                <p>Thử thách bản thân với các câu hỏi về Phổ loạn thần</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quiz-progress"></div>
+                </div>
+                <p id="progress-text">Câu 0/10</p>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz sẽ được tạo động bằng JavaScript -->
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="startQuiz()">Bắt Đầu Kiểm Tra</button>
+                <button class="btn" onclick="resetQuiz()" style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);">Làm Lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentSection = 'overview';
+        let quizData = [];
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let quizStarted = false;
+
+        // Quiz questions data
+        const questions = [
+            {
+                question: "DSM-5 mô tả bao nhiêu đặc điểm để chẩn đoán các rối loạn phổ phân liệt?",
+                options: ["3 đặc điểm", "4 đặc điểm", "5 đặc điểm", "6 đặc điểm"],
+                correct: 2,
+                explanation: "DSM-5 mô tả 5 đặc điểm: Ảo giác, Hoang tưởng, Suy nghĩ phi tổ chức, Hành vi bất thường, Triệu chứng âm tính"
+            },
+            {
+                question: "Triệu chứng nào KHÔNG phải là triệu chứng dương tính?",
+                options: ["Ảo thanh ra lệnh", "Hoang tưởng chi phối", "Cảm xúc cùn mòn", "Lời nói rời rạc"],
+                correct: 2,
+                explanation: "Cảm xúc cùn mòn là triệu chứng âm tính, không phải triệu chứng dương tính"
+            },
+            {
+                question: "Tỉ lệ mắc cả đời của Tâm thần phân liệt là:",
+                options: ["Dưới 1% (khoảng 0.7%)", "Khoảng 2-3%", "Khoảng 5%", "Trên 10%"],
+                correct: 0,
+                explanation: "Theo APA 2013, tỉ lệ mắc cả đời của tâm thần phân liệt dưới 1%, khoảng 0.7%"
+            },
+            {
+                question: "Tỉ lệ nam : nữ mắc Tâm thần phân liệt là:",
+                options: ["1:1", "1.4:1", "2:1", "1:1.4"],
+                correct: 1,
+                explanation: "Tỉ lệ nam : nữ mắc tâm thần phân liệt là 1.4:1, nam mắc nhiều hơn nữ"
+            },
+            {
+                question: "Để chẩn đoán Tâm thần phân liệt, các triệu chứng phải kéo dài ít nhất:",
+                options: ["1 tháng", "3 tháng", "6 tháng", "1 năm"],
+                correct: 2,
+                explanation: "Theo DSM-5, để chẩn đoán tâm thần phân liệt, các dấu hiệu phải kéo dài ít nhất 6 tháng"
+            },
+            {
+                question: "Điểm khác biệt chính giữa Rối loạn dạng phân liệt và Tâm thần phân liệt là:",
+                options: ["Loại triệu chứng", "Mức độ nghiêm trọng", "Thời gian kéo dài", "Tuổi khởi phát"],
+                correct: 2,
+                explanation: "Rối loạn dạng phân liệt kéo dài 1-6 tháng, trong khi tâm thần phân liệt kéo dài ≥6 tháng"
+            },
+            {
+                question: "Tuổi khởi phát chủ yếu của phổ loạn thần là:",
+                options: ["10-20 tuổi", "15-35 tuổi", "25-45 tuổi", "35-55 tuổi"],
+                correct: 1,
+                explanation: "Tuổi khởi phát chủ yếu của phổ loạn thần là 15-35 tuổi"
+            },
+            {
+                question: "Tỉ lệ bệnh nhân tâm thần phân liệt nỗ lực tự tử ít nhất 1 lần là:",
+                options: ["10%", "20%", "30%", "40%"],
+                correct: 1,
+                explanation: "20% bệnh nhân tâm thần phân liệt nỗ lực tự tử ít nhất 1 lần trong đời"
+            },
+            {
+                question: "Yếu tố nào là tiên lượng TỐT của rối loạn dạng phân liệt?",
+                options: ["Khởi phát từ từ", "Khởi phát nhanh trong 4 tuần", "Cảm xúc cùn mòn rõ", "Tiền sử chức năng xã hội kém"],
+                correct: 1,
+                explanation: "Khởi phát nhanh trong vòng 4 tuần kể từ thay đổi hành vi đầu tiên là yếu tố tiên lượng tốt"
+            },
+            {
+                question: "Dấu hiệu nào ủng hộ rối loạn loạn thần do chất?",
+                options: ["Có ảo thanh", "Hoang tưởng bị theo dõi", "Test dương tính và cải thiện nhanh khi ngưng chất", "Từng có trầm cảm"],
+                correct: 2,
+                explanation: "Test độc chất dương tính và cải thiện nhanh khi ngưng chất là dấu hiệu điển hình của loạn thần do chất"
+            }
+        ];
+
+        // Section navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            currentSection = sectionId;
+        }
+
+        // Interactive functions
+        function highlightSymptom(element) {
+            // Reset all cards
+            document.querySelectorAll('.symptom-card').forEach(card => {
+                card.style.transform = 'scale(1)';
+                card.style.zIndex = '1';
+            });
+            
+            // Highlight selected card
+            element.style.transform = 'scale(1.1)';
+            element.style.zIndex = '10';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.zIndex = '1';
+            }, 2000);
+        }
+
+        function toggleBrainInfo() {
+            const brainInfo = document.getElementById('brain-info');
+            const currentContent = brainInfo.innerHTML;
+            
+            if (currentContent.includes('Nhấp để xem')) {
+                brainInfo.innerHTML = `
+                    <div style="text-align: left; font-size: 1rem;">
+                        <h4>🧠 Các vùng não bị ảnh hưởng:</h4>
+                        <p>• Vỏ não trước trán (prefrontal cortex)</p>
+                        <p>• Thùy thái dương (temporal lobe)</p>
+                        <p>• Hệ thống dopamine</p>
+                        <p>• Corpus callosum</p>
+                        <p style="margin-top: 15px; font-style: italic;">Nhấp lại để ẩn thông tin</p>
+                    </div>
+                `;
+            } else {
+                brainInfo.innerHTML = `
+                    <p>🧠 Não bộ trong phổ loạn thần</p>
+                    <p style="font-size: 1rem; opacity: 0.8;">Nhấp để xem thông tin chi tiết</p>
+                `;
+            }
+        }
+
+        function toggleCaseAnalysis(caseId) {
+            const caseDiv = document.getElementById(caseId);
+            if (caseDiv.style.display === 'none' || caseDiv.style.display === '') {
+                caseDiv.style.display = 'block';
+                caseDiv.style.animation = 'fadeInUp 0.5s ease';
+            } else {
+                caseDiv.style.display = 'none';
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            quizStarted = true;
+            currentQuizIndex = 0;
+            quizScore = 0;
+            quizData = [...questions].sort(() => Math.random() - 0.5); // Shuffle questions
+            showQuizQuestion();
+            updateProgress();
+        }
+
+        function showQuizQuestion() {
+            if (currentQuizIndex >= quizData.length) {
+                showQuizResults();
+                return;
+            }
+
+            const question = quizData[currentQuizIndex];
+            const container = document.getElementById('quiz-container');
+            
+            container.innerHTML = `
+                <div class="quiz-container">
+                    <div class="question">
+                        Câu ${currentQuizIndex + 1}: ${question.question}
+                    </div>
+                    ${question.options.map((option, index) => 
+                        `<div class="option" onclick="selectOption(${index})" data-index="${index}">
+                            ${String.fromCharCode(65 + index)}. ${option}
+                        </div>`
+                    ).join('')}
+                    <div style="margin-top: 20px;">
+                        <button class="btn" onclick="submitAnswer()" id="submit-btn" disabled>Trả Lời</button>
+                        <button class="btn" onclick="nextQuestion()" id="next-btn" style="display: none;">Câu Tiếp Theo</button>
+                    </div>
+                    <div id="explanation" style="display: none; margin-top: 20px; padding: 20px; background: #e8f5e8; border-radius: 10px;">
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(index) {
+            // Remove previous selections
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Select current option
+            document.querySelector(`[data-index="${index}"]`).classList.add('selected');
+            document.getElementById('submit-btn').disabled = false;
+        }
+
+        function submitAnswer() {
+            const selectedOption = document.querySelector('.option.selected');
+            if (!selectedOption) return;
+            
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            const correctIndex = quizData[currentQuizIndex].correct;
+            
+            // Disable all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+            
+            // Show correct/incorrect
+            document.querySelectorAll('.option').forEach((option, index) => {
+                if (index === correctIndex) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex && index !== correctIndex) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Update score
+            if (selectedIndex === correctIndex) {
+                quizScore++;
+            }
+            
+            // Show explanation
+            document.getElementById('explanation').innerHTML = `
+                <h4>${selectedIndex === correctIndex ? '✅ Chính xác!' : '❌ Sai rồi!'}</h4>
+                <p><strong>Giải thích:</strong> ${quizData[currentQuizIndex].explanation}</p>
+            `;
+            document.getElementById('explanation').style.display = 'block';
+            
+            // Hide submit, show next
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuizIndex++;
+            updateProgress();
+            showQuizQuestion();
+        }
+
+        function showQuizResults() {
+            const container = document.getElementById('quiz-container');
+            const percentage = Math.round((quizScore / quizData.length) * 100);
+            let grade = '';
+            let color = '';
+            
+            if (percentage >= 90) {
+                grade = 'Xuất sắc! 🏆';
+                color = '#2ecc71';
+            } else if (percentage >= 80) {
+                grade = 'Tốt! 👍';
+                color = '#3498db';
+            } else if (percentage >= 70) {
+                grade = 'Khá 📝';
+                color = '#f39c12';
+            } else if (percentage >= 60) {
+                grade = 'Trung bình ⚠️';
+                color = '#e67e22';
+            } else {
+                grade = 'Cần cố gắng thêm 📚';
+                color = '#e74c3c';
+            }
+            
+            container.innerHTML = `
+                <div class="quiz-container" style="text-align: center;">
+                    <h3 style="color: ${color}; font-size: 2rem; margin-bottom: 20px;">${grade}</h3>
+                    <div style="font-size: 3rem; margin: 20px 0;">${percentage}%</div>
+                    <p style="font-size: 1.2rem;">Bạn đã trả lời đúng <strong>${quizScore}/${quizData.length}</strong> câu hỏi</p>
+                    
+                    <div style="margin: 30px 0; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <h4>📊 Phản hồi chi tiết:</h4>
+                        <div style="text-align: left; margin-top: 15px;">
+                            ${percentage >= 90 ? '• Bạn đã nắm vững kiến thức về Phổ loạn thần!' : ''}
+                            ${percentage >= 70 && percentage < 90 ? '• Bạn có nền tảng tốt, hãy ôn lại các phần còn thiếu.' : ''}
+                            ${percentage < 70 ? '• Bạn nên ôn lại toàn bộ nội dung và thực hành thêm.' : ''}
+                            <br>• Hãy xem lại các phần: Triệu chứng, Chẩn đoán, Ca bệnh
+                            <br>• Thực hành với các ca bệnh thực tế để củng cố kiến thức
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resetQuiz() {
+            quizStarted = false;
+            currentQuizIndex = 0;
+            quizScore = 0;
+            updateProgress();
+            document.getElementById('quiz-container').innerHTML = '';
+        }
+
+        function updateProgress() {
+            const progress = quizStarted ? (currentQuizIndex / quizData.length) * 100 : 0;
+            document.getElementById('quiz-progress').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `Câu ${currentQuizIndex}/${quizData.length}`;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

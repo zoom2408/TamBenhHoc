@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Các Tiếp Cận Tâm Bệnh Học - Website Học Tập Tương Tác</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            color: #f0f0f0;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .approach-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .approach-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .approach-card:hover::before {
+            left: 100%;
+        }
+
+        .approach-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .approach-card.expanded {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .approach-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .approach-card.expanded .approach-title {
+            color: white;
+        }
+
+        .approach-details {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .approach-details.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 200px;
+            }
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, #ff7b7b 0%, #667eea 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .answers {
+            display: grid;
+            gap: 10px;
+        }
+
+        .answer-btn {
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .answer-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .answer-btn.correct {
+            background: #4CAF50;
+            border-color: #45a049;
+        }
+
+        .answer-btn.incorrect {
+            background: #f44336;
+            border-color: #da190b;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+
+        .model-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .model-box {
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            min-width: 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        .model-a { background: #3498db; }
+        .model-b { background: #e74c3c; }
+        .model-c { background: #2ecc71; }
+
+        .arrow {
+            font-size: 2em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .interactive-demo {
+            background: #f0f8ff;
+            border: 2px solid #4169e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .demo-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4169e1;
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .demo-result {
+            background: #e8f5e8;
+            border: 1px solid #4CAF50;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            margin-top: 5px;
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+            color: #667eea;
+            text-decoration: underline;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 300px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -150px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .model-diagram {
+                flex-direction: column;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CÁC TIẾP CẬN TÂM BỆNH HỌC</h1>
+            <p class="subtitle">Khám phá và học tập các lý thuyết cốt lõi - Đặng Khánh An, M.A</p>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" onclick="showSection('overview', this)">Tổng quan</button>
+            <button class="nav-btn" onclick="showSection('biological', this)">Sinh học</button>
+            <button class="nav-btn" onclick="showSection('psychodynamic', this)">Phân tâm/Tâm động</button>
+            <button class="nav-btn" onclick="showSection('cognitive', this)">Nhận thức/Hành vi</button>
+            <button class="nav-btn" onclick="showSection('humanistic', this)">Nhân văn/Hiện sinh</button>
+            <button class="nav-btn" onclick="showSection('cultural', this)">Văn hóa/Xã hội</button>
+            <button class="nav-btn" onclick="showSection('multifactorial', this)">Đa nhân tố</button>
+            <button class="nav-btn" onclick="showSection('quiz', this)">Kiểm tra</button>
+        </nav>
+
+        <div id="overview" class="section active">
+            <h2>🧠 TỔNG QUAN CÁC TIẾP CẬN TÂM BỆNH HỌC</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Tiếp cận chính</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Phương pháp điều trị</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Tương tác</span>
+                </div>
+            </div>
+
+            <div class="approach-grid">
+                <div class="approach-card" onclick="expandCard(this)">
+                    <h3 class="approach-title">🧬 SINH HỌC</h3>
+                    <p>Tập trung vào cơ sở sinh học của rối loạn tâm thần</p>
+                    <div class="approach-details">
+                        <p><strong>Trọng tâm:</strong> Dẫn truyền thần kinh, di truyền, cấu trúc não</p>
+                        <p><strong>Phương pháp:</strong> Hóa dược liệu pháp, nghiên cứu gen, chụp ảnh não</p>
+                    </div>
+                </div>
+
+                <div class="approach-card" onclick="expandCard(this)">
+                    <h3 class="approach-title">🏛️ PHÂN TÂM/TÂM ĐỘNG</h3>
+                    <p>Khám phá vô thức và cấu trúc nhân cách</p>
+                    <div class="approach-details">
+                        <p><strong>Trọng tâm:</strong> Vô thức, cơ chế phòng vệ, quan hệ đối tượng</p>
+                        <p><strong>Phương pháp:</strong> Phân tích giấc mơ, chuyển cảm, diễn giải</p>
+                    </div>
+                </div>
+
+                <div class="approach-card" onclick="expandCard(this)">
+                    <h3 class="approach-title">🧩 NHẬN THỨC/HÀNH VI</h3>
+                    <p>Thay đổi suy nghĩ và hành vi có vấn đề</p>
+                    <div class="approach-details">
+                        <p><strong>Trọng tâm:</strong> Mô hình A-B-C, tái cấu trúc nhận thức</p>
+                        <p><strong>Phương pháp:</strong> CBT, phơi nhiễm, thách thức niềm tin</p>
+                    </div>
+                </div>
+
+                <div class="approach-card" onclick="expandCard(this)">
+                    <h3 class="approach-title">🌟 NHÂN VĂN/HIỆN SINH</h3>
+                    <p>Tôn trọng tiềm năng và tự do lựa chọn của con người</p>
+                    <div class="approach-details">
+                        <p><strong>Trọng tâm:</strong> Tự hiện thực hóa, ý nghĩa cuộc sống</p>
+                        <p><strong>Phương pháp:</strong> Trị liệu lấy khách hàng làm trung tâm</p>
+                    </div>
+                </div>
+
+                <div class="approach-card" onclick="expandCard(this)">
+                    <h3 class="approach-title">🌍 VÀN HÓA/XÃ HỘI</h3>
+                    <p>Ảnh hưởng của xã hội và văn hóa đến sức khỏe tâm thần</p>
+                    <div class="approach-details">
+                        <p><strong>Trọng tâm:</strong> Bất bình đẳng giới, định chế xã hội</p>
+                        <p><strong>Phương pháp:</strong> Trị liệu gia đình, tiếp cận nữ quyền</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="biological" class="section">
+            <h2>🧬 TIẾP CẬN SINH HỌC</h2>
+            
+            <div class="diagram-container">
+                <h3>Các chất dẫn truyền thần kinh quan trọng</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; border-left: 4px solid #2196f3;">
+                        <h4 style="color: #1976d2;">Serotonin & Norepinephrine</h4>
+                        <p><strong>Liên quan:</strong> Rối loạn khí sắc, trầm cảm</p>
+                    </div>
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 10px; border-left: 4px solid #9c27b0;">
+                        <h4 style="color: #7b1fa2;">Dopamine</h4>
+                        <p><strong>Liên quan:</strong> Tâm thần phân liệt, Parkinson, ADHD</p>
+                    </div>
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; border-left: 4px solid #4caf50;">
+                        <h4 style="color: #388e3c;">GABA & Norepinephrine</h4>
+                        <p><strong>Liên quan:</strong> Các triệu chứng lo âu</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">🧪 Mô phỏng ảnh hưởng của dẫn truyền thần kinh</div>
+                <select class="demo-input" id="neurotransmitter" onchange="simulateEffect()">
+                    <option value="">Chọn chất dẫn truyền...</option>
+                    <option value="serotonin">Serotonin (thiếu hụt)</option>
+                    <option value="dopamine">Dopamine (rối loạn)</option>
+                    <option value="gaba">GABA (thiếu hụt)</option>
+                </select>
+                <div class="demo-result" id="neurotransmitterResult"></div>
+            </div>
+
+            <div style="background: #fff3e0; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #ff9800;">
+                <h3 style="color: #f57c00;">Ứng dụng thực tế</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Nghiên cứu về mã hóa gen trong di truyền rối loạn tâm thần</li>
+                    <li>Phát triển thuốc điều trị tác động lên hệ thần kinh</li>
+                    <li>Sử dụng công nghệ chụp ảnh não để chẩn đoán</li>
+                    <li>Liệu pháp kích thích từ tính xuyên sọ (TMS)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="psychodynamic" class="section">
+            <h2>🏛️ TIẾP CẬN PHÂN TÂM/TÂM ĐỘNG</h2>
+            
+            <div class="diagram-container">
+                <h3>Cấu trúc nhân cách theo Jean Bergeret</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: #ffebee; padding: 15px; border-radius: 10px; text-align: center; border: 2px solid #f44336;">
+                        <h4 style="color: #c62828;">LOẠN TÂM</h4>
+                        <p><strong>Lo hãi:</strong> Bị tan rã</p>
+                        <p><strong>Rối loạn:</strong> Sầu uất, hưng cảm, tâm thần phân liệt</p>
+                    </div>
+                    <div style="background: #e8eaf6; padding: 15px; border-radius: 10px; text-align: center; border: 2px solid #3f51b5;">
+                        <h4 style="color: #303f9f;">NHIỄU TÂM</h4>
+                        <p><strong>Lo hãi:</strong> Bị thiến</p>
+                        <p><strong>Rối loạn:</strong> Lo âu, ám ảnh, Hysteria</p>
+                    </div>
+                    <div style="background: #e1f5fe; padding: 15px; border-radius: 10px; text-align: center; border: 2px solid #00bcd4;">
+                        <h4 style="color: #0097a7;">RANH GIỚI/LỆCH LẠC</h4>
+                        <p><strong>Lo hãi:</strong> Mất bản ngã</p>
+                        <p><strong>Rối loạn:</strong> Ái kỷ, phô dâm, bạo dâm</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">🔍 Phân tích cấu trúc nhân cách</div>
+                <p>Nhập mô tả triệu chứng để xác định khuynh hướng cấu trúc:</p>
+                <textarea class="demo-input" id="symptomDescription" placeholder="Ví dụ: Bệnh nhân thường xuyên lo lắng về việc mắc bệnh, kiểm tra sức khỏe liên tục..."></textarea>
+                <button style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;" onclick="analyzePersonality()">Phân tích</button>
+                <div class="demo-result" id="personalityResult"></div>
+            </div>
+
+            <div style="background: #f3e5f5; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3 style="color: #7b1fa2;">Điều trị theo tiếp cận Phân tâm</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div>
+                        <h4>🔍 Bóc tách các cơ chế tâm lý</h4>
+                        <p>Khám phá những xung đột vô thức và cơ chế phòng vệ</p>
+                    </div>
+                    <div>
+                        <h4>💭 Chuyển cảm (Transference)</h4>
+                        <p>Làm việc trên mối quan hệ điều trị để hiểu các mẫu quan hệ</p>
+                    </div>
+                    <div>
+                        <h4>⏰ Điều trị dài hạn</h4>
+                        <p>Thường diễn ra trong thời gian dài để thay đổi cấu trúc tâm lý sâu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cognitive" class="section">
+            <h2>🧩 TIẾP CẬN NHẬN THỨC/HÀNH VI</h2>
+            
+            <div class="diagram-container">
+                <h3>Mô hình A-B-C của Albert Ellis</h3>
+                <div class="model-diagram">
+                    <div class="model-box model-a">
+                        <strong>A</strong><br>
+                        Sự kiện kích hoạt<br>
+                        (Activating Event)
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="model-box model-b">
+                        <strong>B</strong><br>
+                        Niềm tin/Nhận thức<br>
+                        (Beliefs)
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="model-box model-c">
+                        <strong>C</strong><br>
+                        Hành vi/Cảm xúc<br>
+                        (Consequences)
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">🔄 Thực hành mô hình A-B-C</div>
+                <p><strong>A - Sự kiện:</strong></p>
+                <input type="text" class="demo-input" id="eventA" placeholder="Ví dụ: Bị từ chối trong buổi phỏng vấn">
+                
+                <p><strong>B - Niềm tin tiêu cực:</strong></p>
+                <input type="text" class="demo-input" id="beliefB" placeholder="Ví dụ: Tôi không bao giờ đủ giỏi">
+                
+                <p><strong>C - Hậu quả cảm xúc:</strong></p>
+                <input type="text" class="demo-input" id="consequenceC" placeholder="Ví dụ: Trầm cảm, tránh xã hội">
+                
+                <button style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;" onclick="analyzeABC()">Phân tích & Đưa ra gợi ý</button>
+                
+                <div class="demo-result" id="abcResult"></div>
+            </div>
+
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3 style="color: #2e7d32;">Kỹ thuật CBT chính</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <h4>📝 Tái cấu trúc nhận thức</h4>
+                        <p>Thách thức và thay thế niềm tin bóp méo</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3;">
+                        <h4>🎯 Liệu pháp phơi nhiễm</h4>
+                        <p>Tiếp xúc dần với tình huống sợ hãi</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                        <h4>🔄 Huấn luyện kỹ năng</h4>
+                        <p>Học các kỹ năng đối phó và thư giãn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="humanistic" class="section">
+            <h2>🌟 TIẾP CẬN NHÂN VĂN/HIỆN SINH</h2>
+            
+            <div class="diagram-container">
+                <h3>Bốn trụ cốt của Hiện sinh</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: linear-gradient(135deg, #ff7b7b, #ff9a9e); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4>🔓 Tự do - Trách nhiệm</h4>
+                        <p>Quyền lựa chọn và chịu trách nhiệm</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4>🤝 Cô đơn - Kết nối</h4>
+                        <p>Cân bằng giữa độc lập và quan hệ</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4>💀 Cái chết - Sống</h4>
+                        <p>Ý thức về hữu hạn của cuộc sống</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4>🌌 Hư vô - Ý nghĩa</h4>
+                        <p>Tìm kiếm ý nghĩa trong cuộc sống</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">🎯 Đánh giá mức độ tự hiện thực hóa</div>
+                <p>Đánh giá bản thân trên từng khía cạnh (1-10):</p>
+                
+                <div style="margin: 10px 0;">
+                    <label>Mức độ tự nhận thức:</label>
+                    <input type="range" min="1" max="10" value="5" id="selfAwareness" style="width: 100%; margin: 5px 0;">
+                    <span id="selfAwarenessValue">5</span>/10
+                </div>
+                
+                <div style="margin: 10px 0;">
+                    <label>Khả năng đưa ra lựa chọn:</label>
+                    <input type="range" min="1" max="10" value="5" id="autonomy" style="width: 100%; margin: 5px 0;">
+                    <span id="autonomyValue">5</span>/10
+                </div>
+                
+                <div style="margin: 10px 0;">
+                    <label>Ý nghĩa cuộc sống:</label>
+                    <input type="range" min="1" max="10" value="5" id="meaning" style="width: 100%; margin: 5px 0;">
+                    <span id="meaningValue">5</span>/10
+                </div>
+                
+                <button style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;" onclick="calculateSelfActualization()">Tính toán kết quả</button>
+                
+                <div class="demo-result" id="actualizationResult"></div>
+            </div>
+
+            <div style="background: #fff8e1; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3 style="color: #f57c00;">Đặc điểm của Tiếp cận Nhân văn</h3>
+                <div style="margin: 15px 0;">
+                    <div class="tooltip">
+                        <strong>👤 Trọng tâm là con người (Person-centered)</strong>
+                        <span class="tooltiptext">Carl Rogers phát triển phương pháp lấy khách hàng làm trung tâm, tập trung vào kinh nghiệm chủ quan của họ</span>
+                    </div>
+                    <p style="margin: 10px 0 20px 20px;">Khách hàng là chuyên gia về chính cuộc sống của mình</p>
+                    
+                    <div class="tooltip">
+                        <strong>🔓 Tự do ý chí (Free will)</strong>
+                        <span class="tooltiptext">Con người không bị chi phối hoàn toàn bởi quá khứ hay vô thức, mà có khả năng lựa chọn</span>
+                    </div>
+                    <p style="margin: 10px 0 20px 20px;">Mọi người đều có quyền lựa chọn hành vi của mình</p>
+                    
+                    <div class="tooltip">
+                        <strong>📈 Khuynh hướng hiện thực hóa bản thân</strong>
+                        <span class="tooltiptext">Abraham Maslow tin rằng con người có động lực bẩm sinh để phát triển tiềm năng</span>
+                    </div>
+                    <p style="margin: 10px 0 20px 20px;">Mọi người đều có tiềm năng tăng trưởng và phát triển tích cực</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="cultural" class="section">
+            <h2>🌍 TIẾP CẬN VĂN HÓA/XÃ HỘI</h2>
+            
+            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3>Trọng tâm của tiếp cận Văn hóa/Xã hội</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                        <h4>⚖️ Bất bình đẳng giới</h4>
+                        <p>Ảnh hưởng của phân biệt giới tính đến sức khỏe tâm thần</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                        <h4>🏛️ Định chế xã hội</h4>
+                        <p>Tác động của các cấu trúc quyền lực và xã hội</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                        <h4>🌐 Đa dạng văn hóa</h4>
+                        <p>Tôn trọng sự khác biệt về nền tảng văn hóa</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">🔍 Phân tích yếu tố văn hóa-xã hội</div>
+                <p>Chọn tình huống để xem phân tích đa chiều:</p>
+                <select class="demo-input" id="socialCase" onchange="analyzeSocialCase()">
+                    <option value="">Chọn trường hợp...</option>
+                    <option value="depression_woman">Phụ nữ trầm cảm sau ly hôn</option>
+                    <option value="anxiety_immigrant">Lo âu ở người nhập cư</option>
+                    <option value="identity_lgbtq">Khủng hoảng bản sắc LGBTQ+</option>
+                </select>
+                <div class="demo-result" id="socialResult"></div>
+            </div>
+
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3 style="color: #2e7d32;">Các liệu pháp trong tiếp cận Văn hóa-Xã hội</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <h4>👨‍👩‍👧‍👦 Trị liệu hệ thống gia đình</h4>
+                        <p>Làm việc với toàn bộ hệ thống gia đình</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #e91e63;">
+                        <h4>👩 Tiếp cận nữ quyền</h4>
+                        <p>Giải quyết những vấn đề liên quan đến giới tính</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #9c27b0;">
+                        <h4>🏳️‍🌈 Tham vấn khẳng định LGBTIQ+</h4>
+                        <p>Hỗ trợ cộng đồng LGBTIQ+ trong môi trường an toàn</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                        <h4>💑 Trị liệu cặp đôi/hôn nhân</h4>
+                        <p>Cải thiện mối quan hệ và giao tiếp</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3;">
+                        <h4>📚 Liệu pháp trần thuật</h4>
+                        <p>Xây dựng lại câu chuyện cuộc sống tích cực</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="multifactorial" class="section">
+            <h2>🔄 TIẾP CẬN ĐA NHÂN TỐ</h2>
+            
+            <div class="diagram-container">
+                <h3>Mô hình Tâm-Sinh-Xã (Biopsychosocial Model)</h3>
+                <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <svg width="400" height="300" style="background: white; border-radius: 10px;">
+                        <circle cx="200" cy="100" r="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="3"/>
+                        <text x="200" y="70" text-anchor="middle" style="font-weight: bold; font-size: 14px; fill: #1976d2;">SINH HỌC</text>
+                        <text x="200" y="85" text-anchor="middle" style="font-size: 11px;">Gen, não bộ,</text>
+                        <text x="200" y="98" text-anchor="middle" style="font-size: 11px;">hóa học cơ thể</text>
+
+                        <circle cx="130" cy="200" r="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="3"/>
+                        <text x="130" y="170" text-anchor="middle" style="font-weight: bold; font-size: 14px; fill: #7b1fa2;">TÂM LÝ</text>
+                        <text x="130" y="185" text-anchor="middle" style="font-size: 11px;">Nhận thức, cảm xúc,</text>
+                        <text x="130" y="198" text-anchor="middle" style="font-size: 11px;">hành vi, nhân cách</text>
+
+                        <circle cx="270" cy="200" r="80" fill="#e8f5e8" stroke="#4caf50" stroke-width="3"/>
+                        <text x="270" y="170" text-anchor="middle" style="font-weight: bold; font-size: 14px; fill: #2e7d32;">XÃ HỘI</text>
+                        <text x="270" y="185" text-anchor="middle" style="font-size: 11px;">Gia đình, văn hóa,</text>
+                        <text x="270" y="198" text-anchor="middle" style="font-size: 11px;">kinh tế xã hội</text>
+
+                        <text x="200" y="280" text-anchor="middle" style="font-weight: bold; font-size: 16px; fill: #333;">RỐI LOẠN TÂM THẦN</text>
+                        
+                        <!-- Arrows pointing to center -->
+                        <path d="M 200 180 L 200 240" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <path d="M 160 160 L 180 220" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <path d="M 240 160 L 220 220" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">🎯 Phân tích đa nhân tố cho trầm cảm</div>
+                <p><strong>Trường hợp:</strong> Phụ nữ 35 tuổi, mẹ đơn thân, trầm cảm nặng sau ly hôn. Tiền sử gia đình có người mắc trầm cảm.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 10px;">
+                        <h4 style="color: #1976d2;">🧬 Yếu tố SINH HỌC</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Tiền sử gia đình mắc trầm cảm (yếu tố di truyền)</li>
+                            <li>Mất cân bằng Serotonin & Norepinephrine</li>
+                            <li>Rối loạn giấc ngủ và thay đổi hormone</li>
+                        </ul>
+                        <p><strong>Điều trị:</strong> Thuốc chống trầm cảm (SSRI), điều chỉnh lối sống</p>
+                    </div>
+                    
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 10px;">
+                        <h4 style="color: #7b1fa2;">🧠 Yếu tố TÂM LÝ</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Suy nghĩ tiêu cực về bản thân và tương lai</li>
+                            <li>Phản ứng với mất mát (cơ chế nội quan hóa)</li>
+                            <li>Lòng tự trọng thấp, cảm giác tội lỗi</li>
+                        </ul>
+                        <p><strong>Điều trị:</strong> CBT, tái cấu trúc nhận thức</p>
+                    </div>
+                    
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px;">
+                        <h4 style="color: #2e7d32;">🌍 Yếu tố XÃ HỘI</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Áp lực xã hội đối với mẹ đơn thân</li>
+                            <li>Khó khăn kinh tế sau ly hôn</li>
+                            <li>Thiếu hỗ trợ xã hội và cộng đồng</li>
+                        </ul>
+                        <p><strong>Điều trị:</strong> Trị liệu gia đình, hỗ trợ cộng đồng</p>
+                    </div>
+                </div>
+                
+                <div style="background: #fff3e0; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <h4 style="color: #f57c00;">📋 Kế hoạch điều trị tổng hợp</h4>
+                    <ol style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Giai đoạn cấp:</strong> Thuốc chống trầm cảm + CBT</li>
+                        <li><strong>Giai đoạn ổn định:</strong> Trị liệu tâm lý dài hạn</li>
+                        <li><strong>Duy trì:</strong> Hỗ trợ xã hội, nhóm hỗ trợ mẹ đơn thân</li>
+                        <li><strong>Phòng ngừa:</strong> Giáo dục gia đình, quản lý căng thẳng</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3>Ưu điểm của tiếp cận Đa nhân tố</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>🎯 Toàn diện</h4>
+                        <p>Xem xét tất cả các yếu tố có thể ảnh hưởng</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>⚖️ Cân bằng</h4>
+                        <p>Không thiên về một yếu tố đơn lẻ nào</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>🎪 Linh hoạt</h4>
+                        <p>Có thể điều chỉnh theo từng trường hợp cụ thể</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section">
+            <h2>🎯 KIỂM TRA KIẾN THỨC</h2>
+            
+            <div class="score-display" id="scoreDisplay" style="display: none;">
+                <span id="scoreText">Điểm của bạn: 0/0</span>
+            </div>
+
+            <div class="quiz-container" id="quizContainer">
+                <!-- Quiz questions will be loaded here -->
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <button id="nextQuestionBtn" style="padding: 15px 30px; background: #4CAF50; color: white; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; display: none;" onclick="nextQuestion()">Câu hỏi tiếp theo</button>
+                <button id="restartQuizBtn" style="padding: 15px 30px; background: #667eea; color: white; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; display: none;" onclick="restartQuiz()">Làm lại</button>
+            </div>
+
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3 style="color: #2e7d32;">📚 Tài liệu tham khảo</h3>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Đặng Khánh An - Các tiếp cận Tâm bệnh học USSH</li>
+                    <li>Jean Bergeret - Cấu trúc nhân cách trong Phân tâm học</li>
+                    <li>Carl Rogers - Trị liệu lấy khách hàng làm trung tâm</li>
+                    <li>Albert Ellis - Mô hình A-B-C trong CBT</li>
+                    <li>Abraham Maslow - Tháp nhu cầu và tự hiện thực hóa</li>
+                </ul>
+            </div>
+
+            <div style="background: #ffebee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #f44336;">
+                <h3 style="color: #c62828;">⚠️ Lưu ý quan trọng</h3>
+                <p>Website này chỉ mang tính chất giáo dục và tham khảo. Không thay thế cho việc tư vấn, chẩn đoán hay điều trị y khoa chuyên nghiệp.</p>
+                
+                <div style="margin-top: 15px; padding: 10px; background: #fff3e0; border-radius: 5px;">
+                    <h4 style="color: #f57c00;">📞 Liên hệ hỗ trợ khẩn cấp</h4>
+                    <p><strong>Đường dây nóng Ngày Mai:</strong> 094 482 46 10</p>
+                    <p><strong>Tổng đài:</strong> 1900 1267 hoặc 115</p>
+                    <p><strong>Ưu tiên:</strong> Nhập viện, thuốc cải thiện, kế hoạch bảo vệ an toàn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentSection = 'overview';
+        let visitedSections = ['overview'];
+        let currentQuizQuestion = 0;
+        let quizScore = 0;
+        let totalQuestions = 0;
+
+        // Quiz questions based on the material
+        const quizQuestions = [
+            {
+                question: "Theo tiếp cận sinh học, rối loạn khí sắc chủ yếu liên quan đến sự mất cân bằng của những chất dẫn truyền thần kinh nào?",
+                answers: [
+                    "Dopamine và GABA",
+                    "Serotonin và norepinephrine",
+                    "Acetylcholine và glutamate",
+                    "Oxytocin và vasopressin"
+                ],
+                correct: 1,
+                explanation: "Theo tài liệu, Serotonin & norepinephrine liên quan chủ yếu đến rối loạn khí sắc như trầm cảm."
+            },
+            {
+                question: "Trong lý thuyết cấu trúc nhân cách của Bergeret, cấu trúc nhân cách nào có lo hãi chủ đạo là 'bị thiến'?",
+                answers: [
+                    "Loạn tâm",
+                    "Nhiễu tâm",
+                    "Lệch lạc",
+                    "Ranh giới"
+                ],
+                correct: 1,
+                explanation: "Nhiễu tâm có lo hãi chủ đạo là 'bị thiến' theo lý thuyết của Jean Bergeret."
+            },
+            {
+                question: "Mô hình A-B-C của Albert Ellis được hiểu như thế nào?",
+                answers: [
+                    "A → Antecedent, B → Behavior, C → Consequence",
+                    "A → Sự kiện kích hoạt, B → Quá trình nhận thức, C → Hành vi/cảm xúc",
+                    "A → Anxiety, B → Belief, C → Coping",
+                    "A → Assessment, B → Baseline, C → Change"
+                ],
+                correct: 1,
+                explanation: "Trong mô hình A-B-C của Ellis: A là Sự kiện kích hoạt, B là Quá trình nhận thức/Niềm tin, C là Hành vi/Cảm xúc."
+            },
+            {
+                question: "Bốn trụ cốt của hiện sinh trong tham vấn/trị liệu tâm lý bao gồm:",
+                answers: [
+                    "Tự do-Trách nhiệm, Cô đơn-Kết nối, Cái chết-Sống, Hư vô-Ý nghĩa",
+                    "Quá khứ-Hiện tại, Lo âu-An lạc, Cá nhân-Xã hội, Thực tế-Lý tưởng",
+                    "Ý thức-Vô thức, Cảm xúc-Lý trí, Bên trong-Bên ngoài, Tĩnh-Động",
+                    "Sinh-Lão-Bệnh-Tử"
+                ],
+                correct: 0,
+                explanation: "Bốn trụ cốt của hiện sinh là: Tự do-Trách nhiệm, Cô đơn-Kết nối, Cái chết-Sống, Hư vô-Ý nghĩa."
+            },
+            {
+                question: "Tiếp cận văn hóa-xã hội trong tâm bệnh học nhấn mạnh yếu tố nào?",
+                answers: [
+                    "Cấu trúc não bộ và di truyền",
+                    "Bất bình đẳng giới và các định chế xã hội",
+                    "Cơ chế phòng vệ vô thức",
+                    "Quá trình học tập và điều kiện hóa"
+                ],
+                correct: 1,
+                explanation: "Tiếp cận văn hóa-xã hội nhấn mạnh bất bình đẳng giới và các định chế xã hội."
+            }
+        ];
+
+        // Initialize the website
+        function initializeWebsite() {
+            updateProgress();
+            loadQuiz();
+            
+            // Add event listeners for sliders
+            document.getElementById('selfAwareness').oninput = function() {
+                document.getElementById('selfAwarenessValue').textContent = this.value;
+            };
+            document.getElementById('autonomy').oninput = function() {
+                document.getElementById('autonomyValue').textContent = this.value;
+            };
+            document.getElementById('meaning').oninput = function() {
+                document.getElementById('meaningValue').textContent = this.value;
+            };
+        }
+
+        // Show section function
+        function showSection(sectionId, button) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected section and activate button
+            document.getElementById(sectionId).classList.add('active');
+            button.classList.add('active');
+            
+            // Update current section and visited sections
+            currentSection = sectionId;
+            if (!visitedSections.includes(sectionId)) {
+                visitedSections.push(sectionId);
+            }
+            
+            updateProgress();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const totalSections = 8;
+            const progress = (visitedSections.length / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Expand approach card
+        function expandCard(card) {
+            const allCards = document.querySelectorAll('.approach-card');
+            allCards.forEach(c => {
+                c.classList.remove('expanded');
+                c.querySelector('.approach-details').classList.remove('show');
+            });
+            
+            if (card) {
+                card.classList.add('expanded');
+                card.querySelector('.approach-details').classList.add('show');
+            }
+        }
+
+        // Simulate neurotransmitter effect
+        function simulateEffect() {
+            const select = document.getElementById('neurotransmitter');
+            const result = document.getElementById('neurotransmitterResult');
+            
+            if (select.value === '') {
+                result.style.display = 'none';
+                return;
+            }
+            
+            let content = '';
+            switch (select.value) {
+                case 'serotonin':
+                    content = `
+                        <h4>🧠 Ảnh hưởng của thiếu hụt Serotonin:</h4>
+                        <ul>
+                            <li><strong>Triệu chứng:</strong> Trầm cảm, lo âu, rối loạn giấc ngủ</li>
+                            <li><strong>Cơ chế:</strong> Serotonin điều hóa tâm trạng và cảm xúc</li>
+                            <li><strong>Điều trị:</strong> SSRI (Selective Serotonin Reuptake Inhibitors)</li>
+                            <li><strong>Thời gian:</strong> 4-6 tuần để có hiệu quả rõ rệt</li>
+                        </ul>
+                    `;
+                    break;
+                case 'dopamine':
+                    content = `
+                        <h4>⚡ Ảnh hưởng của rối loạn Dopamine:</h4>
+                        <ul>
+                            <li><strong>Triệu chứng:</strong> Ảo giác, hoang tưởng, rối loạn vận động</li>
+                            <li><strong>Cơ chế:</strong> Dopamine liên quan đến phần thưởng và vận động</li>
+                            <li><strong>Điều trị:</strong> Thuốc chống loạn thần, L-DOPA (Parkinson)</li>
+                            <li><strong>Lưu ý:</strong> Cân bằng li용量 thuốc rất quan trọng</li>
+                        </ul>
+                    `;
+                    break;
+                case 'gaba':
+                    content = `
+                        <h4>😰 Ảnh hưởng của thiếu hụt GABA:</h4>
+                        <ul>
+                            <li><strong>Triệu chứng:</strong> Lo âu, căng thẳng, cơn hoảng loạn</li>
+                            <li><strong>Cơ chế:</strong> GABA là chất dẫn truyền ức chế chính</li>
+                            <li><strong>Điều trị:</strong> Benzodiazepines, kỹ thuật thư giãn</li>
+                            <li><strong>Cảnh báo:</strong> Nguy cơ phụ thuộc với benzodiazepines</li>
+                        </ul>
+                    `;
+                    break;
+            }
+            
+            result.innerHTML = content;
+            result.style.display = 'block';
+        }
+
+        // Analyze personality structure
+        function analyzePersonality() {
+            const description = document.getElementById('symptomDescription').value.toLowerCase();
+            const result = document.getElementById('personalityResult');
+            
+            if (!description.trim()) {
+                alert('Vui lòng nhập mô tả triệu chứng!');
+                return;
+            }
+            
+            let analysis = '';
+            if (description.includes('lo âu') || description.includes('ám ảnh') || description.includes('kiểm tra')) {
+                analysis = `
+                    <h4>🔍 Phân tích: Khuynh hướng NHIỄU TÂM</h4>
+                    <p><strong>Đặc điểm:</strong> Lo hãi bị thiến, triệu chứng lo âu, ám ảnh</p>
+                    <p><strong>Cơ chế phòng vệ:</strong> Dồn nén, cô lập ảnh hưởng, hình thành phản ứng</p>
+                    <p><strong>Điều trị khuyến nghị:</strong> CBT kết hợp phân tâm, thuốc chống lo âu ngắn hạn</p>
+                `;
+            } else if (description.includes('trầm cảm') || description.includes('ảo giác') || description.includes('hoang tưởng')) {
+                analysis = `
+                    <h4>🔍 Phân tích: Khuynh hướng LOẠN TÂM</h4>
+                    <p><strong>Đặc điểm:</strong> Lo hãi bị tan rã, mất liên hệ với thực tế</p>
+                    <p><strong>Cơ chế phòng vệ:</strong> Tách biệt, chiếu lên, phủ định</p>
+                    <p><strong>Điều trị khuyến nghị:</strong> Thuốc ổn định tâm thần, hỗ trợ tâm lý xã hội</p>
+                `;
+            } else if (description.includes('bạo lực') || description.includes('lừa dối') || description.includes('không cảm xúc')) {
+                analysis = `
+                    <h4>🔍 Phân tích: Khuynh hướng RANH GIỚI/LỆCH LẠC</h4>
+                    <p><strong>Đặc điểm:</strong> Lo hãi mất bản ngã, rối loạn nhân cách</p>
+                    <p><strong>Cơ chế phòng vệ:</strong> Tạch biệt, khiếu nại chiếu lên</p>
+                    <p><strong>Điều trị khuyến nghị:</strong> Trị liệu dialectical behavior therapy (DBT), hỗ trợ dài hạn</p>
+                `;
+            } else {
+                analysis = `
+                    <h4>🔍 Cần thêm thông tin để phân tích chính xác</h4>
+                    <p>Vui lòng mô tả chi tiết hơn về:</p>
+                    <ul>
+                        <li>Các triệu chứng cụ thể</li>
+                        <li>Thời gian xuất hiện</li>
+                        <li>Mức độ ảnh hưởng đến cuộc sống</li>
+                        <li>Phản ứng với stress</li>
+                    </ul>
+                `;
+            }
+            
+            result.innerHTML = analysis;
+            result.style.display = 'block';
+        }
+
+        // Analyze ABC model
+        function analyzeABC() {
+            const eventA = document.getElementById('eventA').value;
+            const beliefB = document.getElementById('beliefB').value;
+            const consequenceC = document.getElementById('consequenceC').value;
+            const result = document.getElementById('abcResult');
+            
+            if (!eventA.trim() || !beliefB.trim() || !consequenceC.trim()) {
+                alert('Vui lòng điền đầy đủ tất cả các trường!');
+                return;
+            }
+            
+            const analysis = `
+                <h4>📊 Phân tích mô hình A-B-C</h4>
+                <div style="margin: 15px 0;">
+                    <p><strong>A (Sự kiện):</strong> ${eventA}</p>
+                    <p><strong>B (Niềm tin tiêu cực):</strong> ${beliefB}</p>
+                    <p><strong>C (Hậu quả):</strong> ${consequenceC}</p>
+                </div>
+                
+                <h4>💡 Gợi ý thay đổi niềm tin (B'):</h4>
+                <div style="background: #e8f5e8; padding: 10px; border-radius: 5px; margin: 10px 0;">
+                    <p><strong>Thách thức niềm tin:</strong></p>
+                    <ul>
+                        <li>Có bằng chứng nào chứng minh niềm tin này là đúng 100%?</li>
+                        <li>Bạn sẽ khuyên một người bạn gì trong tình huống tương tự?</li>
+                        <li>Niềm tin thay thế tích cực nào có thể phù hợp hơn?</li>
+                    </ul>
+                </div>
+                
+                <h4>🎯 Kế hoạch hành động:</h4>
+                <ol style="margin: 10px 0; padding-left: 20px;">
+                    <li><strong>Nhận diện:</strong> Ghi nhận khi niềm tin tiêu cực xuất hiện</li>
+                    <li><strong>Thách thức:</strong> Đặt câu hỏi về tính hợp lý của niềm tin</li>
+                    <li><strong>Thay thế:</strong> Phát triển niềm tin cân bằng và thực tế hơn</li>
+                    <li><strong>Thực hành:</strong> Luyện tập niềm tin mới trong tình huống thực tế</li>
+                </ol>
+            `;
+            
+            result.innerHTML = analysis;
+            result.style.display = 'block';
+        }
+
+        // Calculate self-actualization
+        function calculateSelfActualization() {
+            const selfAwareness = parseInt(document.getElementById('selfAwareness').value);
+            const autonomy = parseInt(document.getElementById('autonomy').value);
+            const meaning = parseInt(document.getElementById('meaning').value);
+            const result = document.getElementById('actualizationResult');
+            
+            const total = selfAwareness + autonomy + meaning;
+            const average = total / 3;
+            
+            let level = '';
+            let recommendations = '';
+            let color = '';
+            
+            if (average >= 8) {
+                level = 'CAO';
+                color = '#4CAF50';
+                recommendations = `
+                    <p>🌟 Bạn đang trên con đường tự hiện thực hóa tốt!</p>
+                    <ul>
+                        <li>Tiếp tục phát triển các mối quan hệ ý nghĩa</li>
+                        <li>Tìm kiếm những thách thức mới để tăng trưởng</li>
+                        <li>Chia sẻ kinh nghiệm để giúp đỡ người khác</li>
+                    </ul>
+                `;
+            } else if (average >= 5) {
+                level = 'TRUNG BÌNH';
+                color = '#FF9800';
+                recommendations = `
+                    <p>⚖️ Bạn đang ở mức độ cân bằng, còn nhiều tiềm năng!</p>
+                    <ul>
+                        <li>Tăng cường tự nhận thức qua thiền định hoặc viết nhật ký</li>
+                        <li>Luyện tập đưa ra quyết định độc lập hơn</li>
+                        <li>Khám phá các hoạt động mang lại ý nghĩa sâu sắc</li>
+                    </ul>
+                `;
+            } else {
+                level = 'THẤP';
+                color = '#f44336';
+                recommendations = `
+                    <p>🌱 Đây là thời điểm tốt để bắt đầu hành trình tự hiện thực hóa!</p>
+                    <ul>
+                        <li>Tham gia trị liệu tâm lý lấy khách hàng làm trung tâm</li>
+                        <li>Tham gia các nhóm hỗ trợ hoặc cộng đồng</li>
+                        <li>Dành thời gian tự khám phá sở thích và giá trị cá nhân</li>
+                    </ul>
+                `;
+            }
+            
+            const analysis = `
+                <div style="background: ${color}; color: white; padding: 15px; border-radius: 10px; text-align: center; margin: 15px 0;">
+                    <h3>Mức độ Tự hiện thực hóa: ${level}</h3>
+                    <p style="font-size: 1.5em; margin: 10px 0;">${average.toFixed(1)}/10</p>
+                </div>
+                
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Chi tiết điểm số:</h4>
+                    <p>• Tự nhận thức: ${selfAwareness}/10</p>
+                    <p>• Tự chủ: ${autonomy}/10</p>
+                    <p>• Ý nghĩa cuộc sống: ${meaning}/10</p>
+                </div>
+                
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Khuyến nghị:</h4>
+                    ${recommendations}
+                </div>
+            `;
+            
+            result.innerHTML = analysis;
+            result.style.display = 'block';
+        }
+
+        // Analyze social case
+        function analyzeSocialCase() {
+            const select = document.getElementById('socialCase');
+            const result = document.getElementById('socialResult');
+            
+            if (select.value === '') {
+                result.style.display = 'none';
+                return;
+            }
+            
+            let analysis = '';
+            switch (select.value) {
+                case 'depression_woman':
+                    analysis = `
+                        <h4>👩‍💼 Phân tích: Phụ nữ trầm cảm sau ly hôn</h4>
+                        <div style="margin: 15px 0;">
+                            <h5>🌍 Yếu tố văn hóa-xã hội:</h5>
+                            <ul>
+                                <li><strong>Kỳ vọng xã hội:</strong> Áp lực về vai trò "người mẹ hoàn hảo"</li>
+                                <li><strong>Định kiến:</strong> Sự kỳ thị đối với mẹ đơn thân</li>
+                                <li><strong>Kinh tế:</strong> Thu nhập giảm, gánh nặng tài chính</li>
+                                <li><strong>Hỗ trợ xã hội:</strong> Mạng lưới hỗ trợ bị thu hẹp</li>
+                            </ul>
+                            
+                            <h5>💊 Can thiệp đa chiều:</h5>
+                            <ul>
+                                <li><strong>Cá nhân:</strong> CBT, thuốc chống trầm cảm</li>
+                                <li><strong>Gia đình:</strong> Trị liệu gia đình, hỗ trợ con em</li>
+                                <li><strong>Cộng đồng:</strong> Nhóm hỗ trợ mẹ đơn thân</li>
+                                <li><strong>Xã hội:</strong> Chính sách hỗ trợ, giảm kỳ thị</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'anxiety_immigrant':
+                    analysis = `
+                        <h4>🌏 Phân tích: Lo âu ở người nhập cư</h4>
+                        <div style="margin: 15px 0;">
+                            <h5>🌍 Yếu tố văn hóa-xã hội:</h5>
+                            <ul>
+                                <li><strong>Rào cản ngôn ngữ:</strong> Khó khăn giao tiếp, hiểu lầm</li>
+                                <li><strong>Sốc văn hóa:</strong> Khác biệt về giá trị, tập quán</li>
+                                <li><strong>Phân biệt đối xử:</strong> Kỳ thị, loại trừ xã hội</li>
+                                <li><strong>Tách biệt:</strong> Xa gia đình, bạn bè ở quê nhà</li>
+                            </ul>
+                            
+                            <h5>💊 Can thiệp đa chiều:</h5>
+                            <ul>
+                                <li><strong>Cá nhân:</strong> Tham vấn đa văn hóa, kỹ năng đối phó</li>
+                                <li><strong>Cộng đồng:</strong> Kết nối với cộng đồng người cùng quốc gia</li>
+                                <li><strong>Giáo dục:</strong> Học ngôn ngữ, hiểu văn hóa địa phương</li>
+                                <li><strong>Pháp lý:</strong> Hỗ trợ giải quyết vấn đề visa, công việc</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'identity_lgbtq':
+                    analysis = `
+                        <h4>🏳️‍🌈 Phân tích: Khủng hoảng bản sắc LGBTQ+</h4>
+                        <div style="margin: 15px 0;">
+                            <h5>🌍 Yếu tố văn hóa-xã hội:</h5>
+                            <ul>
+                                <li><strong>Định kiến xã hội:</strong> Kỳ thị, bắt nạt, bạo lực</li>
+                                <li><strong>Gia đình:</strong> Từ chối, đuổi khỏi nhà</li>
+                                <li><strong>Tôn giáo:</strong> Xung đột với niềm tin tôn giáo</li>
+                                <li><strong>Pháp lý:</strong> Thiếu bảo vệ pháp lý, quyền lợi</li>
+                            </ul>
+                            
+                            <h5>💊 Can thiệp khẳng định:</h5>
+                            <ul>
+                                <li><strong>Cá nhân:</strong> Tham vấn khẳng định LGBTQ+</li>
+                                <li><strong>Nhóm:</strong> Tham gia cộng đồng LGBTQ+</li>
+                                <li><strong>Gia đình:</strong> Giáo dục, hòa giải gia đình</li>
+                                <li><strong>Xã hội:</strong> Vận động quyền lợi, giảm kỳ thị</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            result.innerHTML = analysis;
+            result.style.display = 'block';
+        }
+
+        // Load quiz
+        function loadQuiz() {
+            totalQuestions = quizQuestions.length;
+            currentQuizQuestion = 0;
+            quizScore = 0;
+            displayQuestion();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const container = document.getElementById('quizContainer');
+            const question = quizQuestions[currentQuizQuestion];
+            
+            container.innerHTML = `
+                <div class="question">
+                    Câu ${currentQuizQuestion + 1}/${totalQuestions}: ${question.question}
+                </div>
+                <div class="answers">
+                    ${question.answers.map((answer, index) => 
+                        `<button class="answer-btn" onclick="selectAnswer(${index})">${String.fromCharCode(65 + index)}. ${answer}</button>`
+                    ).join('')}
+                </div>
+            `;
+            
+            document.getElementById('nextQuestionBtn').style.display = 'none';
+            document.getElementById('restartQuizBtn').style.display = 'none';
+            updateScoreDisplay();
+        }
+
+        // Select answer
+        function selectAnswer(selectedIndex) {
+            const question = quizQuestions[currentQuizQuestion];
+            const buttons = document.querySelectorAll('.answer-btn');
+            
+            // Disable all buttons
+            buttons.forEach(btn => btn.style.pointerEvents = 'none');
+            
+            // Mark correct and incorrect answers
+            buttons.forEach((btn, index) => {
+                if (index === question.correct) {
+                    btn.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            // Update score
+            if (selectedIndex === question.correct) {
+                quizScore++;
+            }
+            
+            // Show explanation
+            const container = document.getElementById('quizContainer');
+            container.innerHTML += `
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; margin-top: 15px; border-radius: 10px;">
+                    <h4>💡 Giải thích:</h4>
+                    <p>${question.explanation}</p>
+                </div>
+            `;
+            
+            // Show next button or finish
+            if (currentQuizQuestion < totalQuestions - 1) {
+                document.getElementById('nextQuestionBtn').style.display = 'inline-block';
+            } else {
+                showFinalScore();
+            }
+            
+            updateScoreDisplay();
+        }
+
+        // Next question
+        function nextQuestion() {
+            currentQuizQuestion++;
+            displayQuestion();
+        }
+
+        // Show final score
+        function showFinalScore() {
+            const container = document.getElementById('quizContainer');
+            const percentage = Math.round((quizScore / totalQuestions) * 100);
+            
+            let message = '';
+            let color = '';
+            
+            if (percentage >= 80) {
+                message = 'Xuất sắc! Bạn đã nắm vững kiến thức!';
+                color = '#4CAF50';
+            } else if (percentage >= 60) {
+                message = 'Tốt! Bạn hiểu khá tốt các khái niệm.';
+                color = '#FF9800';
+            } else {
+                message = 'Cần ôn tập thêm. Hãy xem lại tài liệu!';
+                color = '#f44336';
+            }
+            
+            container.innerHTML += `
+                <div style="background: ${color}; color: white; padding: 20px; margin-top: 20px; border-radius: 15px; text-align: center;">
+                    <h3>🎉 Hoàn thành!</h3>
+                    <p style="font-size: 1.5em; margin: 10px 0;">${quizScore}/${totalQuestions} (${percentage}%)</p>
+                    <p style="font-size: 1.2em;">${message}</p>
+                </div>
+            `;
+            
+            document.getElementById('restartQuizBtn').style.display = 'inline-block';
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            loadQuiz();
+            document.getElementById('scoreDisplay').style.display = 'block';
+        }
+
+        // Update score display
+        function updateScoreDisplay() {
+            document.getElementById('scoreDisplay').style.display = 'block';
+            document.getElementById('scoreText').textContent = `Điểm của bạn: ${quizScore}/${totalQuestions}`;
+        }
+
+        // Initialize website when page loads
+        window.onload = function() {
+            initializeWebsite();
+        };
+    </script>
+</body>
+</html>

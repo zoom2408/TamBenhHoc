@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCD và Các Rối Loạn Liên Quan - Học Tập Tương Tác</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            color: #4a5568;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .disorder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .disorder-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .disorder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .disorder-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .disorder-card p {
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .diagnostic-criteria {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .criteria-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .criteria-item h4 {
+            color: #4a5568;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .criteria-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-question h4 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: #e2e8f0;
+            border-color: #667eea;
+        }
+
+        .quiz-option.correct {
+            background: #c6f6d5;
+            border-color: #38a169;
+        }
+
+        .quiz-option.incorrect {
+            background: #fed7d7;
+            border-color: #e53e3e;
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .case-details {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-details h4 {
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .case-details p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .treatment-info {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .treatment-step {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .brain-diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .brain-regions {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .brain-region {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .interactive-element {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-element:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .expand-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .expand-content.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .disorder-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .brain-regions {
+                flex-direction: column;
+            }
+            
+            .statistics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 OCD VÀ CÁC RỐI LOẠN LIÊN QUAN</h1>
+            <p>Học tập tương tác về Rối loạn Ám ảnh Cưỡng chế và các rối loạn liên quan theo DSM-5</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('overview')">Tổng Quan</button>
+            <button class="nav-btn" onclick="showSection('disorders')">9 Rối Loạn</button>
+            <button class="nav-btn" onclick="showSection('ocd-details')">OCD Chi Tiết</button>
+            <button class="nav-btn" onclick="showSection('brain-anatomy')">Giải Phẫu Não</button>
+            <button class="nav-btn" onclick="showSection('treatment')">Điều Trị</button>
+            <button class="nav-btn" onclick="showSection('case-studies')">Ca Bệnh</button>
+            <button class="nav-btn" onclick="showSection('quiz')">Kiểm Tra</button>
+        </div>
+
+        <!-- Tổng Quan -->
+        <div id="overview" class="content-section active">
+            <h2 class="section-title">📊 TỔNG QUAN</h2>
+            
+            <div class="statistics">
+                <div class="stat-card">
+                    <div class="stat-number">1.2%</div>
+                    <div class="stat-label">Tỷ lệ hiện mắc OCD trong 12 tháng tại Hoa Kỳ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">76%</div>
+                    <div class="stat-label">Bệnh nhân OCD mắc thêm rối loạn lo âu khác</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">41%</div>
+                    <div class="stat-label">Bệnh nhân OCD mắc thêm trầm cảm hoặc lưỡng cực</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">44.1%</div>
+                    <div class="stat-label">Tỷ lệ có ý định tự tử trong đời</div>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('overview-features')">
+                <h3>🎯 Đặc điểm chung của nhóm rối loạn</h3>
+                <p>Nhấp để xem chi tiết...</p>
+                <div id="overview-features" class="expand-content">
+                    <p><strong>Ám ảnh:</strong> Suy nghĩ, hình ảnh hoặc xung động liên tục, xâm nhập và không mong muốn gây ra lo âu hoặc đau khổ đáng kể.</p>
+                    <p><strong>Cưỡng chế:</strong> Hành vi hoặc hành động tinh thần lặp đi lặp lại mà cá nhân cảm thấy bắt buộc phải thực hiện để đáp lại ám ảnh.</p>
+                    <p><strong>Mối quan hệ:</strong> 75% bệnh nhân có cả ám ảnh và cưỡng chế. Cưỡng chế được thực hiện để giảm lo âu từ ám ảnh.</p>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('risk-factors')">
+                <h3>⚠️ Yếu tố nguy cơ và đồng mắc</h3>
+                <p>Nhấp để xem chi tiết...</p>
+                <div id="risk-factors" class="expand-content">
+                    <p><strong>Yếu tố di truyền:</strong> Có tính di truyền, đặc biệt ở trẻ em</p>
+                    <p><strong>Giới tính:</strong> Ở người trưởng thành, nữ giới bị ảnh hưởng nhiều hơn; ở trẻ em, nam giới nhiều hơn</p>
+                    <p><strong>Rối loạn đồng mắc:</strong> Lo âu (76%), trầm cảm/lưỡng cực (41%), rối loạn ăn uống, rối loạn phổ tự kỷ</p>
+                    <p><strong>Nguy cơ tự tử:</strong> Tỷ lệ cao hơn người bình thường, cần theo dõi chặt chẽ</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9 Rối Loạn -->
+        <div id="disorders" class="content-section">
+            <h2 class="section-title">🔹 9 RỐI LOẠN TRONG PHÂN NHÓM</h2>
+            
+            <div class="disorder-grid">
+                <div class="disorder-card" onclick="showDisorderDetail('ocd')">
+                    <h3>1. Rối loạn Ám ảnh Cưỡng chế</h3>
+                    <p>Có ám ảnh và/hoặc cưỡng chế gây suy giảm chức năng đáng kể</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('bdd')">
+                    <h3>2. Rối loạn Mặc cảm Cơ thể</h3>
+                    <p>Ám ảnh về khuyết điểm ngoại hình (không đáng kể hoặc không có)</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('hoarding')">
+                    <h3>3. Rối loạn Tích trữ</h3>
+                    <p>Khó khăn vứt bỏ đồ đạc, tích tụ gây suy giảm chức năng</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('trichotillomania')">
+                    <h3>4. Chứng Nhổ tóc</h3>
+                    <p>Nhổ tóc lặp đi lặp lại gây ra sự mỏng tóc hoặc rụng tóc</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('excoriation')">
+                    <h3>5. Chứng Bóc da</h3>
+                    <p>Bóc da lặp đi lặp lại gây tổn thương da</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('substance')">
+                    <h3>6. Do Sử dụng Chất/Thuốc</h3>
+                    <p>Triệu chứng OCD do tác dụng của chất hoặc thuốc</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('medical')">
+                    <h3>7. Do Tình trạng Y khoa</h3>
+                    <p>Triệu chứng OCD do hậu quả của bệnh lý khác</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('other-specified')">
+                    <h3>8. Biệt định Khác</h3>
+                    <p>Triệu chứng OCD không đáp ứng đầy đủ tiêu chuẩn</p>
+                </div>
+                <div class="disorder-card" onclick="showDisorderDetail('unspecified')">
+                    <h3>9. Không Biệt định</h3>
+                    <p>Triệu chứng OCD không rõ nguyên nhân</p>
+                </div>
+            </div>
+
+            <div id="disorder-details" style="margin-top: 30px;"></div>
+        </div>
+
+        <!-- OCD Chi Tiết -->
+        <div id="ocd-details" class="content-section">
+            <h2 class="section-title">🎯 OCD CHI TIẾT</h2>
+            
+            <div class="diagnostic-criteria">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #4a5568;">Tiêu chuẩn Chẩn đoán DSM-5</h3>
+                
+                <div class="criteria-item">
+                    <h4>A. Có ám ảnh, cưỡng chế hoặc cả hai:</h4>
+                    <p><strong>Ám ảnh:</strong> (1) Suy nghĩ, xung động hoặc hình ảnh liên tục và xâm nhập, (2) Gây ra lo âu hoặc đau khổ đáng kể, (3) Cố gắng bỏ qua hoặc trung hòa chúng.</p>
+                    <p><strong>Cưỡng chế:</strong> (1) Hành vi hoặc hành động tinh thần lặp đi lặp lại, (2) Được thực hiện để đáp lại ám ảnh hoặc theo quy tắc cứng nhắc, (3) Nhằm ngăn chặn hoặc giảm lo âu.</p>
+                </div>
+                
+                <div class="criteria-item">
+                    <h4>B. Tác động thời gian và chức năng:</h4>
+                    <p>Ám ảnh hoặc cưỡng chế chiếm nhiều thời gian (>1 giờ/ngày) hoặc gây suy giảm chức năng đáng kể trong các lĩnh vực xã hội, nghề nghiệp.</p>
+                </div>
+                
+                <div class="criteria-item">
+                    <h4>C. Loại trừ nguyên nhân sinh lý:</h4>
+                    <p>Triệu chứng không do tác động sinh lý của chất (ma túy, thuốc) hoặc tình trạng y tế khác.</p>
+                </div>
+                
+                <div class="criteria-item">
+                    <h4>D. Chẩn đoán phân biệt:</h4>
+                    <p>Không được giải thích tốt hơn bằng các rối loạn tâm thần khác như lo âu lan tỏa, mặc cảm ngoại hình, tích trữ, nhổ tóc, bóc da...</p>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('obsession-compulsion-pairs')">
+                <h3>🔄 Các cặp Ám ảnh - Cưỡng chế thường gặp</h3>
+                <p>Nhấp để xem chi tiết...</p>
+                <div id="obsession-compulsion-pairs" class="expand-content">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                        <div>
+                            <h4 style="color: #e53e3e;">Ám ảnh</h4>
+                            <ul style="margin-left: 20px; line-height: 1.8;">
+                                <li>Sợ dơ bẩn, lan truyền</li>
+                                <li>Sự đối xứng, cân bằng, chính xác</li>
+                                <li>Tình dục, gây hấn, tôn giáo</li>
+                                <li>Sợ gây hại cho mình/người khác</li>
+                                <li>Sợ vứt bỏ</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: #38a169;">Cưỡng chế</h4>
+                            <ul style="margin-left: 20px; line-height: 1.8;">
+                                <li>Rửa, lau chùi, tránh tiếp xúc</li>
+                                <li>Cân chỉnh, sắp xếp, đếm</li>
+                                <li>Cầu nguyện, mê tín</li>
+                                <li>Thú tội, xưng tội</li>
+                                <li>Tích trữ, sắp xếp</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('contributing-factors')">
+                <h3>🧩 Các yếu tố đóng góp</h3>
+                <p>Nhấp để xem chi tiết...</p>
+                <div id="contributing-factors" class="expand-content">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 15px;">
+                        <div style="background: #e6fffa; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #319795;">Thổi phồng trách nhiệm</h4>
+                            <p>Cảm thấy có trách nhiệm cho nội dung suy nghĩ ám ảnh. Đánh giá suy nghĩ có thể dẫn đến hệ quả tiêu cực.</p>
+                        </div>
+                        <div style="background: #fef5e7; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #d69e2e;">Liên hợp suy nghĩ - hành động</h4>
+                            <p>Tin rằng có suy nghĩ về sự kiện = sự kiện xảy ra thật. Cố gắng đàn áp suy nghĩ gây căng thẳng.</p>
+                        </div>
+                        <div style="background: #fed7f7; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #b83280;">Sự nhiễm bẩn trong tâm trí</h4>
+                            <p>Cảm giác dơ bẩn kích hoạt bởi hình ảnh, suy nghĩ, kí ức về bạo lực, lạm dụng, sỉ nhục.</p>
+                        </div>
+                        <div style="background: #e6ffed; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #38a169;">Vấn đề về trí nhớ</h4>
+                            <p>Thiếu hụt về trí nhớ, kém tự tin về tính chính xác, khó phân biệt thực tế và tưởng tượng.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Giải Phẫu Não -->
+        <div id="brain-anatomy" class="content-section">
+            <h2 class="section-title">🧠 GIẢI PHẪU NÃO VÀ OCD</h2>
+            
+            <div class="brain-diagram">
+                <h3 style="margin-bottom: 20px; color: #4a5568;">Mạch Frontostriatal và OCD</h3>
+                <p style="margin-bottom: 20px; color: #666;">Hoạt động quá mức trong các vùng não này, cùng với nucleus accumbens và amygdala, góp phần vào rối loạn ám ảnh cưỡng chế.</p>
+                
+                <div class="brain-regions">
+                    <div class="brain-region">
+                        <h4>Frontal Cortex</h4>
+                        <p>Vùng trán não - Điều khiển chức năng điều hành và ra quyết định</p>
+                    </div>
+                    <div class="brain-region">
+                        <h4>Striatum</h4>
+                        <p>Hạch nền - Liên quan đến vận động và thói quen</p>
+                    </div>
+                    <div class="brain-region">
+                        <h4>Nucleus Accumbens</h4>
+                        <p>Trung tâm khen thưởng - Tham gia vào hành vi lặp lại</p>
+                    </div>
+                    <div class="brain-region">
+                        <h4>Amygdala</h4>
+                        <p>Hạnh nhân - Xử lý cảm xúc và phản ứng sợ hãi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('neurobiological-factors')">
+                <h3>🔬 Yếu tố thần kinh sinh học</h3>
+                <p>Nhấp để xem chi tiết...</p>
+                <div id="neurobiological-factors" class="expand-content">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 15px;">
+                        <div style="background: #e6f3ff; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #2b6cb0;">Chấn thương não</h4>
+                            <p>Khởi phát OCD có thể liên hệ với chấn thương não hoặc viêm não, gây ra "nghi ngờ" về những việc mình làm.</p>
+                        </div>
+                        <div style="background: #f0fff4; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #38a169;">Yếu tố di truyền</h4>
+                            <p>Nghiên cứu sinh đôi cho thấy có thành phần di truyền trong OCD, đặc biệt ở trẻ em.</p>
+                        </div>
+                        <div style="background: #fffaf0; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #d69e2e;">Neurotransmitter</h4>
+                            <p>Sự mất cân bằng trong hệ serotonin và các chất dẫn truyền thần kinh khác.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Điều Trị -->
+        <div id="treatment" class="content-section">
+            <h2 class="section-title">💊 ĐIỀU TRỊ</h2>
+            
+            <div class="treatment-info">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #4a5568;">Liệu pháp Tiếp xúc Tránh phản ứng (ERP)</h3>
+                
+                <div class="treatment-step">
+                    <h4>1. Đánh giá và Lập kế hoạch</h4>
+                    <p>• Đánh giá mức độ lo âu cho các tình huống khác nhau (thang đo 0-100)</p>
+                    <p>• Xác định các kích thích gây ám ảnh và hành vi cưỡng chế tương ứng</p>
+                    <p>• Lập thang bậc phơi nhiễm từ dễ đến khó</p>
+                </div>
+                
+                <div class="treatment-step">
+                    <h4>2. Tiếp xúc (Exposure)</h4>
+                    <p>• Tiếp xúc dần với các kích thích gây lo âu/ám ảnh</p>
+                    <p>• Bắt đầu từ mức độ thấp nhất trong thang bậc</p>
+                    <p>• Duy trì tiếp xúc cho đến khi lo âu giảm tự nhiên</p>
+                </div>
+                
+                <div class="treatment-step">
+                    <h4>3. Ngăn chặn phản ứng (Response Prevention)</h4>
+                    <p>• Ngăn chặn hoặc trì hoãn hành vi cưỡng chế</p>
+                    <p>• Không cho phép các hành vi tránh né hoặc nghi thức</p>
+                    <p>• Học cách chịu đựng lo âu mà không thực hiện cưỡng chế</p>
+                </div>
+                
+                <div class="treatment-step">
+                    <h4>4. Tái cấu trúc nhận thức</h4>
+                    <p>• Thách thức niềm tin về trách nhiệm phóng đại</p>
+                    <p>• Xử lý liên hợp suy nghĩ - hành động (TAF)</p>
+                    <p>• Tăng khả năng chấp nhận sự không chắc chắn</p>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('treatment-approaches')">
+                <h3>🛠️ Các phương pháp điều trị khác</h3>
+                <p>Nhấp để xem chi tiết...</p>
+                <div id="treatment-approaches" class="expand-content">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 15px;">
+                        <div style="background: #e6f3ff; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #2b6cb0;">Thuốc</h4>
+                            <p><strong>SSRI:</strong> Sertraline, Fluoxetine, Fluvoxamine</p>
+                            <p><strong>TCA:</strong> Clomipramine (khi SSRI không hiệu quả)</p>
+                            <p>Liều cao hơn và thời gian điều trị lâu hơn so với trầm cảm</p>
+                        </div>
+                        <div style="background: #f0fff4; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #38a169;">Kỹ thuật hành vi</h4>
+                            <p><strong>Giới hạn thời gian:</strong> Hạn chế thời gian kiểm tra, rửa tay</p>
+                            <p><strong>Xao nhãng:</strong> Bóp banh stress, nghe nhạc</p>
+                            <p><strong>Thay đổi thói quen:</strong> Huấn luyện thay đổi hành vi</p>
+                        </div>
+                        <div style="background: #fffaf0; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #d69e2e;">Hỗ trợ</h4>
+                            <p><strong>Mindfulness:</strong> Quan sát suy nghĩ mà không phán xét</p>
+                            <p><strong>Thư giãn:</strong> Giảm căng thẳng tổng thể</p>
+                            <p><strong>Hỗ trợ gia đình:</strong> Giáo dục và hướng dẫn thân nhân</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('erp-example')">
+                <h3>📝 Ví dụ ERP cho trường hợp sợ nhiễm trùng</h3>
+                <p>Nhấp để xem chi tiết...</p>
+                <div id="erp-example" class="expand-content">
+                    <div style="background: #f7fafc; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                        <h4 style="color: #4a5568; margin-bottom: 15px;">Thang bậc phơi nhiễm (từ thấp đến cao):</h4>
+                        <div style="display: grid; gap: 10px;">
+                            <div style="background: #c6f6d5; padding: 10px; border-radius: 8px; border-left: 4px solid #38a169;">
+                                <strong>Mức 1 (20-30 điểm):</strong> Chạm vào tay nắm cửa sạch với một ngón tay
+                            </div>
+                            <div style="background: #fef5e7; padding: 10px; border-radius: 8px; border-left: 4px solid #d69e2e;">
+                                <strong>Mức 5 (50-60 điểm):</strong> Chạm vào bề mặt công cộng mà không rửa tay
+                            </div>
+                            <div style="background: #fed7d7; padding: 10px; border-radius: 8px; border-left: 4px solid #e53e3e;">
+                                <strong>Mức 8 (80-90 điểm):</strong> Chạm vào thùng rác và tiếp tục hoạt động khác
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; color: #666;"><strong>Quy tắc:</strong> Ở mỗi mức, duy trì tiếp xúc ít nhất 60-90 phút hoặc cho đến khi lo âu giảm 50%. Không được rửa tay hoặc sử dụng gel rửa tay.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ca Bệnh -->
+        <div id="case-studies" class="content-section">
+            <h2 class="section-title">👥 CÁC CA BỆNH ĐIỂN HÌNH</h2>
+            
+            <div class="case-study">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #4a5568;">CA 2 - Nhiễm bẩn và rửa/tắm</h3>
+                
+                <div class="case-details">
+                    <h4>(1) Triệu chứng hiện tại</h4>
+                    <p>Q.A.N., nữ, 19 tuổi, sinh viên, than phiền "sợ bẩn và vi khuẩn" 6 tháng qua. Tắm rửa mỗi lần 60-90 phút, 3-4 lần/ngày; rửa tay >20 lần/ngày; tránh chạm bề mặt công cộng. Khi thấy hình ảnh máu/vết bẩn trên mạng, cảm thấy "nhiễm bẩn trong tâm trí", phải tắm gấp. Đi học muộn, da khô nứt nẻ.</p>
+                </div>
+                
+                <div class="case-details">
+                    <h4>(2) Tiền sử - bối cảnh</h4>
+                    <p>Tính cầu toàn từ trước. Khởi phát sau khi xem tin tức về dịch bệnh. Không sử dụng chất. Gia đình có tiền sử lo âu.</p>
+                </div>
+                
+                <div class="case-details">
+                    <h4>(3) Khám tâm thần</h4>
+                    <p>Ám ảnh về nhiễm trùng, "bẩn trong tâm trí"; cưỡng chế tắm/rửa quá mức. Lo âu cao khi không thực hiện ritual. Insight tốt: biết vô lý nhưng không cưỡng được. Suy giảm chức năng học tập và xã hội.</p>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #4a5568;">CA 3 - Đối xứng/sắp xếp - nghi thức đếm/cầu nguyện thầm</h3>
+                
+                <div class="case-details">
+                    <h4>(1) Triệu chứng hiện tại</h4>
+                    <p>T.M.A., nữ, 21 tuổi, sinh viên, than phiền "mọi thứ phải thẳng hàng, cân xứng". Khi vào phòng học, A. phải sắp xếp lại bàn ghế cho "cảm giác cân bằng"; nếu không, trong đầu xuất hiện ý nghĩ phạm thượng thoáng qua, khiến A. phải đếm thầm theo quy tắc 4–8–16 và cầu nguyện thầm đến khi "yên". Thời gian nghi thức ~90–120 phút/ngày, muộn giờ học, mệt mỏi.</p>
+                </div>
+                
+                <div class="case-details">
+                    <h4>(2) Khám tâm thần</h4>
+                    <p>Lo âu, bứt rứt; có ám ảnh về đối xứng/chính xác và ý nghĩ phạm thượng xâm nhập; cưỡng chế gồm sắp xếp, đếm, cầu nguyện thầm (hành vi tinh thần). Insight tốt: biết là vô lý nhưng khó cưỡng.</p>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #4a5568;">CA 4 - Rối loạn mặc cảm cơ thể (BDD)</h3>
+                
+                <div class="case-details">
+                    <h4>(1) Triệu chứng hiện tại</h4>
+                    <p>L.T.T., nam, 24 tuổi, nhân viên phòng gym, than phiền "cơ ngực và tay quá nhỏ, nhìn yếu đuối". 1 năm nay, T. soi gương nhiều lần/ngày, dùng app chụp góc "tăng cơ"; so sánh cơ thể với người khác; tập luyện quá mức; chế độ ăn kiêng nghiêm ngặt; cân nhắc dùng steroid. Tránh mặc áo phông sáng màu, hạn chế giao tiếp, từ chối hẹn hò vì "xấu hổ về thân hình".</p>
+                </div>
+                
+                <div class="case-details">
+                    <h4>(2) Khám tâm thần</h4>
+                    <p>Mặc cảm rõ về một "khuyết điểm" ngoại hình không đáng kể/không hiện hữu; hành vi soi gương/chải chuốt lặp lại, so sánh cơ thể, né tránh xã hội. Không ảo tưởng cơ thể.</p>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #4a5568;">CA 5 - Rối loạn tích trữ</h3>
+                
+                <div class="case-details">
+                    <h4>(1) Triệu chứng hiện tại</h4>
+                    <p>Đ.T.L., nữ, 58 tuổi, sống một mình, con trai đưa đến vì "nhà không thể bước vào". 5 năm gần đây, L. không thể vứt bỏ báo/tạp chí/quần áo cũ, túi nilon, hóa đơn; mua thêm kệ để chứa; lối đi bị che kín; bếp và phòng tắm bị chất đống. Khi con trai đề nghị dọn, bà hoảng sợ, đau khổ dữ dội và trì hoãn.</p>
+                </div>
+                
+                <div class="case-details">
+                    <h4>(2) Khám tâm thần</h4>
+                    <p>Tỉnh, định hướng tốt. Không ám ảnh xâm nhập về bẩn/hại. Khó vứt bỏ đồ vật do "sợ cần đến", "bỏ thì tiếc", gắn bó quá mức; tích trữ dẫn đến suy giảm chức năng (vệ sinh, an toàn, xung đột xã hội).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz -->
+        <div id="quiz" class="content-section">
+            <h2 class="section-title">🎯 KIỂM TRA KIẾN THỨC</h2>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <h4>1. Theo DSM-5, chẩn đoán Rối loạn Ám ảnh Cưỡng chế yêu cầu các triệu chứng phải:</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">A. Xuất hiện ít nhất 3 lần/tuần</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, true)">B. Chiếm 1 giờ/ngày hoặc gây suy giảm chức năng đáng kể</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">C. Kéo dài ít nhất 6 tháng</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">D. Không đáp ứng với thuốc</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>2. Mối quan hệ điển hình giữa ám ảnh và cưỡng chế trong OCD:</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">A. Không liên quan gì nhau</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, true)">B. Cưỡng chế được thực hiện để giảm lo âu từ ám ảnh</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">C. Ám ảnh xuất hiện sau cưỡng chế</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">D. Chỉ có một trong hai</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>3. Liệu pháp ERP (Exposure and Response Prevention) trong OCD bao gồm:</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">A. Chỉ dùng thuốc</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, true)">B. Tiếp xúc dần với kích thích gây sợ + ngăn chặn hành vi cưỡng chế</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">C. Chỉ tư vấn tâm lý</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">D. Chỉ thôi miên</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>4. Trong phổ OCD và các rối loạn liên quan, có bao nhiêu rối loạn chính được phân loại?</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">A. 7 rối loạn</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">B. 8 rối loạn</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, true)">C. 9 rối loạn</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">D. 10 rối loạn</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>5. Đặc điểm cốt lõi của rối loạn tích trữ:</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(this, true)">A. Khó vứt bỏ đồ đạc (không có ám ảnh), kèm tích tụ gây suy giảm chức năng</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">B. Sợ vi khuẩn nên tránh chạm</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">C. Soi gương nhiều</div>
+                        <div class="quiz-option" onclick="selectAnswer(this, false)">D. Nhổ tóc</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="resetQuiz()">Làm lại bài kiểm tra</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all nav buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function toggleExpand(elementId) {
+            const element = document.getElementById(elementId);
+            element.classList.toggle('show');
+        }
+
+        function showDisorderDetail(disorderType) {
+            const detailsContainer = document.getElementById('disorder-details');
+            let content = '';
+
+            switch(disorderType) {
+                case 'ocd':
+                    content = `
+                        <div class="diagnostic-criteria">
+                            <h3>Rối loạn Ám ảnh Cưỡng chế (OCD)</h3>
+                            <div class="criteria-item">
+                                <h4>Đặc điểm chính:</h4>
+                                <p>• Có ám ảnh và/hoặc cưỡng chế gây suy giảm chức năng</p>
+                                <p>• 75% bệnh nhân có cả ám ảnh và cưỡng chế</p>
+                                <p>• Cưỡng chế được thực hiện để giảm lo âu từ ám ảnh</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>Các cặp ám ảnh-cưỡng chế thường gặp:</h4>
+                                <p>• Sợ dơ bẩn → Rửa, lau chùi</p>
+                                <p>• Đối xứng/chính xác → Sắp xếp, đếm</p>
+                                <p>• Sợ gây hại → Kiểm tra, thú tội</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'bdd':
+                    content = `
+                        <div class="diagnostic-criteria">
+                            <h3>Rối loạn Mặc cảm Cơ thể (BDD)</h3>
+                            <div class="criteria-item">
+                                <h4>Đặc điểm chính:</h4>
+                                <p>• Ám ảnh về khuyết điểm ngoại hình (không đáng kể hoặc không có)</p>
+                                <p>• Hành vi lặp lại: soi gương, chải chuốt, so sánh</p>
+                                <p>• Có thể có biến thể mặc cảm cơ bắp ở nam giới</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>Hành vi thường gặp:</h4>
+                                <p>• Soi gương quá mức hoặc tránh gương</p>
+                                <p>• Chải chuốt, trang điểm kéo dài</p>
+                                <p>• So sánh ngoại hình với người khác</p>
+                                <p>• Tránh các hoạt động xã hội</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'hoarding':
+                    content = `
+                        <div class="diagnostic-criteria">
+                            <h3>Rối loạn Tích trữ</h3>
+                            <div class="criteria-item">
+                                <h4>Đặc điểm chính:</h4>
+                                <p>• Khó khăn vứt bỏ đồ đạc không cần thiết</p>
+                                <p>• Không có ám ảnh điển hình</p>
+                                <p>• Tập trung vào việc thu thập và sở hữu</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>Vật phẩm thường tích trữ:</h4>
+                                <p>• Báo, tạp chí, sách</p>
+                                <p>• Quần áo, túi xách</p>
+                                <p>• Thư từ, giấy tờ</p>
+                                <p>• Đồ vật "có thể cần đến"</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>Hệ lụy:</h4>
+                                <p>• Nguy cơ hỏa hoạn, té ngã</p>
+                                <p>• Vệ sinh kém</p>
+                                <p>• Xung đột gia đình và hàng xóm</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'trichotillomania':
+                    content = `
+                        <div class="diagnostic-criteria">
+                            <h3>Chứng Nhổ tóc (Trichotillomania)</h3>
+                            <div class="criteria-item">
+                                <h4>Đặc điểm chính:</h4>
+                                <p>• Nhổ tóc lặp đi lặp lại</p>
+                                <p>• Gây ra sự mỏng tóc hoặc rụng tóc</p>
+                                <p>• Không có ám ảnh điển hình</p>
+                                <p>• Hành vi cưỡng chế nhổ tóc</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>Vị trí thường nhổ:</h4>
+                                <p>• Tóc trên đầu (phổ biến nhất)</p>
+                                <p>• Lông mày, lông mi</p>
+                                <p>• Lông cơ thể khác</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'excoriation':
+                    content = `
+                        <div class="diagnostic-criteria">
+                            <h3>Chứng Bóc da (Excoriation)</h3>
+                            <div class="criteria-item">
+                                <h4>Đặc điểm chính:</h4>
+                                <p>• Bóc da lặp đi lặp lại</p>
+                                <p>• Gây tổn thương da</p>
+                                <p>• Hành vi cưỡng chế không có ám ảnh</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>Các hành vi phổ biến:</h4>
+                                <p>• Cắt, rạch, đốt</p>
+                                <p>• Cào, cấu</p>
+                                <p>• Tự đánh, tự cắn</p>
+                                <p>• Có ý tự gây tổn thương mô để gây tôn thương</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                default:
+                    content = `
+                        <div class="diagnostic-criteria">
+                            <h3>Các rối loạn OCD khác</h3>
+                            <div class="criteria-item">
+                                <h4>6. Do sử dụng chất/thuốc:</h4>
+                                <p>Triệu chứng OCD do tác dụng phụ của thuốc hoặc chất gây nghiện</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>7. Do tình trạng y khoa khác:</h4>
+                                <p>Triệu chứng OCD là hậu quả trực tiếp của bệnh lý khác</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>8. Biệt định khác:</h4>
+                                <p>Có triệu chứng OCD nhưng không đáp ứng đầy đủ tiêu chuẩn</p>
+                            </div>
+                            <div class="criteria-item">
+                                <h4>9. Không biệt định:</h4>
+                                <p>Triệu chứng OCD không rõ nguyên nhân cụ thể</p>
+                            </div>
+                        </div>
+                    `;
+            }
+            
+            detailsContainer.innerHTML = content;
+        }
+
+        function selectAnswer(option, isCorrect) {
+            // Remove previous selections in this question
+            const options = option.parentNode.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+
+            // Add appropriate class
+            if (isCorrect) {
+                option.classList.add('correct');
+            } else {
+                option.classList.add('incorrect');
+                // Show correct answer
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        function resetQuiz() {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Website học OCD và các rối loạn liên quan đã tải xong!');
+        });
+    </script>
+</body>
+</html>

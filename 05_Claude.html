@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Các Rối Loạn Lo Âu - Học tập tương tác</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
+
+    <div id="app-container">
+        <div class="bg-white shadow-lg border-b-4 border-indigo-500">
+            <div class="max-w-6xl mx-auto px-6 py-6">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">
+                    Các Rối Loạn Lo Âu
+                </h1>
+                <p class="text-lg text-gray-600">
+                    Website học tập tương tác - Tài liệu từ Đặng Khánh An, M.A
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 py-8">
+            <div class="bg-white rounded-xl shadow-lg mb-8 overflow-hidden">
+                <nav class="flex" id="navigation-tabs">
+                    <button data-section="overview" class="nav-button flex-1 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-3 sm:px-6 py-4 text-xs sm:text-sm font-medium transition-all duration-200 border-b-4 bg-indigo-50 text-indigo-700 border-indigo-500 shadow-inner border-r border-gray-200">
+                        <i data-lucide="book-open" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        <span class="text-center leading-tight">Tổng quan</span>
+                    </button>
+                    <button data-section="disorders" class="nav-button flex-1 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-3 sm:px-6 py-4 text-xs sm:text-sm font-medium transition-all duration-200 border-b-4 text-gray-600 hover:bg-gray-50 border-transparent hover:text-gray-900 hover:border-gray-200 border-r border-gray-200">
+                        <i data-lucide="brain" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        <span class="text-center leading-tight">Các rối loạn</span>
+                    </button>
+                    <button data-section="symptoms" class="nav-button flex-1 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-3 sm:px-6 py-4 text-xs sm:text-sm font-medium transition-all duration-200 border-b-4 text-gray-600 hover:bg-gray-50 border-transparent hover:text-gray-900 hover:border-gray-200 border-r border-gray-200">
+                        <i data-lucide="heart" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        <span class="text-center leading-tight">Triệu chứng</span>
+                    </button>
+                    <button data-section="treatment" class="nav-button flex-1 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-3 sm:px-6 py-4 text-xs sm:text-sm font-medium transition-all duration-200 border-b-4 text-gray-600 hover:bg-gray-50 border-transparent hover:text-gray-900 hover:border-gray-200 border-r border-gray-200">
+                        <i data-lucide="users" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        <span class="text-center leading-tight">Điều trị</span>
+                    </button>
+                    <button data-section="quiz" class="nav-button flex-1 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-3 sm:px-6 py-4 text-xs sm:text-sm font-medium transition-all duration-200 border-b-4 text-gray-600 hover:bg-gray-50 border-transparent hover:text-gray-900 hover:border-gray-200">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        <span class="text-center leading-tight">Kiểm tra</span>
+                    </button>
+                </nav>
+            </div>
+
+            <main id="main-content">
+                <section id="section-overview" class="content-section">
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6">Tổng quan về Rối loạn Lo âu</h2>
+                            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                                <div class="bg-indigo-50 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-indigo-800 mb-3">Định nghĩa</h3>
+                                    <p class="text-gray-700">
+                                        Rối loạn lo âu là nhóm các tình trạng tâm thần được đặc trưng bởi sự lo lắng, sợ hãi và các triệu chứng thể chất liên quan, gây ảnh hưởng đáng kể đến chức năng sinh hoạt.
+                                    </p>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-green-800 mb-3">Tầm quan trọng</h3>
+                                    <p class="text-gray-700">
+                                        Là nhóm rối loạn tâm thần phổ biến nhất, ảnh hưởng đến hàng triệu người và có thể điều trị hiệu quả khi được chẩn đoán và can thiệp kịp thời.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="bg-yellow-50 rounded-lg p-6">
+                                <h3 class="text-xl font-semibold text-yellow-800 mb-4">Danh sách các Rối loạn Lo âu</h3>
+                                <div id="overview-disorder-list" class="grid md:grid-cols-2 gap-3">
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-disorders" class="content-section hidden">
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6">Chi tiết các Rối loạn Lo âu</h2>
+                            <div id="disorders-accordion-container" class="space-y-4">
+                                </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-symptoms" class="content-section hidden">
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6">Mức độ Nghiêm trọng Lo âu</h2>
+                            <div class="bg-gradient-to-r from-green-100 via-yellow-100 to-red-100 rounded-lg p-6 mb-8">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Thang đo Nghiêm trọng</h3>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-center">
+                                        <div class="text-sm font-medium text-green-700">Ít nghiêm trọng</div>
+                                        <div class="mt-2 text-xs text-green-600">
+                                            • Rối loạn hoang tưởng<br/>
+                                            • Rối loạn LT ngắn<br/>
+                                            • Rối loạn đang phân liệt
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-sm font-medium text-orange-700">Nghiêm trọng hơn</div>
+                                        <div class="mt-2 text-xs text-orange-600">
+                                            • Tâm thần phân liệt<br/>
+                                            • Rối loạn cảm xúc phân liệt
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="bg-red-50 rounded-lg p-6">
+                                    <h3 class="text-lg font-semibold text-red-800 mb-3">Triệu chứng Thể chất</h3>
+                                    <ul class="text-sm text-red-700 space-y-1">
+                                        <li>• Tim đập nhanh</li>
+                                        <li>• Khó thở</li>
+                                        <li>• Vã mồ hôi</li>
+                                        <li>• Run tay</li>
+                                        <li>• Đau đầu</li>
+                                        <li>• Buồn nôn</li>
+                                        <li>• Chóng mặt</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-6">
+                                    <h3 class="text-lg font-semibold text-blue-800 mb-3">Triệu chứng Cảm xúc</h3>
+                                    <ul class="text-sm text-blue-700 space-y-1">
+                                        <li>• Sợ hãi</li>
+                                        <li>• Lo lắng</li>
+                                        <li>• Bứt rứt</li>
+                                        <li>• Cáu gắt</li>
+                                        <li>• Căng thẳng</li>
+                                        <li>• Hoảng sợ</li>
+                                        <li>• Bất an</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-6">
+                                    <h3 class="text-lg font-semibold text-green-800 mb-3">Triệu chứng Hành vi</h3>
+                                    <ul class="text-sm text-green-700 space-y-1">
+                                        <li>• Né tránh</li>
+                                        <li>• Nhịp chân</li>
+                                        <li>• Cắn móng</li>
+                                        <li>• Kiểm soát quá mức</li>
+                                        <li>• Cần sự đảm bảo</li>
+                                        <li>• Hành vi an toàn</li>
+                                        <li>• Rút lui xã hội</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-8 bg-yellow-50 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-yellow-800 mb-3">Liệu pháp Tiếp xúc - Phản ứng</h3>
+                                <p class="text-sm text-yellow-700 mb-4">
+                                    Biểu đồ cho thấy hiệu quả của liệu pháp tiếp xúc trong điều trị lo âu. Mức độ lo âu giảm dần theo thời gian khi được phơi nhiễm có kiểm soát.
+                                </p>
+                                <div class="text-center text-gray-600 text-sm italic">
+                                    Thời gian điều trị: 0-50 phút | Mức độ lo âu giảm từ 90% xuống 10-20%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-treatment" class="content-section hidden">
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6">Phương pháp Điều trị</h2>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div class="bg-blue-50 rounded-lg p-6">
+                                        <h3 class="text-xl font-semibold text-blue-800 mb-4">Liệu pháp Nhận thức - Hành vi (CBT)</h3>
+                                        <div class="space-y-3 text-sm text-blue-700">
+                                            <div>
+                                                <strong>Thành phần chính:</strong>
+                                                <ul class="list-disc list-inside ml-4 mt-1">
+                                                    <li>Giáo dục về mô hình rối loạn</li>
+                                                    <li>Tái cấu trúc nhận thức</li>
+                                                    <li>Liệu pháp phơi nhiễm</li>
+                                                    <li>Loại bỏ hành vi an toàn</li>
+                                                    <li>Kỹ thuật thở và thư giãn</li>
+                                                </ul>
+                                            </div>
+                                            <div><strong>Hiệu quả:</strong> 60% bệnh nhân duy trì cải thiện sau 1 năm</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-green-50 rounded-lg p-6">
+                                        <h3 class="text-xl font-semibold text-green-800 mb-4">Liệu pháp Phơi nhiễm</h3>
+                                        <div class="space-y-3 text-sm text-green-700">
+                                            <div>
+                                                <strong>Nguyên tắc:</strong>
+                                                <ul class="list-disc list-inside ml-4 mt-1">
+                                                    <li>Tiếp xúc dần dần có kiểm soát</li>
+                                                    <li>Xây dựng thang bậc phơi nhiễm (SUDs)</li>
+                                                    <li>Phơi nhiễm nội cảm và ngoại cảnh</li>
+                                                    <li>Ngăn chặn hành vi né tránh</li>
+                                                </ul>
+                                            </div>
+                                            <div><strong>Mục tiêu:</strong> Giảm độ nhạy cảm và tăng khả năng đối phó</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-purple-50 rounded-lg p-6">
+                                        <h3 class="text-xl font-semibold text-purple-800 mb-4">Điều trị Thuốc</h3>
+                                        <div class="space-y-3 text-sm text-purple-700">
+                                            <div>
+                                                <strong>First-line cho GAD:</strong>
+                                                <ul class="list-disc list-inside ml-4 mt-1">
+                                                    <li>SSRI/SNRI</li>
+                                                    <li>Tác dụng bền vững</li>
+                                                    <li>Ít tác dụng phụ</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <strong>Benzodiazepine:</strong>
+                                                <ul class="list-disc list-inside ml-4 mt-1">
+                                                    <li>Chỉ dùng ngắn hạn</li>
+                                                    <li>Nguy cơ lệ thuộc</li>
+                                                    <li>Hỗ trợ trong giai đoạn đầu</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-orange-50 rounded-lg p-6">
+                                        <h3 class="text-xl font-semibold text-orange-800 mb-4">Phương pháp Khác</h3>
+                                        <div class="space-y-3 text-sm text-orange-700">
+                                            <div>
+                                                <strong>Liệu pháp Phân tâm:</strong>
+                                                <ul class="list-disc list-inside ml-4 mt-1">
+                                                    <li>Ý thức hóa xung đột vô thức</li>
+                                                    <li>Làm việc với chuyển di</li>
+                                                    <li>Phù hợp với một số trường hợp</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <strong>Kỹ thuật hỗ trợ:</strong>
+                                                <ul class="list-disc list-inside ml-4 mt-1">
+                                                    <li>Mindfulness</li>
+                                                    <li>Yoga và thiền</li>
+                                                    <li>Tập thể dục thường xuyên</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-8 bg-gray-50 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Mô hình Điều trị Giai đoạn</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-semibold">1</div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Giai đoạn 1: Giáo dục</h4>
+                                            <p class="text-sm text-gray-600">Giáo dục mô hình nhận thức về rối loạn lo âu</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-semibold">2</div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Giai đoạn 2A: Thư giãn</h4>
+                                            <p class="text-sm text-gray-600">Các kỹ thuật thư giãn để giảm kích thích căng thẳng</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-semibold">2B</div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Giai đoạn 2B: Nhận thức</h4>
+                                            <p class="text-sm text-gray-600">Thay đổi nhận thức về cơn hoảng loạn/lo âu</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-semibold">2C</div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Giai đoạn 2C: Hành vi</h4>
+                                            <p class="text-sm text-gray-600">Các kỹ thuật hành vi để kiểm soát triệu chứng</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-quiz" class="content-section hidden">
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6">Kiểm tra Kiến thức</h2>
+                            
+                            <div id="quiz-start-container">
+                                <div class="text-center space-y-4">
+                                    <div class="bg-indigo-50 rounded-lg p-8">
+                                        <i data-lucide="alert-triangle" class="w-16 h-16 text-indigo-600 mx-auto mb-4"></i>
+                                        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Sẵn sàng kiểm tra?</h3>
+                                        <p class="text-indigo-600 mb-6" id="quiz-intro-text"></p>
+                                        <button id="start-quiz-btn" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">
+                                            Bắt đầu kiểm tra
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="quiz-questions-container" class="hidden">
+                                <div class="text-center mt-6">
+                                    <button id="submit-quiz-btn" disabled class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                                        Nộp bài
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="quiz-results-container" class="hidden">
+                                </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA ---
+            const anxietyDisorders = [
+                { id: 'separation', name: 'Rối loạn lo âu chia ly', english: 'Separation Anxiety Disorder', description: 'Nỗi sợ quá mức khi xa cách những người thân yêu hoặc nơi quen thuộc.', symptoms: ['Sợ hãi khi phải xa người thân', 'Từ chối đi học hoặc ra khỏi nhà', 'Ác mông về việc chia ly', 'Đau đầu, đau bụng khi phải chia ly'], prevalence: 'Phổ biến ở trẻ em, có thể tiếp tục đến tuổi trưởng thành' },
+                { id: 'selective_mutism', name: 'Câm có chọn lọc', english: 'Selective Mutism', description: 'Niềm cứng không nói trong các tình huống xã hội cụ thể mặc dù có thể nói bình thường ở những nơi khác.', symptoms: ['Không nói trong trường học', 'Nói bình thường ở nhà', 'Lo âu xã hội cao', 'Cứng đờ trong các tình huống mới'], prevalence: 'Hiếm gặp, thường bắt đầu trong thời thơ ấu' },
+                { id: 'specific_phobia', name: 'Ám sợ đặc hiệu', english: 'Specific Phobia', description: 'Nỗi sợ hãi không hợp lý đối với một đối tượng hoặc tình huống cụ thể.', symptoms: ['Sợ hãi cực độ đối với đối tượng cụ thể', 'Né tránh hoàn toàn', 'Phản ứng hoảng loạn khi tiếp xúc', 'Nhận biết sự sợ hãi là không hợp lý'], criteria: ['A. Nỗi sợ hãi rõ rệt về đối tượng/tình huống cụ thể', 'B. Luôn gây ra sợ hãi tức thì', 'C. Chủ động né tránh hoặc chịu đựng với sự sợ hãi dữ dội', 'D. Sợ hãi không tương xứng với mối nguy hiểm thực tế', 'E. Kéo dài từ 6 tháng trở lên', 'F. Gây đau khổ hoặc suy giảm chức năng đáng kể', 'G. Không được giải thích tốt hơn bởi rối loạn khác'], prevalence: 'Nữ giới cao hơn nam giới (tỷ lệ 2:1)' },
+                { id: 'social_anxiety', name: 'Rối loạn lo âu xã hội', english: 'Social Anxiety Disorder', description: 'Sợ hãi bị đánh giá tiêu cực trong các tình huống xã hội hoặc khi biểu diễn.', symptoms: ['Mặt đỏ, tay run khi nói trước đám đông', 'Sợ bị đánh giá là ngu ngốc', 'Né tránh các tình huống xã hội', 'Tim đập nhanh, khó thở'], mechanism: 'Tập trung vào bản thân (self-focused attention) và hành vi an toàn duy trì rối loạn', treatment: 'CBT với phơi nhiễm theo bậc thang + tái cấu trúc nhận thức', prevalence: 'Khởi phát tuổi thiếu niên/đầu trưởng thành' },
+                { id: 'panic_disorder', name: 'Rối loạn hoảng loạn', english: 'Panic Disorder', description: 'Những cơn hoảng loạn lặp đi lặp lại một cách bất ngờ với lo lắng dai dẳng về cơn tái phát.', symptoms: ['1. Hồi hộp, đánh trống ngực hoặc tăng nhịp tim', '2. Vã mồ hôi', '3. Run hay co thắt cơ bắp', '4. Cảm giác "hụt hơi" hoặc khó thở', '5. Cảm giác nghẹt thở', '6. Đau hoặc khó chịu ở ngực', '7. Buồn nôn hoặc khó chịu ở bụng', '8. Chóng mặt, xây xẩm, run rẩy', '9. Cảm giác ớn lạnh hoặc nóng ran', '10. Loạn cảm (tê bì hoặc kim châm)', '11. Tri giác sai thực tại', '12. Sợ mất kiểm soát hoặc trở nên điên loạn', '13. Sợ chết'], criteria: ['A. Cơn hoảng loạn bất ngờ với ≥4/13 triệu chứng', 'B. Lo lắng dai dẳng hoặc thay đổi hành vi ≥1 tháng', 'C. Không do tác động của chất hoặc bệnh lý y khoa', 'D. Không được giải thích tốt hơn bởi rối loạn khác'], mechanism: 'Diễn giải thảm họa các cảm giác cơ thể → vòng xoắn tăng kích thích', treatment: 'CBT: Giáo dục mô hình + phơi nhiễm + tái cấu trúc nhận thức + loại bỏ hành vi an toàn' },
+                { id: 'agoraphobia', name: 'Ám sợ khoảng không', english: 'Agoraphobia', description: 'Sợ hãi các bối cảnh nơi khó thoát ra hoặc khó có được sự trợ giúp.', symptoms: ['Tránh phương tiện công cộng', 'Sợ ở một mình ngoài nhà', 'Cần người đi kèm', 'Sợ không gian rộng hoặc kín'], prevalence: 'Có thể xuất hiện độc lập, không nhất thiết kèm rối loạn hoảng loạn' },
+                { id: 'gad', name: 'Rối loạn lo âu lan tỏa', english: 'Generalized Anxiety Disorder', description: 'Lo lắng quá mức và khó kiểm soát về nhiều sự kiện hoặc hoạt động khác nhau.', symptoms: { physical: ['Đau đầu, choáng váng, đau mỏi vai gáy', 'Mắt mở to, chớp mắt thường xuyên', 'Tăng nhạy với âm thanh, dễ giật mình', 'Khó thở, khó nuốt, nghẹn', 'Hồi hộp, tim đập nhanh, tăng huyết áp', 'Đầy hơi, ợ chua, trào ngược, khó tiêu', 'Tiểu không tự chủ, tiểu mót', 'Bủn rủn, yếu, mỏi, lạnh, tê bì', 'Mồ hôi lạnh, mệt mỏi'], emotional: ['Không yên, bứt rứt, cáu gắt', 'Sợ hãi rõ ràng/lo lắng mơ hồ'], cognitive: ['Nghĩ về các mối đe dọa', 'Nghĩ về hậu quả tiêu cực', 'Siêu-lo lắng (worry about worry)'], behavioral: ['Nhịp chân, xoắn vặn tay, cắn móng', 'Né tránh các mối đe dọa'] }, criteria: ['D. Ảnh hưởng đáng kể đến chức năng xã hội/nghề nghiệp', 'E. Không do tác dụng của chất hoặc bệnh lý khác', 'F. Không được giải thích tốt hơn bởi rối loạn khác'], prevalence: 'Nữ cao hơn nam 1.5-2.5 lần, bắt đầu độ tuổi 20s, diễn tiến mạn tính', prognosis: '35-50% vẫn còn triệu chứng đáng kể sau nhiều năm' }
+            ];
+
+            const quizQuestions = [
+                { question: 'Đặc trưng trung tâm của lo âu xã hội là gì?', options: ['A. Sợ bị đánh giá tiêu cực trong tình huống xã hội/biểu hiện', 'B. Sợ không gian kín', 'C. Sợ máu', 'D. Sợ bệnh'], correct: 0 },
+                { question: 'Một cơn hoảng loạn cần có bao nhiều triệu chứng?', options: ['A. Ít nhất 2/13 triệu chứng', 'B. Ít nhất 4/13 triệu chứng', 'C. Tất cả 13 triệu chứng', 'D. Ít nhất 8/13 triệu chứng'], correct: 1 },
+                { question: 'Ám sợ đặc hiệu cần kéo dài bao lâu để chẩn đoán?', options: ['A. Ít nhất 1 tháng', 'B. Ít nhất 3 tháng', 'C. Ít nhất 6 tháng', 'D. Ít nhất 1 năm'], correct: 2 },
+                { question: 'Cơ chế duy trì lo âu xã hội thường gặp là?', options: ['A. Tập trung vào bản thân và hành vi an toàn/né tránh', 'B. Hoang tưởng', 'C. Cưỡng bức', 'D. Quên'], correct: 0 },
+                { question: 'Tỷ lệ giới tính trong rối loạn lo âu lan tỏa?', options: ['A. Nam cao hơn nữ', 'B. Nữ cao hơn nam 1.5-2.5 lần', 'C. Nam và nữ bằng nhau', 'D. Chỉ gặp ở nữ'], correct: 1 }
+            ];
+
+            let selectedAnswers = {};
+            
+            // --- DOM Elements ---
+            const navButtons = document.querySelectorAll('.nav-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            const overviewDisorderList = document.getElementById('overview-disorder-list');
+            const disordersAccordionContainer = document.getElementById('disorders-accordion-container');
+            const quizStartContainer = document.getElementById('quiz-start-container');
+            const quizQuestionsContainer = document.getElementById('quiz-questions-container');
+            const quizResultsContainer = document.getElementById('quiz-results-container');
+            const startQuizBtn = document.getElementById('start-quiz-btn');
+            const quizIntroText = document.getElementById('quiz-intro-text');
+            
+            // --- RENDER FUNCTIONS ---
+            const renderOverviewList = () => {
+                overviewDisorderList.innerHTML = anxietyDisorders.map((disorder, index) => `
+                    <div class="flex items-center gap-3 p-3 bg-white rounded-lg">
+                        <span class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center text-sm font-semibold">${index + 1}</span>
+                        <div>
+                            <div class="font-medium text-gray-800">${disorder.name}</div>
+                            <div class="text-sm text-gray-600">${disorder.english}</div>
+                        </div>
+                    </div>
+                `).join('');
+            };
+
+            const renderDisordersAccordion = () => {
+                disordersAccordionContainer.innerHTML = anxietyDisorders.map(disorder => {
+                    const renderSymptoms = () => {
+                        if (!disorder.symptoms) return '';
+                        let symptomsHtml = '<h4 class="font-semibold text-gray-800 mb-2">Triệu chứng:</h4>';
+                        if (Array.isArray(disorder.symptoms)) {
+                            symptomsHtml += `<ul class="list-disc list-inside text-sm text-gray-600 ml-4">${disorder.symptoms.map(s => `<li>${s}</li>`).join('')}</ul>`;
+                        } else {
+                            symptomsHtml += `<div class="space-y-3">
+                                ${disorder.symptoms.physical ? `<div><h5 class="font-medium text-gray-700">Triệu chứng thể chất:</h5><ul class="list-disc list-inside text-sm text-gray-600 ml-4">${disorder.symptoms.physical.map(s => `<li>${s}</li>`).join('')}</ul></div>` : ''}
+                                ${disorder.symptoms.emotional ? `<div><h5 class="font-medium text-gray-700">Triệu chứng cảm xúc:</h5><ul class="list-disc list-inside text-sm text-gray-600 ml-4">${disorder.symptoms.emotional.map(s => `<li>${s}</li>`).join('')}</ul></div>` : ''}
+                                ${disorder.symptoms.cognitive ? `<div><h5 class="font-medium text-gray-700">Triệu chứng nhận thức:</h5><ul class="list-disc list-inside text-sm text-gray-600 ml-4">${disorder.symptoms.cognitive.map(s => `<li>${s}</li>`).join('')}</ul></div>` : ''}
+                            </div>`;
+                        }
+                        return `<div>${symptomsHtml}</div>`;
+                    };
+
+                    return `
+                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                            <button class="accordion-toggle w-full flex items-center justify-between p-6 bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <div class="text-left">
+                                    <h3 class="text-xl font-semibold text-gray-800">${disorder.name}</h3>
+                                    <p class="text-sm text-gray-600 mt-1">${disorder.english}</p>
+                                </div>
+                                <span>
+                                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-600 icon-right"></i>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-600 icon-down hidden"></i>
+                                </span>
+                            </button>
+                            <div class="accordion-content hidden p-6 bg-white space-y-4">
+                                <p class="text-gray-700">${disorder.description}</p>
+                                ${renderSymptoms()}
+                                ${disorder.criteria ? `<div><h4 class="font-semibold text-gray-800 mb-2">Tiêu chí chẩn đoán:</h4><ul class="list-disc list-inside text-sm text-gray-600 ml-4">${disorder.criteria.map(c => `<li>${c}</li>`).join('')}</ul></div>` : ''}
+                                ${disorder.mechanism ? `<div class="bg-blue-50 rounded-lg p-4"><h4 class="font-semibold text-blue-800 mb-2">Cơ chế:</h4><p class="text-sm text-blue-700">${disorder.mechanism}</p></div>` : ''}
+                                ${disorder.treatment ? `<div class="bg-green-50 rounded-lg p-4"><h4 class="font-semibold text-green-800 mb-2">Điều trị:</h4><p class="text-sm text-green-700">${disorder.treatment}</p></div>` : ''}
+                                ${disorder.prevalence ? `<div class="bg-orange-50 rounded-lg p-4"><h4 class="font-semibold text-orange-800 mb-2">Dịch tễ học:</h4><p class="text-sm text-orange-700">${disorder.prevalence}</p></div>` : ''}
+                                ${disorder.prognosis ? `<div class="bg-purple-50 rounded-lg p-4"><h4 class="font-semibold text-purple-800 mb-2">Tiên lượng:</h4><p class="text-sm text-purple-700">${disorder.prognosis}</p></div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                addAccordionListeners();
+                lucide.createIcons(); // Re-render icons after adding them to the DOM
+            };
+            
+            const renderQuiz = () => {
+                quizQuestionsContainer.innerHTML = `
+                    <div class="space-y-6">
+                        ${quizQuestions.map((q, qIndex) => `
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Câu ${qIndex + 1}: ${q.question}</h3>
+                                <div class="space-y-3">
+                                    ${q.options.map((opt, oIndex) => `
+                                        <label class="flex items-center gap-3 cursor-pointer">
+                                            <input type="radio" name="question-${qIndex}" value="${oIndex}" class="quiz-option w-4 h-4 text-indigo-600">
+                                            <span class="text-gray-700">${opt}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="text-center mt-6">
+                        <button id="submit-quiz-btn" disabled class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                            Nộp bài
+                        </button>
+                    </div>
+                `;
+                addQuizListeners();
+            };
+
+            const renderQuizResults = (score) => {
+                const scorePercent = (score / quizQuestions.length) * 100;
+                let feedbackClass, feedbackIcon, feedbackTitle, feedbackText;
+
+                if (scorePercent >= 80) {
+                    feedbackClass = { bg: 'bg-green-50', text: 'text-green-700', title: 'text-green-800' };
+                    feedbackIcon = `<i data-lucide="check-circle" class="w-16 h-16 text-green-600 mx-auto mb-4"></i>`;
+                    feedbackTitle = `Kết quả: ${scorePercent.toFixed(0)}%`;
+                    feedbackText = 'Xuất sắc! Bạn đã nắm vững kiến thức.';
+                } else if (scorePercent >= 60) {
+                    feedbackClass = { bg: 'bg-yellow-50', text: 'text-yellow-700', title: 'text-yellow-800' };
+                    feedbackIcon = `<i data-lucide="alert-triangle" class="w-16 h-16 text-yellow-600 mx-auto mb-4"></i>`;
+                    feedbackTitle = `Kết quả: ${scorePercent.toFixed(0)}%`;
+                    feedbackText = 'Khá tốt! Bạn cần ôn lại một số kiến thức.';
+                } else {
+                    feedbackClass = { bg: 'bg-red-50', text: 'text-red-700', title: 'text-red-800' };
+                    feedbackIcon = `<i data-lucide="x-circle" class="w-16 h-16 text-red-600 mx-auto mb-4"></i>`;
+                    feedbackTitle = `Kết quả: ${scorePercent.toFixed(0)}%`;
+                    feedbackText = 'Bạn cần học lại tài liệu để hiểu rõ hơn.';
+                }
+
+                quizResultsContainer.innerHTML = `
+                    <div class="text-center space-y-6">
+                        <div class="rounded-lg p-8 ${feedbackClass.bg}">
+                            ${feedbackIcon}
+                            <h3 class="text-2xl font-bold mb-2 ${feedbackClass.title}">${feedbackTitle}</h3>
+                            <p class="${feedbackClass.text}">${feedbackText}</p>
+                        </div>
+                        <div class="space-y-4">
+                            ${quizQuestions.map((q, qIndex) => `
+                                <div class="bg-gray-50 rounded-lg p-4 text-left">
+                                    <h4 class="font-medium text-gray-800 mb-2">Câu ${qIndex + 1}: ${q.question}</h4>
+                                    <div class="space-y-1 text-sm">
+                                        <div class="flex items-center gap-2 ${selectedAnswers[qIndex] === q.correct ? 'text-green-700' : 'text-red-700'}">
+                                            ${selectedAnswers[qIndex] === q.correct ? '<i data-lucide="check-circle" class="w-4 h-4"></i>' : '<i data-lucide="x" class="w-4 h-4"></i>'}
+                                            <span>Bạn chọn: ${q.options[selectedAnswers[qIndex]]}</span>
+                                        </div>
+                                        ${selectedAnswers[qIndex] !== q.correct ? `
+                                            <div class="flex items-center gap-2 text-green-700">
+                                                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                                <span>Đáp án đúng: ${q.options[q.correct]}</span>
+                                            </div>` : ''
+                                        }
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="flex gap-4 justify-center">
+                            <button id="reset-quiz-btn" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">Làm lại</button>
+                            <button id="quiz-to-home-btn" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">Về trang chủ</button>
+                        </div>
+                    </div>
+                `;
+                lucide.createIcons();
+                document.getElementById('reset-quiz-btn').addEventListener('click', resetQuiz);
+                document.getElementById('quiz-to-home-btn').addEventListener('click', () => {
+                    resetQuiz();
+                    quizStartContainer.classList.remove('hidden');
+                    quizResultsContainer.classList.add('hidden');
+                });
+            };
+
+            // --- EVENT LISTENERS & LOGIC ---
+
+            // Navigation
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetSection = button.dataset.section;
+
+                    // Update button styles
+                    navButtons.forEach(btn => {
+                        btn.classList.remove('bg-indigo-50', 'text-indigo-700', 'border-indigo-500', 'shadow-inner');
+                        btn.classList.add('text-gray-600', 'hover:bg-gray-50', 'border-transparent', 'hover:text-gray-900', 'hover:border-gray-200');
+                    });
+                    button.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-500', 'shadow-inner');
+                    
+                    // Update content visibility
+                    contentSections.forEach(section => {
+                        if (section.id === `section-${targetSection}`) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Accordion
+            const addAccordionListeners = () => {
+                document.querySelectorAll('.accordion-toggle').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const content = button.nextElementSibling;
+                        const iconRight = button.querySelector('.icon-right');
+                        const iconDown = button.querySelector('.icon-down');
+                        
+                        content.classList.toggle('hidden');
+                        iconRight.classList.toggle('hidden');
+                        iconDown.classList.toggle('hidden');
+                    });
+                });
+            };
+            
+            // Quiz
+            const checkQuizCompletion = () => {
+                const submitBtn = document.getElementById('submit-quiz-btn');
+                if (submitBtn) {
+                     submitBtn.disabled = Object.keys(selectedAnswers).length < quizQuestions.length;
+                }
+            };
+
+            const addQuizListeners = () => {
+                document.querySelectorAll('.quiz-option').forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        const questionIndex = parseInt(e.target.name.split('-')[1]);
+                        const answerIndex = parseInt(e.target.value);
+                        selectedAnswers[questionIndex] = answerIndex;
+                        checkQuizCompletion();
+                    });
+                });
+
+                document.getElementById('submit-quiz-btn').addEventListener('click', () => {
+                    let score = 0;
+                    quizQuestions.forEach((q, index) => {
+                        if (selectedAnswers[index] === q.correct) {
+                            score++;
+                        }
+                    });
+                    quizQuestionsContainer.classList.add('hidden');
+                    quizResultsContainer.classList.remove('hidden');
+                    renderQuizResults(score);
+                });
+            };
+            
+            const resetQuiz = () => {
+                selectedAnswers = {};
+                quizResultsContainer.classList.add('hidden');
+                quizQuestionsContainer.classList.remove('hidden');
+                renderQuiz();
+            }
+
+            startQuizBtn.addEventListener('click', () => {
+                quizStartContainer.classList.add('hidden');
+                quizQuestionsContainer.classList.remove('hidden');
+                renderQuiz();
+            });
+
+            // --- INITIALIZATION ---
+            const init = () => {
+                renderOverviewList();
+                renderDisordersAccordion();
+                quizIntroText.textContent = `Bài kiểm tra gồm ${quizQuestions.length} câu hỏi về các rối loạn lo âu`;
+                lucide.createIcons();
+            };
+
+            init();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Tập Phổ Lưỡng Cực</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .spectrum-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 40px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 50px;
+            position: relative;
+        }
+        
+        .brain-icon {
+            width: 100px;
+            height: 100px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .spectrum-labels {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            top: -30px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .disorder-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .disorder-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .disorder-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .disorder-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .disorder-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .dsm-criteria {
+            background: #f8f9fa;
+            border: 3px solid #007bff;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .dsm-criteria h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        
+        .criteria-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .criteria-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .criteria-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .statistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .interactive-quiz {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .quiz-question {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-question.active {
+            display: block;
+        }
+        
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 15px;
+            background: white;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background: #fff3cd;
+            transform: translateX(5px);
+        }
+        
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .quiz-option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: #28a745;
+        }
+        
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+        
+        .treatment-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .treatment-card {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .treatment-card h4 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+        
+        .neurotransmitter-visual {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .neurotransmitter {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 10px;
+        }
+        
+        .case-study {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .case-study h4 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 80%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 PHỔ LƯỠNG CỰC</h1>
+            <p>Website Học Tập Tương Tác - Rối loạn Lưỡng cực</p>
+            <p><em>Tác giả: Đặng Khánh An - M.A</em></p>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('overview')">Tổng quan</button>
+            <button class="nav-btn" onclick="showSection('types')">Phân loại</button>
+            <button class="nav-btn" onclick="showSection('dsm')">Tiêu chuẩn DSM-5</button>
+            <button class="nav-btn" onclick="showSection('epidemiology')">Dịch tễ học</button>
+            <button class="nav-btn" onclick="showSection('causes')">Nguyên nhân</button>
+            <button class="nav-btn" onclick="showSection('prognosis')">Tiên lượng</button>
+            <button class="nav-btn" onclick="showSection('treatment')">Điều trị</button>
+            <button class="nav-btn" onclick="showSection('quiz')">Kiểm tra</button>
+        </div>
+        
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <h2>🌈 Sức Khỏe Tâm Thần Là Một Phổ Rộng</h2>
+            
+            <div class="spectrum-visual">
+                <div class="spectrum-labels">
+                    <span>Mắc bệnh tâm thần nặng</span>
+                    <span>🧠</span>
+                    <span>Không có bệnh tâm thần</span>
+                </div>
+                <div class="brain-icon">🧠</div>
+            </div>
+            
+            <h3>💭 Sợ và Lo</h3>
+            <p><strong>Sợ có trước</strong>, khi tổ tiên chúng ta phải đối diện với những nguy hiểm trực diện:</p>
+            <ul style="margin: 15px 0; padding-left: 20px;">
+                <li>Hạch hạnh nhân bị kích thích mà <strong>không thông qua vỏ não</strong> => phản ứng chiến đấu hay bỏ chạy</li>
+            </ul>
+            
+            <p><strong>Lo đến sau</strong>, khi trí nhớ phát triển, ghi lại những kinh nghiệm của việc gặp sợ để chuẩn bị trước, nguy hiểm trong tương lai, chuẩn bị, có sự kiểm soát của vỏ não.</p>
+            
+            <p>Như vậy sợ và lo là những phản ứng có được trên bậc thang tiến hóa của loài người. Giúp con người tồn tại và tiến hóa.</p>
+            
+            <h3>🎯 Tiếp Cận Đa Nhân Tố</h3>
+            <div style="display: flex; justify-content: center; margin: 30px 0;">
+                <div style="text-align: center; background: #f8f9fa; padding: 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                    <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+                        <div style="padding: 20px; background: #e3f2fd; border-radius: 10px; margin: 0 10px;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🧬</div>
+                            <strong>Sinh học</strong>
+                        </div>
+                        <div style="padding: 20px; background: #f3e5f5; border-radius: 10px; margin: 0 10px;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🧠</div>
+                            <strong>Tâm lý</strong>
+                        </div>
+                        <div style="padding: 20px; background: #e8f5e8; border-radius: 10px; margin: 0 10px;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🏢</div>
+                            <strong>Văn hóa Xã hội</strong>
+                        </div>
+                        <div style="padding: 20px; background: #fff3e0; border-radius: 10px; margin: 0 10px;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🌍</div>
+                            <strong>Môi trường</strong>
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #333;">⬇️</div>
+                    <div style="margin-top: 20px; padding: 20px; background: #ffebee; border-radius: 10px;">
+                        <strong style="color: #d32f2f;">RỐI LOẠN TÂM THẦN</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Types Section -->
+        <div id="types" class="content-section">
+            <h2>📊 Phân Loại Rối Loạn Lưỡng Cực</h2>
+            
+            <div class="disorder-comparison">
+                <div class="disorder-card">
+                    <h3>🔴 RỐI LOẠN LƯỠNG CỰC I</h3>
+                    <ul>
+                        <li>✅ Có tiền sử ít nhất 1 pha hưng cảm</li>
+                        <li>⚠️ Pha hưng cảm theo sau hoặc được theo sau bởi 1 pha hưng cảm nhẹ hoặc trầm cảm</li>
+                        <li>🏥 Thường cần nhập viện</li>
+                        <li>⏰ Kéo dài ≥1 tuần</li>
+                    </ul>
+                </div>
+                
+                <div class="disorder-card">
+                    <h3>🟡 RỐI LOẠN LƯỠNG CỰC II</h3>
+                    <ul>
+                        <li>❌ Không có tiền sử pha hưng cảm</li>
+                        <li>😢 Tiền sử hoặc hiện tại có ít nhất 1 pha trầm cảm chủ yếu</li>
+                        <li>🟡 Tiền sử hoặc hiện tại có ít nhất 1 pha hưng cảm nhẹ</li>
+                        <li>⏰ Hưng cảm nhẹ ≥4 ngày</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e8; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3>🔍 Các Rối Loạn Khác Trong Phổ</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #c8e6c9;">🔄 Loạn khí sắc chu kỳ</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #c8e6c9;">💊 Rối loạn lưỡng cực do chất/thuốc</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #c8e6c9;">🏥 Rối loạn lưỡng cực do bệnh cơ thể</li>
+                    <li style="padding: 10px 0;">❓ Rối loạn lưỡng cực không biệt định và các rối loạn khác có liên quan</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- DSM Section -->
+        <div id="dsm" class="content-section">
+            <h2>📋 Tiêu Chuẩn DSM-5</h2>
+            
+            <div class="dsm-criteria">
+                <h3>🔥 PHA HƯNG CẢM (DSM-5)</h3>
+                <div class="criteria-list">
+                    <li><strong>A.</strong> Khí sắc hưng phấn, khó kềm chế hay cáu bẳn, gia tăng hoạt động và năng lượng bất thường và liên tục trong <strong>ít nhất 1 tuần</strong></li>
+                    <li><strong>B.</strong> Gồm ít nhất 3 trong số các triệu chứng sau:
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Tự đánh giá cao bản thân hay ý tưởng tự cao</li>
+                            <li>Giảm nhu cầu ngủ (cảm thấy khỏe chỉ sau 3 giờ ngủ)</li>
+                            <li>Nói nhiều hơn thường ngày hoặc bị thôi thúc nói liên tục</li>
+                            <li>Tư duy phi tán hoặc cảm thấy các ý nghĩ xuất hiện dồn dập liên tục</li>
+                            <li>Đãng trí (sự chú ý dễ dàng bị lôi cuốn bởi kích thích bên ngoài)</li>
+                            <li>Gia tăng hoạt động có mục đích hoặc kích động tâm thần vận động</li>
+                            <li>Tham gia quá nhiều vào các hoạt động có tiềm năng mang lại hậu quả tai hại</li>
+                        </ul>
+                    </li>
+                    <li><strong>C.</strong> Rối loạn khí sắc phải đủ nặng để gây suy giảm rõ rệt đến chức năng xã hội hoặc nghề nghiệp, hoặc cần vào viện điều trị</li>
+                </div>
+            </div>
+            
+            <div class="dsm-criteria" style="background: #fff3cd; border-color: #ffc107;">
+                <h3 style="color: #856404;">🟡 PHA HƯNG CẢM NHẸ (DSM-5)</h3>
+                <div class="criteria-list">
+                    <li><strong>A.</strong> Giống pha hưng cảm nhưng kéo dài <strong>ít nhất 4 ngày</strong></li>
+                    <li><strong>C.</strong> Giai đoạn này <strong>không làm thay đổi rõ ràng</strong> các chức năng của bệnh nhân so với giai đoạn trước đó</li>
+                    <li><strong>D.</strong> Rối loạn khí sắc và sự thay đổi trong hoạt động được <strong>nhận thấy rõ rệt bởi những người khác</strong></li>
+                    <li><strong>E.</strong> Giai đoạn này <strong>không đủ nặng</strong> để gây ra những biến đổi rõ rệt trong chức năng hoạt động xã hội hoặc nghề nghiệp hoặc phải cần thiết nhập viện</li>
+                </div>
+            </div>
+            
+            <div class="dsm-criteria" style="background: #f8d7da; border-color: #dc3545;">
+                <h3 style="color: #721c24;">😢 PHA TRẦM CẢM NHẸ (DSM-5)</h3>
+                <div class="criteria-list">
+                    <li><strong>A.</strong> Ít nhất 5 tiêu chuẩn. Phải có ít nhất (1) hoặc (2). Thời gian <strong>ít nhất 2 tuần</strong>:
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>(1) Khí sắc trầm lan tỏa</li>
+                            <li>(2) Thường xuyên mất hứng thú, không hài lòng</li>
+                            <li>(3) Thay đổi cân nặng đáng kể (5% khối lượng cơ thể)</li>
+                            <li>(4) Rối loạn giấc ngủ</li>
+                            <li>(5) Tâm thần vận động: kích động/chậm chạp</li>
+                            <li>(6) Mệt mỏi thường xuyên hoặc mất năng lượng</li>
+                            <li>(7) Cảm giác vô dụng, tội lỗi</li>
+                            <li>(8) Giảm năng lực tập trung, suy nghĩ</li>
+                            <li>(9) Thường nghĩ về cái chết hoặc có ý tưởng tự sát</li>
+                        </ul>
+                    </li>
+                    <li><strong>B.</strong> Các triệu chứng này gây ra sự đau khổ đáng kể về mặt lâm sàng</li>
+                    <li><strong>C.</strong> Các triệu chứng không phải do các tác động sinh lý trực tiếp của một chất hoặc do một bệnh khác gây nên</li>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Epidemiology Section -->
+        <div id="epidemiology" class="content-section">
+            <h2>📈 Dịch Tễ Học</h2>
+            
+            <div class="statistics-grid">
+                <div class="stat-card">
+                    <span class="stat-number">1-2%</span>
+                    <div>Tỷ lệ mắc ở người lớn</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">1%</span>
+                    <div>Tỷ lệ mắc suốt đời RLLC I</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">6%</span>
+                    <div>Phổ rối loạn lưỡng cực</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">20-25%</span>
+                    <div>Từng cố tự sát</div>
+                </div>
+            </div>
+            
+            <div style="background: #e3f2fd; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #1976d2;">🔍 Đặc Điểm Dịch Tễ Học</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div>
+                        <h4>👫 Giới tính</h4>
+                        <ul style="padding-left: 20px;">
+                            <li>Không có khác biệt về tỉ lệ mắc theo giới tính</li>
+                            <li>Nữ: nhiều pha trầm cảm, ít pha hưng cảm hơn</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>🎨 Đặc điểm khác</h4>
+                        <ul style="padding-left: 20px;">
+                            <li>Có tương quan với những thành tựu và sáng tạo nghệ thuật</li>
+                            <li>Đứng hàng thứ 6 trong các nguyên nhân gây tàn phế trong độ tuổi 15-44 (WHO)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Causes Section -->
+        <div id="causes" class="content-section">
+            <h2>🧬 Nguyên Nhân</h2>
+            
+            <div class="neurotransmitter-visual">
+                <div class="neurotransmitter">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🧪</div>
+                    <h4>Dopamine</h4>
+                    <p>Liên quan đến động lực và phần thưởng</p>
+                </div>
+                <div class="neurotransmitter">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
+                    <h4>Norepinephrine</h4>
+                    <p>Hàm lượng cao trong RLLC</p>
+                </div>
+                <div class="neurotransmitter">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🌊</div>
+                    <h4>Serotonin</h4>
+                    <p>Không đóng vai trò trung tâm</p>
+                </div>
+            </div>
+            
+            <div style="background: #f8f9fa; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3>🧬 Yếu Tố Di Truyền</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4>📊 Nghiên Cứu Song Sinh</h4>
+                        <ul style="padding-left: 20px;">
+                            <li><strong>Song sinh cùng trứng:</strong> 40% cùng bị RLLC</li>
+                            <li><strong>Song sinh khác trứng:</strong> 5-10% cùng bị RLLC</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>🧬 Gen Liên Quan</h4>
+                        <ul style="padding-left: 20px;">
+                            <li><strong>TPH1, TPH2:</strong> Enzyme tổng hợp serotonin</li>
+                            <li><strong>CACNA1C:</strong> Mã hóa kênh Ca, liên quan đến tác dụng của Lithium</li>
+                            <li><strong>Vị trí nhiễm sắc thể:</strong> 4, 5, 12, 18, 21, X</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Prognosis Section -->
+        <div id="prognosis" class="content-section">
+            <h2>📊 Tiên Lượng Tiến Triển</h2>
+            
+            <div style="background: #ffebee; border: 3px solid #f44336; border-radius: 15px; padding: 25px; margin: 20px 0;">
+                <h3 style="color: #c62828;">⚠️ Thống Kê Quan Trọng</h3>
+                
+                <div class="statistics-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #ffcdd2, #f8bbd9);">
+                        <span class="stat-number">90%</span>
+                        <div>Sẽ gặp cơn hưng cảm thứ 2 trong vòng 5 năm</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #ffcdd2, #f8bbd9);">
+                        <span class="stat-number">90%</span>
+                        <div>Sẽ nhập viện ít nhất 1 lần trong đời</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #ffcdd2, #f8bbd9);">
+                        <span class="stat-number">2/3</span>
+                        <div>Nghiện rượu hay ma túy</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #ffcdd2, #f8bbd9);">
+                        <span class="stat-number">25-50%</span>
+                        <div>Có hành vi tự sát</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e8; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #2e7d32;">📈 Đặc Điểm Tiến Triển</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 15px 0; border-bottom: 1px solid #c8e6c9; display: flex; align-items: center;">
+                        <span style="background: #4caf50; color: white; padding: 8px 12px; border-radius: 50%; margin-right: 15px;">1</span>
+                        <div>
+                            <strong>RLLC I:</strong> Giai đoạn trầm cảm nhiều gấp 3 lần giai đoạn hưng cảm
+                        </div>
+                    </li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid #c8e6c9; display: flex; align-items: center;">
+                        <span style="background: #4caf50; color: white; padding: 8px 12px; border-radius: 50%; margin-right: 15px;">2</span>
+                        <div>
+                            <strong>RLLC II:</strong> Giai đoạn trầm cảm nhiều gấp 37 lần giai đoạn hưng cảm nhẹ
+                        </div>
+                    </li>
+                    <li style="padding: 15px 0; display: flex; align-items: center;">
+                        <span style="background: #4caf50; color: white; padding: 8px 12px; border-radius: 50%; margin-right: 15px;">3</span>
+                        <div>
+                            <strong>Tự sát:</strong> Không có bệnh lý tâm thần nào "thích" tự sát như rối loạn lưỡng cực. 15% "thành công"
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div style="background: #e3f2fd; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #1976d2;">💪 Hy Vọng Điều Trị</h3>
+                <p style="font-size: 1.1rem; line-height: 1.6;">
+                    Dù gây tàn phế nhiều, tỷ lệ tử vong cao, nhưng nhiều bệnh nhân rối loạn lưỡng cực vẫn có thể <strong style="color: #2e7d32;">sống lâu dài với chất lượng cuộc sống tốt</strong>, nếu được <strong style="color: #2e7d32;">chẩn đoán và điều trị đúng</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Treatment Section -->
+        <div id="treatment" class="content-section">
+            <h2>💊 Điều Trị</h2>
+            
+            <div class="treatment-section">
+                <div class="treatment-card">
+                    <h4>🚨 Chiến Lược Can Thiệp</h4>
+                    <ul>
+                        <li><strong>Điều trị thuốc sớm:</strong> BN được điều trị bằng lithium có nguy cơ tự tử thấp hơn 8,85 lần</li>
+                        <li><strong>Điều trị tâm lý:</strong> Được cho là có kết quả tốt khi kết hợp điều trị thuốc</li>
+                        <li><strong>Giáo dục BN và người chăm sóc:</strong> Nhận biết dấu hiệu; khả năng quản lý stress</li>
+                    </ul>
+                </div>
+                
+                <div class="treatment-card">
+                    <h4>⚡ Giai Đoạn Cấp/Củng Cố</h4>
+                    <p><strong>Giai đoạn hưng cảm, hưng cảm nhẹ, hỗn hợp:</strong></p>
+                    <ul>
+                        <li>Ưu tiên điều trị hoá dược</li>
+                        <li>Liệu pháp sốc điện khi kháng trị hoá dược</li>
+                        <li>Trường hợp nặng: có thể hợp liều ngắn benzodiazepine</li>
+                    </ul>
+                    <p><strong>Giai đoạn trầm cảm:</strong></p>
+                    <ul>
+                        <li>Điều trị hoá dược: Lithium</li>
+                        <li>Thuốc CTC không có tác dụng thậm chí gây cơn hưng cảm</li>
+                        <li>Sốc điện khi có ý định tự tử hay triệu chứng loạn thần</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e8; border: 3px solid #4caf50; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #2e7d32;">🔄 Giai Đoạn Duy Trì</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 20px 0;">
+                    <div>
+                        <h4 style="color: #388e3c;">💊 Hoá Dược Liệu Pháp</h4>
+                        <p><strong style="color: #2e7d32;">Lithium</strong> là thuốc được sử dụng rộng rãi nhất do:</p>
+                        <ul style="padding-left: 20px; margin: 15px 0;">
+                            <li>Hiệu quả hơn so với các thuốc ổn định khí sắc khác</li>
+                            <li>Hiệu quả hơn thuốc chống loạn thần</li>
+                            <li>Ngăn ngừa tái phát</li>
+                            <li>Giảm nguy cơ tự sát</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: #388e3c;">🧠 Tâm Lý Liệu Pháp</h4>
+                        <ul style="padding-left: 20px;">
+                            <li>Làm nhẹ các triệu chứng</li>
+                            <li>Giảm các stress có hại</li>
+                            <li>Tìm ra các nguyên nhân gây tái phát</li>
+                            <li>Tìm ra các tiền triệu trước khi toàn phát</li>
+                            <li>Tìm ra các yếu tố giúp BN duy trì trạng thái bình thường</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 25px; padding: 20px; background: rgba(255, 255, 255, 0.7); border-radius: 10px;">
+                    <p style="font-size: 1.2rem; font-weight: bold; color: #2e7d32;">
+                        📈 Biểu đồ cho thấy tỷ lệ toan tính tự tử ở những bệnh nhân rối loạn lưỡng cực I trước và trong khi điều trị tích cực bằng thuốc và điều trị tâm lý bổ trợ
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quiz Section -->
+        <div id="quiz" class="content-section">
+            <h2>🧩 Kiểm Tra Kiến Thức</h2>
+            
+            <div class="interactive-quiz">
+                <h3>📝 Trắc nghiệm Phổ Lưỡng Cực</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div id="currentScore" style="text-align: center; font-weight: bold; margin: 10px 0;">Điểm: 0/10</div>
+                
+                <div class="quiz-question active" data-question="0">
+                    <h4>Câu 1: Theo DSM-5, pha hưng cảm trong RLLC I phải kéo dài ít nhất:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. 2 ngày</div>
+                    <div class="quiz-option" data-answer="wrong">B. 4 ngày</div>
+                    <div class="quiz-option" data-answer="correct">C. 1 tuần</div>
+                    <div class="quiz-option" data-answer="wrong">D. 2 tuần</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> Pha hưng cảm phải kéo dài ≥1 tuần hoặc bất kỳ thời gian nào nếu cần nhập viện. Hưng cảm nhẹ chỉ cần ≥4 ngày.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="1">
+                    <h4>Câu 2: Điểm khác biệt chính giữa RLLC I và II là:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. Độ tuổi khởi phát</div>
+                    <div class="quiz-option" data-answer="correct">B. Có hay không có pha hưng cảm toàn phát</div>
+                    <div class="quiz-option" data-answer="wrong">C. Mức độ trầm cảm</div>
+                    <div class="quiz-option" data-answer="wrong">D. Khả năng di truyền</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> Lưỡng cực I có ít nhất một pha hưng cảm toàn phát, trong khi Lưỡng cực II chỉ có hưng cảm nhẹ.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="2">
+                    <h4>Câu 3: Tỷ lệ bệnh nhân RLLC có hành vi tự sát ít nhất 1 lần trong đời là:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. 10-15%</div>
+                    <div class="quiz-option" data-answer="wrong">B. 20-25%</div>
+                    <div class="quiz-option" data-answer="correct">C. 25-50%</div>
+                    <div class="quiz-option" data-answer="wrong">D. 60-70%</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> 25-50% bệnh nhân RLLC có hành vi tự sát, 15% "thành công". Đây là tỷ lệ rất cao.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="3">
+                    <h4>Câu 4: Chẩn đoán trầm cảm chủ yếu yêu cầu:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. ≥3/9 triệu chứng trong ≥1 tuần</div>
+                    <div class="quiz-option" data-answer="wrong">B. ≥4/9 triệu chứng trong ≥2 tuần</div>
+                    <div class="quiz-option" data-answer="correct">C. ≥5/9 triệu chứng trong ≥2 tuần</div>
+                    <div class="quiz-option" data-answer="wrong">D. ≥6/9 triệu chứng trong ≥1 tháng</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> DSM-5 yêu cầu ≥5/9 triệu chứng trong ≥2 tuần, phải có khí sắc trầm hoặc mất hứng thú.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="4">
+                    <h4>Câu 5: Tỷ lệ cùng bị RLLC trong các cặp song sinh cùng trứng là:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. 15%</div>
+                    <div class="quiz-option" data-answer="wrong">B. 25%</div>
+                    <div class="quiz-option" data-answer="correct">C. 40%</div>
+                    <div class="quiz-option" data-answer="wrong">D. 60%</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> Tỷ lệ này ở các cặp song sinh khác trứng chỉ là 5-10%, cho thấy yếu tố di truyền quan trọng.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="5">
+                    <h4>Câu 6: Thuốc được sử dụng rộng rãi nhất trong điều trị duy trì RLLC:</h4>
+                    <div class="quiz-option" data-answer="correct">A. Lithium</div>
+                    <div class="quiz-option" data-answer="wrong">B. SSRI</div>
+                    <div class="quiz-option" data-answer="wrong">C. Benzodiazepine</div>
+                    <div class="quiz-option" data-answer="wrong">D. Antipsychotic</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> Lithium được chứng minh có hiệu quả hơn so với các thuốc khác trong việc ngăn ngừa tái phát và giảm nguy cơ tự sát.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="6">
+                    <h4>Câu 7: Trong RLLC, neurotransmitter nào KHÔNG đóng vai trò trung tâm:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. Dopamine</div>
+                    <div class="quiz-option" data-answer="wrong">B. Norepinephrine</div>
+                    <div class="quiz-option" data-answer="correct">C. Serotonin</div>
+                    <div class="quiz-option" data-answer="wrong">D. Tất cả đều quan trọng</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> Theo nghiên cứu, serotonin không đóng vai trò trung tâm trong RLLC, trong khi norepinephrine có hàm lượng cao.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="7">
+                    <h4>Câu 8: Pha hưng cảm nhẹ khác pha hưng cảm ở điểm:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. Loại triệu chứng</div>
+                    <div class="quiz-option" data-answer="wrong">B. Thời gian kéo dài (4 ngày vs 1 tuần)</div>
+                    <div class="quiz-option" data-answer="correct">C. Mức độ ảnh hưởng chức năng</div>
+                    <div class="quiz-option" data-answer="wrong">D. Cả A và B</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> Hưng cảm nhẹ không đủ nặng để gây suy giảm rõ rệt chức năng hoặc cần nhập viện, khác với pha hưng cảm.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="8">
+                    <h4>Câu 9: Tỷ lệ mắc RLLC theo giới tính:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. Nam > Nữ</div>
+                    <div class="quiz-option" data-answer="wrong">B. Nữ > Nam</div>
+                    <div class="quiz-option" data-answer="correct">C. Không có khác biệt</div>
+                    <div class="quiz-option" data-answer="wrong">D. Phụ thuộc vào tuổi</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> Không có khác biệt về tỉ lệ mắc theo giới tính, nhưng nữ có nhiều pha trầm cảm và ít pha hưng cảm hơn.
+                    </div>
+                </div>
+                
+                <div class="quiz-question" data-question="9">
+                    <h4>Câu 10: Trong vòng 5 năm sau cơn hưng cảm đầu tiên, bao nhiêu % sẽ gặp cơn hưng cảm thứ 2:</h4>
+                    <div class="quiz-option" data-answer="wrong">A. 70%</div>
+                    <div class="quiz-option" data-answer="wrong">B. 80%</div>
+                    <div class="quiz-option" data-answer="correct">C. 90%</div>
+                    <div class="quiz-option" data-answer="wrong">D. 95%</div>
+                    <div class="explanation" style="display: none; margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
+                        <strong>Giải thích:</strong> 90% sẽ gặp một cơn hưng cảm thứ 2 trong vòng 5 năm, cho thấy tính chất tái phát cao của bệnh.
+                    </div>
+                </div>
+                
+                <button class="btn" id="nextQuizBtn" onclick="nextQuestion()">Tiếp theo</button>
+                <button class="btn btn-success" id="restartQuizBtn" onclick="restartQuiz()" style="display: none;">Làm lại</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+        const totalQuestions = 10;
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to corresponding nav button
+            event.target.classList.add('active');
+        }
+        
+        function nextQuestion() {
+            if (!answered) {
+                alert('Vui lòng chọn một đáp án!');
+                return;
+            }
+            
+            if (currentQuestion < totalQuestions - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showFinalScore();
+            }
+        }
+        
+        function showQuestion() {
+            // Hide all questions
+            const questions = document.querySelectorAll('.quiz-question');
+            questions.forEach(q => q.classList.remove('active'));
+            
+            // Show current question
+            const currentQ = document.querySelector(`[data-question="${currentQuestion}"]`);
+            if (currentQ) {
+                currentQ.classList.add('active');
+                
+                // Reset options
+                const options = currentQ.querySelectorAll('.quiz-option');
+                options.forEach(option => {
+                    option.classList.remove('correct', 'wrong');
+                    option.onclick = function() { selectAnswer(this, currentQ); };
+                });
+                
+                // Hide explanation
+                const explanation = currentQ.querySelector('.explanation');
+                if (explanation) explanation.style.display = 'none';
+            }
+            
+            answered = false;
+            updateProgress();
+        }
+        
+        function selectAnswer(option, questionDiv) {
+            if (answered) return;
+            
+            answered = true;
+            const options = questionDiv.querySelectorAll('.quiz-option');
+            const explanation = questionDiv.querySelector('.explanation');
+            
+            // Show correct/wrong
+            options.forEach(opt => {
+                if (opt.dataset.answer === 'correct') {
+                    opt.classList.add('correct');
+                } else if (opt === option && opt.dataset.answer === 'wrong') {
+                    opt.classList.add('wrong');
+                }
+                opt.onclick = null; // Disable further clicks
+            });
+            
+            // Update score
+            if (option.dataset.answer === 'correct') {
+                score++;
+                updateScore();
+            }
+            
+            // Show explanation
+            if (explanation) {
+                explanation.style.display = 'block';
+            }
+            
+            // Auto-advance after 2 seconds
+            setTimeout(() => {
+                if (currentQuestion < totalQuestions - 1) {
+                    nextQuestion();
+                } else {
+                    document.getElementById('nextQuizBtn').style.display = 'none';
+                    document.getElementById('restartQuizBtn').style.display = 'inline-block';
+                }
+            }, 2000);
+        }
+        
+        function updateScore() {
+            document.getElementById('currentScore').textContent = `Điểm: ${score}/${totalQuestions}`;
+        }
+        
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        
+        function showFinalScore() {
+            const percentage = (score / totalQuestions) * 100;
+            let message = '';
+            
+            if (percentage >= 90) {
+                message = '🎉 Xuất sắc! Bạn đã nắm vững kiến thức về Phổ Lưỡng Cực!';
+            } else if (percentage >= 70) {
+                message = '👍 Tốt! Bạn có hiểu biết khá tốt về chủ đề này.';
+            } else if (percentage >= 50) {
+                message = '📚 Ổn! Bạn nên xem lại một số phần để hiểu rõ hơn.';
+            } else {
+                message = '💪 Cần cố gắng thêm! Hãy đọc lại tài liệu và thử lại.';
+            }
+            
+            alert(`${message}\n\nĐiểm của bạn: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)`);
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            
+            updateScore();
+            showQuestion();
+            
+            document.getElementById('nextQuizBtn').style.display = 'inline-block';
+            document.getElementById('restartQuizBtn').style.display = 'none';
+        }
+        
+        // Initialize
+        updateScore();
+        updateProgress();
+    </script>
+</body>
+</html>

@@ -3,11 +3,1348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheatsheet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Hướng Dẫn Chẩn Đoán Các Rối Loạn Tâm Thần</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .page-break {
+            page-break-after: always;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c5aa0;
+            font-size: 24px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        
+        .header h2 {
+            color: #666;
+            font-size: 16px;
+            margin: 10px 0 0 0;
+            font-weight: normal;
+        }
+        
+        h2 {
+            color: #2c5aa0;
+            border-bottom: 2px solid #2c5aa0;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: #d32f2f;
+            margin-top: 25px;
+        }
+        
+        h4 {
+            color: #1976d2;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #2c5aa0;
+            color: white;
+            padding: 12px 8px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        .diagnostic-table th {
+            background-color: #1976d2;
+        }
+        
+        .symptom-table th {
+            background-color: #388e3c;
+        }
+        
+        .comparison-table th {
+            background-color: #f57c00;
+        }
+        
+        .criteria-box {
+            background-color: #f5f5f5;
+            border-left: 4px solid #2c5aa0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning-box {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .important-note {
+            background-color: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .flow-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+        }
+        
+        .disorder-card {
+            background-color: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .disorder-title {
+            color: #2c5aa0;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #2c5aa0;
+            padding-bottom: 5px;
+        }
+        
+        @media print {
+            .page-break {
+                page-break-after: always;
+            }
+            
+            body {
+                font-size: 12px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            h2 {
+                font-size: 16px;
+            }
+            
+            h3 {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
-<body class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Cheatsheet</h1>
-    <p>Nội dung Cheatsheet sẽ được cập nhật sau.</p>
+<body>
+    <!-- Trang bìa -->
+    <div class="header">
+        <h1>Hướng Dẫn Chẩn Đoán Các Rối Loạn Tâm Thần</h1>
+        <h2>Tài Liệu Tham Khảo Lâm Sàng</h2>
+        <p style="margin-top: 30px; font-size: 14px;">
+            <strong>Bao gồm:</strong><br>
+            • Phổ Loạn Thần<br>
+            • Phổ Lưỡng Cực và Rối loạn lưỡng cực<br>
+            • Trầm cảm chủ yếu<br>
+            • Rối loạn lo âu<br>
+            • Ám ảnh cưỡng chế và các rối loạn liên quan
+        </p>
+    </div>
+    
+    <div class="page-break"></div>
+
+    <!-- Mục lục -->
+    <h2>MỤC LỤC</h2>
+    <ol style="font-size: 16px; line-height: 2;">
+        <li><a href="#psychotic-spectrum">Phổ Loạn Thần</a></li>
+        <li><a href="#bipolar-spectrum">Phổ Lưỡng Cực và Rối loạn lưỡng cực</a></li>
+        <li><a href="#major-depression">Trầm cảm chủ yếu</a></li>
+        <li><a href="#anxiety-disorders">Rối loạn lo âu</a></li>
+        <li><a href="#ocd-related">Ám ảnh cưỡng chế và các rối loạn liên quan</a></li>
+        <li><a href="#differential-diagnosis">Chẩn đoán phân biệt</a></li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <!-- 1. PHỔ LOẠN THẦN -->
+    <h2 id="psychotic-spectrum">1. PHỔ LOẠN THẦN (SCHIZOPHRENIA SPECTRUM)</h2>
+    
+    <div class="disorder-card">
+        <div class="disorder-title">ĐỊNH NGHĨA VÀ ĐẶC ĐIỂM CHUNG</div>
+        <p><strong>Loạn thần</strong> là tình trạng nghiêm trọng về tâm thần đặc trưng bởi sự mất khả năng nhận thức về thực tại. Đương sự không thể phân biệt được đâu là thật và đâu là ảo.</p>
+    </div>
+
+    <h3>Các triệu chứng cốt lõi (DSM-5)</h3>
+    <div class="criteria-box">
+        <strong>5 đặc điểm chẩn đoán các rối loạn phổ phân liệt:</strong>
+        <ol>
+            <li><strong>Hoang tưởng</strong> - Niềm tin sai lệch, bền vững</li>
+            <li><strong>Ảo giác</strong> - Tri giác không có kích thích thực tế</li>
+            <li><strong>Suy nghĩ (lời nói) phi tổ chức</strong> - Trật đường ray, không mạch lạc</li>
+            <li><strong>Hành vi vô tổ chức hoặc hành vi vận động bất thường rõ rệt</strong></li>
+            <li><strong>Các triệu chứng âm tính</strong> - Giảm biểu lộ cảm xúc, giảm ý chí</li>
+        </ol>
+    </div>
+
+    <h3>Triệu chứng Dương tính và Âm tính</h3>
+    <table class="symptom-table">
+        <thead>
+            <tr>
+                <th>TRIỆU CHỨNG DƯƠNG TÍNH</th>
+                <th>TRIỆU CHỨNG ÂM TÍNH</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    • Hoang tưởng<br>
+                    • Ảo giác (thanh, thị, xúc giác)<br>
+                    • Suy nghĩ vô tổ chức<br>
+                    • Hành vi vô tổ chức
+                </td>
+                <td>
+                    • Giảm biểu lộ cảm xúc (cùn mòn)<br>
+                    • Giảm ý chí (avolition)<br>
+                    • Nghèo lời (alogia)<br>
+                    • Giảm giao tiếp mắt
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Tiêu chuẩn chẩn đoán Tâm thần phân liệt (DSM-5)</h3>
+    <div class="criteria-box">
+        <strong>A.</strong> Có hai (hoặc nhiều hơn) trong các triệu chứng sau, mỗi triệu chứng xuất hiện trong một khoảng thời gian đáng kể trong thời kỳ 1 tháng (hoặc ít hơn nếu điều trị thành công). <em>Ít nhất phải có một trong ba triệu chứng (1), (2), hoặc (3):</em>
+        <ol>
+            <li>Hoang tưởng</li>
+            <li>Ảo giác</li>
+            <li>Ngôn ngữ rời rạc (ví dụ: thường xuyên trật đường ray hoặc không mạch lạc)</li>
+            <li>Hành vi rối loạn trầm trọng hoặc căng trương lực</li>
+            <li>Triệu chứng âm tính (tức là, biểu hiện cảm xúc cùn mòn hoặc mất ý chí)</li>
+        </ol>
+        
+        <strong>B.</strong> Suy giảm chức năng rõ rệt trong công việc, mối quan hệ liên cá nhân, hoặc tự chăm sóc bản thân<br>
+        <strong>C.</strong> Dấu hiệu liên tục của rối loạn kéo dài ít nhất 6 tháng<br>
+        <strong>D.</strong> Loại trừ rối loạn phân liệt cảm xúc và rối loạn khí sắc<br>
+        <strong>E.</strong> Không phải do tác động sinh lý của chất hoặc bệnh lý cơ thể<br>
+        <strong>F.</strong> Nếu có tiền sử rối loạn phổ tự kỷ, chẩn đoán bổ sung chỉ khi có hoang tưởng hoặc ảo giác nổi bật
+    </div>
+
+    <h3>Timeline và Giai đoạn tiến triển</h3>
+    <table class="diagnostic-table">
+        <thead>
+            <tr>
+                <th>RỐI LOẠN</th>
+                <th>THỜI GIAN TỐI THIỂU</th>
+                <th>ĐẶC ĐIỂM THỜI GIAN</th>
+                <th>GIAI ĐOẠN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Rối loạn loạn thần ngắn</strong></td>
+                <td>1 ngày - < 1 tháng</td>
+                <td>Khởi phát đột ngột, hồi phục hoàn toàn</td>
+                <td>Cấp tính</td>
+            </tr>
+            <tr>
+                <td><strong>Rối loạn dạng phân liệt</strong></td>
+                <td>≥ 1 tháng - < 6 tháng</td>
+                <td>Có yếu tố tiên lượng tốt</td>
+                <td>Bán cấp</td>
+            </tr>
+            <tr>
+                <td><strong>Tâm thần phân liệt</strong></td>
+                <td>≥ 6 tháng tổng<br>(≥ 1 tháng triệu chứng hoạt động)</td>
+                <td>Liên tục, có thể kèm giai đoạn tiền triệu và tồn dư</td>
+                <td>Mạn tính</td>
+            </tr>
+            <tr>
+                <td><strong>Rối loạn hoang tưởng</strong></td>
+                <td>≥ 1 tháng hoang tưởng</td>
+                <td>Chức năng bảo tồn, không đáp ứng tiêu chuẩn A</td>
+                <td>Ổn định</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Giai đoạn tiến triển Tâm thần phân liệt</h3>
+    <div class="criteria-box">
+        <strong>1. Giai đoạn tiền bệnh (Prodromal):</strong>
+        <ul>
+            <li>Giảm từ từ chức năng thông thường → đặc điểm loạn thần</li>
+            <li>Thời gian: thường kéo dài 5 năm</li>
+            <li>Triệu chứng: niềm tin kỳ lạ, trải nghiệm tri giác bất thường, triệu chứng âm tính nhẹ</li>
+        </ul>
+        
+        <strong>2. Giai đoạn toàn phát (Active):</strong>
+        <ul>
+            <li>Bộc lộ rõ ràng triệu chứng loạn thần (dương tính hoặc âm tính)</li>
+            <li>Thời gian: ít nhất 1 tháng (hoặc ít hơn nếu điều trị thành công)</li>
+            <li>Đáp ứng đầy đủ Tiêu chuẩn A</li>
+        </ul>
+        
+        <strong>3. Giai đoạn di chứng (Residual):</strong>
+        <ul>
+            <li>Ngưng bộc lộ triệu chứng dương tính</li>
+            <li>Vẫn còn xuất hiện triệu chứng âm tính</li>
+            <li>Suy giảm chức năng dai dẳng</li>
+        </ul>
+    </div>
+
+    <h3>Dấu hiệu nhận diện sớm (Red Flags)</h3>
+    <div class="warning-box">
+        <strong>Triệu chứng tiền triệu cần chú ý:</strong>
+        <ul>
+            <li>Thay đổi đột ngột tính cách, hành vi</li>
+            <li>Suy giảm chức năng học tập, xã hội không rõ nguyên nhân</li>
+            <li>Rút lui xã hội, cô lập</li>
+            <li>Niềm tin kỳ lạ, nghi ngờ không có căn cứ</li>
+            <li>Trải nghiệm tri giác bất thường (nghe thấy tiếng gọi tên, thấy bóng người)</li>
+            <li>Lời nói khó hiểu, mất mạch lạc</li>
+            <li>Vệ sinh cá nhân kém, không quan tâm ngoại hình</li>
+        </ul>
+    </div>
+
+    <h3>Phân độ nghiêm trọng theo thời gian và chức năng</h3>
+    <div class="flow-diagram">
+        <strong>PHỔ LOẠN THẦN THEO MỨC ĐỘ NGHIÊM TRỌNG</strong><br><br>
+        
+        <table style="width: 100%; text-align: center; border: none;">
+            <tr style="border: none;">
+                <td style="border: none; background: #e3f2fd; padding: 10px; margin: 5px; border-radius: 5px;">
+                    <strong>Rối loạn hoang tưởng</strong><br>
+                    <small>Chức năng tốt</small>
+                </td>
+                <td style="border: none;">→</td>
+                <td style="border: none; background: #fff3e0; padding: 10px; margin: 5px; border-radius: 5px;">
+                    <strong>Loạn thần ngắn</strong><br>
+                    <small>Cấp tính, hồi phục</small>
+                </td>
+                <td style="border: none;">→</td>
+                <td style="border: none; background: #fff8e1; padding: 10px; margin: 5px; border-radius: 5px;">
+                    <strong>Dạng phân liệt</strong><br>
+                    <small>Tiên lượng tốt</small>
+                </td>
+                <td style="border: none;">→</td>
+                <td style="border: none; background: #ffebee; padding: 10px; margin: 5px; border-radius: 5px;">
+                    <strong>Tâm thần phân liệt</strong><br>
+                    <small>Mạn tính, suy giảm</small>
+                </td>
+            </tr>
+        </table>
+        
+        <br><strong>Thời gian:</strong> < 1 tháng → 1-6 tháng → ≥ 6 tháng<br>
+        <strong>Suy giảm chức năng:</strong> Ít → Trung bình → Nhiều → Nghiêm trọng
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 2. PHỔ LƯỠNG CỰC -->
+    <h2 id="bipolar-spectrum">2. PHỔ LƯỠNG CỰC VÀ RỐI LOẠN LƯỠNG CỰC</h2>
+
+    <div class="disorder-card">
+        <div class="disorder-title">ĐẶC ĐIỂM CHUNG</div>
+        <p>Rối loạn lưỡng cực đặc trưng bởi sự thay đổi khí sắc giữa các pha hưng cảm/hưng cảm nhẹ và trầm cảm, gây ảnh hưởng nghiêm trọng đến chức năng xã hội và nghề nghiệp.</p>
+    </div>
+
+    <h3>Dịch tễ học</h3>
+    <div class="important-note">
+        <ul>
+            <li>Tỉ lệ mắc suốt đời RLLC 1: khoảng 1%</li>
+            <li>Ít phổ biến hơn RL trầm cảm chủ yếu (1-2% ở người lớn)</li>
+            <li>Không có khác biệt theo giới tính</li>
+            <li>Nữ: nhiều pha trầm cảm, ít pha hưng cảm hơn</li>
+            <li>20-25% từng cố tự sát</li>
+            <li>Đứng hàng thứ 6 nguyên nhân gây tàn phế (15-44 tuổi)</li>
+        </ul>
+    </div>
+
+    <h3>Phân loại rối loạn lưỡng cực</h3>
+    <table class="diagnostic-table">
+        <thead>
+            <tr>
+                <th>LOẠI RỐI LOẠN</th>
+                <th>ĐẶC ĐIỂM CHÍNH</th>
+                <th>TIÊU CHUẨN THỜI GIAN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Lưỡng cực I</strong></td>
+                <td>Có ít nhất 1 pha hưng cảm toàn phát</td>
+                <td>Hưng cảm: ≥1 tuần (hoặc nhập viện)</td>
+            </tr>
+            <tr>
+                <td><strong>Lưỡng cực II</strong></td>
+                <td>Có pha hưng cảm nhẹ + pha trầm cảm chủ yếu</td>
+                <td>Hưng cảm nhẹ: ≥4 ngày</td>
+            </tr>
+            <tr>
+                <td><strong>Loạn khí sắc chu kỳ</strong></td>
+                <td>Triệu chứng hưng cảm nhẹ + trầm cảm không đủ tiêu chuẩn</td>
+                <td>≥2 năm (1 năm ở trẻ em/vị thành niên)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Tiêu chuẩn pha hưng cảm (DSM-5)</h3>
+    <div class="criteria-box">
+        <strong>A.</strong> Giai đoạn rõ rệt về khí sắc bất thường và dai dẳng được nâng lên, mở rộng, hoặc cáu kỉnh, và tăng hoạt động hoặc năng lượng có mục đích một cách bất thường và dai dẳng, kéo dài ít nhất 1 tuần và có mặt hầu hết các ngày, gần như cả ngày
+        
+        <strong>B.</strong> Trong giai đoạn rối loạn khí sắc và tăng năng lượng hoặc hoạt động, 3 (hoặc nhiều hơn) trong các triệu chứng sau đây có mặt ở mức độ nghiêm trọng và thể hiện sự thay đổi đáng chú ý so với hành vi bình thường:
+        <ol>
+            <li>Tăng lòng tự tôn hoặc ý tưởng tự cao</li>
+            <li>Giảm nhu cầu ngủ</li>
+            <li>Nói nhiều hơn bình thường hoặc có áp lực phải tiếp tục nói</li>
+            <li>Chạy ý tưởng hoặc trải nghiệm chủ quan về tư duy đua nhau</li>
+            <li>Dễ mất tập trung</li>
+            <li>Tăng hoạt động có mục đích hoặc kích động tâm thần vận động</li>
+            <li>Tham gia quá mức vào các hoạt động có tiềm năng hậu quả đau khổ cao</li>
+        </ol>
+    </div>
+
+    <h3>Timeline chẩn đoán các pha</h3>
+    <table class="diagnostic-table">
+        <thead>
+            <tr>
+                <th>LOẠI PHA</th>
+                <th>THỜI GIAN TỐI THIỂU</th>
+                <th>TIÊU CHÍ ĐẶC BIỆT</th>
+                <th>SẮC THÁ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Pha hưng cảm</strong></td>
+                <td>≥ 1 tuần<br>(Hoặc bất kỳ thời gian nào nếu nhập viện)</td>
+                <td>≥3/7 triệu chứng hưng cảm<br>Suy giảm chức năng nghiêm trọng</td>
+                <td>Nâng cao/mở rộng/cáu kỉnh</td>
+            </tr>
+            <tr>
+                <td><strong>Pha hưng cảm nhẹ</strong></td>
+                <td>≥ 4 ngày liên tục</td>
+                <td>≥3/7 triệu chứng hưng cảm<br>KHÔNG suy giảm chức năng nghiêm trọng</td>
+                <td>Nâng cao/mở rộng/cáu kỉnh</td>
+            </tr>
+            <tr>
+                <td><strong>Pha trầm cảm</strong></td>
+                <td>≥ 2 tuần</td>
+                <td>≥5/9 triệu chứng trầm cảm</td>
+                <td>Trầm/buồn/tuyệt vọng</td>
+            </tr>
+            <tr>
+                <td><strong>Pha hỗn hợp</strong></td>
+                <td>Theo pha chính</td>
+                <td>Triệu chứng của cả hai pha</td>
+                <td>Hỗn hợp/không ổn định</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Dấu hiệu nhận diện sớm pha hưng cảm</h3>
+    <div class="criteria-box">
+        <strong>Red flags cần chú ý (trước khi đủ tiêu chuẩn chẩn đoán):</strong>
+        <ul>
+            <li><strong>Giảm nhu cầu ngủ:</strong> Ngủ ≤3 giờ nhưng vẫn tràn đầy năng lượng</li>
+            <li><strong>Tăng hoạt động:</strong> Bắt đầu nhiều dự án cùng lúc, năng suất cao bất thường</li>
+            <li><strong>Thay đổi lời nói:</strong> Nói nhanh, nhiều, khó ngắt lời</li>
+            <li><strong>Hành vi nguy cơ cao:</strong> Chi tiêu bốc đồng, đầu tư liều lĩnh</li>
+            <li><strong>Thay đổi tính cách:</strong> Từ tính cách bình thường → quá tự tin, cáu gắt</li>
+            <li><strong>Suy nghĩ phi tán:</strong> Nhảy từ chủ đề này sang chủ đề khác</li>
+        </ul>
+    </div>
+
+    <h3>Dấu hiệu cảnh báo nguy cơ cao</h3>
+    <div class="warning-box">
+        <strong>Yêu cầu can thiệp ngay lập tức:</strong>
+        <ul>
+            <li>Hành vi xung động nguy hiểm (lái xe tốc độ cao, hành vi tình dục bừa bãi)</li>
+            <li>Chi tiêu quá mức gây hậu quả tài chính nghiêm trọng</li>
+            <li>Ý tưởng hoang tưởng tự cao (tin mình có năng lực đặc biệt)</li>
+            <li>Mất ngủ hoàn toàn >3 ngày liên tục</li>
+            <li>Kích động, hung hăng</li>
+            <li>Triệu chứng loạn thần (ảo giác, hoang tưởng)</li>
+        </ul>
+    </div>
+
+    <h3>Tiên lượng và diễn tiến</h3>
+    <div class="important-note">
+        <strong>Số liệu quan trọng:</strong>
+        <ul>
+            <li><strong>90%</strong> sẽ gặp cơn hưng cảm thứ 2 trong vòng 5 năm</li>
+            <li><strong>90%</strong> bệnh nhân sẽ nhập viện ít nhất 1 lần trong đời</li>
+            <li><strong>Tỷ lệ pha:</strong> Trầm cảm gấp 3 lần hưng cảm (RLLC I), gấp 37 lần (RLLC II)</li>
+            <li><strong>2/3</strong> bệnh nhân nghiện rượu hoặc ma túy</li>
+            <li><strong>25-50%</strong> có hành vi tự sát, <strong>15%</strong> tự sát thành công</li>
+        </ul>
+    </div>
+
+    <h3>Đặc điểm phân biệt RLLC I và II</h3>
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>TIÊU CHÍ</th>
+                <th>RỐI LOẠN LƯỠNG CỰC I</th>
+                <th>RỐI LOẠN LƯỠNG CỰC II</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Pha hưng cảm toàn phát</strong></td>
+                <td>✓ Có (ít nhất 1 lần)</td>
+                <td>✗ Không có</td>
+            </tr>
+            <tr>
+                <td><strong>Pha hưng cảm nhẹ</strong></td>
+                <td>Có thể có</td>
+                <td>✓ Có (ít nhất 1 lần)</td>
+            </tr>
+            <tr>
+                <td><strong>Pha trầm cảm chủ yếu</strong></td>
+                <td>Có thể có</td>
+                <td>✓ Có (ít nhất 1 lần)</td>
+            </tr>
+            <tr>
+                <td><strong>Suy giảm chức năng trong pha hưng cảm</strong></td>
+                <td>Nghiêm trọng hoặc cần nhập viện</td>
+                <td>Không nghiêm trọng</td>
+            </tr>
+            <tr>
+                <td><strong>Tỷ lệ tự sát</strong></td>
+                <td>Cao</td>
+                <td>Cao hơn RLLC I</td>
+            </tr>
+            <tr>
+                <td><strong>Nguy cơ chẩn đoán lầm</strong></td>
+                <td>Thấp (do pha hưng cảm rõ ràng)</td>
+                <td>Cao (thường bị chẩn đoán thành trầm cảm)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- 3. TRẦM CẢM CHỦ YẾU -->
+    <h2 id="major-depression">3. TRẦM CẢM CHỦ YẾU</h2>
+
+    <div class="disorder-card">
+        <div class="disorder-title">ĐỊNH NGHĨA</div>
+        <p>Trầm cảm chủ yếu là rối loạn khí sắc đặc trưng bởi khí sắc trầm lan tỏa và/hoặc mất hứng thú, kèm theo các triệu chứng thể chất và nhận thức, gây ảnh hưởng nghiêm trọng đến chức năng xã hội và nghề nghiệp.</p>
+    </div>
+
+    <h3>Tiêu chuẩn chẩn đoán Trầm cảm chủ yếu (DSM-5)</h3>
+    <div class="criteria-box">
+        <strong>A.</strong> Ít nhất 5 triệu chứng trong 2 tuần. <em>Phải có ít nhất (1) hoặc (2):</em>
+        <ol>
+            <li><strong>Khí sắc trầm lan tỏa</strong> - hầu hết các ngày, gần như cả ngày</li>
+            <li><strong>Mất hứng thú, không hài lòng</strong> - trong tất cả hoặc gần như tất cả hoạt động</li>
+            <li><strong>Thay đổi cân nặng đáng kể</strong> - tăng/giảm 5% khối lượng cơ thể trong 1 tháng</li>
+            <li><strong>Rối loạn giấc ngủ</strong> - mất ngủ hoặc ngủ quá nhiều</li>
+            <li><strong>Kích động/chậm chạp tâm thần vận động</strong></li>
+            <li><strong>Mệt mỏi hoặc mất năng lượng</strong> - hầu hết các ngày</li>
+            <li><strong>Cảm giác vô dụng, tội lỗi</strong> - quá mức hoặc không phù hợp</li>
+            <li><strong>Giảm khả năng tập trung, suy nghĩ</strong> - hoặc do dự không quyết định được</li>
+            <li><strong>Nghĩ về cái chết hoặc ý tưởng tự sát</strong></li>
+        </ol>
+
+        <strong>B.</strong> Gây đau khổ đáng kể về lâm sàng hoặc suy giảm chức năng<br>
+        <strong>C.</strong> Không phải do tác động sinh lý của chất hoặc bệnh lý khác<br>
+        <strong>D.</strong> Không được giải thích tốt hơn bởi các rối loạn khác<br>
+        <strong>E.</strong> Chưa từng có cơn hưng cảm hoặc hưng cảm nhẹ
+    </div>
+
+    <h3>Timeline và giai đoạn của trầm cảm</h3>
+    <table class="diagnostic-table">
+        <thead>
+            <tr>
+                <th>LOẠI TRẦM CẢM</th>
+                <th>THỜI GIAN TỐI THIỂU</th>
+                <th>ĐẶC ĐIỂM</th>
+                <th>TIÊU CHÍ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Trầm cảm chủ yếu</strong></td>
+                <td>≥ 2 tuần</td>
+                <td>Cấp tính, nghiêm trọng</td>
+                <td>≥5/9 triệu chứng</td>
+            </tr>
+            <tr>
+                <td><strong>Trầm cảm dai dẳng</strong></td>
+                <td>≥ 2 năm người lớn<br>≥ 1 năm trẻ em/vị thành niên</td>
+                <td>Mạn tính, ít nghiêm trọng hơn</td>
+                <td>≥2/6 triệu chứng</td>
+            </tr>
+            <tr>
+                <td><strong>Rối loạn khí sắc tiền kinh nguyệt</strong></td>
+                <td>Hầu hết chu kỳ kinh trong 1 năm</td>
+                <td>Liên quan chu kỳ kinh nguyệt</td>
+                <td>≥5 triệu chứng trong tuần cuối</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Dấu hiệu nhận diện sớm</h3>
+    <div class="criteria-box">
+        <strong>Triệu chứng khởi đầu (thường xuất hiện đầu tiên):</strong>
+        <ul>
+            <li><strong>Thay đổi giấc ngủ:</strong> Mất ngủ, thức sớm, hoặc ngủ quá nhiều</li>
+            <li><strong>Mệt mỏi bất thường:</strong> Không có nguyên nhân rõ ràng</li>
+            <li><strong>Giảm hứng thú:</strong> Mất hứng thú với hoạt động yêu thích</li>
+            <li><strong>Thay đổi thực ăn:</strong> Ăn nhiều hơn hoặc ít hơn bình thường</li>
+            <li><strong>Khó tập trung:</strong> Giảm hiệu suất công việc, học tập</li>
+            <li><strong>Cảm xúc không ổn định:</strong> Dễ khóc, cáu gắt</li>
+        </ul>
+    </div>
+
+    <h3>Phân biệt mức độ nghiêm trọng</h3>
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>MỨC ĐỘ</th>
+                <th>SỐ TRIỆU CHỨNG</th>
+                <th>CƯỜNG ĐỘ</th>
+                <th>SUY GIẢM CHỨC NĂNG</th>
+                <th>TRIỆU CHỨNG ĐẶC BIỆT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Nhẹ</strong></td>
+                <td>5-6 triệu chứng</td>
+                <td>Đau buồn nhưng dễ quản lý</td>
+                <td>Suy giảm nhẹ</td>
+                <td>Không có triệu chứng loạn thần</td>
+            </tr>
+            <tr>
+                <td><strong>Trung bình</strong></td>
+                <td>6-7 triệu chứng</td>
+                <td>Trung bình</td>
+                <td>Suy giảm trung bình</td>
+                <td>Có thể có tư duy tiêu cực</td>
+            </tr>
+            <tr>
+                <td><strong>Nặng</strong></td>
+                <td>7-9 triệu chứng</td>
+                <td>Đau buồn rất nhiều, khó quản lý</td>
+                <td>Suy giảm nghiêm trọng</td>
+                <td><strong>Có thể kèm triệu chứng loạn thần</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Yếu tố tâm lý đặc trưng</h3>
+    <div class="important-note">
+        <strong>Đặc điểm nhận thức tiêu cực:</strong>
+        <ul>
+            <li><strong>Tư duy nhai lại:</strong> Nghiền ngẫm quá mức về vấn đề, có thể phát triển thành tư duy ám ảnh</li>
+            <li><strong>Thiên lệch chú ý:</strong> Khó chuyển sự chú ý khỏi kích thích tiêu cực</li>
+            <li><strong>Diễn giải tiêu cực:</strong> Xu hướng diễn giải thông tin mơ hồ theo hướng xấu</li>
+            <li><strong>Ký ức tiêu cực:</strong> Dễ nhớ những sự kiện tiêu cực hơn tích cực</li>
+        </ul>
+    </div>
+
+    <h3>Phân biệt với Tang thương/Mất mát</h3>
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>TIÊU CHÍ</th>
+                <th>TRẦM CẢM CHỦ YẾU</th>
+                <th>TANG THƯƠNG BÌNH THƯỜNG</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Lòng tự tôn</strong></td>
+                <td>Bị ảnh hưởng nghiêm trọng</td>
+                <td>Ít bị ảnh hưởng</td>
+            </tr>
+            <tr>
+                <td><strong>Cảm giác tội lỗi</strong></td>
+                <td>Tội lỗi về bản thân</td>
+                <td>Tội lỗi về người đã mất</td>
+            </tr>
+            <tr>
+                <td><strong>Ý tưởng về cái chết</strong></td>
+                <td>Muốn chết để thoát khổ</td>
+                <td>Muốn đoàn tụ với người đã mất</td>
+            </tr>
+            <tr>
+                <td><strong>Tiến triển</strong></td>
+                <td>Ít biến đổi theo thời gian</td>
+                <td>Giảm dần theo thời gian</td>
+            </tr>
+            <tr>
+                <td><strong>Triệu chứng loạn thần</strong></td>
+                <td>Có thể có (mức độ nặng)</td>
+                <td>Hiếm khi có</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Giai đoạn hồi phục</h3>
+    <div class="criteria-box">
+        <strong>Thuyên giảm một phần:</strong> Triệu chứng có mặt nhưng không đủ tiêu chuẩn chẩn đoán, hoặc thời gian < 2 tháng
+        
+        <strong>Thuyên giảm hoàn toàn:</strong> Trong 2 tháng qua không có dấu hiệu/triệu chứng nghiêm trọng nào
+        
+        <strong>Tiến triển mạn tính:</strong> Triệu chứng duy trì kéo dài trên 2 năm
+    </div>
+
+    <h3>Trầm cảm dai dẳng (Dysthymia)</h3>
+    <div class="criteria-box">
+        <strong>A.</strong> Khí sắc trầm trong hầu hết các ngày, ít nhất 2 năm (1 năm ở trẻ em/vị thành niên)
+        
+        <strong>B.</strong> Có 2 hoặc nhiều triệu chứng sau:
+        <ol>
+            <li>Ăn uống kém hoặc ăn quá nhiều</li>
+            <li>Mất ngủ hoặc ngủ quá nhiều</li>
+            <li>Giảm năng lượng hoặc mệt mỏi</li>
+            <li>Tự đánh giá thấp bản thân</li>
+            <li>Khó tập trung hoặc đưa ra quyết định</li>
+            <li>Cảm giác tuyệt vọng</li>
+        </ol>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 4. RỐI LOẠN LO ÂU -->
+    <h2 id="anxiety-disorders">4. RỐI LOẠN LO ÂU</h2>
+
+    <div class="disorder-card">
+        <div class="disorder-title">CÁC RỐI LOẠN TRONG NHÓM</div>
+        <ol>
+            <li>Rối loạn lo âu chia ly</li>
+            <li>Câm có chọn lọc</li>
+            <li>Ám sợ đặc hiệu</li>
+            <li>Rối loạn lo âu xã hội</li>
+            <li>Rối loạn hoảng loạn</li>
+            <li>Ám sợ khoảng không</li>
+            <li>Rối loạn lo âu lan tỏa</li>
+            <li>Rối loạn lo âu do thuốc/chất</li>
+            <li>Rối loạn lo âu do tình trạng y khoa</li>
+        </ol>
+    </div>
+
+    <h3>Rối loạn lo âu lan tỏa (GAD)</h3>
+    <div class="criteria-box">
+        <strong>A.</strong> Lo lắng quá mức và dai dẳng xuất hiện hầu hết các ngày trong ít nhất 6 tháng, liên quan đến nhiều sự kiện hoặc hoạt động
+        
+        <strong>B.</strong> Khó kiểm soát lo lắng
+        
+        <strong>C.</strong> Lo lắng đi kèm ít nhất 3/6 triệu chứng (trẻ em chỉ cần 1):
+        <ol>
+            <li>Bồn chồn hoặc cảm giác căng thẳng</li>
+            <li>Dễ mệt mỏi</li>
+            <li>Khó tập trung hoặc đầu óc trống rỗng</li>
+            <li>Dễ cáu kỉnh</li>
+            <li>Căng cơ</li>
+            <li>Rối loạn giấc ngủ</li>
+        </ol>
+        
+        <strong>D-F.</strong> Ảnh hưởng chức năng, loại trừ nguyên nhân sinh lý và rối loạn tâm thần khác
+    </div>
+
+    <h3>Triệu chứng lo âu theo hệ thống</h3>
+    <table class="symptom-table">
+        <thead>
+            <tr>
+                <th>HỆ THỐNG</th>
+                <th>TRIỆU CHỨNG</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Cơ thể</strong></td>
+                <td>Đau đầu, choáng váng, đau vai gáy, mở to đồng tử, khó thở, tim nhanh, tăng huyết áp, đầy hơi, tiểu mót, bủn rủn tay chân, mồ hôi lạnh, mệt mỏi</td>
+            </tr>
+            <tr>
+                <td><strong>Cảm xúc</strong></td>
+                <td>Không yên, bứt rứt, cáu gắt, sợ hãi rõ ràng/lo lắng mơ hồ</td>
+            </tr>
+            <tr>
+                <td><strong>Tư duy</strong></td>
+                <td>Nghĩ về mối đe dọa, nguyên nhân lo lắng, hậu quả tiêu cực</td>
+            </tr>
+            <tr>
+                <td><strong>Hành vi</strong></td>
+                <td>Nhịp chân, xoắn vặn tay, cắn móng, bóc da, giảm thiểu hoặc né tránh</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Ám sợ đặc hiệu</h3>
+    <div class="criteria-box">
+        <strong>A.</strong> Nỗi sợ hãi hoặc lo âu rõ rệt về một đối tượng hoặc tình huống cụ thể
+        
+        <strong>B.</strong> Đối tượng/tình huống gây ám ảnh sợ hầu như luôn gây ra nỗi sợ hãi tức thì
+        
+        <strong>C.</strong> Đối tượng/tình huống bị chủ động né tránh hoặc chịu đựng với sợ hãi dữ dội
+        
+        <strong>D.</strong> Nỗi sợ không tương xứng với mối nguy hiểm thực tế
+        
+        <strong>E.</strong> Dai dẳng, thường kéo dài ≥ 6 tháng
+        
+        <strong>F-G.</strong> Gây đau khổ đáng kể hoặc suy giảm chức năng, không được giải thích bởi rối loạn khác
+    </div>
+
+    <h3>Timeline chẩn đoán các rối loạn lo âu</h3>
+    <table class="diagnostic-table">
+        <thead>
+            <tr>
+                <th>LOẠI RỐI LOẠN</th>
+                <th>THỜI GIAN TỐI THIỂU</th>
+                <th>ĐẶC ĐIỂM THỜI GIAN</th>
+                <th>TUỔI KHỞI PHÁT THƯỜNG GẶP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Lo âu lan tỏa (GAD)</strong></td>
+                <td>≥ 6 tháng</td>
+                <td>Lo lắng hầu hết các ngày</td>
+                <td>Trung niên</td>
+            </tr>
+            <tr>
+                <td><strong>Ám sợ đặc hiệu</strong></td>
+                <td>≥ 6 tháng</td>
+                <td>Sợ hãi dai dẳng</td>
+                <td>Thời thơ ấu</td>
+            </tr>
+            <tr>
+                <td><strong>Lo âu xã hội</strong></td>
+                <td>≥ 6 tháng</td>
+                <td>Sợ hãi trong tình huống xã hội</td>
+                <td>Tuổi thiếu niên</td>
+            </tr>
+            <tr>
+                <td><strong>Hoảng loạn</strong></td>
+                <td>Không quy định cụ thể</td>
+                <td>Cơn hoảng loạn + lo âu dự đoán ≥ 1 tháng</td>
+                <td>Trẻ tuổi - trung niên</td>
+            </tr>
+            <tr>
+                <td><strong>Ám sợ khoảng không</strong></td>
+                <td>≥ 6 tháng</td>
+                <td>Sợ hãi 2/5 tình huống</td>
+                <td>Cuối tuổi thiếu niên</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Dấu hiệu nhận diện sớm theo độ tuổi</h3>
+    <div class="criteria-box">
+        <strong>Trẻ em (5-12 tuổi):</strong>
+        <ul>
+            <li>Bám víu cha mẹ quá mức</li>
+            <li>Khóc lóc, ăn vạ khi chia ly</li>
+            <li>Sợ hãi nhiều thứ (bóng tối, quái vật, động vật)</li>
+            <li>Đau bụng, đau đầu không rõ nguyên nhân</li>
+            <li>Từ chối đến trường</li>
+        </ul>
+        
+        <strong>Thanh thiếu niên (13-18 tuổi):</strong>
+        <ul>
+            <li>Tránh các hoạt động xã hội</li>
+            <li>Lo lắng quá mức về thành tích học tập</li>
+            <li>Cơn hoảng loạn đầu tiên</li>
+            <li>Triệu chứng thể chất: tim đập nhanh, đổ mồ hôi</li>
+            <li>Hoàn hảo chủ nghĩa</li>
+        </ul>
+        
+        <strong>Người trưởng thành:</strong>
+        <ul>
+            <li>Lo lắng về nhiều lĩnh vực khác nhau</li>
+            <li>Triệu chứng thể chất kéo dài</li>
+            <li>Tránh né tình huống gây lo âu</li>
+            <li>Suy giảm hiệu suất công việc</li>
+        </ul>
+    </div>
+
+    <h3>Phân biệt các loại lo âu</h3>
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>LOẠI LO ÂU</th>
+                <th>ĐỐI TƯỢNG</th>
+                <th>ĐẶC ĐIỂM</th>
+                <th>HÀNH VI TRÁNH NÉ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Lo âu lan tỏa</strong></td>
+                <td>Nhiều chủ đề khác nhau</td>
+                <td>Lo lắng lan tỏa, khó kiểm soát</td>
+                <td>Tìm cách đảm bảo, hỏi nhiều lần</td>
+            </tr>
+            <tr>
+                <td><strong>Ám sợ đặc hiệu</strong></td>
+                <td>Đối tượng/tình huống cụ thể</td>
+                <td>Sợ hãi không tương xứng</td>
+                <td>Tránh hoàn toàn đối tượng sợ hãi</td>
+            </tr>
+            <tr>
+                <td><strong>Lo âu xã hội</strong></td>
+                <td>Tình huống xã hội</td>
+                <td>Sợ bị đánh giá tiêu cực</td>
+                <td>Tránh giao tiếp, thuyết trình</td>
+            </tr>
+            <tr>
+                <td><strong>Hoảng loạn</strong></td>
+                <td>Cảm giác mất kiểm soát</td>
+                <td>Cơn lo âu cấp tính, dữ dội</td>
+                <td>Tránh nơi đã xảy ra cơn hoảng</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Cơn hoảng loạn - Đặc điểm và timeline</h3>
+    <div class="warning-box">
+        <strong>Tiêu chí cơn hoảng loạn (≥4 triệu chứng, đạt đỉnh trong 10 phút):</strong>
+        <ul>
+            <li>Tim đập nhanh, hồi hộp</li>
+            <li>Đổ mồ hôi</li>
+            <li>Run rẩy</li>
+            <li>Khó thở, cảm giác nghẹt thở</li>
+            <li>Cảm giác nghẹt, khó nuốt</li>
+            <li>Đau ngực</li>
+            <li>Buồn nôn, khó chịu bụng</li>
+            <li>Chóng mặt, choáng váng</li>
+            <li>Lạnh run hoặc nóng bừng</li>
+            <li>Tê bì, châm chích</li>
+            <li>Mất thực tại hoặc mất bản thân</li>
+            <li>Sợ mất kiểm soát hoặc "phát điên"</li>
+            <li>Sợ chết</li>
+        </ul>
+        
+        <strong>Thời gian:</strong> Cơn hoảng thường kéo dài 5-20 phút, hiếm khi quá 1 giờ
+    </div>
+
+    <h3>Đánh giá mức độ nghiêm trọng</h3>
+    <div class="flow-diagram">
+        <strong>THANG ĐO MỨC ĐỘ SUY GIẢM CHỨC NĂNG</strong><br><br>
+        
+        <table style="width: 100%; text-align: center;">
+            <tr>
+                <td style="background: #e8f5e8; padding: 10px; border-radius: 5px; margin: 2px;">
+                    <strong>Nhẹ</strong><br>
+                    <small>Vẫn làm việc/học tập bình thường<br>
+                    Hạn chế một số hoạt động</small>
+                </td>
+                <td>→</td>
+                <td style="background: #fff8e1; padding: 10px; border-radius: 5px; margin: 2px;">
+                    <strong>Trung bình</strong><br>
+                    <small>Giảm hiệu suất rõ rệt<br>
+                    Tránh một số tình huống</small>
+                </td>
+                <td>→</td>
+                <td style="background: #ffebee; padding: 10px; border-radius: 5px; margin: 2px;">
+                    <strong>Nặng</strong><br>
+                    <small>Không thể làm việc/học tập<br>
+                    Hạn chế nghiêm trọng hoạt động</small>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>Biến chứng và đồng mắc</h3>
+    <div class="important-note">
+        <strong>Rối loạn thường đồng mắc với lo âu:</strong>
+        <ul>
+            <li><strong>Trầm cảm:</strong> 50-60% bệnh nhân lo âu có triệu chứng trầm cảm</li>
+            <li><strong>Rối loạn sử dụng chất:</strong> Tự điều trị bằng rượu, thuốc an thần</li>
+            <li><strong>Rối loạn ăn uống:</strong> Đặc biệt ở lo âu xã hội</li>
+            <li><strong>Rối loạn giấc ngủ:</strong> Mất ngủ, ác mộng</li>
+            <li><strong>Các vấn đề thể chất:</strong> Hội chứng ruột kích thích, đau đầu</li>
+        </ul>
+    </div>
+    <h2 id="ocd-related">5. ÁM ẢNH CƯỠNG CHẾ VÀ CÁC RỐI LOẠN LIÊN QUAN</h2>
+
+    <div class="disorder-card">
+        <div class="disorder-title">CÁC RỐI LOẠN TRONG PHÂN NHÓM</div>
+        <ol>
+            <li>Rối loạn ám ảnh cưỡng chế (OCD)</li>
+            <li>Rối loạn mặc cảm cơ thể</li>
+            <li>Rối loạn tích trữ</li>
+            <li>Chứng nhổ tóc</li>
+            <li>Chứng bóc da</li>
+            <li>OCD do sử dụng chất/thuốc</li>
+            <li>OCD do tình trạng y khoa khác</li>
+        </ol>
+    </div>
+
+    <h3>Dịch tễ học OCD</h3>
+    <div class="important-note">
+        <ul>
+            <li>Tỷ lệ hiện mắc 12 tháng: 1,2% (toàn thế giới 1,1-1,8%)</li>
+            <li>Nữ giới bị ảnh hưởng nhiều hơn ở người trưởng thành</li>
+            <li>Nam giới thường bị ảnh hưởng nhiều hơn ở thời thơ ấu</li>
+            <li>76% đồng mắc rối loạn lo âu khác</li>
+            <li>41% đồng mắc rối loạn trầm cảm hoặc lưỡng cực</li>
+            <li>Tỷ lệ tự sát: 14,2% (nỗ lực), 44,1% (ý định trong đời), 25,9% (ý định hiện tại)</li>
+        </ul>
+    </div>
+
+    <h3>Tiêu chuẩn chẩn đoán OCD (DSM-5)</h3>
+    <div class="criteria-box">
+        <strong>A.</strong> Sự hiện diện của ám ảnh, hành vi cưỡng chế, hoặc cả hai:
+        
+        <strong>Ám ảnh được định nghĩa bởi (1) và (2):</strong>
+        <ol>
+            <li>Những suy nghĩ, thôi thúc hoặc hình ảnh tái diễn và dai dẳng được trải nghiệm như xâm nhập và không mong muốn, gây lo âu hoặc phiền muộn rõ rệt</li>
+            <li>Cá nhân cố gắng bỏ qua hoặc kìm nén, hoặc trung hòa chúng bằng suy nghĩ hoặc hành động khác</li>
+        </ol>
+        
+        <strong>Hành vi cưỡng chế được định nghĩa bởi (1) và (2):</strong>
+        <ol>
+            <li>Các hành vi lặp đi lặp lại (rửa tay, sắp xếp, kiểm tra) hoặc hành vi tinh thần (cầu nguyện, đếm, lặp lại từ ngữ) mà cá nhân cảm thấy bị thúc đẩy phải thực hiện</li>
+            <li>Nhằm ngăn ngừa hoặc giảm bớt lo âu, nhưng không liên quan thực tế hoặc rõ ràng là quá mức</li>
+        </ol>
+
+        <strong>B.</strong> Chiếm nhiều thời gian (>1 giờ/ngày) hoặc gây phiền muộn đáng kể/suy giảm chức năng
+        
+        <strong>C.</strong> Không do tác động sinh lý của chất hoặc tình trạng y tế
+        
+        <strong>D.</strong> Không được giải thích tốt hơn bằng các triệu chứng rối loạn tâm thần khác
+    </div>
+
+    <h3>Mối quan hệ Ám ảnh - Cưỡng chế</h3>
+    <table class="diagnostic-table">
+        <thead>
+            <tr>
+                <th>ÁM ẢNH</th>
+                <th>CƯỠNG CHẾ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sợ dơ bẩn, lan truyền</td>
+                <td>Rửa, lau chùi, tránh tiếp xúc</td>
+            </tr>
+            <tr>
+                <td>Sự đối xứng, cân bằng, chính xác</td>
+                <td>Cân chỉnh, sắp xếp, đếm</td>
+            </tr>
+            <tr>
+                <td>Tình dục, gây hấn, tôn giáo, luật lệ</td>
+                <td>Cầu nguyện, mê tín</td>
+            </tr>
+            <tr>
+                <td>Sợ mình hoặc người khác bị tổn hại</td>
+                <td>Thú tội, xưng tội</td>
+            </tr>
+            <tr>
+                <td>Sợ vứt bỏ</td>
+                <td>Tích trữ, sắp xếp</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="important-note">
+        <strong>Lưu ý:</strong> 75% bệnh nhân vừa có suy nghĩ ám ảnh vừa có hành vi cưỡng chế. Cưỡng chế thường được thực hiện để đáp lại ám ảnh.
+    </div>
+
+    <h3>Cơ chế thần kinh học</h3>
+    <div class="criteria-box">
+        <strong>Chất dẫn truyền thần kinh:</strong>
+        <ul>
+            <li><strong>Serotonin:</strong> Có liên quan mật thiết nhất với OCD</li>
+            <li><strong>Dopamine:</strong> Đóng vai trò quan trọng trong mạch trán-thể vân</li>
+        </ul>
+        
+        <strong>Điều trị:</strong> Các thuốc làm tăng nồng độ serotonin giảm hoạt động quá mức trong mạch trán-thể vân
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 6. CHẨN ĐOÁN PHÂN BIỆT -->
+    <h2 id="differential-diagnosis">6. CHẨN ĐOÁN PHÂN BIỆT</h2>
+
+    <h3>Bảng tổng hợp Timeline chẩn đoán tất cả các phổ</h3>
+    <table class="diagnostic-table" style="font-size: 13px;">
+        <thead>
+            <tr>
+                <th>PHỔ RỐI LOẠN</th>
+                <th>RỐI LOẠN CỤ THỂ</th>
+                <th>THỜI GIAN TỐI THIỂU</th>
+                <th>SỐ TRIỆU CHỨNG</th>
+                <th>SUY GIẢM CHỨC NĂNG</th>
+                <th>ĐẶC ĐIỂM NHẬN DIỆN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f5f5f5;">
+                <td rowspan="4"><strong>PHỔ LOẠN THẦN</strong></td>
+                <td>Loạn thần ngắn</td>
+                <td>1 ngày - <1 tháng</td>
+                <td>≥1 triệu chứng loạn thần</td>
+                <td>Cấp tính</td>
+                <td>Khởi phát đột ngột, hồi phục hoàn toàn</td>
+            </tr>
+            <tr style="background-color: #f5f5f5;">
+                <td>Dạng phân liệt</td>
+                <td>1-6 tháng</td>
+                <td>≥2/5 triệu chứng</td>
+                <td>Đáng kể</td>
+                <td>Yếu tố tiên lượng tốt</td>
+            </tr>
+            <tr style="background-color: #f5f5f5;">
+                <td>Tâm thần phân liệt</td>
+                <td>≥6 tháng (1 tháng hoạt động)</td>
+                <td>≥2/5 triệu chứng</td>
+                <td>Nghiêm trọng</td>
+                <td>3 giai đoạn: Tiền triệu-Hoạt động-Tồn dư</td>
+            </tr>
+            <tr style="background-color: #f5f5f5;">
+                <td>Rối loạn hoang tưởng</td>
+                <td>≥1 tháng</td>
+                <td>Chỉ hoang tưởng</td>
+                <td>Ít</td>
+                <td>Chức năng tương đối bảo tồn</td>
+            </tr>
+            
+            <tr style="background-color: #e3f2fd;">
+                <td rowspan="3"><strong>PHỔ LƯỠNG CỰC</strong></td>
+                <td>Lưỡng cực I</td>
+                <td>≥1 tuần hưng cảm</td>
+                <td>≥3/7 triệu chứng hưng cảm</td>
+                <td>Nghiêm trọng</td>
+                <td>Có pha hưng cảm toàn phát</td>
+            </tr>
+            <tr style="background-color: #e3f2fd;">
+                <td>Lưỡng cực II</td>
+                <td>≥4 ngày hưng cảm nhẹ + ≥2 tuần trầm cảm</td>
+                <td>≥3/7 hưng cảm nhẹ + ≥5/9 trầm cảm</td>
+                <td>Trong pha trầm cảm</td>
+                <td>Không có hưng cảm toàn phát</td>
+            </tr>
+            <tr style="background-color: #e3f2fd;">
+                <td>Loạn khí sắc chu kỳ</td>
+                <td>≥2 năm (1 năm trẻ em)</td>
+                <td>Triệu chứng nhẹ</td>
+                <td>Không nghiêm trọng</td>
+                <td>Thay đổi khí sắc dai dẳng</td>
+            </tr>
+            
+            <tr style="background-color: #e8f5e8;">
+                <td rowspan="2"><strong>TRẦM CẢM</strong></td>
+                <td>Trầm cảm chủ yếu</td>
+                <td>≥2 tuần</td>
+                <td>≥5/9 triệu chứng</td>
+                <td>Đáng kể</td>
+                <td>Khí sắc trầm hoặc mất hứng thú</td>
+            </tr>
+            <tr style="background-color: #e8f5e8;">
+                <td>Trầm cảm dai dẳng</td>
+                <td>≥2 năm (1 năm trẻ em)</td>
+                <td>≥2/6 triệu chứng</td>
+                <td>Ít hơn trầm cảm chủ yếu</td>
+                <td>Mạn tính, ít nghiêm trọng</td>
+            </tr>
+            
+            <tr style="background-color: #fff8e1;">
+                <td rowspan="4"><strong>LO ÂU</strong></td>
+                <td>Lo âu lan tỏa</td>
+                <td>≥6 tháng</td>
+                <td>≥3/6 triệu chứng (1 ở trẻ em)</td>
+                <td>Đáng kể</td>
+                <td>Lo lắng khó kiểm soát, lan tỏa</td>
+            </tr>
+            <tr style="background-color: #fff8e1;">
+                <td>Ám sợ đặc hiệu</td>
+                <td>≥6 tháng</td>
+                <td>Sợ hãi cụ thể</td>
+                <td>Đáng kể</td>
+                <td>Sợ hãi không tương xứng</td>
+            </tr>
+            <tr style="background-color: #fff8e1;">
+                <td>Lo âu xã hội</td>
+                <td>≥6 tháng</td>
+                <td>Sợ hãi trong tình huống xã hội</td>
+                <td>Đáng kể</td>
+                <td>Sợ bị đánh giá tiêu cực</td>
+            </tr>
+            <tr style="background-color: #fff8e1;">
+                <td>Hoảng loạn</td>
+                <td>Cơn hoảng + lo âu ≥1 tháng</td>
+                <td>≥4 triệu chứng/cơn</td>
+                <td>Đáng kể</td>
+                <td>Cơn lo âu cấp tính, dữ dội</td>
+            </tr>
+            
+            <tr style="background-color: #fce4ec;">
+                <td><strong>OCD</strong></td>
+                <td>Ám ảnh cưỡng chế</td>
+                <td>>1 giờ/ngày hoặc suy giảm chức năng</td>
+                <td>Ám ảnh + Cưỡng chế</td>
+                <td>Đáng kể</td>
+                <td>Chu kỳ ám ảnh-cưỡng chế</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Dấu hiệu cảnh báo đỏ (Red Flags) cần can thiệp khẩn cấp</h3>
+    <div class="warning-box">
+        <strong>⚠️ CẦN CAN THIỆP NGAY LẬP TỨC:</strong>
+        <ul>
+            <li><strong>Nguy cơ tự sát cao:</strong> Có kế hoạch, phương tiện cụ thể</li>
+            <li><strong>Nguy cơ bạo lực:</strong> Đe dọa, hành vi hung hăng</li>
+            <li><strong>Triệu chứng loạn thần cấp tính:</strong> Ảo giác ra lệnh, hoang tưởng bị hại</li>
+            <li><strong>Catatonia:</strong> Bất động, múa vờn, từ chối ăn uống</li>
+            <li><strong>Mất ngủ hoàn toàn >3 ngày:</strong> Đặc biệt trong pha hưng cảm</li>
+            <li><strong>Suy giảm chức năng nghiêm trọng:</strong> Không thể tự chăm sóc</li>
+            <li><strong>Hành vi nguy hiểm:</strong> Lái xe khi hoảng loạn, hành vi xung động</li>
+        </ul>
+    </div>
+
+    <h3>Nguyên tắc chẩn đoán phân biệt nhanh</h3>
+    <div class="flow-diagram">
+        <strong>THUẬT TOÁN CHẨN ĐOÁN NẤC THANG</strong><br><br>
+        
+        <div style="text-align: left; font-size: 14px;">
+            <strong>BƯỚC 1: Loại trừ nguyên nhân cơ thể</strong><br>
+            → Thuốc, chất gây nghiện, bệnh nội khoa, thần kinh<br><br>
+            
+            <strong>BƯỚC 2: Có triệu chứng loạn thần không?</strong><br>
+            ✓ Có → Xác định thời gian → Phổ loạn thần<br>
+            ✗ Không → Tiếp tục<br><br>
+            
+            <strong>BƯỚC 3: Có rối loạn khí sắc không?</strong><br>
+            ✓ Có pha hưng cảm → Phổ lưỡng cực<br>
+            ✓ Chỉ trầm cảm → Trầm cảm chủ yếu<br>
+            ✗ Không → Tiếp tục<br><br>
+            
+            <strong>BƯỚC 4: Triệu chứng chính là gì?</strong><br>
+            → Lo lắng lan tỏa/cụ thể → Rối loạn lo âu<br>
+            → Chu kỳ ám ảnh-cưỡng chế → OCD<br>
+            → Khác → Xem xét rối loạn khác<br><br>
+            
+            <strong>BƯỚC 5: Đánh giá mức độ nghiêm trọng</strong><br>
+            → Thời gian, số triệu chứng, suy giảm chức năng<br>
+        </div>
+    </div>
+
+    <h3>Lưu ý quan trọng trong chẩn đoán lâm sàng</h3>
+    <div class="important-note">
+        <strong>🔍 NGUYÊN TẮC CHUNG:</strong>
+        <ul>
+            <li><strong>Thời gian là then chốt:</strong> Tuân thủ nghiêm ngặt timeline DSM-5</li>
+            <li><strong>Suy giảm chức năng:</strong> Phải có ảnh hưởng đáng kể đến cuộc sống</li>
+            <li><strong>Loại trừ nguyên nhân khác:</strong> Luôn kiểm tra thuốc, chất, bệnh lý cơ thể</li>
+            <li><strong>Đánh giá nguy cơ:</strong> Tự sát, bạo lực là ưu tiên hàng đầu</li>
+            <li><strong>Đồng mắc:</strong> Một người có thể mắc nhiều rối loạn cùng lúc</li>
+            <li><strong>Biến thiên theo thời gian:</strong> Theo dõi diễn tiến để điều chỉnh chẩn đoán</li>
+            <li><strong>Bối cảnh văn hóa:</strong> Xem xét yếu tố văn hóa, tôn giáo, xã hội</li>
+        </ul>
+    </div>
+
+    <h3>Lưu ý chẩn đoán phân biệt quan trọng</h3>
+    
+    <div class="warning-box">
+        <h4>Tâm thần phân liệt vs Lưỡng cực có triệu chứng loạn thần</h4>
+        <ul>
+            <li><strong>Tâm thần phân liệt:</strong> Triệu chứng loạn thần có mặt kể cả khi không có rối loạn khí sắc nghiêm trọng</li>
+            <li><strong>Lưỡng cực:</strong> Triệu chứng loạn thần chỉ xuất hiện trong các pha khí sắc nghiêm trọng</li>
+        </ul>
+    </div>
+
+    <div class="warning-box">
+        <h4>Trầm cảm chủ yếu vs Lưỡng cực II</h4>
+        <ul>
+            <li><strong>Chìa khóa:</strong> Tiền sử hưng cảm nhẹ (≥4 ngày)</li>
+            <li><strong>Lưu ý:</strong> Bệnh nhân lưỡng cực thường đến khám trong pha trầm cảm</li>
+            <li><strong>Hậu quả:</strong> Chẩn đoán sai dẫn đến điều trị có hại (chỉ dùng thuốc chống trầm cảm)</li>
+        </ul>
+    </div>
+
+    <div class="warning-box">
+        <h4>Lo âu lan tỏa vs Rối loạn hoảng loạn</h4>
+        <ul>
+            <li><strong>GAD:</strong> Lo lắng dai dẳng, lan tỏa về nhiều vấn đề</li>
+            <li><strong>Hoảng loạn:</strong> Cơn lo âu cấp tính, dữ dội, có đỉnh điểm rõ rệt</li>
+        </ul>
+    </div>
+
+    <div class="warning-box">
+        <h4>OCD vs Lo âu lan tỏa</h4>
+        <ul>
+            <li><strong>OCD:</strong> Suy nghĩ xâm nhập cụ thể + hành vi cưỡng chế</li>
+            <li><strong>GAD:</strong> Lo lắng lan tỏa về nhiều chủ đề mà không có hành vi cưỡng chế cụ thể</li>
+        </ul>
+    </div>
+
+    <h3>Sơ đồ chẩn đoán nhanh</h3>
+    <div class="flow-diagram">
+        <strong>QUY TRÌNH CHẨN ĐOÁN BƯỚC ĐẦU</strong><br><br>
+        
+        <strong>1. Có triệu chứng loạn thần?</strong><br>
+        ↓ Có → Phổ loạn thần<br>
+        ↓ Không<br><br>
+        
+        <strong>2. Có thay đổi khí sắc?</strong><br>
+        ↓ Có → Tiếp tục<br>
+        ↓ Không → Xem xét lo âu, OCD<br><br>
+        
+        <strong>3. Có tiền sử hưng cảm/hưng cảm nhẹ?</strong><br>
+        ↓ Có → Phổ lưỡng cực<br>
+        ↓ Không → Trầm cảm chủ yếu<br><br>
+        
+        <strong>4. Triệu chứng chủ yếu là lo lắng?</strong><br>
+        ↓ Có → Rối loạn lo âu<br>
+        ↓ Không<br><br>
+        
+        <strong>5. Có chu kỳ ám ảnh-cưỡng chế?</strong><br>
+        ↓ Có → OCD và rối loạn liên quan<br>
+    </div>
+
+    <div class="footer">
+        <p><strong>Lưu ý quan trọng:</strong> Tài liệu này chỉ mang tính chất tham khảo. Chẩn đoán chính thức cần được thực hiện bởi chuyên gia có đủ trình độ dựa trên đánh giá lâm sàng toàn diện.</p>
+        <p><em>© 2025 - Tài liệu chẩn đoán các rối loạn tâm thần - Dựa trên DSM-5</em></p>
+    </div>
+
 </body>
 </html>
